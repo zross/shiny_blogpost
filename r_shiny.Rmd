@@ -174,9 +174,11 @@ shinyApp(ui = ui, server = server)
 Instead we need to wrap the values in an `observe`, `reactive` or `render*` function that is designed to handle reactive content. 
 
 
-### `observe`: wrap the reactive value in an observer if you want side effects (and don't need output)
+### `observe` or `observeEvent`: wrap the reactive value in an observer if you want side effects (and don't need output)
 
 Observers will get triggered in response to reactive values. They were designed to listen to reactive elements and respond by causing side effects, like updates to text boxes or pull-downs. Unlike the `reactive` function, they do not return data or values.
+
+There are two flavors of `observe`. With `observe` the code inside will get triggered when any of the reactive values inside change. With 'observeEvent` code will only be triggered by specified reactive values.
 
 So, back to the example, if we wrap the `print` statement in an observer the app will print the value of the text box to the console. In this example we're printing to the console only, not yet back to the ui.
 
@@ -222,7 +224,35 @@ shinyApp(ui = ui, server = server)
 
 ```
 
-### `reactive`: generate output with no side effects
+As mentioned above, the code in an `observe` will run if *any* of the reactives inside change. So in the following code both print statements will run when either reactive changes.
+
+```{r, eval=FALSE}
+server <- function(input, output, session) {
+  # both print statements will run when EITHER reactive
+  # changes
+   observe({
+    print(input$mytext) 
+    print(input$myslider)
+    })
+}
+```
+
+But with `observeEvent` the code inside will only run if the specified reactive value changes. So in the following code the print statements will only execute if the user makes changes to the text box.
+
+```{r, eval=FALSE}
+server <- function(input, output, session) {
+  # both print statements will run when EITHER reactive
+  # changes
+   observeEvent(input$mytext, {
+    print(input$mytext) 
+    print(input$myslider)
+    })
+}
+```
+
+
+
+### `reactive`: isolate code and generate output with no side effects
 
 A `reactive` is used in the same way you would use an R function except that it gets triggered by a reactive element. Because using `reactive` creates a function and returns results you generally save as an object and use it elsewhere in your server as you would use any R function with the very important exception that it can only be run within a "reactive context" (so in another reactive, an observer or a render* function) . The reactives are NOT supposed to generate side effects, they should essentially be self-contained.
 
@@ -274,13 +304,13 @@ shinyApp(ui = ui, server = server)
 
 ```
 
-### `render*` and `*output`: To create a display text, tables, plots and user interface elements.
 
 
-## Now we're talking: making your UI dynamic with `render*` functions
+### `render*` and `*Output`: To create a display text, tables, plots and user interface elements.
 
+The third type of listener is designed to create items to add to your user interface. In the previous mini-apps we listened and reacted to reactive values with `observe` or `reactive` but simply printed to the console. But this is not that useful and will not keep your users entertained for long. We need to be able to return values to the user and this is where we use the set of render and output function.
 
-The simple server above is just a proof of concept -- we know it's working because values are being printed to the console. But this is not useful and will not keep your users entertained for long. We need to be able to return values to the user. 
+#### `renderText` and `textOutput` as the initial example
 
 In order to return values to the user we need a strategy to (1) grab the values from the UI in the server; (2) process as necessary and then (3) return the result to the UI. To do this RStudio created a suite of functions that tag-team and circulate the value to and from the server. These are the `render*` functions and the `*Output` functions.
 
@@ -342,167 +372,7 @@ shinyApp(ui = ui, server = server)
 ```
 
 
-
-
-
-
-
-## Triggering reactive functions with reactive values
-
-In our example above, we included a reactive value (`input$mytext`) in an `observe` function. Each time the user changes the text value the server prints the result to the console. No problem.
-
-But what if (A) you have no reactive value in an `observe` function or (B) your reactive value IS in the `observe` function but does **absolutely nothing**?
-
-### If there is no reactive values the code will run once
-
-If the `observe` (or `reactive` or `render*`) funcion has no reactive value inside it, it will run when you launch the app but never again. So in this server code the values 1-10 will print to the console once and then never again. 
-
-```{r, eval=FALSE}
-# this will work. it prints the value to the console
-server <- function(input, output, session) {
-  observe({
-    print(1:10) # will not run
-    })
-}
-
-```
-
-### If there is a reactive value the code will run with each change
-
-Conversely, if you include a reactive value in an `observe` (or `reactive` or `render`) function the code inside will be triggered everytime the reactive value changes **even if that reactive values is not used in any calculations**. So in this code you can see that `input$mytext` is not actually part of the print statement -- it's not used. Nevertheless, any time your user changes the text box this server will print 1 to 10. This is a very important concept -- a reactive in your `observer` or `reactive` functions will trigger that function to run if the user interacts with it even if the reactive element is not part of the calculations.
-
-
-```{r, eval=FALSE}
-# this will work. it prints the value to the console
-server <- function(input, output, session) {
-  observe({
-    input$mytext
-    print(1:10) # will run every time "mytext" changes
-    })
-}
-
-```
-
-
-
-
-## What the heck is the difference between an `observer` and a `reactive`
-
-Observers and reactives can both be used to read and respond to reactive values from the UI like `input$mytext` above and it can be confusing for those beginning to work Shiny about when to use which function. Joe Cheng of RStudio gave a great [presentation]() at the recent Shiny Developers Conference on this topic and and boiled down the difference to:
-
-1) 
-2) 
-
-In the example below, we have both an `observer` and a `reactive` in the server to illustrate a typical case. For the `observer`, we want to trigger a side effect and we don't want to generate output. A `reactive` operates similar to a typical R function. It returns output, should not cause side effects and can be saved and run similar to a function. 
-
-Note that the `reactive` is really just a function. 
-
-```{r, eval=FALSE}
-#### server
-
-server <- function(input, output, session) {
-  
-  # return a list of UI elements
-  observe({
-    #if(is.null(input$myslider)) return()
-    # the reactive here is not part of the calculation
-    # but is added to so that the observer will run
-    # any time the user interacts with the slider
-    input$myslider
-    updateTextInput(session, "mytext", value=sample(1:1000, 1))
-  })
-  
-   dat <- reactive({
-    #endrow <- ifelse(is.null(input$myslider), 5, input$myslider) 
-    input$myslider
-    cars[1:sample(1:50,1),]
-    
-  })
-  
-  output$mytable <- renderTable({
-    dat()
-    #data.frame(a=1:5, b=1:5)
-  })
-}
-
-#### user interface
-ui <- fluidPage(
-  
-  titlePanel("My lovely app"),
-  
-  sidebarLayout(
-    
-    sidebarPanel(
-      h3("Interact with slider and the text input and table change"),
-      sliderInput(inputId = "myslider", label = "Limit the ", min = 0, 
-        max = 50, value = c(10)),
-      textInput(inputId = "mytext", label = "Text input", value = "Enter text...")
-    ), #endsidebarpanel
-    
-    mainPanel(
-      tabsetPanel(
-        tabPanel("Summary"), 
-        tabPanel("Plot"), 
-        tabPanel("Table", tableOutput("mytable"))
-      )
-    )#end mainpanel
-  )# end sidebarlayout
-)
-
-shinyApp(ui = ui, server = server)
-```
-
-
-## It's important to know that reactive functions run on app load
-
-Above we discussed the fact that the reactives be triggered in response to user interaction with a reactive elemement. It's important to know, though, that all your reactives will also be triggered on app load and this can cause unexpected results.
-
-```{r, eval=FALSE}
-#### server
-server <- function(input, output, session) {
-  # this will work, the reactive element is wrapped in an observer
-  # it prints the value to the console
-   dat <- reactive({
-     
-   })
-}
-
-#### user interface
-ui <- fluidPage(
-  
-  titlePanel("My lovely app"),
-  
-  sidebarLayout(
-    
-    sidebarPanel(
-      # the title
-      h3("Sidebar title"),
-      #add a slider
-      sliderInput(inputId = "myslider", label = "Limit the ", min = 0, 
-        max = 100, value = c(40, 60)),
-      # a text input box
-      textInput(inputId = "mytext", label = "Text input", value = "Enter text...")
-    ), #endsidebarpanel
-    
-    mainPanel(
-      tabsetPanel(
-        tabPanel("Plot"), 
-        tabPanel("Summary"), 
-        tabPanel("Table")
-      )
-    )#end mainpanel
-  )# end sidebarlayout
-)
-
-shinyApp(ui = ui, server = server)
-
-```
-
-
-
-
-
-## Spice things up with `renderPlot` & `plotOutput`
+#### Spice things up with `renderPlot` and `plotOutput`
 
 Similar to the `renderText` and `textOutput`, the `renderPlot` and `plotOutput` functions will create an object, in this case a plot, and then add that object to the user interface. Also similar to the text example, the objects move from the UI to the server and back to the UI.
 
@@ -552,7 +422,7 @@ shinyApp(ui = ui, server = server)
 
 
 
-## Dynamic UI widgets with `renderUI`
+#### Dynamic UI widgets with `renderUI` and `outputUI`
 
 
 More often than plain text or even a nice plot, you're likely to want to output new and altered HTML elements. In this case, instead of using `renderText` and `textOutput` you would use the `renderUI` and `uiOutput` pair of functions. In this example, the user input in the textbox gets appended to a pulldown menu. (This example does not remember previous input, this is discussed in another section below).
@@ -609,64 +479,202 @@ shinyApp(ui = ui, server = server)
 ```
 
 
-## Avoid running unecessary code using `reactive` expressions
+### Putting all three listeners together
 
-
-The way I've set up the app works just fine for something tiny but as your app grows including all your input and output in one long function will be very difficult to follow and debug. This could also result in a slow app. 
-
-As an example take a look at the server code below. The select input depends on the text box and the radio buttons depend on the slider -- they are completely independent. BUT, and this is important, any time either the text box OR the slider changes the entire `renderUI` code gets re-run. So, for example, if you change the text box, you'll see that the third radio button changes. Probably not what you want.
-
+In the example below I'm including one typical use case for each of the three listeners. In a later example, I will link them together in a more meaningful way but there is one more topic I want to cover before I do that.
+ 
 
 ```{r, eval=FALSE}
+#### server
+
 server <- function(input, output, session) {
   
-  output$my_output_text <- renderUI({
-    list(
-      selectInput(inputId = "myselect", label="", choices = c(input$mytext, initial_list)),
-      radioButtons(inputId = "myradio", label="", choices = c(input$myslider[1], input$myslider[2], round(rnorm(1),2)))
-    )
+  # return a list of UI elements
+  observe({
+    # the reactive here is not part of the calculation
+    # but is added to so that the observer will run
+    # any time the user interacts with the slider
+    
+    updateTextInput(session, "mytext", value=input$myslider)
+  })
+  
+   dat <- reactive({
+    input$myslider
+    cars[1:input$myslider,]
+    
+  })
+  
+  output$mytable <- renderTable({
+    dat()
   })
 }
 
+#### user interface
+ui <- fluidPage(
+  
+  titlePanel("My lovely app"),
+  
+  sidebarLayout(
+    
+    sidebarPanel(
+      h3("Interact with slider and the text input and table change"),
+      sliderInput(inputId = "myslider", label = "Limit the ", min = 0, 
+        max = 50, value = c(10)),
+      textInput(inputId = "mytext", label = "Text input", value = "Enter text...")
+    ), #endsidebarpanel
+    
+    mainPanel(
+      tabsetPanel(
+        tabPanel("Summary"), 
+        tabPanel("Plot"), 
+        tabPanel("Table", tableOutput("mytable"))
+      )
+    )#end mainpanel
+  )# end sidebarlayout
+)
+
+shinyApp(ui = ui, server = server)
+```
+
+
+
+## Triggering listeners with reactive values
+
+In our examples above, we included a reactive value (`input$mytext`) in `observe` or `reactive` or `render`. Each time the user changes the text value the server prints the result to the console. No problem.
+
+But what if (A) you have no reactive value in an `observe` function or (B) your reactive value IS in the `observe` function but does **absolutely nothing**?
+
+### If there is no reactive values the code will run once
+
+If the `observe` (or `reactive` or `render*`) funcion has no reactive value inside it, it will run when you launch the app but never again. So in this server code the values 1-10 will print to the console once and then never again. 
+
+```{r, eval=FALSE}
+# this will work. it prints the value to the console
+server <- function(input, output, session) {
+  observe({
+    print(1:10) # will not run more than once
+    })
+}
+
+```
+
+### If there is a reactive value the code will run with each change
+
+Conversely, if you include a reactive value in an `observe` (or `reactive` or `render`) function the code inside will be triggered everytime the reactive value changes **even if that reactive values is not used in any calculations**. So in this code you can see that `input$mytext` is not actually part of the print statement -- it's not used. Nevertheless, any time your user changes the text box this server will print 1 to 10. This is a very important concept -- a reactive in your `observer` or `reactive` functions will trigger that function to run if the user interacts with it even if the reactive element is not part of the calculations.
+
+
+```{r, eval=FALSE}
+# this will work. it prints the value to the console
+server <- function(input, output, session) {
+  observe({
+    input$mytext
+    print(1:10) # will run every time "mytext" changes
+    })
+}
 
 ```
 
 
-Enter the reactive expression. A chunk of interactive code can be bundled in a reactive function and this function will only be triggered when pieces change. So unlike the previous version of the server the third radio button will not change when the text box changes. Note that using `reactive` creates a **function** so when you call the expression you need to add the parentheses.
+## Isolate blocks of code using `reactive` so they only run when needed
 
+Reactive functions are also a way to isolate your code and ensure that code is only running when you want it to run. Take for example, the following code. I have included the reactive associated with both the slider and the text input in the same observer. As a result, even if the user only changes the slider, the code associated with the text input will also get run
+
+**Here all code in the observer run when the user changes either the text box or slider** 
 
 ```{r, eval=FALSE}
-
-
+#### server
 server <- function(input, output, session) {
-  initial_list <- c("New York", "Philadelphia")
-  
-  selectChoices <- reactive({
-    c(input$mytext, initial_list)
-  })
-  
-  radioChoices <- reactive({
-    c(input$myslider[1], input$myslider[2], round(rnorm(1),2))
-  })
-  
-  
-  output$my_output_text <- renderUI({
-    list(
-      selectInput(inputId = "myselect", label="", choices = selectChoices()),
-      radioButtons(inputId = "myradio", label="", choices = radioChoices())
-    )
-  })
+
+   observe({
+     txt <- paste(input$mytext, sample(1:100, 1))
+     val <- input$myslider * sample(1:100, 1)
+     
+     print(txt)
+     print(val)
+    })
 }
 
+#### user interface
+ui <- fluidPage(
+  
+  titlePanel("My lovely app"),
+  
+  sidebarLayout(
+    
+    sidebarPanel(
+      # the title
+      h3("Sidebar title"),
+      #add a slider
+      sliderInput(inputId = "myslider", label = "Limit the ", min = 0, 
+        max = 100, value = c(40, 60)),
+      # a text input box
+      textInput(inputId = "mytext", label = "Text input", value = "Enter text...")
+    ), #endsidebarpanel
+    
+    mainPanel(
+      tabsetPanel(
+        tabPanel("Plot"), 
+        tabPanel("Summary"), 
+        tabPanel("Table")
+      )
+    )#end mainpanel
+  )# end sidebarlayout
+)
 
+shinyApp(ui = ui, server = server)
 ```
 
-## observeEvent
+
+**Here all code in the observer run when the user changes either the text box or slider** 
+
+```{r, eval=FALSE}
+#### server
+server <- function(input, output, session) {
+  
+  txt <- reactive({paste(input$mytext, sample(1:100, 1))})
+  val <- reactive({input$myslider * sample(1:100, 1)})
+  
+   observe({
+     print(txt())
+     print(val())
+    })
+}
+
+#### user interface
+ui <- fluidPage(
+  
+  titlePanel("My lovely app"),
+  
+  sidebarLayout(
+    
+    sidebarPanel(
+      # the title
+      h3("Sidebar title"),
+      #add a slider
+      sliderInput(inputId = "myslider", label = "Limit the ", min = 0, 
+        max = 100, value = c(40, 60)),
+      # a text input box
+      textInput(inputId = "mytext", label = "Text input", value = "Enter text...")
+    ), #endsidebarpanel
+    
+    mainPanel(
+      tabsetPanel(
+        tabPanel("Plot"), 
+        tabPanel("Summary"), 
+        tabPanel("Table")
+      )
+    )#end mainpanel
+  )# end sidebarlayout
+)
+
+shinyApp(ui = ui, server = server)
+```
+
 
 ## Use `isolate` to stifle reactions
 
 
-In our example above, we separted code into discrete chunks using the `reactive` function but what if you need to **use** a value but don't want to re-run code everytime that value changes?
+In our example above, we separated code into discrete chunks using the `reactive` function but what if you need to **use** a value but don't want to re-run code everytime that value changes?
 
 
 
@@ -799,5 +807,9 @@ shinyApp(ui = ui, server = server)
 ```
 
 
+## Advanced
+
+### Shiny modules
+### htmlTemplates
 
 
