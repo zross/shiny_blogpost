@@ -5,6 +5,9 @@ output:
     toc: true
 ---
 
+```{r, eval=FALSE, echo=FALSE}
+shinyapps::deployApp("X:/administrative/social_media/blogposts/r_shiny/app1", account="spatial")
+```
 
 Shiny is an incredibly useful tool that allows you to create interactive, data-driven web applications with R. With Shiny, you use the open-source R language to create a web application and Shiny compiles your code into the HTML, CSS and JavaScript needed to display your application on the web. Shiny can be used to create a static web page with various widgets but more importantly you can use Shiny to create an interactive web application capable of executing R code in the background.
 
@@ -23,15 +26,18 @@ In earlier versions of `shiny` the user interface required using a ui handler fu
 Depending what you want to do with your app, the `session` argument is not required but since you need it for some tasks we will include it.
 
 
-```{r, eval=FALSE}
-library(shiny)
+#### The simplest possible app {.tabset}
 
-server <- function(input, output, session) { } #the server
+The app panel looks blank but there is a shiny app there
 
-ui <- fluidPage() # the user interface
+##### Code
 
-shinyApp(ui = ui, server = server) # this launches your app
+```{r, eval=FALSE, code=readLines("app0/app.R")}
 ```
+
+
+##### App
+
 
 
 
@@ -44,35 +50,19 @@ As mentioned above, we will use a fluid design. For this example, we will take a
 We have not yet touched our server so the app does nothing but displays our layout.
 
 
-```{r, eval=FALSE}
-#### server
-server <- function(input, output, session) {
-  
-}
+#### Basic user interface {.tabset}
 
-#### user interface
-ui <- fluidPage(
-  
-  titlePanel("My lovely app"),
-  
-  sidebarLayout(
-    
-    sidebarPanel(
-      h3("Sidebar title")
-    ), #endsidebarpanel
-    
-    mainPanel(
-      tabsetPanel(
-        tabPanel("Plot"), 
-        tabPanel("Summary"), 
-        tabPanel("Table")
-      )
-    )#end mainpanel
-  )# end sidebarlayout
-)
+##### Code
 
-shinyApp(ui = ui, server = server)
+```{r, eval=FALSE, code=readLines("app1/app.R")}
 ```
+
+
+##### App
+
+<!--<iFrame width="700" height="500" src="https://spatial.shinyapps.io/app1/"><iFrame>
+-->
+
 
 
 ## More on the user interface: allow user input
@@ -83,41 +73,17 @@ For this particular example, I'll want a slider range and text input and I'll pu
 
 We're still only focusing here on the UI so these widgets "work" but don't actually do anything because we have not touched the server.
 
-```{r, eval=FALSE}
-#### server
-server <- function(input, output, session) {
-  
-}
 
-#### user interface
-ui <- fluidPage(
-  
-  titlePanel("My lovely app"),
-  
-  sidebarLayout(
-    
-    sidebarPanel(
-      # the title
-      h3("Sidebar title"),
-      #add a slider
-      sliderInput(inputId = "myslider", label = "Limit the ", min = 0, 
-        max = 100, value = c(40, 60)),
-      # a text input box
-      textInput(inputId = "mytext", label = "Text input", value = "Enter text...")
-    ), #endsidebarpanel
-    
-    mainPanel(
-      tabsetPanel(
-        tabPanel("Plot"), 
-        tabPanel("Summary"), 
-        tabPanel("Table")
-      )
-    )#end mainpanel
-  )# end sidebarlayout
-)
+#### Allow user input {.tabset}
 
-shinyApp(ui = ui, server = server)
+
+##### Code
+```{r, eval=FALSE, code=readLines("app2/app.R")}
 ```
+
+##### App
+
+
 
 
 ## Hook up the server to listen for user input
@@ -133,43 +99,17 @@ But... and this is one of the most challenging concepts in Shiny, you can't simp
 
 The values associated with your UI inputs (like the text box, `input$mytext`) are called reactive elements. It is tempting to include `input$mytext` directly. Try running the code below and you will get an error `operation not allowed without an active reactive context` meaning that to read the reactive you need to wrap it in a function designed to listen to the reactive elements. Note that if you run this code (and get the error) you'll need to click on the "stop" button in the console to stop the app.
 
-```{r, eval=FALSE}
-#### server
-server <- function(input, output, session) {
-  # this will NOT work!!
-  print(input$mytext)
-}
 
-#### user interface
-ui <- fluidPage(
-  
-  titlePanel("My lovely app"),
-  
-  sidebarLayout(
-    
-    sidebarPanel(
-      # the title
-      h3("Sidebar title"),
-      #add a slider
-      sliderInput(inputId = "myslider", label = "Limit the ", min = 0, 
-        max = 100, value = c(40, 60)),
-      # a text input box
-      textInput(inputId = "mytext", label = "Text input", value = "Enter text...")
-    ), #endsidebarpanel
-    
-    mainPanel(
-      tabsetPanel(
-        tabPanel("Plot"), 
-        tabPanel("Summary"), 
-        tabPanel("Table")
-      )
-    )#end mainpanel
-  )# end sidebarlayout
-)
 
-shinyApp(ui = ui, server = server)
+#### Hook up server {.tabset}
 
+
+##### Code
+```{r, eval=FALSE, code=readLines("app3/app.R")}
 ```
+##### App
+
+
 
 Instead we need to wrap the values in an `observe`, `reactive` or `render*` function that is designed to handle reactive content. 
 
@@ -183,46 +123,17 @@ There are two flavors of `observe`. With `observe` the code inside will get trig
 So, back to the example, if we wrap the `print` statement in an observer the app will print the value of the text box to the console. In this example we're printing to the console only, not yet back to the ui.
 
 
-```{r, eval=FALSE}
-#### server
-server <- function(input, output, session) {
-  # this will work, the reactive element is wrapped in an observer
-  # it prints the value to the console
-   observe({
-    print(input$mytext) # a side effect
-    })
-}
 
-#### user interface
-ui <- fluidPage(
-  
-  titlePanel("My lovely app"),
-  
-  sidebarLayout(
-    
-    sidebarPanel(
-      # the title
-      h3("Sidebar title"),
-      #add a slider
-      sliderInput(inputId = "myslider", label = "Limit the ", min = 0, 
-        max = 100, value = c(40, 60)),
-      # a text input box
-      textInput(inputId = "mytext", label = "Text input", value = "Enter text...")
-    ), #endsidebarpanel
-    
-    mainPanel(
-      tabsetPanel(
-        tabPanel("Plot"), 
-        tabPanel("Summary"), 
-        tabPanel("Table")
-      )
-    )#end mainpanel
-  )# end sidebarlayout
-)
+#### Reactive values {.tabset}
 
-shinyApp(ui = ui, server = server)
 
+##### Code
+```{r, eval=FALSE, code=readLines("app4/app.R")}
 ```
+##### App
+
+
+`
 
 As mentioned above, the code in an `observe` will run if *any* of the reactives inside change. So in the following code both print statements will run when either reactive changes.
 
@@ -259,50 +170,13 @@ A `reactive` is used in the same way you would use an R function except that it 
 So in the example, below I use `reactive` to create a self-contained function called `myresults`. Since I want to print the results to the console (a side effect), I run the reactive function from within an observer. Note that since it's a function I'm using `myresults()` rather than just `myresults`.
 
 
-```{r, eval=FALSE}
-#### server
-server <- function(input, output, session) {
-    
-   myresults <- reactive({
-      paste(input$mytext, "reactive returns results")
-    })
-   
-   observe({
-     print(myresults())
-   })
-   
-}
+#### Using reactive() {.tabset}
 
-#### user interface
-ui <- fluidPage(
-  
-  titlePanel("My lovely app"),
-  
-  sidebarLayout(
-    
-    sidebarPanel(
-      # the title
-      h3("Sidebar title"),
-      #add a slider
-      sliderInput(inputId = "myslider", label = "Limit the ", min = 0, 
-        max = 100, value = c(40, 60)),
-      # a text input box
-      textInput(inputId = "mytext", label = "Text input", value = "Enter text...")
-    ), #endsidebarpanel
-    
-    mainPanel(
-      tabsetPanel(
-        tabPanel("Plot"), 
-        tabPanel("Summary"), 
-        tabPanel("Table")
-      )
-    )#end mainpanel
-  )# end sidebarlayout
-)
 
-shinyApp(ui = ui, server = server)
-
+##### Code
+```{r, eval=FALSE, code=readLines("app5/app.R")}
 ```
+##### App
 
 
 
@@ -333,43 +207,15 @@ Using our own app as an example. Let's say that instead of printing the text to 
 Give this a try, type something in the text box.
 
 
-```{r, eval=FALSE}
-#### server
-server <- function(input, output, session) {
-  
-  # input$mytext comes from the UI. my_output_text gets
-  # sent back
-  output$my_output_text <- renderText({input$mytext})
-}
 
-#### user interface
-ui <- fluidPage(
-  
-  titlePanel("My lovely app"),
-  
-  sidebarLayout(
-    
-    sidebarPanel(
-      h3("Sidebar title"),
-      sliderInput(inputId = "myslider", label = "Limit the ", min = 0, 
-        max = 100, value = c(40, 60)),
-      # mytext is sent to the server as input$mytext
-      textInput(inputId = "mytext", label = "Text input", value = "Enter text...")
-    ), #endsidebarpanel
-    
-    mainPanel(
-      tabsetPanel(
-        # textOutput is used to grab the result from the server
-        tabPanel("Summary", textOutput("my_output_text")), 
-        tabPanel("Plot"), 
-        tabPanel("Table")
-      )
-    )#end mainpanel
-  )# end sidebarlayout
-)
+#### Using render and output {.tabset}
 
-shinyApp(ui = ui, server = server)
+
+##### Code
+```{r, eval=FALSE, code=readLines("app6/app.R")}
 ```
+##### App
+
 
 
 #### Spice things up with `renderPlot` and `plotOutput`
@@ -378,47 +224,15 @@ Similar to the `renderText` and `textOutput`, the `renderPlot` and `plotOutput` 
 
 Run the code and click on the plot tab to see the plot.
 
-```{r, eval=FALSE}
-#### server
-server <- function(input, output, session) {
-  
-  # This render function has a reactive (input$mytext)
-  # so it will run anytime the user makes a change
-  output$my_output_text <- renderText({input$mytext})
-  
-  # This render function does not have a reactive so
-  # it will run just on app load and then never again
-  output$my_output_plot <- renderPlot({plot(1:10, 1:10, pch=16, col=1:10, cex=1:10)})
 
-}
 
-#### user interface
-ui <- fluidPage(
-  
-  titlePanel("My lovely app"),
-  
-  sidebarLayout(
-    
-    sidebarPanel(
-      h3("Sidebar title"),
-      sliderInput(inputId = "myslider", label = "Limit the ", min = 0, 
-        max = 100, value = c(40, 60)),
-      textInput(inputId = "mytext", label = "Text input", value = "Enter text...")
-    ), #endsidebarpanel
-    
-    #!!!!!!!!! make the plot the active one 
-    mainPanel(
-      tabsetPanel(
-        tabPanel("Summary", textOutput("my_output_text")), 
-        tabPanel("Plot",    plotOutput("my_output_plot")), 
-        tabPanel("Table")
-      )
-    )#end mainpanel
-  )# end sidebarlayout
-)
+#### Add a plot {.tabset}
 
-shinyApp(ui = ui, server = server)
+
+##### Code
+```{r, eval=FALSE, code=readLines("app7/app.R")}
 ```
+##### App
 
 
 
@@ -432,109 +246,32 @@ In `renderUI` you will often be returning more than one element for the UI, perh
 By the way, within `renderUI` if you want to include multiple elements you would include them all within a list function in R. As in `list(selectInput...., radioButtons...)`.
 
 
-```{r, eval=FALSE}
-#### server
 
-server <- function(input, output, session) {
-  initial_list <- c("New York", "Philadelphia")
-  
-  # return a list of UI elements
-  output$my_output_text <- renderUI({
-    
-    # some developers use tagList instead of list
-    # either will work
-    list(
-      h4("Nothing special"),
-      selectInput(inputId = "myselect", label="", choices = c(input$mytext, initial_list))
-    )
-    
-  })
-}
 
-#### user interface
-ui <- fluidPage(
-  
-  titlePanel("My lovely app"),
-  
-  sidebarLayout(
-    
-    sidebarPanel(
-      h3("Sidebar title"),
-      sliderInput(inputId = "myslider", label = "Limit the ", min = 0, 
-        max = 100, value = c(40, 60)),
-      textInput(inputId = "mytext", label = "Text input", value = "Enter text...")
-    ), #endsidebarpanel
-    
-    mainPanel(
-      tabsetPanel(
-        tabPanel("Summary", uiOutput("my_output_text")), 
-        tabPanel("Plot"), 
-        tabPanel("Table")
-      )
-    )#end mainpanel
-  )# end sidebarlayout
-)
+#### Dynamic user interface {.tabset}
 
-shinyApp(ui = ui, server = server)
+
+##### Code
+```{r, eval=FALSE, code=readLines("app8/app.R")}
 ```
+##### App
+
+
+
 
 
 ### Putting all three listeners together
 
 In the example below I'm including one typical use case for each of the three listeners. In a later example, I will link them together in a more meaningful way but there is one more topic I want to cover before I do that.
- 
 
-```{r, eval=FALSE}
-#### server
 
-server <- function(input, output, session) {
-  
-  # return a list of UI elements
-  observe({
-    # the reactive here is not part of the calculation
-    # but is added to so that the observer will run
-    # any time the user interacts with the slider
-    
-    updateTextInput(session, "mytext", value=input$myslider)
-  })
-  
-   dat <- reactive({
-    input$myslider
-    cars[1:input$myslider,]
-    
-  })
-  
-  output$mytable <- renderTable({
-    dat()
-  })
-}
+#### All three listeners {.tabset}
 
-#### user interface
-ui <- fluidPage(
-  
-  titlePanel("My lovely app"),
-  
-  sidebarLayout(
-    
-    sidebarPanel(
-      h3("Interact with slider and the text input and table change"),
-      sliderInput(inputId = "myslider", label = "Limit the ", min = 0, 
-        max = 50, value = c(10)),
-      textInput(inputId = "mytext", label = "Text input", value = "Enter text...")
-    ), #endsidebarpanel
-    
-    mainPanel(
-      tabsetPanel(
-        tabPanel("Summary"), 
-        tabPanel("Plot"), 
-        tabPanel("Table", tableOutput("mytable"))
-      )
-    )#end mainpanel
-  )# end sidebarlayout
-)
 
-shinyApp(ui = ui, server = server)
+##### Code
+```{r, eval=FALSE, code=readLines("app8/app.R")}
 ```
+##### App
 
 
 
@@ -581,94 +318,37 @@ Reactive functions are also a way to isolate your code and ensure that code is o
 
 **Here all code in the observer run when the user changes either the text box or slider** 
 
-```{r, eval=FALSE}
-#### server
-server <- function(input, output, session) {
+#### Not ideal {.tabset}
 
-   observe({
-     txt <- paste(input$mytext, sample(1:100, 1))
-     val <- input$myslider * sample(1:100, 1)
-     
-     print(txt)
-     print(val)
-    })
-}
 
-#### user interface
-ui <- fluidPage(
-  
-  titlePanel("My lovely app"),
-  
-  sidebarLayout(
-    
-    sidebarPanel(
-      # the title
-      h3("Sidebar title"),
-      #add a slider
-      sliderInput(inputId = "myslider", label = "Limit the ", min = 0, 
-        max = 100, value = c(40, 60)),
-      # a text input box
-      textInput(inputId = "mytext", label = "Text input", value = "Enter text...")
-    ), #endsidebarpanel
-    
-    mainPanel(
-      tabsetPanel(
-        tabPanel("Plot"), 
-        tabPanel("Summary"), 
-        tabPanel("Table")
-      )
-    )#end mainpanel
-  )# end sidebarlayout
-)
-
-shinyApp(ui = ui, server = server)
+##### Code
+```{r, eval=FALSE, code=readLines("app9/app.R")}
 ```
+##### App
+
 
 
 **Here all code in the observer run when the user changes either the text box or slider** 
 
-```{r, eval=FALSE}
-#### server
-server <- function(input, output, session) {
-  
-  txt <- reactive({paste(input$mytext, sample(1:100, 1))})
-  val <- reactive({input$myslider * sample(1:100, 1)})
-  
-   observe({
-     print(txt())
-     print(val())
-    })
-}
+#### All code runs with change to text or slider {.tabset}
 
-#### user interface
-ui <- fluidPage(
-  
-  titlePanel("My lovely app"),
-  
-  sidebarLayout(
-    
-    sidebarPanel(
-      # the title
-      h3("Sidebar title"),
-      #add a slider
-      sliderInput(inputId = "myslider", label = "Limit the ", min = 0, 
-        max = 100, value = c(40, 60)),
-      # a text input box
-      textInput(inputId = "mytext", label = "Text input", value = "Enter text...")
-    ), #endsidebarpanel
-    
-    mainPanel(
-      tabsetPanel(
-        tabPanel("Plot"), 
-        tabPanel("Summary"), 
-        tabPanel("Table")
-      )
-    )#end mainpanel
-  )# end sidebarlayout
-)
 
-shinyApp(ui = ui, server = server)
+##### Code
+```{r, eval=FALSE, code=readLines("app10a/app.R")}
 ```
+##### App
+
+
+
+
+#### Only relevant code runs with change to text or slider {.tabset}
+
+
+##### Code
+```{r, eval=FALSE, code=readLines("app10b/app.R")}
+```
+##### App
+
 
 
 ## Use `isolate` to stifle reactions
@@ -678,58 +358,13 @@ In our example above, we separated code into discrete chunks using the `reactive
 
 
 
-```{r, eval=FALSE}
-#### server
-
-server <- function(input, output, session) {
-  initial_list <- c("New York", "Philadelphia")
-  
-  selectChoices <- reactive({
-    input$updateButton
-    c(isolate(input$mytext), initial_list)
-  })
-  
-  radioChoices <- reactive({
-    c(input$myslider[1], input$myslider[2], round(rnorm(1),2))
-  })
-  
-  
-  output$my_output_text <- renderUI({
-    list(
-      selectInput(inputId = "myselect", label="", choices = selectChoices()),
-      radioButtons(inputId = "myradio", label="", choices = radioChoices())
-    )
-  })
-}
+#### The example app: Use isolate to avoid triggering reactions {.tabset}
 
 
-#### user interface
-ui <- fluidPage(
-  
-  titlePanel("My lovely app"),
-  
-  sidebarLayout(
-    
-    sidebarPanel(
-      h3("Sidebar title"),
-      sliderInput(inputId = "myslider", label = "Limit the ", min = 0, 
-        max = 100, value = c(40, 60)),
-      textInput(inputId = "mytext", label = "Text input", value = "Enter text..."),
-      actionButton("updateButton", "Update list")
-    ), #endsidebarpanel
-    
-    mainPanel(
-      tabsetPanel(
-        tabPanel("Summary", uiOutput("my_output_text")), 
-        tabPanel("Plot"), 
-        tabPanel("Table")
-      )
-    )#end mainpanel
-  )# end sidebarlayout
-)
-
-shinyApp(ui = ui, server = server)
+##### Code
+```{r, eval=FALSE, code=readLines("app11/app.R")}
 ```
+##### App
 
 
 
@@ -746,70 +381,200 @@ Let's say you have an app that puts the same element in multiple tabs. Perhaps y
 As an alternative, you can create a function that outputs the UI elements you need and then, instead of repeating the code that creates those elements you can simply call the function. So in the example below, I create a function to generate a title, select box, radio buttons and a checkbox. Then I call that function three times -- one each for the tabs.
 
 
-```{r, eval=FALSE}
-#### server
-server <- function(input, output, session) {
-  
-  # The function that creates several ui elements
-  createSelectRadio <- function(id, title){
-    
-    selectID <- paste0("myselect", id)
-    radioID <- paste0("myradio", id)
-    checkID <- paste0("mycheck", id)
-    
-    res <- list(
-      h2(title),
-      selectInput(inputId = selectID, label="", choices = selectChoices()),
-      radioButtons(inputId = radioID, label="", choices = radioChoices()),
-      checkboxInput(inputId = checkID, label="", value=TRUE,)
-    )
-    
-    return(res)
-  }
-  
-  
-  
-  selectChoices <- reactive({c(input$mytext, initial_list)})
-  radioChoices <- reactive({c(input$myslider[1], input$myslider[2], round(rnorm(1),2))})
-  
-  output$forPlot    <- renderUI({createSelectRadio(1, "In plot tab")})
-  output$forSummary <- renderUI({createSelectRadio(2, "In summary tab")})
-  output$forTable   <- renderUI({createSelectRadio(3, "In table tab")})
-  
+
+#### The example app: Create re-useable UI elements {.tabset}
+
+
+##### Code
+```{r, eval=FALSE, code=readLines("app11/app.R")}
+```
+##### App
+
+
+
+
+
+## Advanced topics
+
+
+### DataTables
+
+Adding interactive tables to your Shiny app is easier than you think. The original version of the shiny package included a renderDataTable function but this is slowly being deprecated in favor of the renderDataTable function from the package DT. For the purposes of simply showing a table the two options are very similar but DT extends the styling and interaction capabilities -- take a look at the [documentation](https://rstudio.github.io/DT/shiny.html). 
+
+#### Example app: Using the shiny package for an interactive table {.tabset}
+
+
+##### Code
+```{r, eval=FALSE, code=readLines("app13a/app.R")}
+```
+##### App
+
+
+
+#### Example app: Using the DT package for an interactive table {.tabset}
+
+
+##### Code
+```{r, eval=FALSE, code=readLines("app13b/app.R")}
+```
+##### App
+
+
+
+### Interactive plots and maps
+
+
+HTML widgets allow you to use JavaScript visualization libraries to create interactive graphics in R, including Shiny web applications. For details on HTML widgets generally you can visit [the site](http://www.htmlwidgets.org/). Below I show three examples, two examples of interactive plots (`plot.ly` and `highcharts`) and an interactive map with `leaflet` but there are many other widgets available.
+
+
+
+#### Example app: Use plot.ly to make a ggplot interactive {.tabset}
+
+Details on using plot.ly can be found at [this site](https://plot.ly/r/shiny-tutorial/).
+
+##### Code
+```{r, eval=FALSE, code=readLines("app14a/app.R")}
+```
+##### App
+
+
+#### Example app: Use highcharts to make an interactive plot {.tabset}
+
+Details on using highcharts can be found at [this site](http://jkunst.com/highcharter/).
+
+##### Code
+```{r, eval=FALSE, code=readLines("app14b/app.R")}
+```
+##### App
+
+
+
+
+#### Example app: Use leaflet for an interactive map {.tabset}
+
+Details on using leaflet in R can be found at [this site](http://rstudio.github.io/leaflet/shiny.html). If you want to interact between your map and app see [this example](http://urbanstudies.tcu.edu/research/open-data/tx-demographics/) by Kyle Walker and the [code used to create it](https://gist.github.com/walkerke/4988b5164258917687cb).
+
+##### Code
+```{r, eval=FALSE, code=readLines("app14c/app.R")}
+```
+##### App
+
+
+
+
+
+### Shiny modules
+
+At the Shiny Developers Conference Joe Cheng from RStudio gave a great presentation on Shiny modules. They are designed, in part, to help solve the issue of re-useability discussed above. The idea behind a module is very similar to the functions above that take, as an input, the unique id to be used on the element on your page.
+
+As an example let's say you you're using a slider and two plots in several places in your application
+
+
+1. Create the module UI
+2. Create the module server
+3. Create your Shiny UI and include the module UI inside
+4. Create your Shiny server and include the module server inside
+
+#### 1. Create the module UI
+
+The module UI, unlike the app UI, is simply a function. It needs to have at least one argument, the `id` which is essentially just text that gets prepended to the UI element IDs. So in the example below the function is called `scatterUI` and we have three elements, `slider1`, `plot1` and `plot2`. If the user runs this function with `scatterUI("myapp")` the ids will become `myapp-slider1`, `myapp-plot1` and so on. This is powerful
+
+
+```{r}
+# MODULE UI
+scatterUI <- function(id) {
+  ns <- NS(id)
+  list(
+  fluidRow(
+    column(6, offset=4,    sliderInput(ns("slider1"), label = "Limit the number of points ", min = 0, max = 32, value = 15))
+           ),
+  fluidRow(
+    column(6, plotOutput(ns("plot1"))),
+    column(6, plotOutput(ns("plot2")))
+  )
+  )
   
 }
-
-#### user interface
-ui <- fluidPage(
-  
-  titlePanel("My lovely app"),
-  
-  sidebarLayout(
-    
-    sidebarPanel(
-      h3("Sidebar title"),
-      sliderInput(inputId = "myslider", label = "Limit the ", min = 0, 
-        max = 100, value = c(40, 60)),
-      textInput(inputId = "mytext", label = "Text input", value = "Enter text...")
-    ), #endsidebarpanel
-    
-    mainPanel(
-      tabsetPanel(
-        tabPanel("Summary", uiOutput("forSummary")), 
-        tabPanel("Plot",    uiOutput("forPlot")), 
-        tabPanel("Table",    uiOutput("forTable"))
-      )
-    )#end mainpanel
-  )# end sidebarlayout
-)
-
-shinyApp(ui = ui, server = server)
 ```
 
 
-## Advanced
 
-### Shiny modules
+
+
+
+
+```{r}
+library(ggplot2)
+
+scatterUI <- function(id) {
+  ns <- NS(id)
+  list(
+  fluidRow(
+    column(6, offset=4,    sliderInput(ns("slider1"), label = "Limit the number of points ", min = 0, max = 32, value = 15))
+           ),
+  fluidRow(
+    column(6, plotOutput(ns("plot1"))),
+    column(6, plotOutput(ns("plot2")))
+  )
+  )
+  
+}
+
+
+scatter <- function(input, output, session, dat, var1, var2, ptsize, col1, col2) {
+  browser()
+    dat <- dat[order(dat[[var1]]),]
+    
+  dat <- reactive({
+    dat[1:input$slider1,]
+  })
+  
+  output$plot1 <- renderPlot({
+    ggplot(dat(), aes_string(var1, var2)) + geom_point(color=col1, size=ptsize)
+  })
+
+  output$plot2 <- renderPlot({
+    ggplot(dat(), aes_string(var1, var2)) + geom_point(color=col2, size=ptsize) 
+  })
+
+  
+}
+
+
+
+ui <- fluidPage(
+  
+  scatterUI("prefix"),
+   scatterUI("prefix2")
+  
+)
+
+
+server <- function(input, output,session){
+  
+  
+  callModule(scatter, "prefix", cars, "speed", "dist",  2, "red", "blue")
+  callModule(scatter, "prefix2", mtcars, "mpg", "hp", 4, "forestgreen", "purple")
+  
+}
+
+shinyApp(ui, server)
+
+
+
+```
+
+
+
+
 ### htmlTemplates
+
+
+
+
+
+```{r echo=TRUE}
+sessionInfo
+```
 
 
