@@ -19,7 +19,7 @@ In order to run Shiny and follow the code on this post you should make sure you 
 
 In its simplest form, a Shiny application requires a server function to do the calculations and a user interface that the user interacts with. Below we have the simplest possible shiny app -- it shows nothing and does nothing but you can use the `shinyApp` function to launch the app and, voila!, a functioning web application created entirely in R.
 
-For simplicity, we're creating our Shiny apps in this blog post as single file apps. In the past, Shiny required that you create two separate files (server.R and ui.R) but as of version 0.10.2 Shiny supports [single file applications](http://shiny.rstudio.com/articles/single-file.html) with both server and UI code in the same file. 
+For simplicity, we're creating our Shiny apps in this blog post as single file apps. In the past, Shiny required that you create two separate files (server.R and ui.R) but as of version 0.10.2 Shiny supports [single file applications](http://shiny.rstudio.com/articles/single-file.html) with both server and UI code in the same file. With bigger apps, of course, you will have far more than just one or even two files. 
 
 In earlier versions of `shiny` the user interface required using a ui handler function (`shinyUI`) but this is no longer required. The `fluidPage` function defines the kind of layout we will be using -- fluid refers to the ability of your app to re-structure on the fly to support many screen dimensions. If you want to rigidly structure your page you can use `fixedPage` instead.
 
@@ -41,9 +41,12 @@ The app panel looks blank but there is a shiny app there
 
 
 
-## Flesh out the user interface
+## Layout your app
+
 
 Under the hood, Shiny uses Twitter Bootstrap, a commonly used framework for designing webpages, to scaffold and provide some miminal styling. When you run the function `shinyApp()` your R code is essentially compiled to web-friendly languages HTML, JavaScript and CSS. You can take advantage of Shiny page template functions or you can essentially design your app from scratch. There is also a brand new option discussed below to use what are called htmlTemplates but here we will focus on the more common approach.
+
+### Using predefined layout functions
 
 As mentioned above, we will use a fluid design. For this example, we will take advantage of a Shiny template using the function `sidebarLayout` which creates a page with a sidebar and a main panel. You can review other layout options [here](http://shiny.rstudio.com/articles/layout-guide.html). In this example we're creating a sidebar with only one element, a level 3 header using the `h3()` function. Then, in the main panel we're adding a set of tabs using the container function `tabsetPanel` and the empty individual tabs using `tabPanel`.
 
@@ -54,14 +57,110 @@ We have not yet touched our server so the app does nothing but displays our layo
 
 ##### Code
 
-```{r, eval=FALSE, code=readLines("app1/app.R")}
+```{r, eval=FALSE, code=readLines("app1a/app.R")}
 ```
 
 
 ##### App
 
-<!--<iFrame width="700" height="500" src="https://spatial.shinyapps.io/app1/"><iFrame>
--->
+
+### Adding elements with tags$xxx
+
+It's easy to add HTML elements to your Shiny app using [HTML tags](http://shiny.rstudio.com/articles/tag-glossary.html). There are more than 100 HTML elements you can add to your page using the syntax `tags$OBJECT()` as in `tags$p()` for a paragraph or `tags$blockquote()`. For a limited number of these tags, the most common ones, there are helper functions that allow you to skip the `tags$` so, for example, a first tier header can be created with `h1()` -- but be careful, not all tags permit this.
+
+
+#### Example app: using HTML tags {.tabset}
+
+##### Code
+
+```{r, eval=FALSE, code=readLines("app1d/app.R")}
+```
+
+
+##### App
+
+
+
+### You can also layout using Bootstrap's grid system manually
+
+If you're new to CSS creating your layout can be challenging and you would need to read https://getbootstrap.com/examples/grid/. When you're comfortable
+
+
+
+
+
+#### Basic user interface {.tabset}
+
+##### Code
+
+```{r, eval=FALSE, code=readLines("app1c/app.R")}
+```
+
+
+##### App
+
+
+## Style your app
+
+
+### Use an existing "theme"
+
+Bootstrap offers a number of themes that allow for a complete change of style with limited coding. The `shinythemes` package from RStudio allows you to take advantage of this capability. The only change you need to make is to add a line of code `theme=shinytheme("cosmo")` to your `fluidPage` function and the entire look of you app will change. In this particular example, you won't see much difference because the app is so simple, but with bigger apps the changes are significant.
+
+
+Documentation [here](http://rstudio.github.io/shinythemes/). More detail [here](http://bootswatch.com/).
+
+
+#### Basic user interface {.tabset}
+
+##### Code
+
+```{r, eval=FALSE, code=readLines("app1b/app.R")}
+```
+
+
+##### App
+
+
+### Style yourself with CSS
+
+If you want to use your own CSS have have three basic options: 1) With a two page app (ui.R and server.R) you can add a folder called www and the app will automatically read any CSS files you've included there. 2) You can include your CSS directly inline in the head of your app and 3) You can use the `includeCSS` function to reference a css file.
+
+
+
+
+#### An example using inline CSS in the HTML head {.tabset}
+
+##### Code
+
+```{r, eval=FALSE, code=readLines("app90a/app.R")}
+```
+
+
+##### App
+
+
+
+#### An example using inline CSS in the HTML head {.tabset}
+
+##### Code
+
+```{r, eval=FALSE, code=readLines("app90b/app.R")}
+```
+
+
+##### App
+
+
+
+
+
+
+http://shiny.rstudio.com/articles/css.html
+
+
+
+
 
 
 
@@ -391,6 +490,23 @@ As an alternative, you can create a function that outputs the UI elements you ne
 ##### App
 
 
+
+## Deploy your app
+
+
+
+## Add-in packages
+
+### shinyBS
+
+
+
+### shinyjs
+
+
+
+### shinyURL
+https://github.com/aoles/shinyURL
 
 
 
