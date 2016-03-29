@@ -1,21 +1,27 @@
 #### server
 server <- function(input, output, session) {
-  
+  print(getwd())
 }
 
 #### user interface
 ui <- fluidPage(
+
+ includeCSS("style.css"),
   
   titlePanel("My lovely app"),
   
   sidebarLayout(
     
     sidebarPanel(
-      "Sidebar title"
+      h3("Sidebar title")
     ), #endsidebarpanel
     
     mainPanel(
-      "This is the main panel"
+      tabsetPanel(
+        tabPanel("Plot"), 
+        tabPanel("Summary"), 
+        tabPanel("Table")
+      )
     )#end mainpanel
   )# end sidebarlayout
 )

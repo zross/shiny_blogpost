@@ -1,6 +1,6 @@
 #### server
 server <- function(input, output, session) {
-  
+  print(getwd())
 }
 
 #### user interface
@@ -11,11 +11,16 @@ ui <- fluidPage(
   sidebarLayout(
     
     sidebarPanel(
-      "Sidebar title"
+      # CSS styling inline
+      h3(style = "color:#35990d; font-family:'Comic Sans MS'", "Sidebar title")
     ), #endsidebarpanel
     
     mainPanel(
-      "This is the main panel"
+      tabsetPanel(
+        tabPanel("Plot"), 
+        tabPanel("Summary"), 
+        tabPanel("Table")
+      )
     )#end mainpanel
   )# end sidebarlayout
 )

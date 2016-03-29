@@ -5,9 +5,7 @@ server <- function(input, output, session) {
 
 #### user interface
 ui <- fluidPage(
-  
-  
-  
+
   tags$head(
     tags$style(HTML("
 

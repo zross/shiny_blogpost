@@ -4,6 +4,7 @@ server <- function(input, output, session) {
   # it prints the value to the console
   observe({
     print(input$mytext) # a side effect
+
   })
 }
 

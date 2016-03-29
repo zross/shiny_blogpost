@@ -3,7 +3,10 @@ server <- function(input, output, session) {
   
   # input$mytext comes from the UI. my_output_text gets
   # sent back
-  output$my_output_text <- renderText({input$mytext})
+  output$my_output_text <- renderText({
+    init <- "Your value is: "
+    return(paste0(init, input$mytext))
+    })
 }
 
 #### user interface

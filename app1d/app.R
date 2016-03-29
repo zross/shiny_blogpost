@@ -12,7 +12,7 @@ ui <- fluidPage(
                 sidebarLayout(
                   
                   sidebarPanel(
-                      
+                      h3("Sidebar title")
                   ), #endsidebarpanel
                   
                   mainPanel(
@@ -23,7 +23,7 @@ ui <- fluidPage(
                                deleniti eaque repudiandae. Voluptatibus cumque nesciunt 
                                neque fuga omnis nisi. Aliquam?"),
                     h3("H3 is fine without tags and so is code here"),
-                    code("data.frame(a=1:10, b=1:10")
+                    code("data.frame(a=1:10, b=1:10)")
         
                   )#end mainpanel
                 )# end sidebarlayout

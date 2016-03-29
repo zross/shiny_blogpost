@@ -29,3 +29,6 @@ ui <- fluidPage(
     )#end mainpanel
   )# end sidebarlayout
 )
+
+
+shinyApp(ui = ui, server = server)

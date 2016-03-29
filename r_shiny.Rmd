@@ -17,13 +17,13 @@ In order to run Shiny and follow the code on this post you should make sure you 
 
 ## Shiny at it's simplest
 
-In its simplest form, a Shiny application requires a server function to do the calculations and a user interface that the user interacts with. Below we have the simplest possible shiny app -- it shows nothing and does nothing but you can use the `shinyApp` function to launch the app and, voila!, a functioning web application created entirely in R.
+In its simplest form, a Shiny application requires a server function to do the calculations and a user interface that the user interacts with. Below we have the simplest possible shiny app -- it shows nothing and does nothing but you can use the `shinyApp` function to launch the app and, voila -- a functioning web application created entirely in R.
 
-For simplicity, we're creating our Shiny apps in this blog post as single file apps. In the past, Shiny required that you create two separate files (server.R and ui.R) but as of version 0.10.2 Shiny supports [single file applications](http://shiny.rstudio.com/articles/single-file.html) with both server and UI code in the same file. With bigger apps, of course, you will have far more than just one or even two files. 
+For simplicity, we're creating our Shiny apps in this blog post as single file apps. In the past, Shiny required that you create two separate files (server.R and ui.R) but as of version 0.10.2 Shiny supports [single file applications](http://shiny.rstudio.com/articles/single-file.html) with both server and UI code in the same file. With bigger apps, of course, you will likely have far more files but for now we will create single page apps. 
 
 In earlier versions of `shiny` the user interface required using a ui handler function (`shinyUI`) but this is no longer required. The `fluidPage` function defines the kind of layout we will be using -- fluid refers to the ability of your app to re-structure on the fly to support many screen dimensions. If you want to rigidly structure your page you can use `fixedPage` instead.
 
-Depending what you want to do with your app, the `session` argument is not required but since you need it for some tasks we will include it.
+Depending on what you want to do with your app, the `session` argument is not required but since you need it for some tasks we will include it.
 
 
 #### The simplest possible app {.tabset}
@@ -44,13 +44,11 @@ The app panel looks blank but there is a shiny app there
 ## Layout your app
 
 
-Under the hood, Shiny uses Twitter Bootstrap, a commonly used framework for designing webpages, to scaffold and provide some miminal styling. When you run the function `shinyApp()` your R code is essentially compiled to web-friendly languages HTML, JavaScript and CSS. You can take advantage of Shiny page template functions or you can essentially design your app from scratch. There is also a brand new option discussed below to use what are called htmlTemplates but here we will focus on the more common approach.
+Under the hood, Shiny uses Twitter Bootstrap, a commonly used framework for designing webpages, to scaffold and provide some miminal styling. When you run the function `shinyApp()` your R code is essentially compiled to web-friendly languages HTML, JavaScript and CSS. You can take advantage of Shiny page template functions to layout your app or you can essentially design your app from scratch. There is also a brand new option discussed below to use what are called htmlTemplates but here we will focus on the more commonly used approach.
 
 ### Using predefined layout functions
 
-As mentioned above, we will use a fluid design. For this example, we will take advantage of a Shiny template using the function `sidebarLayout` which creates a page with a sidebar and a main panel. You can review other layout options [here](http://shiny.rstudio.com/articles/layout-guide.html). In this example we're creating a sidebar with only one element, a level 3 header using the `h3()` function. Then, in the main panel we're adding a set of tabs using the container function `tabsetPanel` and the empty individual tabs using `tabPanel`.
-
-We have not yet touched our server so the app does nothing but displays our layout.
+As mentioned above, we will use a fluid design. For this example, we will take advantage of a Shiny template using the function `sidebarLayout` which creates a page with a sidebar and a main panel. You can review other layout options [here](http://shiny.rstudio.com/articles/layout-guide.html). In this example we're creating a `sidebarPanel` and `mainPanel` and not much else.
 
 
 #### Basic user interface {.tabset}
@@ -81,9 +79,11 @@ It's easy to add HTML elements to your Shiny app using [HTML tags](http://shiny.
 
 
 
-### You can also layout using Bootstrap's grid system manually
+### Layout your app using Bootstrap's grid system manually
 
-If you're new to CSS creating your layout can be challenging and you would need to read https://getbootstrap.com/examples/grid/. When you're comfortable
+If you're new to CSS creating your layout can be challenging and you would need to read [the Bootstrap basics](https://getbootstrap.com/examples/grid/) before getting started. When you're comfortable, though, you can use Bootstrap's grid system directly by specifying, rows and columns and column spans. As a general rule, all Bootstrap layouts are 12 columns across and these columns can be grouped to make wider columns.
+
+In the example below, the first row has a column that spans 6 columns but is "offset" 3 columns -- so there is a 3-column wide gap before starting. In the second row, we have 3 "columns", two are 3 columns wide and one is 6 columns wide.
 
 
 
@@ -105,7 +105,7 @@ If you're new to CSS creating your layout can be challenging and you would need 
 
 ### Use an existing "theme"
 
-Bootstrap offers a number of themes that allow for a complete change of style with limited coding. The `shinythemes` package from RStudio allows you to take advantage of this capability. The only change you need to make is to add a line of code `theme=shinytheme("cosmo")` to your `fluidPage` function and the entire look of you app will change. In this particular example, you won't see much difference because the app is so simple, but with bigger apps the changes are significant.
+Bootstrap offers a number of pre-created themes that allow for a complete change of style with limited coding. The `shinythemes` package from RStudio allows you to take advantage of this capability. The only change you need to make is to add a line of code `theme=shinytheme("cosmo")` to your `fluidPage` function and the entire look of you app will change. In this particular example, you won't see much difference because the app is so simple, but with bigger apps the changes are significant.
 
 
 Documentation [here](http://rstudio.github.io/shinythemes/). More detail [here](http://bootswatch.com/).
@@ -124,7 +124,18 @@ Documentation [here](http://rstudio.github.io/shinythemes/). More detail [here](
 
 ### Style yourself with CSS
 
-If you want to use your own CSS have have three basic options: 1) With a two page app (ui.R and server.R) you can add a folder called www and the app will automatically read any CSS files you've included there. 2) You can include your CSS directly inline in the head of your app and 3) You can use the `includeCSS` function to reference a css file.
+If you want to use your own CSS have four options:
+
+1. Include your CSS directly inline in the head of your app
+2. Include CSS within HTML tags
+3. With a two page app (ui.R and server.R) you can add a folder called www and the app will automatically read any CSS files you've included there
+4. Use the `includeCSS` function to read an external CSS file.
+
+
+Best practice for larger apps would be to include all your CSS in a single, external file so that it's easy to find and change settings. For smaller apps including CSS in the head or HTML tags would be acceptable but be careful, if you include styling in the HTML tags it can be difficult to prioritize and organize your styles.
+
+
+For more detail, see [RStudio's page on CSS](http://shiny.rstudio.com/articles/css.html).
 
 
 
@@ -141,7 +152,7 @@ If you want to use your own CSS have have three basic options: 1) With a two pag
 
 
 
-#### An example using inline CSS in the HTML head {.tabset}
+#### An example using `includeCSS` (assumes you have an external file called `style.css`) {.tabset}
 
 ##### Code
 
@@ -153,6 +164,15 @@ If you want to use your own CSS have have three basic options: 1) With a two pag
 
 
 
+#### An example of including a style in an HTML tag {.tabset}
+
+##### Code
+
+```{r, eval=FALSE, code=readLines("app90c/app.R")}
+```
+
+
+##### App
 
 
 
@@ -170,7 +190,7 @@ At this point we have scaffolded our layout but have not added any elements that
 
 For this particular example, I'll want a slider range and text input and I'll put both of them in the sidebar panel. Note that both of these, and all widgets, have a unique input id (`inputId`). Careful, this often causes trouble -- the input ids **must be unique**.
 
-We're still only focusing here on the UI so these widgets "work" but don't actually do anything because we have not touched the server.
+We're still only focusing here on the UI so these widgets "work" but don't actually do anything because we have not touched the server. In this particular example, we are including both a slider and a text input.
 
 
 #### Allow user input {.tabset}
@@ -189,18 +209,18 @@ We're still only focusing here on the UI so these widgets "work" but don't actua
 
 Currently, our users can interact with our application all they want but our server is deaf and dumb. There is no code in the server to tell it to listen or react.
 
-In order to listen, it needs to know what to listen to and this is where our unique input ids come in. Our widgets all have a unique ID that we set above that the server can use to identify and listen to. Each of these input ids is mapped to the `input` argument on our server. So, for example, if you want to access the value of the text box we created (which is called `mytext`) from within the server you would call `input$mytext`. Likewise, for the slider the values are in `input$myslider`.
+In order to listen, it needs to know what to listen to and this is where our unique input ids come in. Our widgets all have a unique ID that the server can use to identify and listen to. Each of these input ids is mapped to the `input` argument on our server. So, for example, if you want to access the value of the text box we created (which is called `mytext`) from within the server you would call `input$mytext`. Likewise, for the slider the values are in `input$myslider`.
 
-But... and this is one of the most challenging concepts in Shiny, you can't simply call `input$mytext` to get the current value of the text box -- **you need to wrap these "reactive" values in one of the functions designed to handle interactive widget output**, a reactive or observer.
+But... and this is one of the most challenging concepts in Shiny, you can't simply call `input$mytext` to get the current value of the text box -- **you need to wrap these "reactive" values in one of the functions designed to handle interactive widget output**.
 
 
 ## The Shiny hearing aids: `observe`, `reactive` or `render*`
 
-The values associated with your UI inputs (like the text box, `input$mytext`) are called reactive elements. It is tempting to include `input$mytext` directly. Try running the code below and you will get an error `operation not allowed without an active reactive context` meaning that to read the reactive you need to wrap it in a function designed to listen to the reactive elements. Note that if you run this code (and get the error) you'll need to click on the "stop" button in the console to stop the app.
+The values associated with your UI inputs (like the text box, `input$mytext`) are called reactive elements. It is tempting to include `input$mytext` directly in the server. Try running the code below and you will get an error `operation not allowed without an active reactive context` meaning that to read the reactive you need to wrap it in a function designed to listen to the reactive elements. Note that if you run this code (and get the error) you'll need to click on the "stop" button in the console to stop the app.
 
 
 
-#### Hook up server {.tabset}
+#### You can't include bare reactive values in the server {.tabset}
 
 
 ##### Code
@@ -213,9 +233,9 @@ The values associated with your UI inputs (like the text box, `input$mytext`) ar
 Instead we need to wrap the values in an `observe`, `reactive` or `render*` function that is designed to handle reactive content. 
 
 
-### `observe` or `observeEvent`: wrap the reactive value in an observer if you want side effects (and don't need output)
+### wrap the reactive value in an observer if you want side effects and don't need output (`observe` or `observeEvent`): 
 
-Observers will get triggered in response to reactive values. They were designed to listen to reactive elements and respond by causing side effects, like updates to text boxes or pull-downs. Unlike the `reactive` function, they do not return data or values.
+Observers will get triggered in response to reactive values. They were designed to listen to reactive elements and respond by causing side effects, like updates to text boxes or pull-downs. Unlike the `reactive` function, which we cover next, they do not return data or values.
 
 There are two flavors of `observe`. With `observe` the code inside will get triggered when any of the reactive values inside change. With 'observeEvent` code will only be triggered by specified reactive values.
 
@@ -223,7 +243,7 @@ So, back to the example, if we wrap the `print` statement in an observer the app
 
 
 
-#### Reactive values {.tabset}
+#### Use `observe` {.tabset}
 
 
 ##### Code
@@ -231,10 +251,9 @@ So, back to the example, if we wrap the `print` statement in an observer the app
 ```
 ##### App
 
+#### Prevent unwanted reactions with `observeEvent`
 
-`
-
-As mentioned above, the code in an `observe` will run if *any* of the reactives inside change. So in the following code both print statements will run when either reactive changes.
+As mentioned above, the code in an `observe` will run if *any* of the reactives inside change. So in the following code the print statement will run if the user interacts with the text box **or** with the slider. Even though the slider reactive `input$myslider` is not actually being used in any way, because it's in the observe function, it will trigger all the code in the observe function to run.
 
 ```{r, eval=FALSE}
 server <- function(input, output, session) {
@@ -242,34 +261,33 @@ server <- function(input, output, session) {
   # changes
    observe({
     print(input$mytext) 
-    print(input$myslider)
+    input$myslider
     })
 }
 ```
 
-But with `observeEvent` the code inside will only run if the specified reactive value changes. So in the following code the print statements will only execute if the user makes changes to the text box.
+The `observeEvent` function is designed to address this issue. With `observeEvent` the code inside will only run if the specified reactive value changes. So in the following code the print statements will only execute if the user makes changes to the text box.
 
 ```{r, eval=FALSE}
 server <- function(input, output, session) {
-  # both print statements will run when EITHER reactive
-  # changes
+   # The observer code will only run if input$mytext changes
    observeEvent(input$mytext, {
     print(input$mytext) 
-    print(input$myslider)
+    input$myslider
     })
 }
 ```
 
 
 
-### `reactive`: isolate code and generate output with no side effects
+### Use `reactive` to isolate code and generate output with no side effects
 
-A `reactive` is used in the same way you would use an R function except that it gets triggered by a reactive element. Because using `reactive` creates a function and returns results you generally save as an object and use it elsewhere in your server as you would use any R function with the very important exception that it can only be run within a "reactive context" (so in another reactive, an observer or a render* function) . The reactives are NOT supposed to generate side effects, they should essentially be self-contained.
+A `reactive` is used in the same way you would use an R function except that it gets triggered by a reactive element. Because using `reactive` creates a function and returns results you generally save a reactive as an object and use it elsewhere in your server as you would use any R function. There is one major distinction from a function, however, that it can only be run within a "reactive context" (so in another reactive, an observer or a render* function) . The reactives are NOT supposed to generate side effects, they should essentially be self-contained.
 
 So in the example, below I use `reactive` to create a self-contained function called `myresults`. Since I want to print the results to the console (a side effect), I run the reactive function from within an observer. Note that since it's a function I'm using `myresults()` rather than just `myresults`.
 
 
-#### Using reactive() {.tabset}
+#### Using `reactive` {.tabset}
 
 
 ##### Code
@@ -279,35 +297,32 @@ So in the example, below I use `reactive` to create a self-contained function ca
 
 
 
-### `render*` and `*Output`: To create a display text, tables, plots and user interface elements.
+### Create and display text, tables, plots and user interface elements with `render*` and `*Output`: 
 
-The third type of listener is designed to create items to add to your user interface. In the previous mini-apps we listened and reacted to reactive values with `observe` or `reactive` but simply printed to the console. But this is not that useful and will not keep your users entertained for long. We need to be able to return values to the user and this is where we use the set of render and output function.
+The third type of listener is designed to create items to add to your user interface. In the previous mini-apps we listened and reacted to reactive values with `observe` or `reactive` but simply printed to the console. But this is not that useful and will not keep your users entertained. We want to produce useful output that the user can interact with.
 
-#### `renderText` and `textOutput` as the initial example
+#### An initial example with `renderText` and `textOutput`
 
 In order to return values to the user we need a strategy to (1) grab the values from the UI in the server; (2) process as necessary and then (3) return the result to the UI. To do this RStudio created a suite of functions that tag-team and circulate the value to and from the server. These are the `render*` functions and the `*Output` functions.
 
-**The user-to-Server-back-to-user process in broad strokes**:
+**The User-to-Server-back-to-User process in broad strokes**:
 
-1. The `renderText` function, in the server, would be used in the server to read the text box input (and process as necessary). 
-2. Then the `renderText` function would send the result back to the user (the UI).
-3. The UI would read in the output from the server using the `textOutput` function.
+1. The `renderText` function, in the server, would be used in the server to read the text box input reactive (and process as necessary). 
+2. Then the `renderText` function would send the result back to Shiny's user interface by attaching the results to the `output` object.
+3. Shiny's UI would read the output from the server and deliver to the user using the `textOutput` function.
 
-**The user-to-Server-back-to-user process a little more detail**:
+**The User-to-Server-back-to-User process our example in detail**:
 
 Using our own app as an example. Let's say that instead of printing the text to the console we want to print it for our users. In order to do this we need to "complete the loop" with our UI which amounts to this:
 
-1. Our UI has a text input called `mytext`
-2. We will grab that value in the server inside the `renderText` function as `input$mytext`
-3. Within the `renderText` function we can process `input$mytext` as necessary and then return the result to the UI.
-4. In order to return the result to the UI from the server we name it and attach it to the output object (`output$myoutputtext <- something`).
-5. In the UI we use the `textOutput` function to read in `myoutputtext` and put it on the UI
-
-Give this a try, type something in the text box.
+1. Our UI has a text input called `mytext`. 
+2. Anytime the text box changes it triggers the `renderText` function in the server (this is because `input$mytext`, a reactive, is in the `renderText` function)
+3. All the code in `renderText` runs each time the text box changes
+4. When done, the returned object from `renderText` gets attached to the `output` list as `my_output_text`.
+5. Since the output `my_output_text` is text we use a `textOutput` function in the UI to read it and display to the user. Note that unlike reactives in the server that are identified as `input$mytext` the output is named in quotes (so we use `"my_output_text"` rather than `output$my_output_text`).
 
 
-
-#### Using render and output {.tabset}
+#### Using `renderText` and `textOutput` (type something in the app text box) {.tabset}
 
 
 ##### Code
@@ -596,7 +611,7 @@ As an example let's say you you're using a slider and two plots in several place
 The module UI, unlike the app UI, is simply a function. It needs to have at least one argument, the `id` which is essentially just text that gets prepended to the UI element IDs. So in the example below the function is called `scatterUI` and we have three elements, `slider1`, `plot1` and `plot2`. If the user runs this function with `scatterUI("myapp")` the ids will become `myapp-slider1`, `myapp-plot1` and so on. This is powerful
 
 
-```{r}
+```{r, eval=FALSE}
 # MODULE UI
 scatterUI <- function(id) {
   ns <- NS(id)
@@ -619,8 +634,9 @@ scatterUI <- function(id) {
 
 
 
-```{r}
+```{r, eval=FALSE}
 library(ggplot2)
+library(shiny)
 
 scatterUI <- function(id) {
   ns <- NS(id)
@@ -694,3 +710,7 @@ sessionInfo
 ```
 
 
+
+GOTCHAS
+
+Be careful about where you put reactive values. I had an instance with a reactive within renderPlot and the same reactive within a plotting function and took several hours to sort out.

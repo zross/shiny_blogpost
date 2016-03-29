@@ -113,15 +113,22 @@ $(document).ready(function () {
 
 <div id="TOC">
 <ul>
-<li><a href="#shinyappsdeployappxadministrativesocial_mediablogpostsr_shinyapp1-accountspatial">shinyapps::deployApp(“X:/administrative/social_media/blogposts/r_shiny/app1”, account=“spatial”)</a><ul>
 <li><a href="#shiny-at-its-simplest">Shiny at it’s simplest</a></li>
-<li><a href="#flesh-out-the-user-interface">Flesh out the user interface</a></li>
+<li><a href="#layout-your-app">Layout your app</a><ul>
+<li><a href="#using-predefined-layout-functions">Using predefined layout functions</a></li>
+<li><a href="#adding-elements-with-tagsxxx">Adding elements with tags$xxx</a></li>
+<li><a href="#layout-your-app-using-bootstraps-grid-system-manually">Layout your app using Bootstrap’s grid system manually</a></li>
+</ul></li>
+<li><a href="#style-your-app">Style your app</a><ul>
+<li><a href="#use-an-existing-theme">Use an existing “theme”</a></li>
+<li><a href="#style-yourself-with-css">Style yourself with CSS</a></li>
+</ul></li>
 <li><a href="#more-on-the-user-interface-allow-user-input">More on the user interface: allow user input</a></li>
 <li><a href="#hook-up-the-server-to-listen-for-user-input">Hook up the server to listen for user input</a></li>
 <li><a href="#the-shiny-hearing-aids-observe-reactive-or-render">The Shiny hearing aids: <code>observe</code>, <code>reactive</code> or <code>render*</code></a><ul>
-<li><a href="#observe-or-observeevent-wrap-the-reactive-value-in-an-observer-if-you-want-side-effects-and-dont-need-output"><code>observe</code> or <code>observeEvent</code>: wrap the reactive value in an observer if you want side effects (and don’t need output)</a></li>
-<li><a href="#reactive-isolate-code-and-generate-output-with-no-side-effects"><code>reactive</code>: isolate code and generate output with no side effects</a></li>
-<li><a href="#render-and-output-to-create-a-display-text-tables-plots-and-user-interface-elements."><code>render*</code> and <code>*Output</code>: To create a display text, tables, plots and user interface elements.</a></li>
+<li><a href="#wrap-the-reactive-value-in-an-observer-if-you-want-side-effects-and-dont-need-output-observe-or-observeevent">wrap the reactive value in an observer if you want side effects and don’t need output (<code>observe</code> or <code>observeEvent</code>):</a></li>
+<li><a href="#use-reactive-to-isolate-code-and-generate-output-with-no-side-effects">Use <code>reactive</code> to isolate code and generate output with no side effects</a></li>
+<li><a href="#create-and-display-text-tables-plots-and-user-interface-elements-with-render-and-output">Create and display text, tables, plots and user interface elements with <code>render*</code> and <code>*Output</code>:</a></li>
 <li><a href="#putting-all-three-listeners-together">Putting all three listeners together</a></li>
 </ul></li>
 <li><a href="#triggering-listeners-with-reactive-values">Triggering listeners with reactive values</a><ul>
@@ -131,29 +138,33 @@ $(document).ready(function () {
 <li><a href="#isolate-blocks-of-code-using-reactive-so-they-only-run-when-needed">Isolate blocks of code using <code>reactive</code> so they only run when needed</a></li>
 <li><a href="#use-isolate-to-stifle-reactions">Use <code>isolate</code> to stifle reactions</a></li>
 <li><a href="#create-re-useable-ui-elements">Create re-useable UI elements</a></li>
+<li><a href="#deploy-your-app">Deploy your app</a></li>
+<li><a href="#add-in-packages">Add-in packages</a><ul>
+<li><a href="#shinybs">shinyBS</a></li>
+<li><a href="#shinyjs">shinyjs</a></li>
+<li><a href="#shinyurl">shinyURL</a></li>
+</ul></li>
 <li><a href="#advanced-topics">Advanced topics</a><ul>
 <li><a href="#datatables">DataTables</a></li>
 <li><a href="#interactive-plots-and-maps">Interactive plots and maps</a></li>
 <li><a href="#shiny-modules">Shiny modules</a></li>
 <li><a href="#htmltemplates">htmlTemplates</a></li>
 </ul></li>
-</ul></li>
 </ul>
 </div>
 
-<div id="shinyappsdeployappxadministrativesocial_mediablogpostsr_shinyapp1-accountspatial" class="section level1">
-<h1>shinyapps::deployApp(“X:/administrative/social_media/blogposts/r_shiny/app1”, account=“spatial”)</h1>
 <p>Shiny is an incredibly useful tool that allows you to create interactive, data-driven web applications with R. With Shiny, you use the open-source R language to create a web application and Shiny compiles your code into the HTML, CSS and JavaScript needed to display your application on the web. Shiny can be used to create a static web page with various widgets but more importantly you can use Shiny to create an interactive web application capable of executing R code in the background.</p>
 <p>Creating and running simple web applications is relatively easy and there are great resources for doing this. But when you want more control of the application functionality understanding the key concepts is challenging. To help you navigate the creation of satisfying Shiny applications we’ve assembled example code below that demonstrates some of the key concepts.</p>
 <p>In order to run Shiny and follow the code on this post you should make sure you have RStudio software and the <code>shiny</code> R package.</p>
 <div id="shiny-at-its-simplest" class="section level2">
 <h2>Shiny at it’s simplest</h2>
-<p>In its simplest form, a Shiny application requires a server function to do the calculations and a user interface that the user interacts with. Below we have the simplest possible shiny app – it shows nothing and does nothing but you can use the <code>shinyApp</code> function to launch the app and, voila!, a functioning web application created entirely in R.</p>
-<p>For simplicity, we’re creating our Shiny apps in this blog post as single file apps. In the past, Shiny required that you create two separate files (server.R and ui.R) but as of version 0.10.2 Shiny supports <a href="http://shiny.rstudio.com/articles/single-file.html">single file applications</a> with both server and UI code in the same file.</p>
+<p>In its simplest form, a Shiny application requires a server function to do the calculations and a user interface that the user interacts with. Below we have the simplest possible shiny app – it shows nothing and does nothing but you can use the <code>shinyApp</code> function to launch the app and, voila – a functioning web application created entirely in R.</p>
+<p>For simplicity, we’re creating our Shiny apps in this blog post as single file apps. In the past, Shiny required that you create two separate files (server.R and ui.R) but as of version 0.10.2 Shiny supports <a href="http://shiny.rstudio.com/articles/single-file.html">single file applications</a> with both server and UI code in the same file. With bigger apps, of course, you will likely have far more files but for now we will create single page apps.</p>
 <p>In earlier versions of <code>shiny</code> the user interface required using a ui handler function (<code>shinyUI</code>) but this is no longer required. The <code>fluidPage</code> function defines the kind of layout we will be using – fluid refers to the ability of your app to re-structure on the fly to support many screen dimensions. If you want to rigidly structure your page you can use <code>fixedPage</code> instead.</p>
-<p>Depending what you want to do with your app, the <code>session</code> argument is not required but since you need it for some tasks we will include it.</p>
-<div id="this-is-technically-an-app" class="section level4 tabset">
-<h4>This is technically an app</h4>
+<p>Depending on what you want to do with your app, the <code>session</code> argument is not required but since you need it for some tasks we will include it.</p>
+<div id="the-simplest-possible-app" class="section level4 tabset">
+<h4>The simplest possible app</h4>
+<p>The app panel looks blank but there is a shiny app there</p>
 <div id="code" class="section level5">
 <h5>Code</h5>
 <pre class="r"><code>library(shiny)
@@ -169,11 +180,12 @@ shinyApp(ui = ui, server = server) # this launches your app</code></pre>
 </div>
 </div>
 </div>
-<div id="flesh-out-the-user-interface" class="section level2">
-<h2>Flesh out the user interface</h2>
-<p>Under the hood, Shiny uses Twitter Bootstrap, a commonly used framework for designing webpages, to scaffold and provide some miminal styling. When you run the function <code>shinyApp()</code> your R code is essentially compiled to web-friendly languages HTML, JavaScript and CSS. You can take advantage of Shiny page template functions or you can essentially design your app from scratch. There is also a brand new option discussed below to use what are called htmlTemplates but here we will focus on the more common approach.</p>
-<p>As mentioned above, we will use a fluid design. For this example, we will take advantage of a Shiny template using the function <code>sidebarLayout</code> which creates a page with a sidebar and a main panel. You can review other layout options <a href="http://shiny.rstudio.com/articles/layout-guide.html">here</a>. In this example we’re creating a sidebar with only one element, a level 3 header using the <code>h3()</code> function. Then, in the main panel we’re adding a set of tabs using the container function <code>tabsetPanel</code> and the empty individual tabs using <code>tabPanel</code>.</p>
-<p>We have not yet touched our server so the app does nothing but displays our layout.</p>
+<div id="layout-your-app" class="section level2">
+<h2>Layout your app</h2>
+<p>Under the hood, Shiny uses Twitter Bootstrap, a commonly used framework for designing webpages, to scaffold and provide some miminal styling. When you run the function <code>shinyApp()</code> your R code is essentially compiled to web-friendly languages HTML, JavaScript and CSS. You can take advantage of Shiny page template functions to layout your app or you can essentially design your app from scratch. There is also a brand new option discussed below to use what are called htmlTemplates but here we will focus on the more commonly used approach.</p>
+<div id="using-predefined-layout-functions" class="section level3">
+<h3>Using predefined layout functions</h3>
+<p>As mentioned above, we will use a fluid design. For this example, we will take advantage of a Shiny template using the function <code>sidebarLayout</code> which creates a page with a sidebar and a main panel. You can review other layout options <a href="http://shiny.rstudio.com/articles/layout-guide.html">here</a>. In this example we’re creating a <code>sidebarPanel</code> and <code>mainPanel</code> and not much else.</p>
 <div id="basic-user-interface" class="section level4 tabset">
 <h4>Basic user interface</h4>
 <div id="code-1" class="section level5">
@@ -185,6 +197,202 @@ server &lt;- function(input, output, session) {
 
 #### user interface
 ui &lt;- fluidPage(
+  
+  titlePanel(&quot;My lovely app&quot;),
+  
+  sidebarLayout(
+    
+    sidebarPanel(
+      &quot;Sidebar title&quot;
+    ), #endsidebarpanel
+    
+    mainPanel(
+      &quot;This is the main panel&quot;
+    )#end mainpanel
+  )# end sidebarlayout
+)
+
+shinyApp(ui = ui, server = server)</code></pre>
+</div>
+<div id="app-1" class="section level5">
+<h5>App</h5>
+</div>
+</div>
+</div>
+<div id="adding-elements-with-tagsxxx" class="section level3">
+<h3>Adding elements with tags$xxx</h3>
+<p>It’s easy to add HTML elements to your Shiny app using <a href="http://shiny.rstudio.com/articles/tag-glossary.html">HTML tags</a>. There are more than 100 HTML elements you can add to your page using the syntax <code>tags$OBJECT()</code> as in <code>tags$p()</code> for a paragraph or <code>tags$blockquote()</code>. For a limited number of these tags, the most common ones, there are helper functions that allow you to skip the <code>tags$</code> so, for example, a first tier header can be created with <code>h1()</code> – but be careful, not all tags permit this.</p>
+<div id="example-app-using-html-tags" class="section level4 tabset">
+<h4>Example app: using HTML tags</h4>
+<div id="code-2" class="section level5">
+<h5>Code</h5>
+<pre class="r"><code>library(shinythemes)
+#### server
+server &lt;- function(input, output, session) {
+  
+}
+
+#### user interface
+ui &lt;- fluidPage(
+                
+                titlePanel(&quot;Include HTML elements&quot;),
+                
+                sidebarLayout(
+                  
+                  sidebarPanel(
+                      h3(&quot;Sidebar title&quot;)
+                  ), #endsidebarpanel
+                  
+                  mainPanel(
+                    h1(&quot;Title without tags$&quot;),
+                    tags$blockquote(&quot;But block quote requires tags$ Lorem ipsum dolor sit amet, consectetur 
+                               adipisicing elit. Eligendi quia officiis adipisci, 
+                               harum necessitatibus earum, veritatis et nihil iusto 
+                               deleniti eaque repudiandae. Voluptatibus cumque nesciunt 
+                               neque fuga omnis nisi. Aliquam?&quot;),
+                    h3(&quot;H3 is fine without tags and so is code here&quot;),
+                    code(&quot;data.frame(a=1:10, b=1:10)&quot;)
+        
+                  )#end mainpanel
+                )# end sidebarlayout
+)
+
+shinyApp(ui = ui, server = server)</code></pre>
+</div>
+<div id="app-2" class="section level5">
+<h5>App</h5>
+</div>
+</div>
+</div>
+<div id="layout-your-app-using-bootstraps-grid-system-manually" class="section level3">
+<h3>Layout your app using Bootstrap’s grid system manually</h3>
+<p>If you’re new to CSS creating your layout can be challenging and you would need to read <a href="https://getbootstrap.com/examples/grid/">the Bootstrap basics</a> before getting started. When you’re comfortable, though, you can use Bootstrap’s grid system directly by specifying, rows and columns and column spans. As a general rule, all Bootstrap layouts are 12 columns across and these columns can be grouped to make wider columns.</p>
+<p>In the example below, the first row has a column that spans 6 columns but is “offset” 3 columns – so there is a 3-column wide gap before starting. In the second row, we have 3 “columns”, two are 3 columns wide and one is 6 columns wide.</p>
+<div id="basic-user-interface-1" class="section level4 tabset">
+<h4>Basic user interface</h4>
+<div id="code-3" class="section level5">
+<h5>Code</h5>
+<pre class="r"><code>#### server
+server &lt;- function(input, output, session) {
+  
+}
+
+#### user interface
+ui &lt;- fluidPage(
+
+    fluidRow(
+      column(6, offset=3,
+             h1(&quot;This is my title in a row by itself with column 6 and offset 3&quot;)
+             )
+      
+    ),
+  fluidRow(
+    column(3,
+           h3(&quot;This could be a side panel (column 3)&quot;),
+           actionButton(&quot;button&quot;, &quot;Click&quot;)
+           
+           ),
+    column(6, 
+           p(&quot;Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+             Eligendi quia officiis adipisci, harum necessitatibus earum, 
+             veritatis et nihil iusto deleniti eaque repudiandae. Voluptatibus 
+             cumque nesciunt neque fuga omnis nisi. Aliquam?&quot;)
+           ),
+    column(3,
+           
+           h3(&quot;Here is right side panel (column 3)&quot;),
+           sliderInput(&quot;slider&quot;, &quot;My slider&quot;, 0, 10, 5)
+           )
+    
+  )
+)
+
+shinyApp(ui = ui, server = server)</code></pre>
+</div>
+<div id="app-3" class="section level5">
+<h5>App</h5>
+</div>
+</div>
+</div>
+</div>
+<div id="style-your-app" class="section level2">
+<h2>Style your app</h2>
+<div id="use-an-existing-theme" class="section level3">
+<h3>Use an existing “theme”</h3>
+<p>Bootstrap offers a number of pre-created themes that allow for a complete change of style with limited coding. The <code>shinythemes</code> package from RStudio allows you to take advantage of this capability. The only change you need to make is to add a line of code <code>theme=shinytheme(&quot;cosmo&quot;)</code> to your <code>fluidPage</code> function and the entire look of you app will change. In this particular example, you won’t see much difference because the app is so simple, but with bigger apps the changes are significant.</p>
+<p>Documentation <a href="http://rstudio.github.io/shinythemes/">here</a>. More detail <a href="http://bootswatch.com/">here</a>.</p>
+<div id="basic-user-interface-2" class="section level4 tabset">
+<h4>Basic user interface</h4>
+<div id="code-4" class="section level5">
+<h5>Code</h5>
+<pre class="r"><code>library(shinythemes)
+#### server
+server &lt;- function(input, output, session) {
+  
+}
+
+#### user interface
+ui &lt;- fluidPage(theme=shinytheme(&quot;cosmo&quot;),
+  
+  titlePanel(&quot;My lovely app&quot;),
+  
+  sidebarLayout(
+    
+    sidebarPanel(
+      h3(&quot;Sidebar title&quot;),
+      actionButton(&quot;button&quot;, &quot;A button&quot;)
+    ), #endsidebarpanel
+    
+    mainPanel(
+      tabsetPanel(
+        tabPanel(&quot;Plot&quot;), 
+        tabPanel(&quot;Summary&quot;), 
+        tabPanel(&quot;Table&quot;)
+      )
+    )#end mainpanel
+  )# end sidebarlayout
+)
+
+shinyApp(ui = ui, server = server)</code></pre>
+</div>
+<div id="app-4" class="section level5">
+<h5>App</h5>
+</div>
+</div>
+</div>
+<div id="style-yourself-with-css" class="section level3">
+<h3>Style yourself with CSS</h3>
+<p>If you want to use your own CSS have four options:</p>
+<ol style="list-style-type: decimal">
+<li>Include your CSS directly inline in the head of your app</li>
+<li>Include CSS within HTML tags</li>
+<li>With a two page app (ui.R and server.R) you can add a folder called www and the app will automatically read any CSS files you’ve included there</li>
+<li>Use the <code>includeCSS</code> function to read an external CSS file.</li>
+</ol>
+<p>Best practice for larger apps would be to include all your CSS in a single, external file so that it’s easy to find and change settings. For smaller apps including CSS in the head or HTML tags would be acceptable but be careful, if you include styling in the HTML tags it can be difficult to prioritize and organize your styles.</p>
+<p>For more detail, see <a href="http://shiny.rstudio.com/articles/css.html">RStudio’s page on CSS</a>.</p>
+<div id="an-example-using-inline-css-in-the-html-head" class="section level4 tabset">
+<h4>An example using inline CSS in the HTML head</h4>
+<div id="code-5" class="section level5">
+<h5>Code</h5>
+<pre class="r"><code>#### server
+server &lt;- function(input, output, session) {
+  
+}
+
+#### user interface
+ui &lt;- fluidPage(
+
+  tags$head(
+    tags$style(HTML(&quot;
+
+      body {
+        background-color:cornflowerblue;
+        color: red;
+      }
+
+    &quot;))
+  ),
   
   titlePanel(&quot;My lovely app&quot;),
   
@@ -206,10 +414,85 @@ ui &lt;- fluidPage(
 
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
-<div id="app-1" class="section level5">
+<div id="app-5" class="section level5">
 <h5>App</h5>
-<!--<iFrame width="700" height="500" src="https://spatial.shinyapps.io/app1/"><iFrame>
--->
+</div>
+</div>
+<div id="an-example-using-includecss-assumes-you-have-an-external-file-called-style.css" class="section level4 tabset">
+<h4>An example using <code>includeCSS</code> (assumes you have an external file called <code>style.css</code>)</h4>
+<div id="code-6" class="section level5">
+<h5>Code</h5>
+<pre class="r"><code>#### server
+server &lt;- function(input, output, session) {
+  print(getwd())
+}
+
+#### user interface
+ui &lt;- fluidPage(
+
+ includeCSS(&quot;style.css&quot;),
+  
+  titlePanel(&quot;My lovely app&quot;),
+  
+  sidebarLayout(
+    
+    sidebarPanel(
+      h3(&quot;Sidebar title&quot;)
+    ), #endsidebarpanel
+    
+    mainPanel(
+      tabsetPanel(
+        tabPanel(&quot;Plot&quot;), 
+        tabPanel(&quot;Summary&quot;), 
+        tabPanel(&quot;Table&quot;)
+      )
+    )#end mainpanel
+  )# end sidebarlayout
+)
+
+shinyApp(ui = ui, server = server)</code></pre>
+</div>
+<div id="app-6" class="section level5">
+<h5>App</h5>
+</div>
+</div>
+<div id="an-example-of-including-a-style-in-an-html-tag" class="section level4 tabset">
+<h4>An example of including a style in an HTML tag</h4>
+<div id="code-7" class="section level5">
+<h5>Code</h5>
+<pre class="r"><code>#### server
+server &lt;- function(input, output, session) {
+  print(getwd())
+}
+
+#### user interface
+ui &lt;- fluidPage(
+  
+  titlePanel(&quot;My lovely app&quot;),
+  
+  sidebarLayout(
+    
+    sidebarPanel(
+      # CSS styling inline
+      h3(style = &quot;color:#35990d; font-family:'Comic Sans MS'&quot;, &quot;Sidebar title&quot;)
+    ), #endsidebarpanel
+    
+    mainPanel(
+      tabsetPanel(
+        tabPanel(&quot;Plot&quot;), 
+        tabPanel(&quot;Summary&quot;), 
+        tabPanel(&quot;Table&quot;)
+      )
+    )#end mainpanel
+  )# end sidebarlayout
+)
+
+shinyApp(ui = ui, server = server)</code></pre>
+</div>
+<div id="app-7" class="section level5">
+<h5>App</h5>
+<p><a href="http://shiny.rstudio.com/articles/css.html" class="uri">http://shiny.rstudio.com/articles/css.html</a></p>
+</div>
 </div>
 </div>
 </div>
@@ -217,10 +500,10 @@ shinyApp(ui = ui, server = server)</code></pre>
 <h2>More on the user interface: allow user input</h2>
 <p>At this point we have scaffolded our layout but have not added any elements that will allow our user interface to be interactive. Shiny has a wide array of input widgets (e.g., pull-down menus, checkboxes) that we can use to add this functionality. They have a nice widget gallery <a href="http://shiny.rstudio.com/gallery/widget-gallery.html">here</a>.</p>
 <p>For this particular example, I’ll want a slider range and text input and I’ll put both of them in the sidebar panel. Note that both of these, and all widgets, have a unique input id (<code>inputId</code>). Careful, this often causes trouble – the input ids <strong>must be unique</strong>.</p>
-<p>We’re still only focusing here on the UI so these widgets “work” but don’t actually do anything because we have not touched the server.</p>
+<p>We’re still only focusing here on the UI so these widgets “work” but don’t actually do anything because we have not touched the server. In this particular example, we are including both a slider and a text input.</p>
 <div id="allow-user-input" class="section level4 tabset">
 <h4>Allow user input</h4>
-<div id="code-2" class="section level5">
+<div id="code-8" class="section level5">
 <h5>Code</h5>
 <pre class="r"><code>### server
 server &lt;- function(input, output, session) {
@@ -252,9 +535,12 @@ ui &lt;- fluidPage(
       )
     )#end mainpanel
   )# end sidebarlayout
-)</code></pre>
+)
+
+
+shinyApp(ui = ui, server = server)</code></pre>
 </div>
-<div id="app-2" class="section level5">
+<div id="app-8" class="section level5">
 <h5>App</h5>
 </div>
 </div>
@@ -262,15 +548,15 @@ ui &lt;- fluidPage(
 <div id="hook-up-the-server-to-listen-for-user-input" class="section level2">
 <h2>Hook up the server to listen for user input</h2>
 <p>Currently, our users can interact with our application all they want but our server is deaf and dumb. There is no code in the server to tell it to listen or react.</p>
-<p>In order to listen, it needs to know what to listen to and this is where our unique input ids come in. Our widgets all have a unique ID that we set above that the server can use to identify and listen to. Each of these input ids is mapped to the <code>input</code> argument on our server. So, for example, if you want to access the value of the text box we created (which is called <code>mytext</code>) from within the server you would call <code>input$mytext</code>. Likewise, for the slider the values are in <code>input$myslider</code>.</p>
-<p>But… and this is one of the most challenging concepts in Shiny, you can’t simply call <code>input$mytext</code> to get the current value of the text box – <strong>you need to wrap these “reactive” values in one of the functions designed to handle interactive widget output</strong>, a reactive or observer.</p>
+<p>In order to listen, it needs to know what to listen to and this is where our unique input ids come in. Our widgets all have a unique ID that the server can use to identify and listen to. Each of these input ids is mapped to the <code>input</code> argument on our server. So, for example, if you want to access the value of the text box we created (which is called <code>mytext</code>) from within the server you would call <code>input$mytext</code>. Likewise, for the slider the values are in <code>input$myslider</code>.</p>
+<p>But… and this is one of the most challenging concepts in Shiny, you can’t simply call <code>input$mytext</code> to get the current value of the text box – <strong>you need to wrap these “reactive” values in one of the functions designed to handle interactive widget output</strong>.</p>
 </div>
 <div id="the-shiny-hearing-aids-observe-reactive-or-render" class="section level2">
 <h2>The Shiny hearing aids: <code>observe</code>, <code>reactive</code> or <code>render*</code></h2>
-<p>The values associated with your UI inputs (like the text box, <code>input$mytext</code>) are called reactive elements. It is tempting to include <code>input$mytext</code> directly. Try running the code below and you will get an error <code>operation not allowed without an active reactive context</code> meaning that to read the reactive you need to wrap it in a function designed to listen to the reactive elements. Note that if you run this code (and get the error) you’ll need to click on the “stop” button in the console to stop the app.</p>
-<div id="hook-up-server" class="section level4 tabset">
-<h4>Hook up server</h4>
-<div id="code-3" class="section level5">
+<p>The values associated with your UI inputs (like the text box, <code>input$mytext</code>) are called reactive elements. It is tempting to include <code>input$mytext</code> directly in the server. Try running the code below and you will get an error <code>operation not allowed without an active reactive context</code> meaning that to read the reactive you need to wrap it in a function designed to listen to the reactive elements. Note that if you run this code (and get the error) you’ll need to click on the “stop” button in the console to stop the app.</p>
+<div id="you-cant-include-bare-reactive-values-in-the-server" class="section level4 tabset">
+<h4>You can’t include bare reactive values in the server</h4>
+<div id="code-9" class="section level5">
 <h5>Code</h5>
 <pre class="r"><code>#### server
 server &lt;- function(input, output, session) {
@@ -307,19 +593,19 @@ ui &lt;- fluidPage(
 
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
-<div id="app-3" class="section level5">
+<div id="app-9" class="section level5">
 <h5>App</h5>
 <p>Instead we need to wrap the values in an <code>observe</code>, <code>reactive</code> or <code>render*</code> function that is designed to handle reactive content.</p>
 </div>
 </div>
-<div id="observe-or-observeevent-wrap-the-reactive-value-in-an-observer-if-you-want-side-effects-and-dont-need-output" class="section level3">
-<h3><code>observe</code> or <code>observeEvent</code>: wrap the reactive value in an observer if you want side effects (and don’t need output)</h3>
-<p>Observers will get triggered in response to reactive values. They were designed to listen to reactive elements and respond by causing side effects, like updates to text boxes or pull-downs. Unlike the <code>reactive</code> function, they do not return data or values.</p>
+<div id="wrap-the-reactive-value-in-an-observer-if-you-want-side-effects-and-dont-need-output-observe-or-observeevent" class="section level3">
+<h3>wrap the reactive value in an observer if you want side effects and don’t need output (<code>observe</code> or <code>observeEvent</code>):</h3>
+<p>Observers will get triggered in response to reactive values. They were designed to listen to reactive elements and respond by causing side effects, like updates to text boxes or pull-downs. Unlike the <code>reactive</code> function, which we cover next, they do not return data or values.</p>
 <p>There are two flavors of <code>observe</code>. With <code>observe</code> the code inside will get triggered when any of the reactive values inside change. With ’observeEvent` code will only be triggered by specified reactive values.</p>
 <p>So, back to the example, if we wrap the <code>print</code> statement in an observer the app will print the value of the text box to the console. In this example we’re printing to the console only, not yet back to the ui.</p>
-<div id="reactive-values" class="section level4 tabset">
-<h4>Reactive values</h4>
-<div id="code-4" class="section level5">
+<div id="use-observe" class="section level4">
+<h4>Use <code class="tabset">observe</code></h4>
+<div id="code-10" class="section level5">
 <h5>Code</h5>
 <pre class="r"><code>#### server
 server &lt;- function(input, output, session) {
@@ -327,6 +613,7 @@ server &lt;- function(input, output, session) {
   # it prints the value to the console
   observe({
     print(input$mytext) # a side effect
+
   })
 }
 
@@ -359,37 +646,38 @@ ui &lt;- fluidPage(
 
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
-<div id="app-4" class="section level5">
+<div id="app-10" class="section level5">
 <h5>App</h5>
-<p>`</p>
-<p>As mentioned above, the code in an <code>observe</code> will run if <em>any</em> of the reactives inside change. So in the following code both print statements will run when either reactive changes.</p>
+</div>
+</div>
+<div id="prevent-unwanted-reactions-with-observeevent" class="section level4">
+<h4>Prevent unwanted reactions with <code>observeEvent</code></h4>
+<p>As mentioned above, the code in an <code>observe</code> will run if <em>any</em> of the reactives inside change. So in the following code the print statement will run if the user interacts with the text box <strong>or</strong> with the slider. Even though the slider reactive <code>input$myslider</code> is not actually being used in any way, because it’s in the observe function, it will trigger all the code in the observe function to run.</p>
 <pre class="r"><code>server &lt;- function(input, output, session) {
   # both print statements will run when EITHER reactive
   # changes
    observe({
     print(input$mytext) 
-    print(input$myslider)
+    input$myslider
     })
 }</code></pre>
-<p>But with <code>observeEvent</code> the code inside will only run if the specified reactive value changes. So in the following code the print statements will only execute if the user makes changes to the text box.</p>
+<p>The <code>observeEvent</code> function is designed to address this issue. With <code>observeEvent</code> the code inside will only run if the specified reactive value changes. So in the following code the print statements will only execute if the user makes changes to the text box.</p>
 <pre class="r"><code>server &lt;- function(input, output, session) {
-  # both print statements will run when EITHER reactive
-  # changes
+   # The observer code will only run if input$mytext changes
    observeEvent(input$mytext, {
     print(input$mytext) 
-    print(input$myslider)
+    input$myslider
     })
 }</code></pre>
 </div>
 </div>
-</div>
-<div id="reactive-isolate-code-and-generate-output-with-no-side-effects" class="section level3">
-<h3><code>reactive</code>: isolate code and generate output with no side effects</h3>
-<p>A <code>reactive</code> is used in the same way you would use an R function except that it gets triggered by a reactive element. Because using <code>reactive</code> creates a function and returns results you generally save as an object and use it elsewhere in your server as you would use any R function with the very important exception that it can only be run within a “reactive context” (so in another reactive, an observer or a render* function) . The reactives are NOT supposed to generate side effects, they should essentially be self-contained.</p>
+<div id="use-reactive-to-isolate-code-and-generate-output-with-no-side-effects" class="section level3">
+<h3>Use <code>reactive</code> to isolate code and generate output with no side effects</h3>
+<p>A <code>reactive</code> is used in the same way you would use an R function except that it gets triggered by a reactive element. Because using <code>reactive</code> creates a function and returns results you generally save a reactive as an object and use it elsewhere in your server as you would use any R function. There is one major distinction from a function, however, that it can only be run within a “reactive context” (so in another reactive, an observer or a render* function) . The reactives are NOT supposed to generate side effects, they should essentially be self-contained.</p>
 <p>So in the example, below I use <code>reactive</code> to create a self-contained function called <code>myresults</code>. Since I want to print the results to the console (a side effect), I run the reactive function from within an observer. Note that since it’s a function I’m using <code>myresults()</code> rather than just <code>myresults</code>.</p>
-<div id="using-reactive" class="section level4 tabset">
-<h4>Using reactive()</h4>
-<div id="code-5" class="section level5">
+<div id="using-reactive" class="section level4">
+<h4>Using <code class="tabset">reactive</code></h4>
+<div id="code-11" class="section level5">
 <h5>Code</h5>
 <pre class="r"><code>#### server
 server &lt;- function(input, output, session) {
@@ -433,44 +721,46 @@ ui &lt;- fluidPage(
 
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
-<div id="app-5" class="section level5">
+<div id="app-11" class="section level5">
 <h5>App</h5>
 </div>
 </div>
 </div>
-<div id="render-and-output-to-create-a-display-text-tables-plots-and-user-interface-elements." class="section level3">
-<h3><code>render*</code> and <code>*Output</code>: To create a display text, tables, plots and user interface elements.</h3>
-<p>The third type of listener is designed to create items to add to your user interface. In the previous mini-apps we listened and reacted to reactive values with <code>observe</code> or <code>reactive</code> but simply printed to the console. But this is not that useful and will not keep your users entertained for long. We need to be able to return values to the user and this is where we use the set of render and output function.</p>
-<div id="rendertext-and-textoutput-as-the-initial-example" class="section level4">
-<h4><code>renderText</code> and <code>textOutput</code> as the initial example</h4>
+<div id="create-and-display-text-tables-plots-and-user-interface-elements-with-render-and-output" class="section level3">
+<h3>Create and display text, tables, plots and user interface elements with <code>render*</code> and <code>*Output</code>:</h3>
+<p>The third type of listener is designed to create items to add to your user interface. In the previous mini-apps we listened and reacted to reactive values with <code>observe</code> or <code>reactive</code> but simply printed to the console. But this is not that useful and will not keep your users entertained. We want to produce useful output that the user can interact with.</p>
+<div id="an-initial-example-with-rendertext-and-textoutput" class="section level4">
+<h4>An initial example with <code>renderText</code> and <code>textOutput</code></h4>
 <p>In order to return values to the user we need a strategy to (1) grab the values from the UI in the server; (2) process as necessary and then (3) return the result to the UI. To do this RStudio created a suite of functions that tag-team and circulate the value to and from the server. These are the <code>render*</code> functions and the <code>*Output</code> functions.</p>
-<p><strong>The user-to-Server-back-to-user process in broad strokes</strong>:</p>
+<p><strong>The User-to-Server-back-to-User process in broad strokes</strong>:</p>
 <ol style="list-style-type: decimal">
-<li>The <code>renderText</code> function, in the server, would be used in the server to read the text box input (and process as necessary).</li>
-<li>Then the <code>renderText</code> function would send the result back to the user (the UI).</li>
-<li>The UI would read in the output from the server using the <code>textOutput</code> function.</li>
+<li>The <code>renderText</code> function, in the server, would be used in the server to read the text box input reactive (and process as necessary).</li>
+<li>Then the <code>renderText</code> function would send the result back to Shiny’s user interface by attaching the results to the <code>output</code> object.</li>
+<li>Shiny’s UI would read the output from the server and deliver to the user using the <code>textOutput</code> function.</li>
 </ol>
-<p><strong>The user-to-Server-back-to-user process a little more detail</strong>:</p>
+<p><strong>The User-to-Server-back-to-User process our example in detail</strong>:</p>
 <p>Using our own app as an example. Let’s say that instead of printing the text to the console we want to print it for our users. In order to do this we need to “complete the loop” with our UI which amounts to this:</p>
 <ol style="list-style-type: decimal">
-<li>Our UI has a text input called <code>mytext</code></li>
-<li>We will grab that value in the server inside the <code>renderText</code> function as <code>input$mytext</code></li>
-<li>Within the <code>renderText</code> function we can process <code>input$mytext</code> as necessary and then return the result to the UI.</li>
-<li>In order to return the result to the UI from the server we name it and attach it to the output object (<code>output$myoutputtext &lt;- something</code>).</li>
-<li>In the UI we use the <code>textOutput</code> function to read in <code>myoutputtext</code> and put it on the UI</li>
+<li>Our UI has a text input called <code>mytext</code>.</li>
+<li>Anytime the text box changes it triggers the <code>renderText</code> function in the server (this is because <code>input$mytext</code>, a reactive, is in the <code>renderText</code> function)</li>
+<li>All the code in <code>renderText</code> runs each time the text box changes</li>
+<li>When done, the returned object from <code>renderText</code> gets attached to the <code>output</code> list as <code>my_output_text</code>.</li>
+<li>Since the output <code>my_output_text</code> is text we use a <code>textOutput</code> function in the UI to read it and display to the user. Note that unlike reactives in the server that are identified as <code>input$mytext</code> the output is named in quotes (so we use <code>&quot;my_output_text&quot;</code> rather than <code>output$my_output_text</code>).</li>
 </ol>
-<p>Give this a try, type something in the text box.</p>
 </div>
-<div id="using-render-and-output" class="section level4 tabset">
-<h4>Using render and output</h4>
-<div id="code-6" class="section level5">
+<div id="using-rendertext-and-textoutput-type-something-in-the-app-text-box" class="section level4 tabset">
+<h4>Using <code>renderText</code> and <code>textOutput</code> (type something in the app text box)</h4>
+<div id="code-12" class="section level5">
 <h5>Code</h5>
 <pre class="r"><code>#### server
 server &lt;- function(input, output, session) {
   
   # input$mytext comes from the UI. my_output_text gets
   # sent back
-  output$my_output_text &lt;- renderText({input$mytext})
+  output$my_output_text &lt;- renderText({
+    init &lt;- &quot;Your value is: &quot;
+    return(paste0(init, input$mytext))
+    })
 }
 
 #### user interface
@@ -501,7 +791,7 @@ ui &lt;- fluidPage(
 
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
-<div id="app-6" class="section level5">
+<div id="app-12" class="section level5">
 <h5>App</h5>
 </div>
 </div>
@@ -512,7 +802,7 @@ shinyApp(ui = ui, server = server)</code></pre>
 </div>
 <div id="add-a-plot" class="section level4 tabset">
 <h4>Add a plot</h4>
-<div id="code-7" class="section level5">
+<div id="code-13" class="section level5">
 <h5>Code</h5>
 <pre class="r"><code>#### server
 server &lt;- function(input, output, session) {
@@ -554,7 +844,7 @@ ui &lt;- fluidPage(
 
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
-<div id="app-7" class="section level5">
+<div id="app-13" class="section level5">
 <h5>App</h5>
 </div>
 </div>
@@ -566,7 +856,7 @@ shinyApp(ui = ui, server = server)</code></pre>
 </div>
 <div id="dynamic-user-interface" class="section level4 tabset">
 <h4>Dynamic user interface</h4>
-<div id="code-8" class="section level5">
+<div id="code-14" class="section level5">
 <h5>Code</h5>
 <pre class="r"><code>#### server
 
@@ -612,7 +902,7 @@ ui &lt;- fluidPage(
 
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
-<div id="app-8" class="section level5">
+<div id="app-14" class="section level5">
 <h5>App</h5>
 </div>
 </div>
@@ -622,7 +912,7 @@ shinyApp(ui = ui, server = server)</code></pre>
 <p>In the example below I’m including one typical use case for each of the three listeners. In a later example, I will link them together in a more meaningful way but there is one more topic I want to cover before I do that.</p>
 <div id="all-three-listeners" class="section level4 tabset">
 <h4>All three listeners</h4>
-<div id="code-9" class="section level5">
+<div id="code-15" class="section level5">
 <h5>Code</h5>
 <pre class="r"><code>#### server
 
@@ -668,7 +958,7 @@ ui &lt;- fluidPage(
 
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
-<div id="app-9" class="section level5">
+<div id="app-15" class="section level5">
 <h5>App</h5>
 </div>
 </div>
@@ -706,7 +996,7 @@ server &lt;- function(input, output, session) {
 <p><strong>Here all code in the observer run when the user changes either the text box or slider</strong></p>
 <div id="not-ideal" class="section level4 tabset">
 <h4>Not ideal</h4>
-<div id="code-10" class="section level5">
+<div id="code-16" class="section level5">
 <h5>Code</h5>
 <pre class="r"><code>#### server
 
@@ -758,14 +1048,14 @@ ui &lt;- fluidPage(
 
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
-<div id="app-10" class="section level5">
+<div id="app-16" class="section level5">
 <h5>App</h5>
 <p><strong>Here all code in the observer run when the user changes either the text box or slider</strong></p>
 </div>
 </div>
 <div id="all-code-runs-with-change-to-text-or-slider" class="section level4 tabset">
 <h4>All code runs with change to text or slider</h4>
-<div id="code-11" class="section level5">
+<div id="code-17" class="section level5">
 <h5>Code</h5>
 <pre class="r"><code>#### server
 server &lt;- function(input, output, session) {
@@ -808,13 +1098,13 @@ ui &lt;- fluidPage(
 
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
-<div id="app-11" class="section level5">
+<div id="app-17" class="section level5">
 <h5>App</h5>
 </div>
 </div>
 <div id="only-relevant-code-runs-with-change-to-text-or-slider" class="section level4 tabset">
 <h4>Only relevant code runs with change to text or slider</h4>
-<div id="code-12" class="section level5">
+<div id="code-18" class="section level5">
 <h5>Code</h5>
 <pre class="r"><code>#### server
 server &lt;- function(input, output, session) {
@@ -857,7 +1147,7 @@ ui &lt;- fluidPage(
 
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
-<div id="app-12" class="section level5">
+<div id="app-18" class="section level5">
 <h5>App</h5>
 </div>
 </div>
@@ -867,7 +1157,7 @@ shinyApp(ui = ui, server = server)</code></pre>
 <p>In our example above, we separated code into discrete chunks using the <code>reactive</code> function but what if you need to <strong>use</strong> a value but don’t want to re-run code everytime that value changes?</p>
 <div id="the-example-app-use-isolate-to-avoid-triggering-reactions" class="section level4 tabset">
 <h4>The example app: Use isolate to avoid triggering reactions</h4>
-<div id="code-13" class="section level5">
+<div id="code-19" class="section level5">
 <h5>Code</h5>
 <pre class="r"><code>#### server
 
@@ -920,7 +1210,7 @@ ui &lt;- fluidPage(
 
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
-<div id="app-13" class="section level5">
+<div id="app-19" class="section level5">
 <h5>App</h5>
 </div>
 </div>
@@ -936,7 +1226,7 @@ shinyApp(ui = ui, server = server)</code></pre>
 <p>As an alternative, you can create a function that outputs the UI elements you need and then, instead of repeating the code that creates those elements you can simply call the function. So in the example below, I create a function to generate a title, select box, radio buttons and a checkbox. Then I call that function three times – one each for the tabs.</p>
 <div id="the-example-app-create-re-useable-ui-elements" class="section level4 tabset">
 <h4>The example app: Create re-useable UI elements</h4>
-<div id="code-14" class="section level5">
+<div id="code-20" class="section level5">
 <h5>Code</h5>
 <pre class="r"><code>#### server
 
@@ -989,9 +1279,25 @@ ui &lt;- fluidPage(
 
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
-<div id="app-14" class="section level5">
+<div id="app-20" class="section level5">
 <h5>App</h5>
 </div>
+</div>
+</div>
+<div id="deploy-your-app" class="section level2">
+<h2>Deploy your app</h2>
+</div>
+<div id="add-in-packages" class="section level2">
+<h2>Add-in packages</h2>
+<div id="shinybs" class="section level3">
+<h3>shinyBS</h3>
+</div>
+<div id="shinyjs" class="section level3">
+<h3>shinyjs</h3>
+</div>
+<div id="shinyurl" class="section level3">
+<h3>shinyURL</h3>
+<p><a href="https://github.com/aoles/shinyURL" class="uri">https://github.com/aoles/shinyURL</a></p>
 </div>
 </div>
 <div id="advanced-topics" class="section level2">
@@ -1001,7 +1307,7 @@ shinyApp(ui = ui, server = server)</code></pre>
 <p>Adding interactive tables to your Shiny app is easier than you think. The original version of the shiny package included a renderDataTable function but this is slowly being deprecated in favor of the renderDataTable function from the package DT. For the purposes of simply showing a table the two options are very similar but DT extends the styling and interaction capabilities – take a look at the <a href="https://rstudio.github.io/DT/shiny.html">documentation</a>.</p>
 <div id="example-app-using-the-shiny-package-for-an-interactive-table" class="section level4 tabset">
 <h4>Example app: Using the shiny package for an interactive table</h4>
-<div id="code-15" class="section level5">
+<div id="code-21" class="section level5">
 <h5>Code</h5>
 <pre class="r"><code>#### server
 
@@ -1049,13 +1355,13 @@ ui &lt;- fluidPage(
 
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
-<div id="app-15" class="section level5">
+<div id="app-21" class="section level5">
 <h5>App</h5>
 </div>
 </div>
 <div id="example-app-using-the-dt-package-for-an-interactive-table" class="section level4 tabset">
 <h4>Example app: Using the DT package for an interactive table</h4>
-<div id="code-16" class="section level5">
+<div id="code-22" class="section level5">
 <h5>Code</h5>
 <pre class="r"><code>library(DT)
 #### server
@@ -1103,7 +1409,7 @@ ui &lt;- fluidPage(
 
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
-<div id="app-16" class="section level5">
+<div id="app-22" class="section level5">
 <h5>App</h5>
 </div>
 </div>
@@ -1114,7 +1420,7 @@ shinyApp(ui = ui, server = server)</code></pre>
 <div id="example-app-use-plot.ly-to-make-a-ggplot-interactive" class="section level4 tabset">
 <h4>Example app: Use plot.ly to make a ggplot interactive</h4>
 <p>Details on using plot.ly can be found at <a href="https://plot.ly/r/shiny-tutorial/">this site</a>.</p>
-<div id="code-17" class="section level5">
+<div id="code-23" class="section level5">
 <h5>Code</h5>
 <pre class="r"><code>library(plotly)
 #### server
@@ -1157,14 +1463,14 @@ ui &lt;- fluidPage(
 
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
-<div id="app-17" class="section level5">
+<div id="app-23" class="section level5">
 <h5>App</h5>
 </div>
 </div>
 <div id="example-app-use-highcharts-to-make-an-interactive-plot" class="section level4 tabset">
 <h4>Example app: Use highcharts to make an interactive plot</h4>
 <p>Details on using highcharts can be found at <a href="http://jkunst.com/highcharter/">this site</a>.</p>
-<div id="code-18" class="section level5">
+<div id="code-24" class="section level5">
 <h5>Code</h5>
 <pre class="r"><code>library(highcharter)
 library(magrittr)
@@ -1207,14 +1513,14 @@ ui &lt;- fluidPage(
 
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
-<div id="app-18" class="section level5">
+<div id="app-24" class="section level5">
 <h5>App</h5>
 </div>
 </div>
 <div id="example-app-use-leaflet-for-an-interactive-map" class="section level4 tabset">
 <h4>Example app: Use leaflet for an interactive map</h4>
 <p>Details on using leaflet in R can be found at <a href="http://rstudio.github.io/leaflet/shiny.html">this site</a>. If you want to interact between your map and app see <a href="http://urbanstudies.tcu.edu/research/open-data/tx-demographics/">this example</a> by Kyle Walker and the <a href="https://gist.github.com/walkerke/4988b5164258917687cb">code used to create it</a>.</p>
-<div id="code-19" class="section level5">
+<div id="code-25" class="section level5">
 <h5>Code</h5>
 <pre class="r"><code>library(leaflet)
 #### server
@@ -1260,17 +1566,170 @@ ui &lt;- fluidPage(
 
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
-<div id="app-19" class="section level5">
+<div id="app-25" class="section level5">
 <h5>App</h5>
 </div>
 </div>
 </div>
 <div id="shiny-modules" class="section level3">
 <h3>Shiny modules</h3>
+<p>At the Shiny Developers Conference Joe Cheng from RStudio gave a great presentation on Shiny modules. They are designed, in part, to help solve the issue of re-useability discussed above. The idea behind a module is very similar to the functions above that take, as an input, the unique id to be used on the element on your page.</p>
+<p>As an example let’s say you you’re using a slider and two plots in several places in your application</p>
+<ol style="list-style-type: decimal">
+<li>Create the module UI</li>
+<li>Create the module server</li>
+<li>Create your Shiny UI and include the module UI inside</li>
+<li>Create your Shiny server and include the module server inside</li>
+</ol>
+<div id="create-the-module-ui" class="section level4">
+<h4>1. Create the module UI</h4>
+<p>The module UI, unlike the app UI, is simply a function. It needs to have at least one argument, the <code>id</code> which is essentially just text that gets prepended to the UI element IDs. So in the example below the function is called <code>scatterUI</code> and we have three elements, <code>slider1</code>, <code>plot1</code> and <code>plot2</code>. If the user runs this function with <code>scatterUI(&quot;myapp&quot;)</code> the ids will become <code>myapp-slider1</code>, <code>myapp-plot1</code> and so on. This is powerful</p>
+<pre class="r"><code># MODULE UI
+scatterUI &lt;- function(id) {
+  ns &lt;- NS(id)
+  list(
+  fluidRow(
+    column(6, offset=4,    sliderInput(ns(&quot;slider1&quot;), label = &quot;Limit the number of points &quot;, min = 0, max = 32, value = 15))
+           ),
+  fluidRow(
+    column(6, plotOutput(ns(&quot;plot1&quot;))),
+    column(6, plotOutput(ns(&quot;plot2&quot;)))
+  )
+  )
+  
+}</code></pre>
+<pre class="r"><code>library(ggplot2)
+library(shiny)
+
+scatterUI &lt;- function(id) {
+  ns &lt;- NS(id)
+  list(
+  fluidRow(
+    column(6, offset=4,    sliderInput(ns(&quot;slider1&quot;), label = &quot;Limit the number of points &quot;, min = 0, max = 32, value = 15))
+           ),
+  fluidRow(
+    column(6, plotOutput(ns(&quot;plot1&quot;))),
+    column(6, plotOutput(ns(&quot;plot2&quot;)))
+  )
+  )
+  
+}
+
+
+scatter &lt;- function(input, output, session, dat, var1, var2, ptsize, col1, col2) {
+  browser()
+    dat &lt;- dat[order(dat[[var1]]),]
+    
+  dat &lt;- reactive({
+    dat[1:input$slider1,]
+  })
+  
+  output$plot1 &lt;- renderPlot({
+    ggplot(dat(), aes_string(var1, var2)) + geom_point(color=col1, size=ptsize)
+  })
+
+  output$plot2 &lt;- renderPlot({
+    ggplot(dat(), aes_string(var1, var2)) + geom_point(color=col2, size=ptsize) 
+  })
+
+  
+}
+
+
+
+ui &lt;- fluidPage(
+  
+  scatterUI(&quot;prefix&quot;),
+   scatterUI(&quot;prefix2&quot;)
+  
+)
+
+
+server &lt;- function(input, output,session){
+  
+  
+  callModule(scatter, &quot;prefix&quot;, cars, &quot;speed&quot;, &quot;dist&quot;,  2, &quot;red&quot;, &quot;blue&quot;)
+  callModule(scatter, &quot;prefix2&quot;, mtcars, &quot;mpg&quot;, &quot;hp&quot;, 4, &quot;forestgreen&quot;, &quot;purple&quot;)
+  
+}
+
+shinyApp(ui, server)</code></pre>
+</div>
 </div>
 <div id="htmltemplates" class="section level3">
 <h3>htmlTemplates</h3>
-</div>
+<pre class="r"><code>sessionInfo</code></pre>
+<pre><code>## function (package = NULL) 
+## {
+##     z &lt;- list()
+##     z$R.version &lt;- R.Version()
+##     z$platform &lt;- z$R.version$platform
+##     if (nzchar(.Platform$r_arch)) 
+##         z$platform &lt;- paste(z$platform, .Platform$r_arch, sep = &quot;/&quot;)
+##     z$platform &lt;- paste0(z$platform, &quot; (&quot;, 8 * .Machine$sizeof.pointer, 
+##         &quot;-bit)&quot;)
+##     z$locale &lt;- Sys.getlocale()
+##     if (.Platform$OS.type == &quot;windows&quot;) {
+##         z$running &lt;- win.version()
+##     }
+##     else if (nzchar(Sys.which(&quot;uname&quot;))) {
+##         uname &lt;- system(&quot;uname -a&quot;, intern = TRUE)
+##         os &lt;- sub(&quot; .*&quot;, &quot;&quot;, uname)
+##         z$running &lt;- switch(os, Linux = if (file.exists(&quot;/etc/os-release&quot;)) {
+##             tmp &lt;- readLines(&quot;/etc/os-release&quot;)
+##             t2 &lt;- if (any(grepl(&quot;^PRETTY_NAME=&quot;, tmp))) sub(&quot;^PRETTY_NAME=&quot;, 
+##                 &quot;&quot;, grep(&quot;^PRETTY_NAME=&quot;, tmp, value = TRUE)[1L]) else if (any(grepl(&quot;^NAME&quot;, 
+##                 tmp))) sub(&quot;^NAME=&quot;, &quot;&quot;, grep(&quot;^NAME=&quot;, tmp, 
+##                 value = TRUE)[1L]) else &quot;Linux (unknown distro)&quot;
+##             sub(&quot;\&quot;(.*)\&quot;&quot;, &quot;\\1&quot;, t2)
+##         } else if (file.exists(&quot;/etc/system-release&quot;)) {
+##             readLines(&quot;/etc/system-release&quot;)
+##         }, Darwin = {
+##             ver &lt;- readLines(&quot;/System/Library/CoreServices/SystemVersion.plist&quot;)
+##             ind &lt;- grep(&quot;ProductUserVisibleVersion&quot;, ver)
+##             ver &lt;- ver[ind + 1L]
+##             ver &lt;- sub(&quot;.*&lt;string&gt;&quot;, &quot;&quot;, ver)
+##             ver &lt;- sub(&quot;&lt;/string&gt;$&quot;, &quot;&quot;, ver)
+##             ver1 &lt;- strsplit(ver, &quot;.&quot;, fixed = TRUE)[[1L]][2L]
+##             sprintf(&quot;OS X %s (%s)&quot;, ver, switch(ver1, `4` = &quot;Tiger&quot;, 
+##                 `5` = &quot;Leopard&quot;, `6` = &quot;Snow Leopard&quot;, `7` = &quot;Lion&quot;, 
+##                 `8` = &quot;Mountain Lion&quot;, `9` = &quot;Mavericks&quot;, `10` = &quot;Yosemite&quot;, 
+##                 `11` = &quot;El Capitan&quot;, &quot;unknown&quot;))
+##         }, SunOS = {
+##             ver &lt;- system(&quot;uname -r&quot;, intern = TRUE)
+##             paste(&quot;Solaris&quot;, strsplit(ver, &quot;.&quot;, fixed = TRUE)[[1L]][2L])
+##         }, uname)
+##     }
+##     if (is.null(package)) {
+##         package &lt;- grep(&quot;^package:&quot;, search(), value = TRUE)
+##         keep &lt;- sapply(package, function(x) x == &quot;package:base&quot; || 
+##             !is.null(attr(as.environment(x), &quot;path&quot;)))
+##         package &lt;- sub(&quot;^package:&quot;, &quot;&quot;, package[keep])
+##     }
+##     pkgDesc &lt;- lapply(package, packageDescription, encoding = NA)
+##     if (length(package) == 0) 
+##         stop(&quot;no valid packages were specified&quot;)
+##     basePkgs &lt;- sapply(pkgDesc, function(x) !is.null(x$Priority) &amp;&amp; 
+##         x$Priority == &quot;base&quot;)
+##     z$basePkgs &lt;- package[basePkgs]
+##     if (any(!basePkgs)) {
+##         z$otherPkgs &lt;- pkgDesc[!basePkgs]
+##         names(z$otherPkgs) &lt;- package[!basePkgs]
+##     }
+##     loadedOnly &lt;- loadedNamespaces()
+##     loadedOnly &lt;- loadedOnly[!(loadedOnly %in% package)]
+##     if (length(loadedOnly)) {
+##         names(loadedOnly) &lt;- loadedOnly
+##         pkgDesc &lt;- c(pkgDesc, lapply(loadedOnly, packageDescription))
+##         z$loadedOnly &lt;- pkgDesc[loadedOnly]
+##     }
+##     class(z) &lt;- &quot;sessionInfo&quot;
+##     z
+## }
+## &lt;bytecode: 0x03dad038&gt;
+## &lt;environment: namespace:utils&gt;</code></pre>
+<p>GOTCHAS</p>
+<p>Be careful about where you put reactive values. I had an instance with a reactive within renderPlot and the same reactive within a plotting function and took several hours to sort out.</p>
 </div>
 </div>
 
