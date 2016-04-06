@@ -3,6 +3,7 @@ title: "R powered web applications with Shiny"
 output:
   html_document:
     toc: true
+    selfcontained: false
 ---
 
 <style>
@@ -20,7 +21,6 @@ library(shiny)
 library(DT)
 library(leaflet)
 library(htmlwidgets)
-#shinyapps::deployApp("X:/administrative/social_media/blogposts/r_shiny/app1", account="spatial")
 ```
 
 Shiny is an R package that can help you create data-driven, interactive web applications with R. With Shiny, you use the open-source R language to create a web application and Shiny compiles your code into the HTML, CSS and JavaScript needed to display your application on the web. Shiny, created by Joe Cheng and the team at RStudio, can be used to create a static web page with various widgets but more importantly you can use Shiny to create an interactive web application capable of executing R code in the background.
@@ -948,7 +948,7 @@ As mentioned above, Kyle Walker inspired us to link plots and maps using the bru
 ##### App
 <iFrame class="iframeapp" src = "https://spatial.shinyapps.io/blog_app37/"></iFrame>
 
-## Including custom JavaScript on in your app
+## Including custom JavaScript in your app
 
 Occasionally you may want to include some JavaScript that you've written in your Shiny app. 
 
