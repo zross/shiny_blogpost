@@ -40,20 +40,27 @@ In earlier versions of `shiny` the user interface required using a ui handler fu
 Depending on what you want to do with your app, the `session` argument is not required but since you need it for some tasks we will include it.
 
 
-#### Example app: The simplest possible app {.tabset}
+#### Example app: The simplest possible app 
 
 The app panel looks blank but there is a shiny app there
 
-##### Code
+<ul class="nav nav-tabs">
+<li class="active"><a data-toggle="tab" href="#code0">Code 0</a></li>
+<li><a data-toggle="tab" href="#app0">App 0</a></li>
+</ul>
 
+<div class="tab-content">
+<div id="code0" class="tab-pane fade in active">
+    
 ```{r, eval=FALSE, code=readLines("blog_app0/app.R")}
+
 ```
 
-
-##### App (will be blank!)
-<iFrame class="iframeapp" src = "https://spatial.shinyapps.io/blog_app0/"></iFrame>
-
-
+</div>
+<div id="app0" class="tab-pane fade">
+<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app0/"></iFrame>
+</div>
+</div>
 
 
 # Set up your user interface (ui)
@@ -69,33 +76,58 @@ Under the hood, Shiny uses Twitter Bootstrap, a commonly used framework for desi
 As mentioned above, we will use a fluid design. For this example, we will take advantage of a Shiny template using the function `sidebarLayout` which creates a page with a sidebar and a main panel. You can review other layout options [here](http://shiny.rstudio.com/articles/layout-guide.html). In this example we're creating a `sidebarPanel` and `mainPanel` and not much else.
 
 
-#### Example app: Basic user interface {.tabset}
 
-##### Code
 
+
+#### Example app: Basic user interface
+
+<ul class="nav nav-tabs">
+<li class="active"><a data-toggle="tab" href="#code1">Code 1</a></li>
+<li><a data-toggle="tab" href="#app1">App 1</a></li>
+</ul>
+
+<div class="tab-content">
+<div id="code1" class="tab-pane fade in active">
+    
 ```{r, eval=FALSE, code=readLines("blog_app1/app.R")}
+
 ```
 
+</div>
+<div id="app1" class="tab-pane fade">
+<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app1/"></iFrame>
+</div>
+</div>
 
-##### App
 
-<iFrame class="iframeapp" src = "https://spatial.shinyapps.io/blog_app1/"></iFrame>
+
+
+
 
 ### Adding elements with tags$xxx
 
 It's easy to add HTML elements to your Shiny app using [HTML tags](http://shiny.rstudio.com/articles/tag-glossary.html). There are more than 100 HTML elements you can add to your page using the syntax `tags$OBJECT()` as in `tags$p()` for a paragraph or `tags$blockquote()`. For a limited number of these tags, the most common ones, there are helper functions that allow you to skip the `tags$` so, for example, a first tier header can be created with `h1()` -- but be careful, not all tags permit this.
 
 
-#### Example app: using HTML tags to layout your app {.tabset}
+#### Example app: using HTML tags to layout your app 
 
-##### Code
+<ul class="nav nav-tabs">
+<li class="active"><a data-toggle="tab" href="#code2">Code 2</a></li>
+<li><a data-toggle="tab" href="#app2">App 2</a></li>
+</ul>
 
+<div class="tab-content">
+<div id="code2" class="tab-pane fade in active">
+    
 ```{r, eval=FALSE, code=readLines("blog_app2/app.R")}
+
 ```
 
-
-##### App
-<iFrame class="iframeapp" src = "https://spatial.shinyapps.io/blog_app2/"></iFrame>
+</div>
+<div id="app2" class="tab-pane fade">
+<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app2/"></iFrame>
+</div>
+</div>
 
 
 ### Layout your app using Bootstrap's grid system manually
@@ -108,16 +140,25 @@ In the example below, the first row has a column that spans 6 columns but is "of
 
 
 
-#### Example app: Manual layout using Bootstrap's grid system {.tabset}
+#### Example app: Manual layout using Bootstrap's grid system 
 
-##### Code
+<ul class="nav nav-tabs">
+<li class="active"><a data-toggle="tab" href="#code3">Code 3</a></li>
+<li><a data-toggle="tab" href="#app3">App 3</a></li>
+</ul>
 
+<div class="tab-content">
+<div id="code3" class="tab-pane fade in active">
+    
 ```{r, eval=FALSE, code=readLines("blog_app3/app.R")}
+
 ```
 
-
-##### App
-<iFrame class="iframeapp" src = "https://spatial.shinyapps.io/blog_app3/"></iFrame>
+</div>
+<div id="app3" class="tab-pane fade">
+<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app3/"></iFrame>
+</div>
+</div>
 
 
 
@@ -132,16 +173,25 @@ Bootstrap offers a number of pre-created themes that allow for a complete change
 Documentation [here](http://rstudio.github.io/shinythemes/). More detail [here](http://bootswatch.com/).
 
 
-#### Example app: Use a pre-existing Bootstrap theme {.tabset}
+#### Example app: Use a pre-existing Bootstrap theme 
 
-##### Code
+<ul class="nav nav-tabs">
+<li class="active"><a data-toggle="tab" href="#code4">Code 4</a></li>
+<li><a data-toggle="tab" href="#app4">App 4</a></li>
+</ul>
 
+<div class="tab-content">
+<div id="code4" class="tab-pane fade in active">
+    
 ```{r, eval=FALSE, code=readLines("blog_app4/app.R")}
+
 ```
 
-
-##### App
-<iFrame class="iframeapp" src = "https://spatial.shinyapps.io/blog_app4/"></iFrame>
+</div>
+<div id="app4" class="tab-pane fade">
+<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app4/"></iFrame>
+</div>
+</div>
 
 ### Style yourself with CSS
 
@@ -161,57 +211,93 @@ For more detail, see [RStudio's page on CSS](http://shiny.rstudio.com/articles/c
 
 
 
-#### Example app: using inline CSS in the HTML head {.tabset}
+#### Example app: using inline CSS in the HTML head 
 
 Note that the actual style code is within an `HTML` function -- this is prevent Shiny from treating the text as "regular" text and escaping the strings.
 
-##### Code
+<ul class="nav nav-tabs">
+<li class="active"><a data-toggle="tab" href="#code5">Code 5</a></li>
+<li><a data-toggle="tab" href="#app5">App 5</a></li>
+</ul>
 
+<div class="tab-content">
+<div id="code5" class="tab-pane fade in active">
+    
 ```{r, eval=FALSE, code=readLines("blog_app5/app.R")}
+
 ```
 
+</div>
+<div id="app5" class="tab-pane fade">
+<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app5/"></iFrame>
+</div>
+</div>
 
-##### App
-<iFrame class="iframeapp" src = "https://spatial.shinyapps.io/blog_app5/"></iFrame>
 
+#### Example app: using `includeCSS` (assumes you have an external file called `style.css`) 
 
-#### Example app: using `includeCSS` (assumes you have an external file called `style.css`) {.tabset}
+<ul class="nav nav-tabs">
+<li class="active"><a data-toggle="tab" href="#code6">Code 6</a></li>
+<li><a data-toggle="tab" href="#app6">App 6</a></li>
+</ul>
 
-##### Code
-
+<div class="tab-content">
+<div id="code6" class="tab-pane fade in active">
+    
 ```{r, eval=FALSE, code=readLines("blog_app6/app.R")}
+
 ```
 
+</div>
+<div id="app6" class="tab-pane fade">
+<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app6/"></iFrame>
+</div>
+</div>
 
-##### App
-<iFrame class="iframeapp" src = "https://spatial.shinyapps.io/blog_app6/"></iFrame>
 
+#### Example app: including a style in an HTML tag 
 
-#### Example app: including a style in an HTML tag {.tabset}
+<ul class="nav nav-tabs">
+<li class="active"><a data-toggle="tab" href="#code7">Code 7</a></li>
+<li><a data-toggle="tab" href="#app7">App 7</a></li>
+</ul>
 
-##### Code
-
+<div class="tab-content">
+<div id="code7" class="tab-pane fade in active">
+    
 ```{r, eval=FALSE, code=readLines("blog_app7/app.R")}
+
 ```
 
+</div>
+<div id="app7" class="tab-pane fade">
+<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app7/"></iFrame>
+</div>
+</div>
 
-##### App
-<iFrame class="iframeapp" src = "https://spatial.shinyapps.io/blog_app7/"></iFrame>
 
 
-
-#### Example app: An example of using the `shinyjs` `inlineCSS` function {.tabset}
+#### Example app: An example of using the `shinyjs` `inlineCSS` function 
 
 You will need to load the `shinyjs` package to use this approach.
 
-##### Code
+<ul class="nav nav-tabs">
+<li class="active"><a data-toggle="tab" href="#code8">Code 8</a></li>
+<li><a data-toggle="tab" href="#app8">App 8</a></li>
+</ul>
 
+<div class="tab-content">
+<div id="code8" class="tab-pane fade in active">
+    
 ```{r, eval=FALSE, code=readLines("blog_app8/app.R")}
+
 ```
 
-
-##### App
-<iFrame class="iframeapp" src = "https://spatial.shinyapps.io/blog_app8/"></iFrame>
+</div>
+<div id="app8" class="tab-pane fade">
+<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app8/"></iFrame>
+</div>
+</div>
 
 
 
@@ -227,15 +313,26 @@ For this particular example, I'll want a slider range and text input and I'll pu
 We're still only focusing here on the UI so these widgets "work" but don't actually do anything because we have not included any code in the Shiny server. In this particular example, we are including both a slider and a text input.
 
 
-#### Example app: Allow user input {.tabset}
+#### Example app: Allow user input 
 
 
-##### Code
+<ul class="nav nav-tabs">
+<li class="active"><a data-toggle="tab" href="#code9">Code 9</a></li>
+<li><a data-toggle="tab" href="#app9">App 9</a></li>
+</ul>
+
+<div class="tab-content">
+<div id="code9" class="tab-pane fade in active">
+    
 ```{r, eval=FALSE, code=readLines("blog_app9/app.R")}
+
 ```
 
-##### App
-<iFrame class="iframeapp" src = "https://spatial.shinyapps.io/blog_app9/"></iFrame>
+</div>
+<div id="app9" class="tab-pane fade">
+<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app9/"></iFrame>
+</div>
+</div>
 
 # Set up your server
 
@@ -259,15 +356,27 @@ The values associated with your UI inputs (like the text box, `input$mytext`) ar
 
 
 
-#### Example app: You can't include bare reactive values in the server {.tabset}
+#### Example app: You can't include bare reactive values in the server 
 
 This will throw an error!
 
-##### Code
+<ul class="nav nav-tabs">
+<li class="active"><a data-toggle="tab" href="#code10">Code 10</a></li>
+<li><a data-toggle="tab" href="#app10">App 10</a></li>
+</ul>
+
+<div class="tab-content">
+<div id="code10" class="tab-pane fade in active">
+    
 ```{r, eval=FALSE, code=readLines("blog_app10/app.R")}
+
 ```
-##### App (it will give an error, app won't work)
-<iFrame class="iframeapp" src = "https://spatial.shinyapps.io/blog_app10/"></iFrame>
+
+</div>
+<div id="app10" class="tab-pane fade">
+<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app10/"></iFrame>
+</div>
+</div>
 
 
 Instead we need to wrap the values in an `observe`, `reactive` function that is designed to handle reactive content. You can also wrap values in a `render*` function and these are discussed in the next section.
@@ -282,15 +391,27 @@ In the example code above (which doesn't work) you'll notice that I used a `prin
 In particular, I want to introduce you to the suite of `update*` functions that are designed to allow you to update existing Shiny widgets -- for example, update a text box or the list of items in a pulldown menu. In the next few apps I will be using a function called `updateTextInput` instead of `print` -- essentially I will use a text box as a console and will print results to the text box with `updateTextInput`. Here is an example:
 
 
-#### Example app: Using `updateTextInput` to show our reactions {.tabset}
+#### Example app: Using `updateTextInput` to show our reactions 
 
 In the app below you can see that I'm "printing" the text typed into `my_text` to `my_results` with the function `updateTextInput`.
 
-##### Code
+<ul class="nav nav-tabs">
+<li class="active"><a data-toggle="tab" href="#code11">Code 11</a></li>
+<li><a data-toggle="tab" href="#app11">App 11</a></li>
+</ul>
+
+<div class="tab-content">
+<div id="code11" class="tab-pane fade in active">
+    
 ```{r, eval=FALSE, code=readLines("blog_app11/app.R")}
+
 ```
-##### App
-<iFrame class="iframeapp" src = "https://spatial.shinyapps.io/blog_app11/"></iFrame>
+
+</div>
+<div id="app11" class="tab-pane fade">
+<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app11/"></iFrame>
+</div>
+</div>
 
 
 
@@ -304,67 +425,128 @@ So, back to the example, if we wrap the `print` statement in an observer the app
 
 
 
-#### Example app: Use `observe` for side effects {.tabset}
+#### Example app: Use `observe` for side effects 
 
 
-##### Code
+<ul class="nav nav-tabs">
+<li class="active"><a data-toggle="tab" href="#code12">Code 12</a></li>
+<li><a data-toggle="tab" href="#app12">App 12</a></li>
+</ul>
+
+<div class="tab-content">
+<div id="code12" class="tab-pane fade in active">
+    
 ```{r, eval=FALSE, code=readLines("blog_app12/app.R")}
+
 ```
-##### App
-<iFrame class="iframeapp" src = "https://spatial.shinyapps.io/blog_app12/"></iFrame>
+
+</div>
+<div id="app12" class="tab-pane fade">
+<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app12/"></iFrame>
+</div>
+</div>
+
 
 ### `observeEvent`: use `observeEvent` to prevent unwanted reactions
 
 As mentioned above, the code in an `observe` will run if *any* of the reactives inside change. So in the following code the print statement will run if the user interacts with the text box **or** with the slider. Even though the slider reactive `input$myslider` is not actually being used in any way, because it's in the observe function, it will trigger all the code in the observe function to run.
 
 
-#### Example app: All the reactives in `observe` will trigger the code to run {.tabset}
+#### Example app: All the reactives in `observe` will trigger the code to run 
 
 
-##### Code
+<ul class="nav nav-tabs">
+<li class="active"><a data-toggle="tab" href="#code13">Code 13</a></li>
+<li><a data-toggle="tab" href="#app13">App 13</a></li>
+</ul>
+
+<div class="tab-content">
+<div id="code13" class="tab-pane fade in active">
+    
 ```{r, eval=FALSE, code=readLines("blog_app13/app.R")}
+
 ```
-##### App
-<iFrame class="iframeapp" src = "https://spatial.shinyapps.io/blog_app13/"></iFrame>
+
+</div>
+<div id="app13" class="tab-pane fade">
+<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app13/"></iFrame>
+</div>
+</div>
 
 
 The `observeEvent` function is designed to address this issue. With `observeEvent` the code inside will only run if the specified reactive value changes. So in the following code the print statements will only execute if the user makes changes to the text box.
 
 
-#### Example app: Only specified reactive(s) trigger the code to run using `observeEvent`. {.tabset}
+#### Example app: Only specified reactive(s) trigger the code to run using `observeEvent`. 
 
 
-##### Code
+<ul class="nav nav-tabs">
+<li class="active"><a data-toggle="tab" href="#code14">Code 14</a></li>
+<li><a data-toggle="tab" href="#app14">App 14</a></li>
+</ul>
+
+<div class="tab-content">
+<div id="code14" class="tab-pane fade in active">
+    
 ```{r, eval=FALSE, code=readLines("blog_app14/app.R")}
+
 ```
-##### App
-<iFrame class="iframeapp" src = "https://spatial.shinyapps.io/blog_app14/"></iFrame>
+
+</div>
+<div id="app14" class="tab-pane fade">
+<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app14/"></iFrame>
+</div>
+</div>
 
 ### Observer priority: which observers run first
 
 With bigger apps, you may have situations where you want one observer to run before others. You can use an `observer`s priority argument to do this. The default priority is 0 and higher numbers mean higher priority (and you can use negative numbers).
 
 
-#### Example app: No priority specified {.tabset}
+#### Example app: No priority specified 
 
 The order of execution is unpredictable, in this case the second observer gets run second.
 
-##### Code
+<ul class="nav nav-tabs">
+<li class="active"><a data-toggle="tab" href="#code15">Code 15</a></li>
+<li><a data-toggle="tab" href="#app15">App 15</a></li>
+</ul>
+
+<div class="tab-content">
+<div id="code15" class="tab-pane fade in active">
+    
 ```{r, eval=FALSE, code=readLines("blog_app15/app.R")}
+
 ```
-##### App
-<iFrame class="iframeapp" src = "https://spatial.shinyapps.io/blog_app15/"></iFrame>
+
+</div>
+<div id="app15" class="tab-pane fade">
+<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app15/"></iFrame>
+</div>
+</div>
 
 
-#### Example app: Prioritize to control order of execution {.tabset}
+#### Example app: Prioritize to control order of execution 
 
 I want the first observer to overwrite the second so it needs to run LAST -- lower priority.
 
-##### Code
+<ul class="nav nav-tabs">
+<li class="active"><a data-toggle="tab" href="#code16">Code 16</a></li>
+<li><a data-toggle="tab" href="#app16">App 16</a></li>
+</ul>
+
+<div class="tab-content">
+<div id="code16" class="tab-pane fade in active">
+    
 ```{r, eval=FALSE, code=readLines("blog_app16/app.R")}
+
 ```
-##### App
-<iFrame class="iframeapp" src = "https://spatial.shinyapps.io/blog_app16/"></iFrame>
+
+</div>
+<div id="app16" class="tab-pane fade">
+<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app16/"></iFrame>
+</div>
+</div>
 
 
 
@@ -376,14 +558,27 @@ A `reactive` is used in the same way you would use an R function except that it 
 So in the example, below I use `reactive` to create a self-contained function called `myresults`. Since I want to print the results to the console (a side effect), I run the reactive function from within an observer. Note that since it's a function I'm using `myresults()` rather than just `myresults`.
 
 
-#### Example app: Using `reactive`. {.tabset}
+#### Example app: Using `reactive`. 
 
 
-##### Code
+<ul class="nav nav-tabs">
+<li class="active"><a data-toggle="tab" href="#code17">Code 17</a></li>
+<li><a data-toggle="tab" href="#app17">App 17</a></li>
+</ul>
+
+<div class="tab-content">
+<div id="code17" class="tab-pane fade in active">
+    
 ```{r, eval=FALSE, code=readLines("blog_app17/app.R")}
+
 ```
-##### App
-<iFrame class="iframeapp" src = "https://spatial.shinyapps.io/blog_app17/"></iFrame>
+
+</div>
+<div id="app17" class="tab-pane fade">
+<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app17/"></iFrame>
+</div>
+</div>
+
 
 ### `eventReactive`: use to prevent unwanted reactions in a `reactive` function
 
@@ -391,14 +586,26 @@ Similar to the function `observeEvent` which allows you to specify which reactiv
 
 
 
-#### Example app: Using `eventReactive` to prevent unwanted reactions {.tabset}
+#### Example app: Using `eventReactive` to prevent unwanted reactions 
 
 
-##### Code
+<ul class="nav nav-tabs">
+<li class="active"><a data-toggle="tab" href="#code18">Code 18</a></li>
+<li><a data-toggle="tab" href="#app18">App 18</a></li>
+</ul>
+
+<div class="tab-content">
+<div id="code18" class="tab-pane fade in active">
+    
 ```{r, eval=FALSE, code=readLines("blog_app18/app.R")}
+
 ```
-##### App
-<iFrame class="iframeapp" src = "https://spatial.shinyapps.io/blog_app18/"></iFrame>
+
+</div>
+<div id="app18" class="tab-pane fade">
+<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app18/"></iFrame>
+</div>
+</div>
 
 
 ## Understanding and controlling when reactive functions get triggered
@@ -451,27 +658,51 @@ As we discussed above, because any reactive value in a reactive function will tr
 
 **Here all code in the observer run when the user changes either the text box or slider** 
 
-#### The example app: All the observer code runs with change to text or slider {.tabset}
+#### The example app: All the observer code runs with change to text or slider 
 
 
-##### Code
+<ul class="nav nav-tabs">
+<li class="active"><a data-toggle="tab" href="#code19">Code 19</a></li>
+<li><a data-toggle="tab" href="#app19">App 19</a></li>
+</ul>
+
+<div class="tab-content">
+<div id="code19" class="tab-pane fade in active">
+    
 ```{r, eval=FALSE, code=readLines("blog_app19/app.R")}
+
 ```
-##### App
-<iFrame class="iframeapp" src = "https://spatial.shinyapps.io/blog_app19/"></iFrame>
+
+</div>
+<div id="app19" class="tab-pane fade">
+<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app19/"></iFrame>
+</div>
+</div>
 
 
 
-#### Isolate code chunks so that only relevant pieces run when changes are made {.tabset}
+#### Isolate code chunks so that only relevant pieces run when changes are made 
 
 I refactored the code above so that the slider and text reactive values are in separate reactive functions. This way if the text reactive changes only the relevant code gets run. Likewise for the slider.
 
 
-##### Code
+<ul class="nav nav-tabs">
+<li class="active"><a data-toggle="tab" href="#code20">Code 20</a></li>
+<li><a data-toggle="tab" href="#app20">App 20</a></li>
+</ul>
+
+<div class="tab-content">
+<div id="code20" class="tab-pane fade in active">
+    
 ```{r, eval=FALSE, code=readLines("blog_app20/app.R")}
+
 ```
-##### App
-<iFrame class="iframeapp" src = "https://spatial.shinyapps.io/blog_app20/"></iFrame>
+
+</div>
+<div id="app20" class="tab-pane fade">
+<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app20/"></iFrame>
+</div>
+</div>
 
 
 ### `isolate`: If you need to use a reactive but don't want it triggering reactions use 
@@ -479,15 +710,27 @@ I refactored the code above so that the slider and text reactive values are in s
 Above you saw that `observeEvent` can limit reactions to specified reactive values. An alternative to using `observeEvent` is to use `isolate`. Given that `observeEvent` exists `isolate` is less useful in obervers but can be quite useful in the `render*` functions discussed above. Nevertheless, I will show one example here with `observe`.
 
 
-#### The example app: Use isolate to avoid triggering reactions {.tabset}
+#### The example app: Use isolate to avoid triggering reactions 
 
 In this example we have two text boxes that update with the input text. One updates constantly and in the other we've used `isolate` to ensure it only gets triggered with a button click.
 
-##### Code
+<ul class="nav nav-tabs">
+<li class="active"><a data-toggle="tab" href="#code21">Code 21</a></li>
+<li><a data-toggle="tab" href="#app21">App 21</a></li>
+</ul>
+
+<div class="tab-content">
+<div id="code21" class="tab-pane fade in active">
+    
 ```{r, eval=FALSE, code=readLines("blog_app21/app.R")}
+
 ```
-##### App
-<iFrame class="iframeapp" src = "https://spatial.shinyapps.io/blog_app21/"></iFrame>
+
+</div>
+<div id="app21" class="tab-pane fade">
+<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app21/"></iFrame>
+</div>
+</div>
 
 
 # Link your user interface with the server to display text, tables and plots (`render*` and `*Output`)
@@ -516,14 +759,26 @@ Using our own app as an example. Let's say that we want to print the value in a 
 5. Since the `my_output_text` object was generated by the server's `renderText` function we need to use the UI's counterpart function `textOutput` to handle it and send it to the user.Note that unlike reactives in the server that are identified as `input$mytext` the output is named in quotes (so we use `"my_output_text"` rather than `output$my_output_text`).
 
 
-#### Example app: Using `renderText` and `textOutput` to add to your UI{.tabset}
+#### Example app: Using `renderText` and `textOutput` to add to your UI
 
 
-##### Code
+<ul class="nav nav-tabs">
+<li class="active"><a data-toggle="tab" href="#code22">Code 22</a></li>
+<li><a data-toggle="tab" href="#app22">App 22</a></li>
+</ul>
+
+<div class="tab-content">
+<div id="code22" class="tab-pane fade in active">
+    
 ```{r, eval=FALSE, code=readLines("blog_app22/app.R")}
+
 ```
-##### App
-<iFrame class="iframeapp" src = "https://spatial.shinyapps.io/blog_app22/"></iFrame>
+
+</div>
+<div id="app22" class="tab-pane fade">
+<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app22/"></iFrame>
+</div>
+</div>
 
 
 #### Spice things up with `renderPlot` and `plotOutput`
@@ -534,14 +789,26 @@ Run the code and click on the plot tab to see the plot.
 
 
 
-#### Example app: Add a plot {.tabset}
+#### Example app: Add a plot 
 
 
-##### Code
+<ul class="nav nav-tabs">
+<li class="active"><a data-toggle="tab" href="#code23">Code 23</a></li>
+<li><a data-toggle="tab" href="#app23">App 23</a></li>
+</ul>
+
+<div class="tab-content">
+<div id="code23" class="tab-pane fade in active">
+    
 ```{r, eval=FALSE, code=readLines("blog_app23/app.R")}
+
 ```
-##### App
-<iFrame class="iframeapp" src = "https://spatial.shinyapps.io/blog_app23/"></iFrame>
+
+</div>
+<div id="app23" class="tab-pane fade">
+<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app23/"></iFrame>
+</div>
+</div>
 
 
 ## Dynamic UI with `renderUI` and `outputUI`
@@ -556,14 +823,26 @@ By the way, within `renderUI` if you want to include multiple elements you would
 
 
 
-#### Dynamic user interface {.tabset}
+#### Dynamic user interface 
 
 
-##### Code
+<ul class="nav nav-tabs">
+<li class="active"><a data-toggle="tab" href="#code24">Code 24</a></li>
+<li><a data-toggle="tab" href="#app24">App 24</a></li>
+</ul>
+
+<div class="tab-content">
+<div id="code24" class="tab-pane fade in active">
+    
 ```{r, eval=FALSE, code=readLines("blog_app24/app.R")}
+
 ```
-##### App
-<iFrame class="iframeapp" src = "https://spatial.shinyapps.io/blog_app24/"></iFrame>
+
+</div>
+<div id="app24" class="tab-pane fade">
+<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app24/"></iFrame>
+</div>
+</div>
 
 
 
@@ -573,14 +852,27 @@ By the way, within `renderUI` if you want to include multiple elements you would
 In the example below I'm including one typical use case for each of the three listeners. In a later example, I will link them together in a more meaningful way but there is one more topic I want to cover before I do that.
 
 
-#### All three listeners {.tabset}
+#### All three listeners 
 
 
-##### Code
+<ul class="nav nav-tabs">
+<li class="active"><a data-toggle="tab" href="#code25">Code 25</a></li>
+<li><a data-toggle="tab" href="#app25">App 25</a></li>
+</ul>
+
+<div class="tab-content">
+<div id="code25" class="tab-pane fade in active">
+    
 ```{r, eval=FALSE, code=readLines("blog_app25/app.R")}
+
 ```
-##### App
-<iFrame class="iframeapp" src = "https://spatial.shinyapps.io/blog_app25/"></iFrame>
+
+</div>
+<div id="app25" class="tab-pane fade">
+<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app25/"></iFrame>
+</div>
+</div>
+
 
 # Deploy your app
 
@@ -619,14 +911,26 @@ The `shinyjs` package allows you to use common JavaScript operations in your Shi
 
 In order to use the functionality you need to load the package and then to activate it in the UI with the `useShinyjs` function.
 
-#### `shinyjs` in action, try the toggle {.tabset}
+#### `shinyjs` in action, try the toggle 
 
 
-##### Code
+<ul class="nav nav-tabs">
+<li class="active"><a data-toggle="tab" href="#code26">Code 26</a></li>
+<li><a data-toggle="tab" href="#app26">App 26</a></li>
+</ul>
+
+<div class="tab-content">
+<div id="code26" class="tab-pane fade in active">
+    
 ```{r, eval=FALSE, code=readLines("blog_app26/app.R")}
+
 ```
-##### App
-<iFrame class="iframeapp" src = "https://spatial.shinyapps.io/blog_app26/"></iFrame>
+
+</div>
+<div id="app26" class="tab-pane fade">
+<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app26/"></iFrame>
+</div>
+</div>
 
 
 ### shinyURL
@@ -654,14 +958,26 @@ As an alternative, you can create a function that outputs the UI elements you ne
 (Note that in the newest versions of Shiny there is an alternative approach, modules, discussed below).
 
 
-#### The example app: Create re-useable UI elements {.tabset}
+#### The example app: Create re-useable UI elements 
 
 
-##### Code
+<ul class="nav nav-tabs">
+<li class="active"><a data-toggle="tab" href="#code27">Code 27</a></li>
+<li><a data-toggle="tab" href="#app27">App 27</a></li>
+</ul>
+
+<div class="tab-content">
+<div id="code27" class="tab-pane fade in active">
+    
 ```{r, eval=FALSE, code=readLines("blog_app27/app.R")}
+
 ```
-##### App
-<iFrame class="iframeapp" src = "https://spatial.shinyapps.io/blog_app27/"></iFrame>
+
+</div>
+<div id="app27" class="tab-pane fade">
+<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app27/"></iFrame>
+</div>
+</div>
 
 
 
@@ -671,24 +987,48 @@ Adding interactive tables to your Shiny app is easier than you think. The origin
 
 Keep in mind that the original `renderDataTable` function and the version in the package `DT` have slightly different syntax which can be confusing when you're looking for example code. I recommend you only use code where `DT` is explicitly loaded (after the `shiny` package) or you see the syntax `DT::renderDataTable` which specifies which version of the function to use.
 
-#### Example app: Using the shiny package for an interactive table {.tabset}
+#### Example app: Using the shiny package for an interactive table 
 
 
-##### Code
+<ul class="nav nav-tabs">
+<li class="active"><a data-toggle="tab" href="#code28">Code 28</a></li>
+<li><a data-toggle="tab" href="#app28">App 28</a></li>
+</ul>
+
+<div class="tab-content">
+<div id="code28" class="tab-pane fade in active">
+    
 ```{r, eval=FALSE, code=readLines("blog_app28/app.R")}
+
 ```
-##### App
-<iFrame class="iframeapp" src = "https://spatial.shinyapps.io/blog_app28/"></iFrame>
+
+</div>
+<div id="app28" class="tab-pane fade">
+<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app28/"></iFrame>
+</div>
+</div>
 
 
-#### Example app: Using the DT package for an interactive table {.tabset}
+#### Example app: Using the DT package for an interactive table 
 
 
-##### Code
+<ul class="nav nav-tabs">
+<li class="active"><a data-toggle="tab" href="#code29">Code 29</a></li>
+<li><a data-toggle="tab" href="#app29">App 29</a></li>
+</ul>
+
+<div class="tab-content">
+<div id="code29" class="tab-pane fade in active">
+    
 ```{r, eval=FALSE, code=readLines("blog_app29/app.R")}
+
 ```
-##### App
-<iFrame class="iframeapp" src = "https://spatial.shinyapps.io/blog_app29/"></iFrame>
+
+</div>
+<div id="app29" class="tab-pane fade">
+<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app29/"></iFrame>
+</div>
+</div>
 
 
 ## Interactive plots and maps
@@ -698,37 +1038,73 @@ HTML widgets allow you to use JavaScript visualization libraries to create inter
 
 
 
-#### Example app: Use plot.ly to make a ggplot interactive {.tabset}
+#### Example app: Use plot.ly to make a ggplot interactive 
 
 Details on using plot.ly can be found at [this site](https://plot.ly/r/shiny-tutorial/).
 
-##### Code
-```{r, eval=FALSE, code=readLines("blog_app30/app.R")}
-```
-##### App
-<iFrame class="iframeapp" src = "https://spatial.shinyapps.io/blog_app30/"></iFrame>
+<ul class="nav nav-tabs">
+<li class="active"><a data-toggle="tab" href="#code30">Code 30</a></li>
+<li><a data-toggle="tab" href="#app30">App 30</a></li>
+</ul>
 
-#### Example app: Use highcharts to make an interactive plot {.tabset}
+<div class="tab-content">
+<div id="code30" class="tab-pane fade in active">
+    
+```{r, eval=FALSE, code=readLines("blog_app30/app.R")}
+
+```
+
+</div>
+<div id="app30" class="tab-pane fade">
+<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app30/"></iFrame>
+</div>
+</div>
+
+#### Example app: Use highcharts to make an interactive plot 
 
 Details on using highcharts can be found at [this site](http://jkunst.com/highcharter/).
 
-##### Code
+<ul class="nav nav-tabs">
+<li class="active"><a data-toggle="tab" href="#code31">Code 31</a></li>
+<li><a data-toggle="tab" href="#app31">App 31</a></li>
+</ul>
+
+<div class="tab-content">
+<div id="code31" class="tab-pane fade in active">
+    
 ```{r, eval=FALSE, code=readLines("blog_app31/app.R")}
+
 ```
-##### App
-<iFrame class="iframeapp" src = "https://spatial.shinyapps.io/blog_app31/"></iFrame>
+
+</div>
+<div id="app31" class="tab-pane fade">
+<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app31/"></iFrame>
+</div>
+</div>
 
 
 
-#### Example app: Use leaflet for an interactive map {.tabset}
+#### Example app: Use leaflet for an interactive map 
 
 Details on using leaflet in R can be found at [this site](http://rstudio.github.io/leaflet/shiny.html). If you want to interact between your map and app see [this example](http://urbanstudies.tcu.edu/research/open-data/tx-demographics/) by Kyle Walker and the [code used to create it](https://gist.github.com/walkerke/4988b5164258917687cb). We use
 
-##### Code
+<ul class="nav nav-tabs">
+<li class="active"><a data-toggle="tab" href="#code32">Code 32</a></li>
+<li><a data-toggle="tab" href="#app32">App 32</a></li>
+</ul>
+
+<div class="tab-content">
+<div id="code32" class="tab-pane fade in active">
+    
 ```{r, eval=FALSE, code=readLines("blog_app32/app.R")}
+
 ```
-##### App
-<iFrame class="iframeapp" src = "https://spatial.shinyapps.io/blog_app32/"></iFrame>
+
+</div>
+<div id="app32" class="tab-pane fade">
+<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app32/"></iFrame>
+</div>
+</div>
 
 
 
@@ -798,26 +1174,50 @@ server <- function(input, output,session){
 ```
 
 
-#### Example app: simple module example {.tabset}
+#### Example app: simple module example 
 
 This example demonstrates the code needed to use a module, but is not a very practical example because the purpose of using modules would be to re-use code. See the next example for a more realistic example.
 
-##### Code
+<ul class="nav nav-tabs">
+<li class="active"><a data-toggle="tab" href="#code33">Code 33</a></li>
+<li><a data-toggle="tab" href="#app33">App 33</a></li>
+</ul>
+
+<div class="tab-content">
+<div id="code33" class="tab-pane fade in active">
+    
 ```{r, eval=FALSE, code=readLines("blog_app33/app.R")}
+
 ```
-##### App
-<iFrame class="iframeapp" src = "https://spatial.shinyapps.io/blog_app33/"></iFrame>
+
+</div>
+<div id="app33" class="tab-pane fade">
+<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app33/"></iFrame>
+</div>
+</div>
 
 
-#### Example app: more practical module example {.tabset}
+#### Example app: more practical module example 
 
 This app is a little harder to follow but a better example of how modules can be useful. In this app the module creates a slider and two plots. As input, the module function takes the name of the data.frame as well as several plot-related variables. This way you can create side-by-side plots with a slider using multiple datasets with slight alteraations to the app server.
 
-##### Code
+<ul class="nav nav-tabs">
+<li class="active"><a data-toggle="tab" href="#code34">Code 34</a></li>
+<li><a data-toggle="tab" href="#app34">App 34</a></li>
+</ul>
+
+<div class="tab-content">
+<div id="code34" class="tab-pane fade in active">
+    
 ```{r, eval=FALSE, code=readLines("blog_app34/app.R")}
+
 ```
-##### App
-<iFrame class="iframeapp" src = "https://spatial.shinyapps.io/blog_app34/"></iFrame>
+
+</div>
+<div id="app34" class="tab-pane fade">
+<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app34/"></iFrame>
+</div>
+</div>
 
 
 ## HTML templates
@@ -905,15 +1305,27 @@ htmlTemplate("X:/administrative/social_media/blogposts/r_shiny/htmlTemplates/tem
 ```
 
 
-#### Example app: An app using HTML templates {.tabset}
+#### Example app: An app using HTML templates 
 
 This app is a little harder to follow than the simple code above but a better example of how modules can be useful. In this app the module creates a slider and two plots. As input, the module function takes the name of the data.frame as well as several plot-related variables. This way you can create side-by-side plots with a slider using multiple datasets with slight alteraations to the app server.
 
-##### Code
+<ul class="nav nav-tabs">
+<li class="active"><a data-toggle="tab" href="#code35">Code 35</a></li>
+<li><a data-toggle="tab" href="#app35">App 35</a></li>
+</ul>
+
+<div class="tab-content">
+<div id="code35" class="tab-pane fade in active">
+    
 ```{r, eval=FALSE, code=readLines("blog_app35/app.R")}
+
 ```
-##### App
-<iFrame class="iframeapp" src = "https://spatial.shinyapps.io/blog_app35/"></iFrame>
+
+</div>
+<div id="app35" class="tab-pane fade">
+<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app35/"></iFrame>
+</div>
+</div>
 
 
 
@@ -923,30 +1335,54 @@ This app is a little harder to follow than the simple code above but a better ex
 In mid-2015 RStudio added plot interactivity to Shiny's arsenal -- this is a little different, though, than the HTML widgets mentioned above. This interactivity allows users to interact with "regular" base plots and ggplot2. Specifically, these functions allow your users to click, hover or brush a base or ggplot to get more information on the elements clicked etc. Adding this type of functionality can be done simply by adding an argument to the `plotOutput` function and using that output in your server. 
 
 
-#### Example app: Brush and click on a ggplot {.tabset}
+#### Example app: Brush and click on a ggplot 
 
 As an example of interactive plots, consider this reasonably simple app. You'll notice that in the `plotOutput` function I added two arguments, one for click and one for brush. And then in the reactive I use both of these. The actual resulting input variables (`input$user_brush` and `input$user_click`) provide details like the x and y coordinates clicked. To use this information to filter your table you can use the corresponding `brushedPoints` and `nearPoints` functions.
 
 A note about this particular example: remember that any reactives in your reactive function will trigger the code to run. As a result, if the user either brushes or clicks the `dat` reactive will run. But... it won't know which reactive variable triggered the code to run. To get around this, I've created a global variable called `interaction_type` that stores the current type of interaction (i.e., brush or click). There are two `observeEvent` functions that will listen and update as needed. Pay special attention to the double assignment operator (`<<-`), this is needed to change the global variable.
 
-##### Code
+<ul class="nav nav-tabs">
+<li class="active"><a data-toggle="tab" href="#code36">Code 36</a></li>
+<li><a data-toggle="tab" href="#app36">App 36</a></li>
+</ul>
+
+<div class="tab-content">
+<div id="code36" class="tab-pane fade in active">
+    
 ```{r, eval=FALSE, code=readLines("blog_app36/app.R")}
+
 ```
-##### App
-<iFrame class="iframeapp" src = "https://spatial.shinyapps.io/blog_app36/"></iFrame>
+
+</div>
+<div id="app36" class="tab-pane fade">
+<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app36/"></iFrame>
+</div>
+</div>
 
 
 
-#### Example app: Brush with map and plot {.tabset}
+#### Example app: Brush with map and plot 
 
 As mentioned above, Kyle Walker inspired us to link plots and maps using the brushing functionality. This app is a slightly more complex version of the brush functionality. In this example, the user selections update in both a plot and on a leaflet map. The approach is very similar, though, to the previous app. We include a `brush` argument in the `plotOutput` and we use a brush to select point with the `brushedPoints` function.
 
 
-##### Code
+<ul class="nav nav-tabs">
+<li class="active"><a data-toggle="tab" href="#code37">Code 37</a></li>
+<li><a data-toggle="tab" href="#app37">App 37</a></li>
+</ul>
+
+<div class="tab-content">
+<div id="code37" class="tab-pane fade in active">
+    
 ```{r, eval=FALSE, code=readLines("blog_app37/app.R")}
+
 ```
-##### App
-<iFrame class="iframeapp" src = "https://spatial.shinyapps.io/blog_app37/"></iFrame>
+
+</div>
+<div id="app37" class="tab-pane fade">
+<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app37/"></iFrame>
+</div>
+</div>
 
 ## Including custom JavaScript in your app
 
@@ -956,19 +1392,31 @@ Occasionally you may want to include some JavaScript that you've written in your
 2. tags$head(HTML("<script type='text/javascript'></script>"))
 
 
-#### Example app: inline JavaScript code {.tabset}
+#### Example app: inline JavaScript code 
 
 Here we add inline JavaScript (jQuery) to fade out, then in the title and finally make it green.
 
 
-##### Code
+<ul class="nav nav-tabs">
+<li class="active"><a data-toggle="tab" href="#code38">Code 38</a></li>
+<li><a data-toggle="tab" href="#app38">App 38</a></li>
+</ul>
+
+<div class="tab-content">
+<div id="code38" class="tab-pane fade in active">
+    
 ```{r, eval=FALSE, code=readLines("blog_app38/app.R")}
+
 ```
-##### App
-<iFrame class="iframeapp" src = "https://spatial.shinyapps.io/blog_app38/"></iFrame>
+
+</div>
+<div id="app38" class="tab-pane fade">
+<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app38/"></iFrame>
+</div>
+</div>
 
 
-# Details on the package versions etc in this post
+# Details on the package versions and operating system used to create this post
 
 
 
