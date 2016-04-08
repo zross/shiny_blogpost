@@ -192,7 +192,7 @@ border: 1px solid #D5D8D5;
 <a data-toggle="tab" href="#code0">Code 0</a>
 </li>
 <li>
-<a data-toggle="tab" href="#app0">App 0</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app0">App 0</a>
 </li>
 </ul>
 <div class="tab-content">
@@ -206,8 +206,7 @@ ui &lt;- basicPage() # the user interface
 shinyApp(ui = ui, server = server) # this launches your app</code></pre>
 </div>
 <div id="app0" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app0/">
-</iFrame>
+
 </div>
 </div>
 </div>
@@ -227,7 +226,7 @@ shinyApp(ui = ui, server = server) # this launches your app</code></pre>
 <a data-toggle="tab" href="#code1">Code 1</a>
 </li>
 <li>
-<a data-toggle="tab" href="#app1">App 1</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app1">App 1</a>
 </li>
 </ul>
 <div class="tab-content">
@@ -257,8 +256,7 @@ ui &lt;- fluidPage(
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
 <div id="app1" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app1/">
-</iFrame>
+
 </div>
 </div>
 </div>
@@ -273,7 +271,7 @@ shinyApp(ui = ui, server = server)</code></pre>
 <a data-toggle="tab" href="#code2">Code 2</a>
 </li>
 <li>
-<a data-toggle="tab" href="#app2">App 2</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app2">App 2</a>
 </li>
 </ul>
 <div class="tab-content">
@@ -309,8 +307,7 @@ ui &lt;- fluidPage(
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
 <div id="app2" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app2/">
-</iFrame>
+
 </div>
 </div>
 </div>
@@ -326,7 +323,7 @@ shinyApp(ui = ui, server = server)</code></pre>
 <a data-toggle="tab" href="#code3">Code 3</a>
 </li>
 <li>
-<a data-toggle="tab" href="#app3">App 3</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app3">App 3</a>
 </li>
 </ul>
 <div class="tab-content">
@@ -366,8 +363,7 @@ ui &lt;- fluidPage(
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
 <div id="app3" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app3/">
-</iFrame>
+
 </div>
 </div>
 </div>
@@ -386,7 +382,7 @@ shinyApp(ui = ui, server = server)</code></pre>
 <a data-toggle="tab" href="#code4">Code 4</a>
 </li>
 <li>
-<a data-toggle="tab" href="#app4">App 4</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app4">App 4</a>
 </li>
 </ul>
 <div class="tab-content">
@@ -421,8 +417,7 @@ ui &lt;- fluidPage(theme=shinytheme(&quot;cosmo&quot;),
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
 <div id="app4" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app4/">
-</iFrame>
+
 </div>
 </div>
 </div>
@@ -447,7 +442,7 @@ shinyApp(ui = ui, server = server)</code></pre>
 <a data-toggle="tab" href="#code5">Code 5</a>
 </li>
 <li>
-<a data-toggle="tab" href="#app5">App 5</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app5">App 5</a>
 </li>
 </ul>
 <div class="tab-content">
@@ -477,8 +472,7 @@ ui &lt;- basicPage(
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
 <div id="app5" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app5/">
-</iFrame>
+
 </div>
 </div>
 </div>
@@ -489,7 +483,7 @@ shinyApp(ui = ui, server = server)</code></pre>
 <a data-toggle="tab" href="#code6">Code 6</a>
 </li>
 <li>
-<a data-toggle="tab" href="#app6">App 6</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app6">App 6</a>
 </li>
 </ul>
 <div class="tab-content">
@@ -511,8 +505,7 @@ includeCSS(&quot;style.css&quot;),
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
 <div id="app6" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app6/">
-</iFrame>
+
 </div>
 </div>
 </div>
@@ -523,7 +516,7 @@ shinyApp(ui = ui, server = server)</code></pre>
 <a data-toggle="tab" href="#code7">Code 7</a>
 </li>
 <li>
-<a data-toggle="tab" href="#app7">App 7</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app7">App 7</a>
 </li>
 </ul>
 <div class="tab-content">
@@ -545,8 +538,7 @@ ui &lt;- basicPage(
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
 <div id="app7" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app7/">
-</iFrame>
+
 </div>
 </div>
 </div>
@@ -558,7 +550,7 @@ shinyApp(ui = ui, server = server)</code></pre>
 <a data-toggle="tab" href="#code8">Code 8</a>
 </li>
 <li>
-<a data-toggle="tab" href="#app8">App 8</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app8">App 8</a>
 </li>
 </ul>
 <div class="tab-content">
@@ -590,8 +582,7 @@ ui &lt;- fluidPage(
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
 <div id="app8" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app8/">
-</iFrame>
+
 </div>
 </div>
 </div>
@@ -609,7 +600,7 @@ shinyApp(ui = ui, server = server)</code></pre>
 <a data-toggle="tab" href="#code9">Code 9</a>
 </li>
 <li>
-<a data-toggle="tab" href="#app9">App 9</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app9">App 9</a>
 </li>
 </ul>
 <div class="tab-content">
@@ -633,8 +624,7 @@ ui &lt;- basicPage(
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
 <div id="app9" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app9/">
-</iFrame>
+
 </div>
 </div>
 </div>
@@ -659,7 +649,7 @@ shinyApp(ui = ui, server = server)</code></pre>
 <a data-toggle="tab" href="#code10">Code 10</a>
 </li>
 <li>
-<a data-toggle="tab" href="#app10">App 10</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app10">App 10</a>
 </li>
 </ul>
 <div class="tab-content">
@@ -682,8 +672,7 @@ ui &lt;- basicPage(
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
 <div id="app10" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app10/">
-</iFrame>
+
 </div>
 </div>
 <p>Instead we need to wrap the values in an <code>observe</code>, <code>reactive</code> function that is designed to handle reactive content. You can also wrap values in a <code>render*</code> function and these are discussed in the next .</p>
@@ -700,7 +689,7 @@ shinyApp(ui = ui, server = server)</code></pre>
 <a data-toggle="tab" href="#code11">Code 11</a>
 </li>
 <li>
-<a data-toggle="tab" href="#app11">App 11</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app11">App 11</a>
 </li>
 </ul>
 <div class="tab-content">
@@ -729,8 +718,7 @@ ui &lt;-   basicPage(
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
 <div id="app11" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app11/">
-</iFrame>
+
 </div>
 </div>
 </div>
@@ -747,7 +735,7 @@ shinyApp(ui = ui, server = server)</code></pre>
 <a data-toggle="tab" href="#code12">Code 12</a>
 </li>
 <li>
-<a data-toggle="tab" href="#app12">App 12</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app12">App 12</a>
 </li>
 </ul>
 <div class="tab-content">
@@ -771,8 +759,7 @@ ui &lt;-   basicPage(
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
 <div id="app12" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app12/">
-</iFrame>
+
 </div>
 </div>
 </div>
@@ -787,7 +774,7 @@ shinyApp(ui = ui, server = server)</code></pre>
 <a data-toggle="tab" href="#code13">Code 13</a>
 </li>
 <li>
-<a data-toggle="tab" href="#app13">App 13</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app13">App 13</a>
 </li>
 </ul>
 <div class="tab-content">
@@ -815,8 +802,7 @@ ui &lt;- basicPage(
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
 <div id="app13" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app13/">
-</iFrame>
+
 </div>
 </div>
 <p>The <code>observeEvent</code> function is designed to address this issue. With <code>observeEvent</code> the code inside will only run if the specified reactive value changes. So in the following code the print statements will only execute if the user makes changes to the text box.</p>
@@ -828,7 +814,7 @@ shinyApp(ui = ui, server = server)</code></pre>
 <a data-toggle="tab" href="#code14">Code 14</a>
 </li>
 <li>
-<a data-toggle="tab" href="#app14">App 14</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app14">App 14</a>
 </li>
 </ul>
 <div class="tab-content">
@@ -858,8 +844,7 @@ ui &lt;- basicPage(
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
 <div id="app14" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app14/">
-</iFrame>
+
 </div>
 </div>
 </div>
@@ -875,7 +860,7 @@ shinyApp(ui = ui, server = server)</code></pre>
 <a data-toggle="tab" href="#code15">Code 15</a>
 </li>
 <li>
-<a data-toggle="tab" href="#app15">App 15</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app15">App 15</a>
 </li>
 </ul>
 <div class="tab-content">
@@ -906,8 +891,7 @@ ui &lt;- basicPage(
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
 <div id="app15" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app15/">
-</iFrame>
+
 </div>
 </div>
 </div>
@@ -919,7 +903,7 @@ shinyApp(ui = ui, server = server)</code></pre>
 <a data-toggle="tab" href="#code16">Code 16</a>
 </li>
 <li>
-<a data-toggle="tab" href="#app16">App 16</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app16">App 16</a>
 </li>
 </ul>
 <div class="tab-content">
@@ -950,8 +934,7 @@ ui &lt;- basicPage(
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
 <div id="app16" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app16/">
-</iFrame>
+
 </div>
 </div>
 </div>
@@ -967,7 +950,7 @@ shinyApp(ui = ui, server = server)</code></pre>
 <a data-toggle="tab" href="#code17">Code 17</a>
 </li>
 <li>
-<a data-toggle="tab" href="#app17">App 17</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app17">App 17</a>
 </li>
 </ul>
 <div class="tab-content">
@@ -1000,8 +983,7 @@ ui &lt;- basicPage(
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
 <div id="app17" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app17/">
-</iFrame>
+
 </div>
 </div>
 </div>
@@ -1016,7 +998,7 @@ shinyApp(ui = ui, server = server)</code></pre>
 <a data-toggle="tab" href="#code18">Code 18</a>
 </li>
 <li>
-<a data-toggle="tab" href="#app18">App 18</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app18">App 18</a>
 </li>
 </ul>
 <div class="tab-content">
@@ -1054,8 +1036,7 @@ ui &lt;- basicPage(
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
 <div id="app18" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app18/">
-</iFrame>
+
 </div>
 </div>
 </div>
@@ -1098,7 +1079,7 @@ shinyApp(ui = ui, server = server)</code></pre>
 <a data-toggle="tab" href="#code19">Code 19</a>
 </li>
 <li>
-<a data-toggle="tab" href="#app19">App 19</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app19">App 19</a>
 </li>
 </ul>
 <div class="tab-content">
@@ -1131,8 +1112,7 @@ ui &lt;- basicPage(
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
 <div id="app19" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app19/">
-</iFrame>
+
 </div>
 </div>
 </div>
@@ -1144,7 +1124,7 @@ shinyApp(ui = ui, server = server)</code></pre>
 <a data-toggle="tab" href="#code20">Code 20</a>
 </li>
 <li>
-<a data-toggle="tab" href="#app20">App 20</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app20">App 20</a>
 </li>
 </ul>
 <div class="tab-content">
@@ -1179,8 +1159,7 @@ ui &lt;- basicPage(
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
 <div id="app20" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app20/">
-</iFrame>
+
 </div>
 </div>
 </div>
@@ -1196,7 +1175,7 @@ shinyApp(ui = ui, server = server)</code></pre>
 <a data-toggle="tab" href="#code21">Code 21</a>
 </li>
 <li>
-<a data-toggle="tab" href="#app21">App 21</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app21">App 21</a>
 </li>
 </ul>
 <div class="tab-content">
@@ -1231,8 +1210,7 @@ ui &lt;- basicPage(
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
 <div id="app21" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app21/">
-</iFrame>
+
 </div>
 </div>
 </div>
@@ -1267,7 +1245,7 @@ shinyApp(ui = ui, server = server)</code></pre>
 <a data-toggle="tab" href="#code22">Code 22</a>
 </li>
 <li>
-<a data-toggle="tab" href="#app22">App 22</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app22">App 22</a>
 </li>
 </ul>
 <div class="tab-content">
@@ -1293,8 +1271,7 @@ ui &lt;- basicPage(
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
 <div id="app22" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app22/">
-</iFrame>
+
 </div>
 </div>
 </div>
@@ -1310,7 +1287,7 @@ shinyApp(ui = ui, server = server)</code></pre>
 <a data-toggle="tab" href="#code23">Code 23</a>
 </li>
 <li>
-<a data-toggle="tab" href="#app23">App 23</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app23">App 23</a>
 </li>
 </ul>
 <div class="tab-content">
@@ -1345,8 +1322,7 @@ ui &lt;- basicPage(
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
 <div id="app23" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app23/">
-</iFrame>
+
 </div>
 </div>
 </div>
@@ -1363,7 +1339,7 @@ shinyApp(ui = ui, server = server)</code></pre>
 <a data-toggle="tab" href="#code24">Code 24</a>
 </li>
 <li>
-<a data-toggle="tab" href="#app24">App 24</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app24">App 24</a>
 </li>
 </ul>
 <div class="tab-content">
@@ -1403,8 +1379,7 @@ ui &lt;- basicPage(
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
 <div id="app24" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app24/">
-</iFrame>
+
 </div>
 </div>
 </div>
@@ -1419,7 +1394,7 @@ shinyApp(ui = ui, server = server)</code></pre>
 <a data-toggle="tab" href="#code25">Code 25</a>
 </li>
 <li>
-<a data-toggle="tab" href="#app25">App 25</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app25">App 25</a>
 </li>
 </ul>
 <div class="tab-content">
@@ -1468,8 +1443,7 @@ ui &lt;- fluidPage(
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
 <div id="app25" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app25/">
-</iFrame>
+
 </div>
 </div>
 </div>
@@ -1512,7 +1486,7 @@ shinyApp(ui = ui, server = server)</code></pre>
 <a data-toggle="tab" href="#code26">Code 26</a>
 </li>
 <li>
-<a data-toggle="tab" href="#app26">App 26</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app26">App 26</a>
 </li>
 </ul>
 <div class="tab-content">
@@ -1540,8 +1514,7 @@ ui &lt;- fluidPage(
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
 <div id="app26" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app26/">
-</iFrame>
+
 </div>
 </div>
 </div>
@@ -1574,7 +1547,7 @@ shinyApp(ui = ui, server = server)</code></pre>
 <a data-toggle="tab" href="#code27">Code 27</a>
 </li>
 <li>
-<a data-toggle="tab" href="#app27">App 27</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app27">App 27</a>
 </li>
 </ul>
 <div class="tab-content">
@@ -1623,8 +1596,7 @@ ui &lt;- basicPage(
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
 <div id="app27" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app27/">
-</iFrame>
+
 </div>
 </div>
 </div>
@@ -1640,7 +1612,7 @@ shinyApp(ui = ui, server = server)</code></pre>
 <a data-toggle="tab" href="#code28">Code 28</a>
 </li>
 <li>
-<a data-toggle="tab" href="#app28">App 28</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app28">App 28</a>
 </li>
 </ul>
 <div class="tab-content">
@@ -1671,8 +1643,7 @@ ui &lt;- basicPage(
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
 <div id="app28" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app28/">
-</iFrame>
+
 </div>
 </div>
 </div>
@@ -1683,7 +1654,7 @@ shinyApp(ui = ui, server = server)</code></pre>
 <a data-toggle="tab" href="#code29">Code 29</a>
 </li>
 <li>
-<a data-toggle="tab" href="#app29">App 29</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app29">App 29</a>
 </li>
 </ul>
 <div class="tab-content">
@@ -1719,8 +1690,7 @@ ui &lt;- basicPage(
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
 <div id="app29" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app29/">
-</iFrame>
+
 </div>
 </div>
 </div>
@@ -1736,7 +1706,7 @@ shinyApp(ui = ui, server = server)</code></pre>
 <a data-toggle="tab" href="#code30">Code 30</a>
 </li>
 <li>
-<a data-toggle="tab" href="#app30">App 30</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app30">App 30</a>
 </li>
 </ul>
 <div class="tab-content">
@@ -1765,8 +1735,7 @@ ui &lt;- basicPage(
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
 <div id="app30" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app30/">
-</iFrame>
+
 </div>
 </div>
 </div>
@@ -1778,7 +1747,7 @@ shinyApp(ui = ui, server = server)</code></pre>
 <a data-toggle="tab" href="#code31">Code 31</a>
 </li>
 <li>
-<a data-toggle="tab" href="#app31">App 31</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app31">App 31</a>
 </li>
 </ul>
 <div class="tab-content">
@@ -1811,8 +1780,7 @@ ui &lt;-  basicPage(
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
 <div id="app31" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app31/">
-</iFrame>
+
 </div>
 </div>
 </div>
@@ -1824,7 +1792,7 @@ shinyApp(ui = ui, server = server)</code></pre>
 <a data-toggle="tab" href="#code32">Code 32</a>
 </li>
 <li>
-<a data-toggle="tab" href="#app32">App 32</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app32">App 32</a>
 </li>
 </ul>
 <div class="tab-content">
@@ -1874,8 +1842,7 @@ ui &lt;- fluidPage(
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
 <div id="app32" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app32/">
-</iFrame>
+
 </div>
 </div>
 </div>
@@ -1930,7 +1897,7 @@ shinyApp(ui = ui, server = server)</code></pre>
 <a data-toggle="tab" href="#code33">Code 33</a>
 </li>
 <li>
-<a data-toggle="tab" href="#app33">App 33</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app33">App 33</a>
 </li>
 </ul>
 <div class="tab-content">
@@ -1970,8 +1937,7 @@ server &lt;- function(input, output,session){
 shinyApp(ui, server)</code></pre>
 </div>
 <div id="app33" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app33/">
-</iFrame>
+
 </div>
 </div>
 </div>
@@ -1983,7 +1949,7 @@ shinyApp(ui, server)</code></pre>
 <a data-toggle="tab" href="#code34">Code 34</a>
 </li>
 <li>
-<a data-toggle="tab" href="#app34">App 34</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app34">App 34</a>
 </li>
 </ul>
 <div class="tab-content">
@@ -2043,8 +2009,7 @@ server &lt;- function(input, output,session){
 shinyApp(ui, server)</code></pre>
 </div>
 <div id="app34" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app34/">
-</iFrame>
+
 </div>
 </div>
 </div>
@@ -2125,7 +2090,7 @@ htmlTemplate(&quot;X:/administrative/social_media/blogposts/r_shiny/htmlTemplate
 <a data-toggle="tab" href="#code35">Code 35</a>
 </li>
 <li>
-<a data-toggle="tab" href="#app35">App 35</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app35">App 35</a>
 </li>
 </ul>
 <div class="tab-content">
@@ -2152,8 +2117,7 @@ htmlTemplate(&quot;template.html&quot;,
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
 <div id="app35" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app35/">
-</iFrame>
+
 </div>
 </div>
 </div>
@@ -2171,7 +2135,7 @@ shinyApp(ui = ui, server = server)</code></pre>
 <a data-toggle="tab" href="#code36">Code 36</a>
 </li>
 <li>
-<a data-toggle="tab" href="#app36">App 36</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app36">App 36</a>
 </li>
 </ul>
 <div class="tab-content">
@@ -2222,8 +2186,7 @@ ui &lt;- fluidPage(
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
 <div id="app36" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app36/">
-</iFrame>
+
 </div>
 </div>
 </div>
@@ -2235,7 +2198,7 @@ shinyApp(ui = ui, server = server)</code></pre>
 <a data-toggle="tab" href="#code37">Code 37</a>
 </li>
 <li>
-<a data-toggle="tab" href="#app37">App 37</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app37">App 37</a>
 </li>
 </ul>
 <div class="tab-content">
@@ -2316,8 +2279,7 @@ ui &lt;- fluidPage(
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
 <div id="app37" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app37/">
-</iFrame>
+
 </div>
 </div>
 </div>
@@ -2339,7 +2301,7 @@ shinyApp(ui = ui, server = server)</code></pre>
 <a data-toggle="tab" href="#code38">Code 38</a>
 </li>
 <li>
-<a data-toggle="tab" href="#app38">App 38</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app38">App 38</a>
 </li>
 </ul>
 <div class="tab-content">
@@ -2372,8 +2334,7 @@ ui &lt;- basicPage(
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
 <div id="app38" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app38/">
-</iFrame>
+
 </div>
 </div>
 </div>

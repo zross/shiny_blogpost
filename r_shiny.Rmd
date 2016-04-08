@@ -46,7 +46,7 @@ The app panel looks blank but there is a shiny app there
 
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" href="#code0">Code 0</a></li>
-<li><a data-toggle="tab" href="#app0">App 0</a></li>
+<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app0">App 0</a></li>
 </ul>
 
 <div class="tab-content">
@@ -58,7 +58,7 @@ The app panel looks blank but there is a shiny app there
 
 </div>
 <div id="app0" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app0/"></iFrame>
+
 </div>
 </div>
 
@@ -83,7 +83,7 @@ As mentioned above, we will use a fluid design. For this example, we will take a
 
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" href="#code1">Code 1</a></li>
-<li><a data-toggle="tab" href="#app1">App 1</a></li>
+<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app1">App 1</a></li>
 </ul>
 
 <div class="tab-content">
@@ -95,7 +95,7 @@ As mentioned above, we will use a fluid design. For this example, we will take a
 
 </div>
 <div id="app1" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app1/"></iFrame>
+
 </div>
 </div>
 
@@ -113,7 +113,7 @@ It's easy to add HTML elements to your Shiny app using [HTML tags](http://shiny.
 
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" href="#code2">Code 2</a></li>
-<li><a data-toggle="tab" href="#app2">App 2</a></li>
+<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app2">App 2</a></li>
 </ul>
 
 <div class="tab-content">
@@ -125,7 +125,7 @@ It's easy to add HTML elements to your Shiny app using [HTML tags](http://shiny.
 
 </div>
 <div id="app2" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app2/"></iFrame>
+
 </div>
 </div>
 
@@ -144,7 +144,7 @@ In the example below, the first row has a column that spans 6 columns but is "of
 
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" href="#code3">Code 3</a></li>
-<li><a data-toggle="tab" href="#app3">App 3</a></li>
+<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app3">App 3</a></li>
 </ul>
 
 <div class="tab-content">
@@ -156,7 +156,7 @@ In the example below, the first row has a column that spans 6 columns but is "of
 
 </div>
 <div id="app3" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app3/"></iFrame>
+
 </div>
 </div>
 
@@ -177,7 +177,7 @@ Documentation [here](http://rstudio.github.io/shinythemes/). More detail [here](
 
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" href="#code4">Code 4</a></li>
-<li><a data-toggle="tab" href="#app4">App 4</a></li>
+<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app4">App 4</a></li>
 </ul>
 
 <div class="tab-content">
@@ -189,7 +189,7 @@ Documentation [here](http://rstudio.github.io/shinythemes/). More detail [here](
 
 </div>
 <div id="app4" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app4/"></iFrame>
+
 </div>
 </div>
 
@@ -217,7 +217,7 @@ Note that the actual style code is within an `HTML` function -- this is prevent 
 
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" href="#code5">Code 5</a></li>
-<li><a data-toggle="tab" href="#app5">App 5</a></li>
+<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app5">App 5</a></li>
 </ul>
 
 <div class="tab-content">
@@ -229,7 +229,7 @@ Note that the actual style code is within an `HTML` function -- this is prevent 
 
 </div>
 <div id="app5" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app5/"></iFrame>
+
 </div>
 </div>
 
@@ -238,7 +238,7 @@ Note that the actual style code is within an `HTML` function -- this is prevent 
 
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" href="#code6">Code 6</a></li>
-<li><a data-toggle="tab" href="#app6">App 6</a></li>
+<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app6">App 6</a></li>
 </ul>
 
 <div class="tab-content">
@@ -250,7 +250,7 @@ Note that the actual style code is within an `HTML` function -- this is prevent 
 
 </div>
 <div id="app6" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app6/"></iFrame>
+
 </div>
 </div>
 
@@ -259,7 +259,7 @@ Note that the actual style code is within an `HTML` function -- this is prevent 
 
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" href="#code7">Code 7</a></li>
-<li><a data-toggle="tab" href="#app7">App 7</a></li>
+<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app7">App 7</a></li>
 </ul>
 
 <div class="tab-content">
@@ -271,7 +271,7 @@ Note that the actual style code is within an `HTML` function -- this is prevent 
 
 </div>
 <div id="app7" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app7/"></iFrame>
+
 </div>
 </div>
 
@@ -283,7 +283,7 @@ You will need to load the `shinyjs` package to use this approach.
 
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" href="#code8">Code 8</a></li>
-<li><a data-toggle="tab" href="#app8">App 8</a></li>
+<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app8">App 8</a></li>
 </ul>
 
 <div class="tab-content">
@@ -295,7 +295,7 @@ You will need to load the `shinyjs` package to use this approach.
 
 </div>
 <div id="app8" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app8/"></iFrame>
+
 </div>
 </div>
 
@@ -318,7 +318,7 @@ We're still only focusing here on the UI so these widgets "work" but don't actua
 
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" href="#code9">Code 9</a></li>
-<li><a data-toggle="tab" href="#app9">App 9</a></li>
+<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app9">App 9</a></li>
 </ul>
 
 <div class="tab-content">
@@ -330,7 +330,7 @@ We're still only focusing here on the UI so these widgets "work" but don't actua
 
 </div>
 <div id="app9" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app9/"></iFrame>
+
 </div>
 </div>
 
@@ -362,7 +362,7 @@ This will throw an error!
 
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" href="#code10">Code 10</a></li>
-<li><a data-toggle="tab" href="#app10">App 10</a></li>
+<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app10">App 10</a></li>
 </ul>
 
 <div class="tab-content">
@@ -374,7 +374,7 @@ This will throw an error!
 
 </div>
 <div id="app10" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app10/"></iFrame>
+
 </div>
 </div>
 
@@ -397,7 +397,7 @@ In the app below you can see that I'm "printing" the text typed into `my_text` t
 
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" href="#code11">Code 11</a></li>
-<li><a data-toggle="tab" href="#app11">App 11</a></li>
+<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app11">App 11</a></li>
 </ul>
 
 <div class="tab-content">
@@ -409,7 +409,7 @@ In the app below you can see that I'm "printing" the text typed into `my_text` t
 
 </div>
 <div id="app11" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app11/"></iFrame>
+
 </div>
 </div>
 
@@ -430,7 +430,7 @@ So, back to the example, if we wrap the `print` statement in an observer the app
 
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" href="#code12">Code 12</a></li>
-<li><a data-toggle="tab" href="#app12">App 12</a></li>
+<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app12">App 12</a></li>
 </ul>
 
 <div class="tab-content">
@@ -442,7 +442,7 @@ So, back to the example, if we wrap the `print` statement in an observer the app
 
 </div>
 <div id="app12" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app12/"></iFrame>
+
 </div>
 </div>
 
@@ -457,7 +457,7 @@ As mentioned above, the code in an `observe` will run if *any* of the reactives 
 
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" href="#code13">Code 13</a></li>
-<li><a data-toggle="tab" href="#app13">App 13</a></li>
+<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app13">App 13</a></li>
 </ul>
 
 <div class="tab-content">
@@ -469,7 +469,7 @@ As mentioned above, the code in an `observe` will run if *any* of the reactives 
 
 </div>
 <div id="app13" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app13/"></iFrame>
+
 </div>
 </div>
 
@@ -482,7 +482,7 @@ The `observeEvent` function is designed to address this issue. With `observeEven
 
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" href="#code14">Code 14</a></li>
-<li><a data-toggle="tab" href="#app14">App 14</a></li>
+<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app14">App 14</a></li>
 </ul>
 
 <div class="tab-content">
@@ -494,7 +494,7 @@ The `observeEvent` function is designed to address this issue. With `observeEven
 
 </div>
 <div id="app14" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app14/"></iFrame>
+
 </div>
 </div>
 
@@ -509,7 +509,7 @@ The order of execution is unpredictable, in this case the second observer gets r
 
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" href="#code15">Code 15</a></li>
-<li><a data-toggle="tab" href="#app15">App 15</a></li>
+<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app15">App 15</a></li>
 </ul>
 
 <div class="tab-content">
@@ -521,7 +521,7 @@ The order of execution is unpredictable, in this case the second observer gets r
 
 </div>
 <div id="app15" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app15/"></iFrame>
+
 </div>
 </div>
 
@@ -532,7 +532,7 @@ I want the first observer to overwrite the second so it needs to run LAST -- low
 
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" href="#code16">Code 16</a></li>
-<li><a data-toggle="tab" href="#app16">App 16</a></li>
+<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app16">App 16</a></li>
 </ul>
 
 <div class="tab-content">
@@ -544,7 +544,7 @@ I want the first observer to overwrite the second so it needs to run LAST -- low
 
 </div>
 <div id="app16" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app16/"></iFrame>
+
 </div>
 </div>
 
@@ -563,7 +563,7 @@ So in the example, below I use `reactive` to create a self-contained function ca
 
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" href="#code17">Code 17</a></li>
-<li><a data-toggle="tab" href="#app17">App 17</a></li>
+<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app17">App 17</a></li>
 </ul>
 
 <div class="tab-content">
@@ -575,7 +575,7 @@ So in the example, below I use `reactive` to create a self-contained function ca
 
 </div>
 <div id="app17" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app17/"></iFrame>
+
 </div>
 </div>
 
@@ -591,7 +591,7 @@ Similar to the function `observeEvent` which allows you to specify which reactiv
 
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" href="#code18">Code 18</a></li>
-<li><a data-toggle="tab" href="#app18">App 18</a></li>
+<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app18">App 18</a></li>
 </ul>
 
 <div class="tab-content">
@@ -603,7 +603,7 @@ Similar to the function `observeEvent` which allows you to specify which reactiv
 
 </div>
 <div id="app18" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app18/"></iFrame>
+
 </div>
 </div>
 
@@ -663,7 +663,7 @@ As we discussed above, because any reactive value in a reactive function will tr
 
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" href="#code19">Code 19</a></li>
-<li><a data-toggle="tab" href="#app19">App 19</a></li>
+<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app19">App 19</a></li>
 </ul>
 
 <div class="tab-content">
@@ -675,7 +675,7 @@ As we discussed above, because any reactive value in a reactive function will tr
 
 </div>
 <div id="app19" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app19/"></iFrame>
+
 </div>
 </div>
 
@@ -688,7 +688,7 @@ I refactored the code above so that the slider and text reactive values are in s
 
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" href="#code20">Code 20</a></li>
-<li><a data-toggle="tab" href="#app20">App 20</a></li>
+<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app20">App 20</a></li>
 </ul>
 
 <div class="tab-content">
@@ -700,7 +700,7 @@ I refactored the code above so that the slider and text reactive values are in s
 
 </div>
 <div id="app20" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app20/"></iFrame>
+
 </div>
 </div>
 
@@ -716,7 +716,7 @@ In this example we have two text boxes that update with the input text. One upda
 
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" href="#code21">Code 21</a></li>
-<li><a data-toggle="tab" href="#app21">App 21</a></li>
+<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app21">App 21</a></li>
 </ul>
 
 <div class="tab-content">
@@ -728,7 +728,7 @@ In this example we have two text boxes that update with the input text. One upda
 
 </div>
 <div id="app21" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app21/"></iFrame>
+
 </div>
 </div>
 
@@ -764,7 +764,7 @@ Using our own app as an example. Let's say that we want to print the value in a 
 
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" href="#code22">Code 22</a></li>
-<li><a data-toggle="tab" href="#app22">App 22</a></li>
+<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app22">App 22</a></li>
 </ul>
 
 <div class="tab-content">
@@ -776,7 +776,7 @@ Using our own app as an example. Let's say that we want to print the value in a 
 
 </div>
 <div id="app22" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app22/"></iFrame>
+
 </div>
 </div>
 
@@ -794,7 +794,7 @@ Run the code and click on the plot tab to see the plot.
 
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" href="#code23">Code 23</a></li>
-<li><a data-toggle="tab" href="#app23">App 23</a></li>
+<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app23">App 23</a></li>
 </ul>
 
 <div class="tab-content">
@@ -806,7 +806,7 @@ Run the code and click on the plot tab to see the plot.
 
 </div>
 <div id="app23" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app23/"></iFrame>
+
 </div>
 </div>
 
@@ -828,7 +828,7 @@ By the way, within `renderUI` if you want to include multiple elements you would
 
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" href="#code24">Code 24</a></li>
-<li><a data-toggle="tab" href="#app24">App 24</a></li>
+<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app24">App 24</a></li>
 </ul>
 
 <div class="tab-content">
@@ -840,7 +840,7 @@ By the way, within `renderUI` if you want to include multiple elements you would
 
 </div>
 <div id="app24" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app24/"></iFrame>
+
 </div>
 </div>
 
@@ -857,7 +857,7 @@ In the example below I'm including one typical use case for each of the three li
 
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" href="#code25">Code 25</a></li>
-<li><a data-toggle="tab" href="#app25">App 25</a></li>
+<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app25">App 25</a></li>
 </ul>
 
 <div class="tab-content">
@@ -869,7 +869,7 @@ In the example below I'm including one typical use case for each of the three li
 
 </div>
 <div id="app25" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app25/"></iFrame>
+
 </div>
 </div>
 
@@ -916,7 +916,7 @@ In order to use the functionality you need to load the package and then to activ
 
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" href="#code26">Code 26</a></li>
-<li><a data-toggle="tab" href="#app26">App 26</a></li>
+<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app26">App 26</a></li>
 </ul>
 
 <div class="tab-content">
@@ -928,7 +928,7 @@ In order to use the functionality you need to load the package and then to activ
 
 </div>
 <div id="app26" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app26/"></iFrame>
+
 </div>
 </div>
 
@@ -963,7 +963,7 @@ As an alternative, you can create a function that outputs the UI elements you ne
 
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" href="#code27">Code 27</a></li>
-<li><a data-toggle="tab" href="#app27">App 27</a></li>
+<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app27">App 27</a></li>
 </ul>
 
 <div class="tab-content">
@@ -975,7 +975,7 @@ As an alternative, you can create a function that outputs the UI elements you ne
 
 </div>
 <div id="app27" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app27/"></iFrame>
+
 </div>
 </div>
 
@@ -992,7 +992,7 @@ Keep in mind that the original `renderDataTable` function and the version in the
 
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" href="#code28">Code 28</a></li>
-<li><a data-toggle="tab" href="#app28">App 28</a></li>
+<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app28">App 28</a></li>
 </ul>
 
 <div class="tab-content">
@@ -1004,7 +1004,7 @@ Keep in mind that the original `renderDataTable` function and the version in the
 
 </div>
 <div id="app28" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app28/"></iFrame>
+
 </div>
 </div>
 
@@ -1014,7 +1014,7 @@ Keep in mind that the original `renderDataTable` function and the version in the
 
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" href="#code29">Code 29</a></li>
-<li><a data-toggle="tab" href="#app29">App 29</a></li>
+<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app29">App 29</a></li>
 </ul>
 
 <div class="tab-content">
@@ -1026,7 +1026,7 @@ Keep in mind that the original `renderDataTable` function and the version in the
 
 </div>
 <div id="app29" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app29/"></iFrame>
+
 </div>
 </div>
 
@@ -1044,7 +1044,7 @@ Details on using plot.ly can be found at [this site](https://plot.ly/r/shiny-tut
 
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" href="#code30">Code 30</a></li>
-<li><a data-toggle="tab" href="#app30">App 30</a></li>
+<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app30">App 30</a></li>
 </ul>
 
 <div class="tab-content">
@@ -1056,7 +1056,7 @@ Details on using plot.ly can be found at [this site](https://plot.ly/r/shiny-tut
 
 </div>
 <div id="app30" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app30/"></iFrame>
+
 </div>
 </div>
 
@@ -1066,7 +1066,7 @@ Details on using highcharts can be found at [this site](http://jkunst.com/highch
 
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" href="#code31">Code 31</a></li>
-<li><a data-toggle="tab" href="#app31">App 31</a></li>
+<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app31">App 31</a></li>
 </ul>
 
 <div class="tab-content">
@@ -1078,7 +1078,7 @@ Details on using highcharts can be found at [this site](http://jkunst.com/highch
 
 </div>
 <div id="app31" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app31/"></iFrame>
+
 </div>
 </div>
 
@@ -1090,7 +1090,7 @@ Details on using leaflet in R can be found at [this site](http://rstudio.github.
 
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" href="#code32">Code 32</a></li>
-<li><a data-toggle="tab" href="#app32">App 32</a></li>
+<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app32">App 32</a></li>
 </ul>
 
 <div class="tab-content">
@@ -1102,7 +1102,7 @@ Details on using leaflet in R can be found at [this site](http://rstudio.github.
 
 </div>
 <div id="app32" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app32/"></iFrame>
+
 </div>
 </div>
 
@@ -1180,7 +1180,7 @@ This example demonstrates the code needed to use a module, but is not a very pra
 
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" href="#code33">Code 33</a></li>
-<li><a data-toggle="tab" href="#app33">App 33</a></li>
+<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app33">App 33</a></li>
 </ul>
 
 <div class="tab-content">
@@ -1192,7 +1192,7 @@ This example demonstrates the code needed to use a module, but is not a very pra
 
 </div>
 <div id="app33" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app33/"></iFrame>
+
 </div>
 </div>
 
@@ -1203,7 +1203,7 @@ This app is a little harder to follow but a better example of how modules can be
 
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" href="#code34">Code 34</a></li>
-<li><a data-toggle="tab" href="#app34">App 34</a></li>
+<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app34">App 34</a></li>
 </ul>
 
 <div class="tab-content">
@@ -1215,7 +1215,7 @@ This app is a little harder to follow but a better example of how modules can be
 
 </div>
 <div id="app34" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app34/"></iFrame>
+
 </div>
 </div>
 
@@ -1311,7 +1311,7 @@ This app is a little harder to follow than the simple code above but a better ex
 
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" href="#code35">Code 35</a></li>
-<li><a data-toggle="tab" href="#app35">App 35</a></li>
+<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app35">App 35</a></li>
 </ul>
 
 <div class="tab-content">
@@ -1323,7 +1323,7 @@ This app is a little harder to follow than the simple code above but a better ex
 
 </div>
 <div id="app35" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app35/"></iFrame>
+
 </div>
 </div>
 
@@ -1343,7 +1343,7 @@ A note about this particular example: remember that any reactives in your reacti
 
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" href="#code36">Code 36</a></li>
-<li><a data-toggle="tab" href="#app36">App 36</a></li>
+<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app36">App 36</a></li>
 </ul>
 
 <div class="tab-content">
@@ -1355,7 +1355,7 @@ A note about this particular example: remember that any reactives in your reacti
 
 </div>
 <div id="app36" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app36/"></iFrame>
+
 </div>
 </div>
 
@@ -1368,7 +1368,7 @@ As mentioned above, Kyle Walker inspired us to link plots and maps using the bru
 
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" href="#code37">Code 37</a></li>
-<li><a data-toggle="tab" href="#app37">App 37</a></li>
+<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app37">App 37</a></li>
 </ul>
 
 <div class="tab-content">
@@ -1380,7 +1380,7 @@ As mentioned above, Kyle Walker inspired us to link plots and maps using the bru
 
 </div>
 <div id="app37" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app37/"></iFrame>
+
 </div>
 </div>
 
@@ -1399,7 +1399,7 @@ Here we add inline JavaScript (jQuery) to fade out, then in the title and finall
 
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" href="#code38">Code 38</a></li>
-<li><a data-toggle="tab" href="#app38">App 38</a></li>
+<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app38">App 38</a></li>
 </ul>
 
 <div class="tab-content">
@@ -1411,7 +1411,7 @@ Here we add inline JavaScript (jQuery) to fade out, then in the title and finall
 
 </div>
 <div id="app38" class="tab-pane fade">
-<iFrame class="iframeapp" src="https://spatial.shinyapps.io/blog_app38/"></iFrame>
+
 </div>
 </div>
 

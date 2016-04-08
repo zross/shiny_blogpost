@@ -1,0 +1,132 @@
+
+
+<!DOCTYPE html>
+<html>
+<body>
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+
+<script>
+
+function clickfunction(item){
+
+var val  = Number(item.replace('app', ''));
+var numiframes = 1;
+var miniframe = val - numiframes;
+var maxiframe = val + numiframes;
+
+if(miniframe<0) miniframe = 0;
+if(maxiframe>38) maxframe = 38;
+
+var alliframes = [];
+for (var i = miniframe; i < maxiframe + 1; i++) {
+alliframes.push('iframe' + i)
+};
+console.log(alliframes)
+
+// this is the full set of iframes we care about
+var iframes = $('.tab-pane>iframe');
+
+// loop through the iframes and remove all but be sure
+// not to remove the one they clicked on.
+
+for (var i = 0; i < iframes.length; i++) {
+var theid = iframes[i].id; 
+if($.inArray(theid, alliframes) == -1){$('#' + theid).remove()};
+
+};
+
+for (var i = miniframe; i < maxiframe + 1 ; i++) {
+if($('#iframe' + i).length == 0){
+$('#app' + i).append('<iFrame width = "100%" height = "400px" class="iframeapp" id = "iframe' + i + '" src="https://spatial.shinyapps.io/blog_app' + i + '/"></iFrame>');
+}
+}
+
+};
+
+
+
+
+
+</script>
+
+
+<ul class="nav nav-tabs">
+<li class="active"><a data-toggle="tab" href="#code0">Code 0</a></li>
+<li><a id="apptoggle0" data-toggle="tab" href="#app0" onclick = "clickfunction(this.hash.substr(1))">App 0</a></li>
+</ul>
+
+<div class="tab-content">
+<div id="code0" data-appear-top-offset="500" class="tab-pane fade in active">
+<pre><code>
+	https://github.com/morr/jquery.appear
+</code></pre>
+
+</div>
+<div id="app0" class="tab-pane fade">
+
+</div>
+</div>
+
+<ul class="nav nav-tabs">
+<li class="active"><a data-toggle="tab" href="#code1">Code 1</a></li>
+<li><a id="apptoggle1" data-toggle="tab" href="#app1" onclick = "clickfunction(this.hash.substr(1))">App 1</a></li>
+</ul>
+
+<div class="tab-content">
+<div id="code1" data-appear-top-offset="500" class="tab-pane fade in active">
+<pre><code>
+	https://github.com/morr/jquery.appear
+</code></pre>
+
+</div>
+<div id="app1" class="tab-pane fade">
+
+</div>
+</div>
+
+
+
+
+<ul class="nav nav-tabs">
+<li class="active"><a data-toggle="tab" href="#code2">Code 2</a></li>
+<li><a id="apptoggle2" data-toggle="tab" href="#app2" onclick = "clickfunction(this.hash.substr(1))">App 2</a></li>
+</ul>
+
+<div class="tab-content">
+<div id="code2" data-appear-top-offset="500" class="tab-pane fade in active">
+<pre><code>
+	https://github.com/morr/jquery.appear
+</code></pre>
+
+</div>
+<div id="app2" class="tab-pane fade">
+
+</div>
+</div>
+
+<ul class="nav nav-tabs">
+<li class="active"><a data-toggle="tab" href="#code3">Code 3</a></li>
+<li><a id="apptoggle3" data-toggle="tab" href="#app3" onclick = "clickfunction(this.hash.substr(1))">App 3</a></li>
+</ul>
+
+<div class="tab-content">
+<div id="code3" data-appear-top-offset="500" class="tab-pane fade in active">
+<pre><code>
+	https://github.com/morr/jquery.appear
+</code></pre>
+
+</div>
+<div id="app3" class="tab-pane fade">
+
+</div>
+</div>
+
+
+</body>
+
+</html>
+
+
+
+
+
