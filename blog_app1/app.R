@@ -11,7 +11,7 @@ ui <- fluidPage(
   sidebarLayout(
     
     sidebarPanel(
-      "Sidebar title"
+      "Sidebar"
     ), #endsidebarpanel
     
     mainPanel(

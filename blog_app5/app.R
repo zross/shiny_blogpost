@@ -3,8 +3,9 @@ server <- function(input, output, session) {
 }
 
 ui <- basicPage(
-
+  # this is your web page header information
   tags$head(
+    # here you include your inline styles
     tags$style(HTML("
 
       body {

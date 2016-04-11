@@ -2,14 +2,14 @@ server <- function(input, output, session) {
   
   # this is my reactive function -- I'm using it to
   # isolate reactions related to the text box
-  myresults <- reactive({
-    paste(input$mytext, "reactive returns results")
+  mystring <- reactive({
+    paste(input$mytext, " is what the user types")
   })
   
   observe({
     # The reactive will run each time the textbox changes and
     # print results to the console.
-    txt <- myresults()
+    txt <- mystring()
     updateTextInput(session, inputId = "myresults", value = txt) 
   })
   

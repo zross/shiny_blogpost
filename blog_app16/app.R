@@ -1,12 +1,14 @@
 server <- function(input, output, session) {
   
-  # With no priority specified the second observer will
-  # run second and overwrite the first observer
+  # first observer has lower priority so it runs second and will
+  # overwrite the other observer
   observe({
     txtA <- paste("First observer", input$mytext)
     updateTextInput(session, inputId = "myresults", value = txtA)
   }, priority = 1)
   
+  # second observer has higher priority so it will run first and
+  # then be overwritten
   observe({
     txtB <- paste("Second observer", input$mytext)
     updateTextInput(session, inputId = "myresults", value = txtB)

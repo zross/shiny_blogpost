@@ -1,8 +1,9 @@
 server <- function(input, output, session) {
   
+  # Using observeEvent we're tell Shiny only to run this code
+  # if mytext gets updated.
   observeEvent(input$mytext, {
-    # Using observeEvent we're tell Shiny only to run this code
-    # if mytext gets updated.
+    
     input$myslider
     txt <- paste(input$mytext, sample(1:10000, 1))
     updateTextInput(session, inputId = "myresults", value = txt)  

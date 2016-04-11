@@ -11,7 +11,7 @@ ui <- fluidPage(theme=shinytheme("cosmo"),
   sidebarLayout(
     
     sidebarPanel(
-      h3("Note the button is black!"),
+      h3("Note the button is black. This is different from the previous app."),
       actionButton("button", "A button")
     ), 
     

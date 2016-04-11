@@ -9,7 +9,7 @@ server <- function(input, output, session) {
   
   
   observe({
-    res <- paste0("Text is ", txt(), ". Slider val is ", val())
+    res <- paste0(txt(), " | Slider ", val())
     updateTextInput(session, "myresults", value = res)
   })  
   
@@ -18,11 +18,13 @@ server <- function(input, output, session) {
 
 ui <- basicPage(
   
-    h3("The value in the text box gets printed to the results text box."),
+    h3("Changes to the text box and slider are separated so that a change to the text box will not affect the slider part of the results textbox"),
     sliderInput("myslider", "A slider:", min=0, max=1000, value=500),
-    textInput("mytext", "Input goes here", ""),
+    textInput("mytext", "Input goes here", "Text"),
     textInput("myresults", "Results will be printed here", "Initial value")
 
 )
 
 shinyApp(ui = ui, server = server)
+
+

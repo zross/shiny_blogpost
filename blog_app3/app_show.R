@@ -11,11 +11,11 @@ ui <- fluidPage(
     
   ),
   fluidRow(
-    column(1, 
+    column(1, class="col-xs-6", 
            actionButton("button", "Click")
            
     ),
-    column(6, 
+    column(6, class="col-xs-6", 
            p("Row 2, Column 2 (button is col 1)")
     )
 
