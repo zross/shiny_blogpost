@@ -131,6 +131,7 @@ Creating and running simple web applications is relatively easy and there are gr
 
 In order to run Shiny and follow the code on this post you should make sure you have RStudio software and the `shiny` R package. In creating this post I'm using version `r packageVersion("shiny")`. Additional details on package versions are at the end.
 
+
 ## Shiny at it's simplest
 
 In its simplest form, a Shiny application requires a server function to do the calculations and a user interface. Below we have the simplest possible shiny app. We create an empty server, a UI with a basic message and then launch the app with the `shinyApp` function. Voila -- a functioning web application created entirely in R!
@@ -178,7 +179,7 @@ Under the hood, Shiny uses Twitter Bootstrap, a commonly used framework for desi
 
 As mentioned above, you will choose a layout function depending on the type of app you want. For this example, we will take advantage of a Shiny template using the function `sidebarLayout` which creates a page with a sidebar and a main panel. You can review other layout options [in the RStudio layout guide](http://shiny.rstudio.com/articles/layout-guide.html). In this example we're creating a `sidebarPanel` and `mainPanel` and not much else.
 
-**Note that in a fluid design your sidebar and other elements may "collapse" if you don't have width on your web page.**
+**Note that in a fluid design your sidebar and other elements may "collapse" if your browser view is not wide enough.**
 
 
 
@@ -299,12 +300,12 @@ In this particular example, you won't see much difference because the app is so 
 
 ### Style yourself with CSS
 
-If you want to use your own CSS have several options. For the sake of completeness, I will cover them all but the best practice would be to include all of your css in an external stylesheet (say, `style.css`). If you're using a two page app (ui.R and server.R) you can add a www folder with your style sheet and this will be read automatically. Otherwise you can read your stylesheet with `includeCSS`. Here is your full list of options.
+If you want to use your own CSS have several options. For the sake of completeness, I will cover them all but the best practice would be to include all of your CSS in an external stylesheet (let's say it's called `style.css`). If you're using a two page app ( with a ui.R and server.R rile) you can add a www folder at the same level as the UI and server files with your style sheet and this will be read automatically. Otherwise you can read your stylesheet with `includeCSS`. Here is your full list of options.
 
-1. Include your CSS directly inline in the head of your app
-2. Include CSS within HTML tags
+1. Include your raw CSS directly inline in the head of your app
+2. Include CSS within specific HTML tags
 3. With a two page app (ui.R and server.R) you can add a folder called www and the app will automatically read any CSS files you've included there
-4. The `shinyjs` package (discussed below) also has a useful function called `inlineCSS` that you can use to add CSS
+4. The `shinyjs` package (discussed [below](#shinyjs)) also has a useful function called `inlineCSS` that you can use to add CSS
 5. Use the `includeCSS` function to read an external CSS file.
 
 As I mention above, best practice for larger apps would be to include all your CSS in a single, external file so that it's easy to find and change settings. For smaller apps including CSS in the head or HTML tags would be acceptable but be careful, if you include styling in the HTML tags it can be difficult to prioritize and organize your styles.
@@ -317,7 +318,7 @@ For more detail, see [RStudio's page on CSS](http://shiny.rstudio.com/articles/c
 
 #### Example app: using inline CSS in the HTML head 
 
-Note that the actual style code is within an `HTML` function -- this is prevent Shiny from treating the text as "regular" text and escaping the strings.
+Note that the actual style code is within an `HTML` function -- this prevents Shiny from treating the text as "regular" text and escaping the strings.
 
 <ul class="nav nav-tabs">
 <li class="active licode"><a data-toggle="tab" href="#code5">Code 5</a></li>
@@ -340,7 +341,7 @@ Note that the actual style code is within an `HTML` function -- this is prevent 
 
 #### Example app: using `includeCSS` (assumes you have an external file called `style.css`) 
 
-In this case my `style.css` file only has one bit of CSS `body{background-color: Maroon;}`
+In this case my `style.css` file only has one bit of CSS `body{background-color: Maroon;}`.
 
 <ul class="nav nav-tabs">
 <li class="active licode"><a data-toggle="tab" href="#code6">Code 6</a></li>
@@ -361,9 +362,9 @@ In this case my `style.css` file only has one bit of CSS `body{background-color:
 </div>
 
 
-#### Example app: including a style in an HTML tag 
+#### Example app: including a style in an individual HTML tag 
 
-Usually, this is not a great idea because it's hard to find your styles and it's even harder to be consistent with style. But for small apps it is fine.
+Usually, this is not a great idea because it's hard to find your styles and it's even harder to be consistent with style. But for small apps it's fine.
 
 <ul class="nav nav-tabs">
 <li class="active licode"><a data-toggle="tab" href="#code7">Code 7</a></li>
@@ -387,7 +388,7 @@ Usually, this is not a great idea because it's hard to find your styles and it's
 
 #### Example app: An example of using the `shinyjs` `inlineCSS` function 
 
-The `shinyjs` package has a lot of nice add-on functionality and includes the `inlineCSS` function to make it a little easier to include CSS is a R-type syntax. Note that instead of `body{color:DarkBlue}` we have `list(body = color:"DarkBlue")`. This will make all the text blue.
+The `shinyjs` package has a lot of nice add-on functionality and includes the `inlineCSS` function to make it a little easier to include CSS using a syntax that is more R-like. Note that instead of `body{color:DarkBlue}`, which is CSS, we have `list(body = "color:DarkBlue")` which is R code. This will make all the text blue.
 
 <ul class="nav nav-tabs">
 <li class="active licode"><a data-toggle="tab" href="#code8">Code 8</a></li>
@@ -414,16 +415,16 @@ The `shinyjs` package has a lot of nice add-on functionality and includes the `i
 
 ## Add widgets to your user interface (text boxes, sliders etc)
 
-At this point we have scaffolded our layout but have not added any elements that will allow our user interface to be interactive. Shiny has a wide array of input widgets (e.g., pull-down menus, checkboxes) that we can use to add this functionality. Take a look at the RStudio [widget gallery](http://shiny.rstudio.com/gallery/widget-gallery.html).
+At this point we have scaffolded and added styles to our UI but have not added any elements that will allow our user interface to be interactive. Shiny has a wide array of input widgets (e.g., pull-down menus, checkboxes) that we can use to add this functionality. Take a look at the RStudio [widget gallery](http://shiny.rstudio.com/gallery/widget-gallery.html) for a complete list.
 
-For this particular example, I'll want a slider range and text input. Note that both of these, and all widgets, have a unique input id (`inputId`). Careful, this often causes trouble -- the **input ids must be unique**.
+For this particular example, I'll want a slider range and text input. Note that both of these, and all widgets, have a unique input id (`inputId`) -- the text is `mytext` and the slider is `myslider`. Careful, this often causes trouble -- the **input ids must be unique**.
 
 We're still only focusing here on the UI so these widgets "work" but don't actually do anything because we have not included any code in the Shiny server. In this particular example, we are including both a slider and a text input.
 
 
 #### Example app: Allow user input 
 
-Simple app with widgets, though the widgets are not connected to the server yet.
+Simple app with widgets, though the widgets are not connected to the server yet. You can enter text and play with the slider but nothing will happen.
 
 
 <ul class="nav nav-tabs">
@@ -452,19 +453,19 @@ Currently, our users can interact with our application all they want but our ser
 
 In order to listen, it needs to know what to listen to and this is where our unique input ids come in. Our widgets all have a unique ID that the server will listen for and react to. Each of these input ids is mapped to the `input` argument on our server. So, for example, if you want to access the value of the text box we created (which is called `mytext`) from within the server you would call `input$mytext`. Likewise, for the slider the values are in `input$myslider`. These objects from the UI (`input$myslider`, `input$mytext`) are called reactive values.
 
-But... and this is one of the most challenging concepts in Shiny, you can't simply refer to `input$mytext` in the server to get the current value of the text box. Instead **you need to wrap these "reactive" values in one of the functions designed to handle interactive widget output**. The functions that can handle the reactive values are `observe`, `reactive` and the suite of `render*` functions all of which are discussed below.
+But... and this is one of the most challenging concepts in Shiny, you can't simply refer to `input$mytext` in the server to get the current value of the text box. Instead **you need to wrap these reactive values in one of the functions designed to handle interactive widget output**. The functions that can handle the reactive values are `observe`, `reactive` and the suite of `render*` functions all of which are discussed below.
 
 
 
 ## Listen for changes with `observe` or `reactive`, the Shiny hearing aids
 
-The values associated with your UI inputs (like the text box, `input$mytext`) are called reactive values. It is tempting to include `input$mytext` directly in the server. Try running the code below in your own console and you will get an error `operation not allowed without an active reactive context`. This means that to read the reactive you need to wrap it in a function designed to listen to the reactive elements. Note that if you run this code locally (and get the error) you'll need to click on the "stop" button in the console to stop the app.
+The values associated with your UI inputs (like the text box, `input$mytext`) are called reactive values. It is tempting to include `input$mytext` directly in the server. Try running the code below in your own console and you will get an error `operation not allowed without an active reactive context`. This means that to read the reactive value you need to wrap it in a function designed to listen to the reactive elements. Note that if you run this code locally (and get the error) you'll need to click on the "stop" button in the console to stop the app.
 
 
 
 #### Example app: Careful, you can't include bare reactive values in the server 
 
-This will throw an error because the reactive value is not being read by a function designed to handle it! Instead we need to wrap the values in an `observe`, `reactive` or `render*` function that is designed to handle reactive content. 
+This will throw an error because the reactive value is not being read by a function designed to handle it! Instead we need to wrap the values in an `observe`, `reactive` or `render*` function that is designed to handle reactive content. In a console, you will see the error. Here the app will fail to load.
 
 <ul class="nav nav-tabs">
 <li class="active licode"><a data-toggle="tab" href="#code10">Code 10</a></li>
@@ -498,7 +499,7 @@ In particular, I want to introduce you to the suite of `update*` functions that 
 
 #### Example app: Using `updateTextInput` as a "console" for this blog post 
 
-In the app below you can see that I'm "printing" the text typed into `my_text` to `my_results` with the function `updateTextInput`.
+In the app below you can see that I'm "printing" the text typed into `mytext` to `myresults` with the function `updateTextInput`.
 
 <ul class="nav nav-tabs">
 <li class="active licode"><a data-toggle="tab" href="#code11">Code 11</a></li>
@@ -524,15 +525,15 @@ In the app below you can see that I'm "printing" the text typed into `my_text` t
 
 Observers will get triggered in response to reactive values. They were designed to listen to reactive elements and respond by causing side effects, like updates to text boxes or pull-downs. Unlike the `reactive` function, which we cover next, they should not be used to return data or values.
 
-There are two flavors of `observe`. With `observe` the code inside will get triggered when any of the reactive values inside change. With 'observeEvent` code will only be triggered by specified reactive values.
+There are two flavors of `observe`. With `observe` the code inside will get triggered when any of the reactive values inside change. With `observeEvent` code will only be triggered by specified reactive values. I would suggest that you use `observeEvent` whenever possible because `observeEvent` forces you to think through and specify the reactions you want to see.
 
-So, back to the example, if we wrap the `input$mytext` in an observer the app will print the value of the text box to our results box. In this example we're printing to the console only, not yet back to the ui.
+So, back to the example from above. Instead of including `input$mytext` alone in the server (which causes an error) we can put the `input$mytext` in an observer and use it to update `myresults`.  Any time the user makes a change to `mytext` the observer code will run and `myresults` will be updated.
 
 
 
 #### Example app: Use `observe` for side effects 
 
-We use the `observer` function to read the reactive value associated with the input text box. The side effect is updating the results text box.
+We use the `observe` function to listen for changes to the reactive value associated with the input text box (`input$mytext`). When `input$mytext` changes the observer code runs and updates `myresults`.
 
 
 <ul class="nav nav-tabs">
@@ -559,8 +560,11 @@ We use the `observer` function to read the reactive value associated with the in
 As mentioned above, the code in an `observe` will run if *any* of the reactives inside change. So in the following code the results text box will update if the user interacts with the input text box **or** with the slider. Even though the slider reactive `input$myslider` is not actually being used in any way. Any reactive value in the `observe` function will trigger all the code in the observe function to run.
 
 
-#### Example app: All the reactive values in `observe` will trigger the code to run 
+#### Example app: All the reactive values in `observe` will trigger the code to run (even if that's not what you want)
 
+Since `input$myslider` and `input$mytext` are in the observer if the user makes a change to *either* the observer code will run.
+
+**Note that in the next couple of apps I paste a random number to the text to make it easier to see updates.**
 
 <ul class="nav nav-tabs">
 <li class="active licode"><a data-toggle="tab" href="#code13">Code 13</a></li>
@@ -581,11 +585,12 @@ As mentioned above, the code in an `observe` will run if *any* of the reactives 
 </div>
 
 
-The `observeEvent` function is designed to address this issue. With `observeEvent` the code inside will only run if the specified reactive value changes. So in the following code the print statements will only execute if the user makes changes to the text box.
+The `observeEvent` function is designed to address this issue. With `observeEvent` the code inside will only run if the specified reactive value(s) change. So in the following code the print statements will only execute if the user makes changes to the text box.
 
 
 #### Example app: Only specified reactive(s) trigger the code to run using `observeEvent`. 
 
+This app only includes a single reactive to respond to (`input$mytext`) but you can include more than one.
 
 <ul class="nav nav-tabs">
 <li class="active licode"><a data-toggle="tab" href="#code14">Code 14</a></li>
@@ -607,12 +612,12 @@ The `observeEvent` function is designed to address this issue. With `observeEven
 
 ### Observer priority: which observers run first
 
-With bigger apps, you may have situations where you want one observer to run before others. You can use an `observer`s priority argument to do this. The default priority is 0 and higher numbers mean higher priority (and you can use negative numbers).
+With bigger apps, you may have situations where you want one observer to run before others. You can use an `observe`s priority argument to do this. The default priority is 0 and higher numbers mean higher priority (and you can use negative numbers).
 
 
 #### Example app: No priority specified 
 
-The order of execution is unpredictable, in this case the second observer gets run second.
+The order of execution is not always predictable in Shiny apps. In this example we have two observers and they **both write to the same output text box**. This app uses default priorities and the second observer will run second and will, therefore, write over the updates from the first observer.
 
 <ul class="nav nav-tabs">
 <li class="active licode"><a data-toggle="tab" href="#code15">Code 15</a></li>
@@ -635,7 +640,7 @@ The order of execution is unpredictable, in this case the second observer gets r
 
 #### Example app: Prioritize to control order of execution 
 
-I want the first observer to overwrite the second so it needs to run LAST -- lower priority.
+Instead of default priorities we will force the first observer to run second so that it writes over the updates from the second observer. In order to do this we have a higher priority for the second observer so that it runs first.
 
 <ul class="nav nav-tabs">
 <li class="active licode"><a data-toggle="tab" href="#code16">Code 16</a></li>
@@ -658,9 +663,9 @@ I want the first observer to overwrite the second so it needs to run LAST -- low
 
 
 
-### `reactive`: use a `reactive` to isolate code and generate output with no side effects
+### `reactive`: use a `reactive` function to isolate code and generate output with no side effects
 
-A `reactive` is used in the same way you would use an R function except that it gets triggered by a reactive element. Because using `reactive` creates a function and returns results you generally save a reactive as an object and use it elsewhere in your server as you would use any R function. There is one major distinction from a function, however, the function can only be executed within a "reactive context" (so in another reactive, an observer or a render* function). The reactives are NOT supposed to generate side effects, they should essentially be self-contained.
+A `reactive` function is used in the same way you would use an R function except that it gets triggered by a reactive element. Because using `reactive` creates a function and returns results you generally save a reactive as an object and use it elsewhere in your server as you would use any R function. There is one major distinction from a function, however, the function can only be executed within a "reactive context" (so in another reactive, an observe or a render* function). The reactives are NOT supposed to generate side effects, they should essentially be self-contained.
 
 So in the example, below I use `reactive` to create a self-contained function called `myresults`. Since I want to print the results to the console (a side effect), I run the reactive function from within an observer. Note that since it's a function I'm using `myresults()` rather than just `myresults`.
 
@@ -741,7 +746,7 @@ server <- function(input, output, session) {
 
 ### If there is a reactive value the code will run on app load and then on each change
 
-Conversely, if you include a reactive value in an `observe` (or `reactive` or `render`) function the code inside will be triggered on app load and then every time the reactive value changes **even if that reactive values is not used in any calculations**. So in the code below you can see that `input$mytext` is not actually part of the print statement -- it's not used. Nevertheless, any time your user changes the text box this server will print 1 to 10 to the console. This is a very important concept -- a reactive value in your `observer` or `reactive` functions will trigger that function to run if the user interacts with it even if the reactive element is not part of the calculations.
+Conversely, if you include a reactive value in an `observe` (or `reactive` or `render`) function the code inside will be triggered on app load and then every time the reactive value changes **even if that reactive values is not used in any calculations**. So in the code below you can see that `input$mytext` is not actually part of the print statement -- it's not used. Nevertheless, any time your user changes the text box this server will print 1 to 10 to the console. This is a very important concept -- a reactive value in your `observe` or `reactive` functions will trigger that function to run if the user interacts with it even if the reactive element is not part of the calculations.
 
 
 ```{r, eval=FALSE}
@@ -1007,7 +1012,7 @@ RStudio also sells a yearly subscription to Shiny Server Pro that provides secur
 
 ### shinyjs
 
-The `shinyjs` package allows you to use common JavaScript operations in your Shiny applications such as hiding an element, delaying code etc. The package provides more than a dozen useful functions that are descibed in a [useful page on GitHub](https://github.com/daattali/shinyjs).
+The `shinyjs` package, created by [Dean Attali](), allows you to use common JavaScript operations in your Shiny applications such as hiding an element, delaying code etc. The package provides more than a dozen useful functions that are descibed in a [useful page on GitHub](https://github.com/daattali/shinyjs). His talk on the package at the 2016 Shiny Developers Conference is also worth watching.
 
 In order to use the functionality you need to load the package and then to activate it in the UI with the `useShinyjs` function.
 
@@ -1034,12 +1039,12 @@ In order to use the functionality you need to load the package and then to activ
 
 
 ### shinyURL
-The `shinyURL` package allows you to save and restore the state of your shiny apps if you want to share not just the app, but a particular page in the app. See the [GitHub page](https://github.com/aoles/shinyURL) for more details. 
+The `shinyURL` package, created by XXXX, allows you to save and restore the state of your shiny apps if you want to share not just the app, but a particular page in the app. See the [GitHub page](https://github.com/aoles/shinyURL) for more details. His talk on the package at the 2016 Shiny Developers Conference is also worth watching.
 
 
 ### shinyBS
 
-The shinyBS package offers some nice additional Bootstrap-related components like modals, collapses and related. Unfortunately, it's not clear that it's being maintained (last commit in April 2015) and many of the components do not work with the most recent versions of Shiny. The functions can still be useful to help guide the creation of updated versions of the components. See, for example, [this discussion](https://github.com/ebailey78/shinyBS/issues/62) where the modal function is altered to work with current Shiny. For now you might hold off on using this one.
+The shinyBS package, created by XX, offers some nice additional Bootstrap-related components like modals, collapses and related. Unfortunately, it's not clear that it's being maintained (last commit in April 2015) and many of the components do not work with the most recent versions of Shiny. The functions can still be useful to help guide the creation of updated versions of the components. See, for example, [this discussion](https://github.com/ebailey78/shinyBS/issues/62) where the modal function is altered to work with current Shiny. For now you might hold off on using this one.
 
 # Advanced topics
 
@@ -1515,6 +1520,10 @@ Here we add inline JavaScript (jQuery) to fade out, then in the title and finall
 </div>
 </div>
 
+
+## More on reactive programming
+
+Joe Cheng, the primary creator of Shiny, gave a great talk on reactive programming at the Shiny Developers Conference in January 2016. The videos are now online and I highly recommend you watch both part 1 and part 2.
 
 # Details on the package versions and operating system used to create this post
 

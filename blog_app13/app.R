@@ -3,6 +3,7 @@ server <- function(input, output, session) {
   observe({
     # even though the slider is not involved in a calculation, if
     # you change the slider it will run all this code and update the text box
+    # changes to the mytext box also will trigger the code to run
     input$myslider
     txt <- paste(input$mytext, sample(1:10000, 1))
     updateTextInput(session, inputId = "myresults", value = txt)  

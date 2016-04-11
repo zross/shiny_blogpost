@@ -4,12 +4,14 @@ server <- function(input, output, session) {
   # if mytext gets updated.
   observeEvent(input$mytext, {
     
+    # myslider is a reactive but it does not trigger the code to 
+    # run here because we're using observeEvent and only specified
+    # input$mytext
     input$myslider
     txt <- paste(input$mytext, sample(1:10000, 1))
     updateTextInput(session, inputId = "myresults", value = txt)  
     
   })
-  
 }
 
 ui <- basicPage(
