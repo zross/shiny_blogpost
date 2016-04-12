@@ -1,19 +1,28 @@
 server <- function(input, output, session) {
   
-  # input$mytext comes from the UI. my_output_text gets
-  # sent back
-  output$my_output_text <- renderText({
-    return(input$mytext)
-    })
+  observe({
+    updateTextInput(session, "text_output1", value = input$text_input)
+  })
+  
+  
+  # instead of observe and isolate, you could instead use observeEvent
+  observe({
+    input$updateButton
+    updateTextInput(session, "text_output2", value = isolate(input$text_input))
+  })
+  
 }
 
+
 ui <- basicPage(
-    h3("The value in the text box gets printed here with the textOutput function."),
-    textInput("mytext", "Input goes here"),
+  
+    h3("The value in the text box gets printed to the results text box."),
+    textInput("text_input", "Type here"),
+    textInput("text_output1", "This box is constantly updating"),
     
-    # my_output_text comes from the server
-    "Your value is:",
-    textOutput("my_output_text")
+    textInput("text_output2", "Updates only with action button click"),
+    actionButton("updateButton", "Update list")
+ 
 )
 
 shinyApp(ui = ui, server = server)

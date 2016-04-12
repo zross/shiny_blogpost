@@ -1,42 +1,35 @@
 server <- function(input, output, session) {
   
-  # when the slider change change the text box
-  observe({
-    updateTextInput(session, "mytext", value=input$myslider)
-  })
-  
-  # when the slider changes update the dataset
-  dat <- reactive({
-    input$myslider
-    cars[1:input$myslider,]
+  # return a list of UI elements
+  output$my_output_UI <- renderUI({
     
+    list(
+      h4(style = "color:blue;", "My selection list"),
+      selectInput(inputId = "myselect", label="", choices = selections)
+    )
   })
   
-  # Since dat() is generated from a reactive that 
-  # is triggered by input$myslider this table will update
-  # any time that input$myslider updates
-  output$mytable <- renderTable({
-    dat()
-  })
+  # initial selections
+  selections <- c("New York", "Philadelphia")
   
+  # use observe event to notice when the user clicks the button
+  # update the selection list. Note the double assignment <<-
+  observeEvent(input$mybutton,{
+    selections <<- c(input$mytext, selections)
+    updateSelectInput(session, "myselect", choices = selections, selected = selections[1])
+  })
+
 }
 
-ui <- fluidPage(
+ui <- basicPage(
   
-  titlePanel("An app using an observe, reactive and render"),
-  
-  sidebarLayout(
-    sidebarPanel(
-      sliderInput("myslider", "Number of rows to display", min=1, max=50, value=5),
-      textInput(inputId = "mytext", label = "Slider value")
-    ), # end sidebar panel
-    
-    mainPanel(
-      tabsetPanel(
-        tabPanel("Table", tableOutput("mytable"))
-      )
-    ) # end main panel
-  )
+    h3("Using renderUI and uiOutput"),
+    uiOutput("my_output_UI"),
+    textInput("mytext", ""),
+    actionButton("mybutton", "Click to add to selections")
+
 )
 
 shinyApp(ui = ui, server = server)
+
+

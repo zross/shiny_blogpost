@@ -190,19 +190,19 @@ Depending on what you want to do with your app, the `session` argument is not re
 Not much here, but this is a real Shiny app.
 
 <ul class="nav nav-tabs">
-<li class="active licode"><a data-toggle="tab" href="#code0">Code 0</a></li>
-<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app0">App 0</a></li>
+<li class="active licode"><a data-toggle="tab" href="#code1">Code 1</a></li>
+<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app1">App 1</a></li>
 </ul>
 
 <div class="tab-content">
-<div id="code0" class="tab-pane fade in active codetab">
+<div id="code1" class="tab-pane fade in active codetab">
     
-```{r, eval=FALSE, code=readLines("blog_app0/app.R")}
+```{r, eval=FALSE, code=readLines("blog_app1/app.R")}
 
 ```
 
 </div>
-<div id="app0" class="tab-pane fade apptab">
+<div id="app1" class="tab-pane fade apptab">
 
 </div>
 </div>
@@ -228,36 +228,6 @@ As mentioned above, you will choose a layout function depending on the type of a
 #### <span class="exampleapp">Example app:</span> Basic user interface
 
 <ul class="nav nav-tabs">
-<li class="active licode"><a data-toggle="tab" href="#code1">Code 1</a></li>
-<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app1">App 1</a></li>
-</ul>
-
-<div class="tab-content">
-<div id="code1" class="tab-pane fade in active codetab">
-    
-```{r, eval=FALSE, code=readLines("blog_app1/app.R")}
-
-```
-
-</div>
-<div id="app1" class="tab-pane fade apptab">
-
-</div>
-</div>
-
-
-
-
-
-
-### Adding elements with tags$xxx
-
-It's easy to add HTML elements to your Shiny app using [HTML tags](http://shiny.rstudio.com/articles/tag-glossary.html). There are more than 100 HTML elements you can add to your page using the syntax `tags$OBJECT()` as in `tags$p()` for a paragraph or `tags$blockquote()`. For a limited number of these tags, the most common ones, there are helper functions that allow you to skip the `tags$` so, for example, a first tier header can be created with `h1()` -- but be careful, not all tags permit this.
-
-
-#### <span class="exampleapp">Example app:</span> using HTML tags to layout your app 
-
-<ul class="nav nav-tabs">
 <li class="active licode"><a data-toggle="tab" href="#code2">Code 2</a></li>
 <li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app2">App 2</a></li>
 </ul>
@@ -276,15 +246,16 @@ It's easy to add HTML elements to your Shiny app using [HTML tags](http://shiny.
 </div>
 
 
-### Layout your app using Bootstrap's grid system manually
-
-If you're new to CSS creating your layout can be challenging and you would need to read [the Bootstrap basics](https://getbootstrap.com/examples/grid/) before getting started. When you're comfortable, though, you can use Bootstrap's grid system directly by specifying, rows and columns and column spans. As a general rule, all Bootstrap layouts are 12 columns across and these columns can be grouped to make wider columns.
-
-In the example below, we have an layout with 2 rows. One is offset by one column and the other has a button (one column width) and text (6 column width).
 
 
 
-#### <span class="exampleapp">Example app:</span> Manual layout using Bootstrap's grid system 
+
+### Adding elements with tags$xxx
+
+It's easy to add HTML elements to your Shiny app using [HTML tags](http://shiny.rstudio.com/articles/tag-glossary.html). There are more than 100 HTML elements you can add to your page using the syntax `tags$OBJECT()` as in `tags$p()` for a paragraph or `tags$blockquote()`. For a limited number of these tags, the most common ones, there are helper functions that allow you to skip the `tags$` so, for example, a first tier header can be created with `h1()` -- but be careful, not all tags permit this.
+
+
+#### <span class="exampleapp">Example app:</span> using HTML tags to layout your app 
 
 <ul class="nav nav-tabs">
 <li class="active licode"><a data-toggle="tab" href="#code3">Code 3</a></li>
@@ -300,6 +271,35 @@ In the example below, we have an layout with 2 rows. One is offset by one column
 
 </div>
 <div id="app3" class="tab-pane fade apptab">
+
+</div>
+</div>
+
+
+### Layout your app using Bootstrap's grid system manually
+
+If you're new to CSS creating your layout can be challenging and you would need to read [the Bootstrap basics](https://getbootstrap.com/examples/grid/) before getting started. When you're comfortable, though, you can use Bootstrap's grid system directly by specifying, rows and columns and column spans. As a general rule, all Bootstrap layouts are 12 columns across and these columns can be grouped to make wider columns.
+
+In the example below, we have an layout with 2 rows. One is offset by one column and the other has a button (one column width) and text (6 column width).
+
+
+
+#### <span class="exampleapp">Example app:</span> Manual layout using Bootstrap's grid system 
+
+<ul class="nav nav-tabs">
+<li class="active licode"><a data-toggle="tab" href="#code4">Code 4</a></li>
+<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app4">App 4</a></li>
+</ul>
+
+<div class="tab-content">
+<div id="code4" class="tab-pane fade in active codetab">
+    
+```{r, eval=FALSE, code=readLines("blog_app4/app.R")}
+
+```
+
+</div>
+<div id="app4" class="tab-pane fade apptab">
 
 </div>
 </div>
@@ -322,19 +322,19 @@ In this particular example, you won't see much difference because the app is so 
 **Note that because this blog post is not very wide and we're using a fluid page, the main panel has collapsed below the sidebar.** 
 
 <ul class="nav nav-tabs">
-<li class="active licode"><a data-toggle="tab" href="#code4">Code 4</a></li>
-<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app4">App 4</a></li>
+<li class="active licode"><a data-toggle="tab" href="#code5">Code 5</a></li>
+<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app5">App 5</a></li>
 </ul>
 
 <div class="tab-content">
-<div id="code4" class="tab-pane fade in active codetab">
+<div id="code5" class="tab-pane fade in active codetab">
     
-```{r, eval=FALSE, code=readLines("blog_app4/app.R")}
+```{r, eval=FALSE, code=readLines("blog_app5/app.R")}
 
 ```
 
 </div>
-<div id="app4" class="tab-pane fade apptab">
+<div id="app5" class="tab-pane fade apptab">
 
 </div>
 </div>
@@ -362,29 +362,6 @@ For more detail, see [RStudio's page on CSS](http://shiny.rstudio.com/articles/c
 Note that the actual style code is within an `HTML` function -- this prevents Shiny from treating the text as "regular" text and escaping the strings.
 
 <ul class="nav nav-tabs">
-<li class="active licode"><a data-toggle="tab" href="#code5">Code 5</a></li>
-<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app5">App 5</a></li>
-</ul>
-
-<div class="tab-content">
-<div id="code5" class="tab-pane fade in active codetab">
-    
-```{r, eval=FALSE, code=readLines("blog_app5/app.R")}
-
-```
-
-</div>
-<div id="app5" class="tab-pane fade apptab">
-
-</div>
-</div>
-
-
-#### <span class="exampleapp">Example app:</span> using `includeCSS` (assumes you have an external file called `style.css`) 
-
-In this case my `style.css` file only has one bit of CSS `body{background-color: Maroon;}`.
-
-<ul class="nav nav-tabs">
 <li class="active licode"><a data-toggle="tab" href="#code6">Code 6</a></li>
 <li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app6">App 6</a></li>
 </ul>
@@ -403,9 +380,9 @@ In this case my `style.css` file only has one bit of CSS `body{background-color:
 </div>
 
 
-#### <span class="exampleapp">Example app:</span> including a style in an individual HTML tag 
+#### <span class="exampleapp">Example app:</span> using `includeCSS` (assumes you have an external file called `style.css`) 
 
-Usually, this is not a great idea because it's hard to find your styles and it's even harder to be consistent with style. But for small apps it's fine.
+In this case my `style.css` file only has one bit of CSS `body{background-color: Maroon;}`.
 
 <ul class="nav nav-tabs">
 <li class="active licode"><a data-toggle="tab" href="#code7">Code 7</a></li>
@@ -426,10 +403,9 @@ Usually, this is not a great idea because it's hard to find your styles and it's
 </div>
 
 
+#### <span class="exampleapp">Example app:</span> including a style in an individual HTML tag 
 
-#### <span class="exampleapp">Example app:</span> An example of using the `shinyjs` `inlineCSS` function 
-
-The `shinyjs` package has a lot of nice add-on functionality and includes the `inlineCSS` function to make it a little easier to include CSS using a syntax that is more R-like. Note that instead of `body{color:DarkBlue}`, which is CSS, we have `list(body = "color:DarkBlue")` which is R code. This will make all the text blue.
+Usually, this is not a great idea because it's hard to find your styles and it's even harder to be consistent with style. But for small apps it's fine.
 
 <ul class="nav nav-tabs">
 <li class="active licode"><a data-toggle="tab" href="#code8">Code 8</a></li>
@@ -445,6 +421,30 @@ The `shinyjs` package has a lot of nice add-on functionality and includes the `i
 
 </div>
 <div id="app8" class="tab-pane fade apptab">
+
+</div>
+</div>
+
+
+
+#### <span class="exampleapp">Example app:</span> An example of using the `shinyjs` `inlineCSS` function 
+
+The `shinyjs` package has a lot of nice add-on functionality and includes the `inlineCSS` function to make it a little easier to include CSS using a syntax that is more R-like. Note that instead of `body{color:DarkBlue}`, which is CSS, we have `list(body = "color:DarkBlue")` which is R code. This will make all the text blue.
+
+<ul class="nav nav-tabs">
+<li class="active licode"><a data-toggle="tab" href="#code9">Code 9</a></li>
+<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app9">App 9</a></li>
+</ul>
+
+<div class="tab-content">
+<div id="code9" class="tab-pane fade in active codetab">
+    
+```{r, eval=FALSE, code=readLines("blog_app9/app.R")}
+
+```
+
+</div>
+<div id="app9" class="tab-pane fade apptab">
 
 </div>
 </div>
@@ -469,19 +469,19 @@ Simple app with widgets, though the widgets are not connected to the server yet.
 
 
 <ul class="nav nav-tabs">
-<li class="active licode"><a data-toggle="tab" href="#code9">Code 9</a></li>
-<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app9">App 9</a></li>
+<li class="active licode"><a data-toggle="tab" href="#code10">Code 10</a></li>
+<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app10">App 10</a></li>
 </ul>
 
 <div class="tab-content">
-<div id="code9" class="tab-pane fade in active codetab">
+<div id="code10" class="tab-pane fade in active codetab">
     
-```{r, eval=FALSE, code=readLines("blog_app9/app.R")}
+```{r, eval=FALSE, code=readLines("blog_app10/app.R")}
 
 ```
 
 </div>
-<div id="app9" class="tab-pane fade apptab">
+<div id="app10" class="tab-pane fade apptab">
 
 </div>
 </div>
@@ -509,19 +509,19 @@ The values associated with your UI inputs (like the text box, `input$mytext`) ar
 This will throw an error because the reactive value is not being read by a function designed to handle it! Instead we need to wrap the values in an `observe`, `reactive` or `render*` function that is designed to handle reactive content. In a console, you will see the error. Here the app will fail to load.
 
 <ul class="nav nav-tabs">
-<li class="active licode"><a data-toggle="tab" href="#code10">Code 10</a></li>
-<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app10">App 10 (this will fail to load properly)</a></li>
+<li class="active licode"><a data-toggle="tab" href="#code11">Code 11</a></li>
+<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app11">App 11 (this will fail to load properly)</a></li>
 </ul>
 
 <div class="tab-content">
-<div id="code10" class="tab-pane fade in active codetab">
+<div id="code11" class="tab-pane fade in active codetab">
     
-```{r, eval=FALSE, code=readLines("blog_app10/app.R")}
+```{r, eval=FALSE, code=readLines("blog_app11/app.R")}
 
 ```
 
 </div>
-<div id="app10" class="tab-pane fade apptab">
+<div id="app11" class="tab-pane fade apptab">
 
 </div>
 </div>
@@ -543,19 +543,19 @@ In particular, I want to introduce you to the suite of `update*` functions that 
 In the app below you can see that I'm "printing" the text typed into `mytext` to `myresults` with the function `updateTextInput`.
 
 <ul class="nav nav-tabs">
-<li class="active licode"><a data-toggle="tab" href="#code11">Code 11</a></li>
-<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app11">App 11</a></li>
+<li class="active licode"><a data-toggle="tab" href="#code12">Code 12</a></li>
+<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app12">App 12</a></li>
 </ul>
 
 <div class="tab-content">
-<div id="code11" class="tab-pane fade in active codetab">
+<div id="code12" class="tab-pane fade in active codetab">
     
-```{r, eval=FALSE, code=readLines("blog_app11/app.R")}
+```{r, eval=FALSE, code=readLines("blog_app12/app.R")}
 
 ```
 
 </div>
-<div id="app11" class="tab-pane fade apptab">
+<div id="app12" class="tab-pane fade apptab">
 
 </div>
 </div>
@@ -578,38 +578,8 @@ We use the `observe` function to listen for changes to the reactive value associ
 
 
 <ul class="nav nav-tabs">
-<li class="active licode"><a data-toggle="tab" href="#code12">Code 12</a></li>
-<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app12">App 12</a></li>
-</ul>
-
-<div class="tab-content">
-<div id="code12" class="tab-pane fade in active codetab">
-    
-```{r, eval=FALSE, code=readLines("blog_app12/app.R")}
-
-```
-
-</div>
-<div id="app12" class="tab-pane fade apptab">
-
-</div>
-</div>
-
-
-### `observeEvent`: use `observeEvent` to prevent unwanted reactions
-
-As mentioned above, the code in an `observe` will run if *any* of the reactives inside change. So in the following code the results text box will update if the user interacts with the input text box **or** with the slider. Even though the slider reactive `input$myslider` is not actually being used in any way. Any reactive value in the `observe` function will trigger all the code in the observe function to run.
-
-
-#### <span class="exampleapp">Example app:</span> All the reactive values in `observe` will trigger the code to run (even if that's not what you want)
-
-Since `input$myslider` and `input$mytext` are in the observer if the user makes a change to *either* the observer code will run.
-
-**Note that in the next couple of apps I paste a random number to the text to make it easier to see updates.**
-
-<ul class="nav nav-tabs">
 <li class="active licode"><a data-toggle="tab" href="#code13">Code 13</a></li>
-<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app13">App 13</a></li>
+<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app13">App 132</a></li>
 </ul>
 
 <div class="tab-content">
@@ -626,12 +596,16 @@ Since `input$myslider` and `input$mytext` are in the observer if the user makes 
 </div>
 
 
-The `observeEvent` function is designed to address this issue. With `observeEvent` the code inside will only run if the specified reactive value(s) change. So in the following code the print statements will only execute if the user makes changes to the text box.
+### `observeEvent`: use `observeEvent` to prevent unwanted reactions
+
+As mentioned above, the code in an `observe` will run if *any* of the reactives inside change. So in the following code the results text box will update if the user interacts with the input text box **or** with the slider. Even though the slider reactive `input$myslider` is not actually being used in any way. Any reactive value in the `observe` function will trigger all the code in the observe function to run.
 
 
-#### <span class="exampleapp">Example app:</span> Only specified reactive(s) trigger the code to run using `observeEvent`. 
+#### <span class="exampleapp">Example app:</span> All the reactive values in `observe` will trigger the code to run (even if that's not what you want)
 
-Using `observeEvent` instead of `observe` allows you to specify the reactive values to listen for and react to. In this case, we're only listening for one reactive (`input$mytext`) but you can include more than one.
+Since `input$myslider` and `input$mytext` are in the observer if the user makes a change to *either* the observer code will run.
+
+**Note that in the next couple of apps I paste a random number to the text to make it easier to see updates.**
 
 <ul class="nav nav-tabs">
 <li class="active licode"><a data-toggle="tab" href="#code14">Code 14</a></li>
@@ -651,14 +625,13 @@ Using `observeEvent` instead of `observe` allows you to specify the reactive val
 </div>
 </div>
 
-### Observer priority: which observers run first
 
-With bigger apps, you may have situations where you want one observer to run before others. You can use an `observe`s priority argument to do this. The default priority is 0 and higher numbers mean higher priority (and you can use negative numbers).
+The `observeEvent` function is designed to address this issue. With `observeEvent` the code inside will only run if the specified reactive value(s) change. So in the following code the print statements will only execute if the user makes changes to the text box.
 
 
-#### <span class="exampleapp">Example app:</span> No priority specified 
+#### <span class="exampleapp">Example app:</span> Only specified reactive(s) trigger the code to run using `observeEvent`. 
 
-The order of execution is not always predictable in Shiny apps. In this example we have two observers and they **both write to the same output text box**. This app uses default priorities and the second observer will run second and will, therefore, write over the updates from the first observer.
+Using `observeEvent` instead of `observe` allows you to specify the reactive values to listen for and react to. In this case, we're only listening for one reactive (`input$mytext`) but you can include more than one.
 
 <ul class="nav nav-tabs">
 <li class="active licode"><a data-toggle="tab" href="#code15">Code 15</a></li>
@@ -678,10 +651,14 @@ The order of execution is not always predictable in Shiny apps. In this example 
 </div>
 </div>
 
+### Observer priority: which observers run first
 
-#### <span class="exampleapp">Example app:</span> Prioritize to control order of execution 
+With bigger apps, you may have situations where you want one observer to run before others. You can use an `observe`s priority argument to do this. The default priority is 0 and higher numbers mean higher priority (and you can use negative numbers).
 
-Instead of default priorities we will force the first observer to run second so that it writes over the updates from the second observer. In order to do this we have a higher priority for the second observer so that it runs first.
+
+#### <span class="exampleapp">Example app:</span> No priority specified 
+
+The order of execution is not always predictable in Shiny apps. In this example we have two observers and they **both write to the same output text box**. This app uses default priorities and the second observer will run second and will, therefore, write over the updates from the first observer.
 
 <ul class="nav nav-tabs">
 <li class="active licode"><a data-toggle="tab" href="#code16">Code 16</a></li>
@@ -702,19 +679,9 @@ Instead of default priorities we will force the first observer to run second so 
 </div>
 
 
+#### <span class="exampleapp">Example app:</span> Prioritize to control order of execution 
 
-
-### `reactive`: use a `reactive` function to isolate code and generate output with no side effects
-
-A `reactive` function is used in the same way you would use an R function except that it gets triggered by a reactive element. Because using `reactive` creates a function and returns results you generally save a reactive as an object and use it elsewhere in your server as you would use any R function. There is one major distinction from a function, however, the function can only be executed within a "reactive context" (so in another reactive, an observe or a render* function). The reactives are NOT supposed to generate side effects, they should essentially be self-contained.
-
-So in the example, below I use `reactive` to create a self-contained function called `myresults`. Since I want to print the results to the console (a side effect), I run the reactive function from within an observer. Note that since it's a function I'm using `myresults()` rather than just `myresults`.
-
-
-#### <span class="exampleapp">Example app:</span> Using `reactive` to generate output
-
-In this app we use `reactive` to create a function that listens for the `input$mytext` reactive value. When it hears a change it generates a string as output.
-
+Instead of default priorities we will force the first observer to run second so that it writes over the updates from the second observer. In order to do this we have a higher priority for the second observer so that it runs first.
 
 <ul class="nav nav-tabs">
 <li class="active licode"><a data-toggle="tab" href="#code17">Code 17</a></li>
@@ -735,16 +702,19 @@ In this app we use `reactive` to create a function that listens for the `input$m
 </div>
 
 
-### `eventReactive`: used to prevent unwanted reactions in a `reactive` function
-
-Similar to the function `observeEvent` which allows you to specify which reactive values trigger a code run, `eventReactive` can do the same for reactive functions. 
 
 
+### `reactive`: use a `reactive` function to isolate code and generate output with no side effects
 
-#### <span class="exampleapp">Example app:</span> Using `eventReactive` to prevent unwanted reactions 
+A `reactive` function is used in the same way you would use an R function except that it gets triggered by a reactive element. Because using `reactive` creates a function and returns results you generally save a reactive as an object and use it elsewhere in your server as you would use any R function. There is one major distinction from a function, however, the function can only be executed within a "reactive context" (so in another reactive, an observe or a render* function). The reactives are NOT supposed to generate side effects, they should essentially be self-contained.
+
+So in the example, below I use `reactive` to create a self-contained function called `myresults`. Since I want to print the results to the console (a side effect), I run the reactive function from within an observer. Note that since it's a function I'm using `myresults()` rather than just `myresults`.
 
 
-Sometimes you only want your reactive function to listen for specific reactive values and this is when you use `eventReactive` or `observeEvent`. In this app we have a `reactive` function that responds to both reactive values and an `eventReactive` that only reacts to changes in `input$mytext`.
+#### <span class="exampleapp">Example app:</span> Using `reactive` to generate output
+
+In this app we use `reactive` to create a function that listens for the `input$mytext` reactive value. When it hears a change it generates a string as output.
+
 
 <ul class="nav nav-tabs">
 <li class="active licode"><a data-toggle="tab" href="#code18">Code 18</a></li>
@@ -760,6 +730,36 @@ Sometimes you only want your reactive function to listen for specific reactive v
 
 </div>
 <div id="app18" class="tab-pane fade apptab">
+
+</div>
+</div>
+
+
+### `eventReactive`: used to prevent unwanted reactions in a `reactive` function
+
+Similar to the function `observeEvent` which allows you to specify which reactive values trigger a code run, `eventReactive` can do the same for reactive functions. 
+
+
+
+#### <span class="exampleapp">Example app:</span> Using `eventReactive` to prevent unwanted reactions 
+
+
+Sometimes you only want your reactive function to listen for specific reactive values and this is when you use `eventReactive` or `observeEvent`. In this app we have a `reactive` function that responds to both reactive values and an `eventReactive` that only reacts to changes in `input$mytext`.
+
+<ul class="nav nav-tabs">
+<li class="active licode"><a data-toggle="tab" href="#code19">Code 19</a></li>
+<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app19">App 19</a></li>
+</ul>
+
+<div class="tab-content">
+<div id="code19" class="tab-pane fade in active codetab">
+    
+```{r, eval=FALSE, code=readLines("blog_app19/app.R")}
+
+```
+
+</div>
+<div id="app19" class="tab-pane fade apptab">
 
 </div>
 </div>
@@ -818,31 +818,6 @@ As we discussed above, because any reactive value in a reactive function will tr
 Both reactive values (`input$mytext` and `input$myslider`) are in the same observer meaning that all the code in that observer runs when either changes. 
 
 <ul class="nav nav-tabs">
-<li class="active licode"><a data-toggle="tab" href="#code19">Code 19</a></li>
-<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app19">App 19</a></li>
-</ul>
-
-<div class="tab-content">
-<div id="code19" class="tab-pane fade in active codetab">
-    
-```{r, eval=FALSE, code=readLines("blog_app19/app.R")}
-
-```
-
-</div>
-<div id="app19" class="tab-pane fade apptab">
-
-</div>
-</div>
-
-
-
-####  <span class="exampleapp">Example app:</span> Reactive values are kept separate (better)
-
-I refactored the code above so that the slider and text reactive values are in separate reactive functions. This way if the text reactive changes only the relevant code gets run. Likewise for the slider.
-
-
-<ul class="nav nav-tabs">
 <li class="active licode"><a data-toggle="tab" href="#code20">Code 20</a></li>
 <li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app20">App 20</a></li>
 </ul>
@@ -861,14 +836,11 @@ I refactored the code above so that the slider and text reactive values are in s
 </div>
 
 
-### `isolate`: An alternative to `observeEvent` or `eventReactive` 
 
-Above you saw that `observeEvent` and `eventReactive` can limit reactions to specified reactive values. An alternative to using those functions is to use `isolate` in `observe`, `reactive` or `render*`. Generally, I'd argue in favor of using `observeEvent` and `eventReactive` because `isolate` will be harder to find in your code, but there are times when `isolate` can be useful.
+####  <span class="exampleapp">Example app:</span> Reactive values are kept separate (better)
 
+I refactored the code above so that the slider and text reactive values are in separate reactive functions. This way if the text reactive changes only the relevant code gets run. Likewise for the slider.
 
-#### The example app: Use isolate to avoid triggering reactions 
-
-In this example we have two text boxes that update with the input text. One updates constantly and in the other we've used `isolate` to ensure it only gets triggered with a button click.
 
 <ul class="nav nav-tabs">
 <li class="active licode"><a data-toggle="tab" href="#code21">Code 21</a></li>
@@ -884,6 +856,34 @@ In this example we have two text boxes that update with the input text. One upda
 
 </div>
 <div id="app21" class="tab-pane fade apptab">
+
+</div>
+</div>
+
+
+### `isolate`: An alternative to `observeEvent` or `eventReactive` 
+
+Above you saw that `observeEvent` and `eventReactive` can limit reactions to specified reactive values. An alternative to using those functions is to use `isolate` in `observe`, `reactive` or `render*`. Generally, I'd argue in favor of using `observeEvent` and `eventReactive` because `isolate` will be harder to find in your code, but there are times when `isolate` can be useful.
+
+
+#### The example app: Use isolate to avoid triggering reactions 
+
+In this example we have two text boxes that update with the input text. One updates constantly and in the other we've used `isolate` to ensure it only gets triggered with a button click.
+
+<ul class="nav nav-tabs">
+<li class="active licode"><a data-toggle="tab" href="#code22">Code 22</a></li>
+<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app22">App 22</a></li>
+</ul>
+
+<div class="tab-content">
+<div id="code22" class="tab-pane fade in active codetab">
+    
+```{r, eval=FALSE, code=readLines("blog_app22/app.R")}
+
+```
+
+</div>
+<div id="app22" class="tab-pane fade apptab">
 
 </div>
 </div>
@@ -919,19 +919,19 @@ Using our own app as an example. Let's say that we want to print the value from 
 
 
 <ul class="nav nav-tabs">
-<li class="active licode"><a data-toggle="tab" href="#code22">Code 22</a></li>
-<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app22">App 22</a></li>
+<li class="active licode"><a data-toggle="tab" href="#code23">Code 23</a></li>
+<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app23">App 23</a></li>
 </ul>
 
 <div class="tab-content">
-<div id="code22" class="tab-pane fade in active codetab">
+<div id="code23" class="tab-pane fade in active codetab">
     
-```{r, eval=FALSE, code=readLines("blog_app22/app.R")}
+```{r, eval=FALSE, code=readLines("blog_app23/app.R")}
 
 ```
 
 </div>
-<div id="app22" class="tab-pane fade apptab">
+<div id="app23" class="tab-pane fade apptab">
 
 </div>
 </div>
@@ -946,19 +946,19 @@ Similar to the `renderText` and `textOutput`, the `renderPlot` and `plotOutput` 
 
 
 <ul class="nav nav-tabs">
-<li class="active licode"><a data-toggle="tab" href="#code23">Code 23</a></li>
-<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app23">App 23</a></li>
+<li class="active licode"><a data-toggle="tab" href="#code24">Code 24</a></li>
+<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app24">App 24</a></li>
 </ul>
 
 <div class="tab-content">
-<div id="code23" class="tab-pane fade in active codetab">
+<div id="code24" class="tab-pane fade in active codetab">
     
-```{r, eval=FALSE, code=readLines("blog_app23/app.R")}
+```{r, eval=FALSE, code=readLines("blog_app24/app.R")}
 
 ```
 
 </div>
-<div id="app23" class="tab-pane fade apptab taller">
+<div id="app24" class="tab-pane fade apptab taller">
 
 </div>
 </div>
@@ -976,19 +976,19 @@ Instead of returning a single object, we are returning a list of objects. Specif
 
 
 <ul class="nav nav-tabs">
-<li class="active licode"><a data-toggle="tab" href="#code24">Code 24</a></li>
-<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app24">App 24</a></li>
+<li class="active licode"><a data-toggle="tab" href="#code25">Code 25</a></li>
+<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app25">App 25</a></li>
 </ul>
 
 <div class="tab-content">
-<div id="code24" class="tab-pane fade in active codetab">
+<div id="code25" class="tab-pane fade in active codetab">
     
-```{r, eval=FALSE, code=readLines("blog_app24/app.R")}
+```{r, eval=FALSE, code=readLines("blog_app25/app.R")}
 
 ```
 
 </div>
-<div id="app24" class="tab-pane fade apptab">
+<div id="app25" class="tab-pane fade apptab">
 
 </div>
 </div>
@@ -1005,19 +1005,19 @@ In the example below I'm including one typical use case for each of the three li
 
 
 <ul class="nav nav-tabs">
-<li class="active licode"><a data-toggle="tab" href="#code25">Code 25</a></li>
-<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app25">App 25</a></li>
+<li class="active licode"><a data-toggle="tab" href="#code26">Code 26</a></li>
+<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app26">App 26</a></li>
 </ul>
 
 <div class="tab-content">
-<div id="code25" class="tab-pane fade in active codetab">
+<div id="code26" class="tab-pane fade in active codetab">
     
-```{r, eval=FALSE, code=readLines("blog_app25/app.R")}
+```{r, eval=FALSE, code=readLines("blog_app26/app.R")}
 
 ```
 
 </div>
-<div id="app25" class="tab-pane fade apptab">
+<div id="app26" class="tab-pane fade apptab">
 
 </div>
 </div>
@@ -1065,19 +1065,19 @@ In order to use the functionality you need to load the package and then to activ
 This is just a tiny example of using the package to run JavaScript code.
 
 <ul class="nav nav-tabs">
-<li class="active licode"><a data-toggle="tab" href="#code26">Code 26</a></li>
-<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app26">App 26</a></li>
+<li class="active licode"><a data-toggle="tab" href="#code27">Code 27</a></li>
+<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app27">App 27</a></li>
 </ul>
 
 <div class="tab-content">
-<div id="code26" class="tab-pane fade in active codetab">
+<div id="code27" class="tab-pane fade in active codetab">
     
-```{r, eval=FALSE, code=readLines("blog_app26/app.R")}
+```{r, eval=FALSE, code=readLines("blog_app27/app.R")}
 
 ```
 
 </div>
-<div id="app26" class="tab-pane fade apptab">
+<div id="app27" class="tab-pane fade apptab">
 
 </div>
 </div>
@@ -1113,36 +1113,6 @@ As an alternative, you can create a function that outputs the UI elements you ne
 The `createSelectRadio` function takes an id as input and then creates and outputs a list of components. The new ID for each component is the component name and then, as a suffix, the id provided when running the function. 
 
 <ul class="nav nav-tabs">
-<li class="active licode"><a data-toggle="tab" href="#code27">Code 27</a></li>
-<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app27">App 27</a></li>
-</ul>
-
-<div class="tab-content">
-<div id="code27" class="tab-pane fade in active codetab">
-    
-```{r, eval=FALSE, code=readLines("blog_app27/app.R")}
-
-```
-
-</div>
-<div id="app27" class="tab-pane fade apptab taller">
-
-</div>
-</div>
-
-
-
-## Interactive data tables (careful, there are two flavors)
-
-Adding interactive tables to your Shiny app is easier than you think. The original version of the shiny package included a `renderDataTable` function but this is slowly being deprecated in favor of a new `renderDataTable` function from the package `DT`. For the purposes of simply showing a table, the two options are very similar but DT extends the styling and interaction capabilities. The `DT` package, created by Yihui Xie, has some pretty amazing functionality  -- take a look at the [documentation](https://rstudio.github.io/DT/shiny.html). 
-
-Keep in mind that the original `renderDataTable` function and the version in the package `DT` have slightly different syntax which can be confusing when you're looking for example code. I recommend you only use code where `DT` is explicitly loaded (after the `shiny` package) or you see the syntax `DT::renderDataTable` which specifies which version of the function to use.
-
-#### <span class="exampleapp">Example app:</span> Using the shiny package for an interactive table 
-
-This app uses the `renderDataTable` function from Shiny.
-
-<ul class="nav nav-tabs">
 <li class="active licode"><a data-toggle="tab" href="#code28">Code 28</a></li>
 <li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app28">App 28</a></li>
 </ul>
@@ -1161,10 +1131,16 @@ This app uses the `renderDataTable` function from Shiny.
 </div>
 
 
-#### <span class="exampleapp">Example app:</span> Using the DT package for an interactive table 
 
-This app uses the `renderDataTable` function from DT.
+## Interactive data tables (careful, there are two flavors)
 
+Adding interactive tables to your Shiny app is easier than you think. The original version of the shiny package included a `renderDataTable` function but this is slowly being deprecated in favor of a new `renderDataTable` function from the package `DT`. For the purposes of simply showing a table, the two options are very similar but DT extends the styling and interaction capabilities. The `DT` package, created by Yihui Xie, has some pretty amazing functionality  -- take a look at the [documentation](https://rstudio.github.io/DT/shiny.html). 
+
+Keep in mind that the original `renderDataTable` function and the version in the package `DT` have slightly different syntax which can be confusing when you're looking for example code. I recommend you only use code where `DT` is explicitly loaded (after the `shiny` package) or you see the syntax `DT::renderDataTable` which specifies which version of the function to use.
+
+#### <span class="exampleapp">Example app:</span> Using the shiny package for an interactive table 
+
+This app uses the `renderDataTable` function from Shiny.
 
 <ul class="nav nav-tabs">
 <li class="active licode"><a data-toggle="tab" href="#code29">Code 29</a></li>
@@ -1179,7 +1155,31 @@ This app uses the `renderDataTable` function from DT.
 ```
 
 </div>
-<div id="app29" class="tab-pane fade apptab">
+<div id="app29" class="tab-pane fade apptab taller">
+
+</div>
+</div>
+
+
+#### <span class="exampleapp">Example app:</span> Using the DT package for an interactive table 
+
+This app uses the `renderDataTable` function from DT.
+
+
+<ul class="nav nav-tabs">
+<li class="active licode"><a data-toggle="tab" href="#code30">Code 30</a></li>
+<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app30">App 30</a></li>
+</ul>
+
+<div class="tab-content">
+<div id="code30" class="tab-pane fade in active codetab">
+    
+```{r, eval=FALSE, code=readLines("blog_app30/app.R")}
+
+```
+
+</div>
+<div id="app30" class="tab-pane fade apptab">
 
 </div>
 </div>
@@ -1197,28 +1197,6 @@ HTML widgets allow you to use JavaScript visualization libraries to create inter
 Details on using plot.ly can be found at [this site](https://plot.ly/r/shiny-tutorial/). In this example, I'm using plot.ly to make a ggplot interactive.
 
 <ul class="nav nav-tabs">
-<li class="active licode"><a data-toggle="tab" href="#code30">Code 30</a></li>
-<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app30">App 30</a></li>
-</ul>
-
-<div class="tab-content">
-<div id="code30" class="tab-pane fade in active codetab">
-    
-```{r, eval=FALSE, code=readLines("blog_app30/app.R")}
-
-```
-
-</div>
-<div id="app30" class="tab-pane fade apptab taller">
-
-</div>
-</div>
-
-#### <span class="exampleapp">Example app:</span> Use highcharts to make an interactive plot 
-
-Details on using highcharts can be found at [this site](http://jkunst.com/highcharter/). In this example, we create a scatter plot from scratch.
-
-<ul class="nav nav-tabs">
 <li class="active licode"><a data-toggle="tab" href="#code31">Code 31</a></li>
 <li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app31">App 31</a></li>
 </ul>
@@ -1231,16 +1209,14 @@ Details on using highcharts can be found at [this site](http://jkunst.com/highch
 ```
 
 </div>
-<div id="app31" class="tab-pane fade apptab">
+<div id="app31" class="tab-pane fade apptab taller">
 
 </div>
 </div>
 
+#### <span class="exampleapp">Example app:</span> Use highcharts to make an interactive plot 
 
-
-#### <span class="exampleapp">Example app:</span> Use leaflet for an interactive map 
-
-Details on using leaflet in R can be found at [this site](http://rstudio.github.io/leaflet/shiny.html). If you want to interact between your map and app see 
+Details on using highcharts can be found at [this site](http://jkunst.com/highcharter/). In this example, we create a scatter plot from scratch.
 
 <ul class="nav nav-tabs">
 <li class="active licode"><a data-toggle="tab" href="#code32">Code 32</a></li>
@@ -1255,7 +1231,31 @@ Details on using leaflet in R can be found at [this site](http://rstudio.github.
 ```
 
 </div>
-<div id="app32" class="tab-pane fade apptab tallest">
+<div id="app32" class="tab-pane fade apptab">
+
+</div>
+</div>
+
+
+
+#### <span class="exampleapp">Example app:</span> Use leaflet for an interactive map 
+
+Details on using leaflet in R can be found at [this site](http://rstudio.github.io/leaflet/shiny.html). If you want to interact between your map and app see 
+
+<ul class="nav nav-tabs">
+<li class="active licode"><a data-toggle="tab" href="#code33">Code 33</a></li>
+<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app33">App 33</a></li>
+</ul>
+
+<div class="tab-content">
+<div id="code33" class="tab-pane fade in active codetab">
+    
+```{r, eval=FALSE, code=readLines("blog_app33/app.R")}
+
+```
+
+</div>
+<div id="app33" class="tab-pane fade apptab tallest">
 
 </div>
 </div>
@@ -1334,29 +1334,6 @@ server <- function(input, output,session){
 This example demonstrates the code needed to use a module, but is not a very practical example because the purpose of using modules would be to re-use code. See the next example for a more realistic example.
 
 <ul class="nav nav-tabs">
-<li class="active licode"><a data-toggle="tab" href="#code33">Code 33</a></li>
-<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app33">App 33</a></li>
-</ul>
-
-<div class="tab-content">
-<div id="code33" class="tab-pane fade in active codetab">
-    
-```{r, eval=FALSE, code=readLines("blog_app33/app.R")}
-
-```
-
-</div>
-<div id="app33" class="tab-pane fade apptab taller">
-
-</div>
-</div>
-
-
-#### <span class="exampleapp">Example app:</span> more practical module example 
-
-This app is a little harder to follow but a better example of how modules can be useful. In this app the module creates a slider and two plots. As input, the module function takes the name of the data.frame as well as several plot-related variables. This way you can create side-by-side plots with a slider using multiple datasets with slight alteraations to the app server.
-
-<ul class="nav nav-tabs">
 <li class="active licode"><a data-toggle="tab" href="#code34">Code 34</a></li>
 <li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app34">App 34</a></li>
 </ul>
@@ -1369,7 +1346,30 @@ This app is a little harder to follow but a better example of how modules can be
 ```
 
 </div>
-<div id="app34" class="tab-pane fade apptab tallest">
+<div id="app34" class="tab-pane fade apptab taller">
+
+</div>
+</div>
+
+
+#### <span class="exampleapp">Example app:</span> more practical module example 
+
+This app is a little harder to follow but a better example of how modules can be useful. In this app the module creates a slider and two plots. As input, the module function takes the name of the data.frame as well as several plot-related variables. This way you can create side-by-side plots with a slider using multiple datasets with slight alteraations to the app server.
+
+<ul class="nav nav-tabs">
+<li class="active licode"><a data-toggle="tab" href="#code35">Code 35</a></li>
+<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app35">App 35</a></li>
+</ul>
+
+<div class="tab-content">
+<div id="code35" class="tab-pane fade in active codetab">
+    
+```{r, eval=FALSE, code=readLines("blog_app35/app.R")}
+
+```
+
+</div>
+<div id="app35" class="tab-pane fade apptab tallest">
 
 </div>
 </div>
@@ -1465,38 +1465,6 @@ htmlTemplate("X:/administrative/social_media/blogposts/r_shiny/htmlTemplates/tem
 This app reads my file, `template.html` and then feeds it a block of controls called `shinycontrols` and a slider called `justslider`.
 
 <ul class="nav nav-tabs">
-<li class="active licode"><a data-toggle="tab" href="#code35">Code 35</a></li>
-<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app35">App 35</a></li>
-</ul>
-
-<div class="tab-content">
-<div id="code35" class="tab-pane fade in active codetab">
-    
-```{r, eval=FALSE, code=readLines("blog_app35/app.R")}
-
-```
-
-</div>
-<div id="app35" class="tab-pane fade apptab tallest">
-
-</div>
-</div>
-
-
-
-## Brush, click and hover on plots (and an example of using global variables)
-
-
-In mid-2015 RStudio added plot interactivity to Shiny's arsenal -- this is a little different, though, than the HTML widgets mentioned above. This interactivity allows users to interact with "regular" base plots and ggplot2 plots. Specifically, these functions allow your users to click, hover or brush a base or ggplot to get more information on the elements clicked etc. Adding this type of functionality can be done simply by adding an argument to the `plotOutput` function and using that output in your server. 
-
-
-#### <span class="exampleapp">Example app:</span> Brush and click on a ggplot 
-
-As an example of interactive plots, consider this reasonably simple app. You'll notice that in the `plotOutput` function I added two arguments, one for click and one for brush. And then in the reactive I use both of these. The actual resulting input variables (`input$user_brush` and `input$user_click`) provide details like the x and y coordinates clicked. To use this information to filter your table you can use the corresponding `brushedPoints` and `nearPoints` functions.
-
-A note about this particular example: remember that any reactives in your reactive function will trigger the code to run. As a result, if the user either brushes or clicks the `dat` reactive will run. But... it won't know which reactive variable triggered the code to run. To get around this, I've created a global variable called `interaction_type` that stores the current type of interaction (i.e., brush or click). There are two `observeEvent` functions that will listen and update as needed. Pay special attention to the double assignment operator (`<<-`), this is needed to change the global variable.
-
-<ul class="nav nav-tabs">
 <li class="active licode"><a data-toggle="tab" href="#code36">Code 36</a></li>
 <li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app36">App 36</a></li>
 </ul>
@@ -1516,12 +1484,17 @@ A note about this particular example: remember that any reactives in your reacti
 
 
 
-#### <span class="exampleapp">Example app:</span> Brush with map and plot 
+## Brush, click and hover on plots (and an example of using global variables)
 
-This app is a slightly more complex version of the brush functionality. In this example, the user selections update in both a plot and on a leaflet map. The approach is very similar, though, to the previous app. We include a `brush` argument in the `plotOutput` and we use a brush to select point with the `brushedPoints` function.
 
-This app example was inspired by an [app from Kyle Walker](http://urbanstudies.tcu.edu/research/open-data/tx-demographics/) that dsiplayes the demographics of Texas Counties. He generously posted the [code used to create it](https://gist.github.com/walkerke/4988b5164258917687cb). 
+In mid-2015 RStudio added plot interactivity to Shiny's arsenal -- this is a little different, though, than the HTML widgets mentioned above. This interactivity allows users to interact with "regular" base plots and ggplot2 plots. Specifically, these functions allow your users to click, hover or brush a base or ggplot to get more information on the elements clicked etc. Adding this type of functionality can be done simply by adding an argument to the `plotOutput` function and using that output in your server. 
 
+
+#### <span class="exampleapp">Example app:</span> Brush and click on a ggplot 
+
+As an example of interactive plots, consider this reasonably simple app. You'll notice that in the `plotOutput` function I added two arguments, one for click and one for brush. And then in the reactive I use both of these. The actual resulting input variables (`input$user_brush` and `input$user_click`) provide details like the x and y coordinates clicked. To use this information to filter your table you can use the corresponding `brushedPoints` and `nearPoints` functions.
+
+A note about this particular example: remember that any reactives in your reactive function will trigger the code to run. As a result, if the user either brushes or clicks the `dat` reactive will run. But... it won't know which reactive variable triggered the code to run. To get around this, I've created a global variable called `interaction_type` that stores the current type of interaction (i.e., brush or click). There are two `observeEvent` functions that will listen and update as needed. Pay special attention to the double assignment operator (`<<-`), this is needed to change the global variable.
 
 <ul class="nav nav-tabs">
 <li class="active licode"><a data-toggle="tab" href="#code37">Code 37</a></li>
@@ -1536,22 +1509,18 @@ This app example was inspired by an [app from Kyle Walker](http://urbanstudies.t
 ```
 
 </div>
-<div id="app37" class="tab-pane fade apptab">
+<div id="app37" class="tab-pane fade apptab tallest">
 
 </div>
 </div>
 
-## Including custom JavaScript in your app
-
-Occasionally you may want to include some JavaScript that you've written in your Shiny app. Similar to the discussion of CSS above you can include the JS by referencing an external file or you can include JS inline in the header.
-
-1. `tags$head(includeScript("google-analytics.js"))`
-2. `tags$head(HTML("<script type='text/javascript'></script>"))`
 
 
-#### <span class="exampleapp">Example app:</span> inline JavaScript code 
+#### <span class="exampleapp">Example app:</span> Brush with map and plot 
 
-Here we add inline JavaScript (jQuery) to fade out, then in the title and finally make it green.
+This app is a slightly more complex version of the brush functionality. In this example, the user selections update in both a plot and on a leaflet map. The approach is very similar, though, to the previous app. We include a `brush` argument in the `plotOutput` and we use a brush to select point with the `brushedPoints` function.
+
+This app example was inspired by an [app from Kyle Walker](http://urbanstudies.tcu.edu/research/open-data/tx-demographics/) that dsiplayes the demographics of Texas Counties. He generously posted the [code used to create it](https://gist.github.com/walkerke/4988b5164258917687cb). 
 
 
 <ul class="nav nav-tabs">
@@ -1572,17 +1541,17 @@ Here we add inline JavaScript (jQuery) to fade out, then in the title and finall
 </div>
 </div>
 
+## Including custom JavaScript in your app
+
+Occasionally you may want to include some JavaScript that you've written in your Shiny app. Similar to the discussion of CSS above you can include the JS by referencing an external file or you can include JS inline in the header.
+
+1. `tags$head(includeScript("google-analytics.js"))`
+2. `tags$head(HTML("<script type='text/javascript'></script>"))`
 
 
-## Shiny dashboards
+#### <span class="exampleapp">Example app:</span> inline JavaScript code 
 
-With an R backend for processing and strong plotting capabilities Shiny is well-suited to creating dashboards. Dashboards can be created manually using the techniques discussed above, but creating them is simpler with the Rstudio package `shinydashboard`. In order to create a dashboard you need a header, sidebar and body. Within the body you create a series `tabItem`s and fill them with the controls you want see included. For more detail you should refer directly to the [shiny dashboard page on GitHub](https://rstudio.github.io/shinydashboard).
-
-
-#### <span class="exampleapp">Example app:</span> A simple dashboard
-
-This code was stolen, in a large part, from the shiny dashboard [get started page](https://rstudio.github.io/shinydashboard/get_started.html).
-
+Here we add inline JavaScript (jQuery) to fade out, then in the title and finally make it green.
 
 
 <ul class="nav nav-tabs">
@@ -1598,7 +1567,38 @@ This code was stolen, in a large part, from the shiny dashboard [get started pag
 ```
 
 </div>
-<div id="app39" class="tab-pane fade apptab tallest">
+<div id="app39" class="tab-pane fade apptab">
+
+</div>
+</div>
+
+
+
+## Shiny dashboards
+
+With an R backend for processing and strong plotting capabilities Shiny is well-suited to creating dashboards. Dashboards can be created manually using the techniques discussed above, but creating them is simpler with the Rstudio package `shinydashboard`. In order to create a dashboard you need a header, sidebar and body. Within the body you create a series `tabItem`s and fill them with the controls you want see included. For more detail you should refer directly to the [shiny dashboard page on GitHub](https://rstudio.github.io/shinydashboard).
+
+
+#### <span class="exampleapp">Example app:</span> A simple dashboard
+
+This code was stolen, in a large part, from the shiny dashboard [get started page](https://rstudio.github.io/shinydashboard/get_started.html).
+
+
+
+<ul class="nav nav-tabs">
+<li class="active licode"><a data-toggle="tab" href="#code40">Code 40</a></li>
+<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app40">App 40</a></li>
+</ul>
+
+<div class="tab-content">
+<div id="code40" class="tab-pane fade in active codetab">
+    
+```{r, eval=FALSE, code=readLines("blog_app40/app.R")}
+
+```
+
+</div>
+<div id="app40" class="tab-pane fade apptab tallest">
 
 </div>
 </div>

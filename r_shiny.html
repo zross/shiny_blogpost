@@ -145,8 +145,9 @@ $(document).ready(function () {
 </ul></li>
 <li><a href="#link-your-user-interface-with-the-server-to-display-text-tables-and-plots-render-and-output">Link your user interface with the server to display text, tables and plots (<code>render*</code> and <code>*Output</code>)</a><ul>
 <li><a href="#an-initial-example-with-rendertext-and-textoutput">An initial example with <code>renderText</code> and <code>textOutput</code></a></li>
+<li><a href="#adding-a-plot-with-renderplot-and-plotoutput">Adding a plot with <code>renderPlot</code> and <code>plotOutput</code></a></li>
 <li><a href="#dynamic-ui-with-renderui-and-outputui">Dynamic UI with <code>renderUI</code> and <code>outputUI</code></a></li>
-<li><a href="#putting-all-three-listeners-together-in-one-app">Putting all three listeners together in one app</a></li>
+<li><a href="#putting-the-three-listeners-reactive-observer-and-render-together-in-your-server">Putting the three listeners, <code>reactive</code>, <code>observer</code> and <code>render</code> together in your server</a></li>
 </ul></li>
 <li><a href="#deploy-your-app">Deploy your app</a></li>
 <li><a href="#add-on-packages">Add-on packages</a><ul>
@@ -156,7 +157,7 @@ $(document).ready(function () {
 </ul></li>
 <li><a href="#advanced-topics">Advanced topics</a><ul>
 <li><a href="#create-re-useable-ui-elements">Create re-useable UI elements</a></li>
-<li><a href="#interactive-data-tables">Interactive data tables</a></li>
+<li><a href="#interactive-data-tables-careful-there-are-two-flavors">Interactive data tables (careful, there are two flavors)</a></li>
 <li><a href="#interactive-plots-and-maps">Interactive plots and maps</a></li>
 <li><a href="#shiny-modules">Shiny modules</a><ul>
 <li><a href="#module-ui">Module UI</a></li>
@@ -165,11 +166,12 @@ $(document).ready(function () {
 <li><a href="#app-server">App Server</a></li>
 </ul></li>
 <li><a href="#html-templates">HTML templates</a><ul>
-<li><a href="#an-html-page-with-references-to-shiny-components">An HTML page with references to Shiny components</a></li>
-<li><a href="#a-ui-that-reads-the-html-template">A UI that reads the HTML template</a></li>
+<li><a href="#you-need-an-html-page-with-references-to-shiny-components">You need an HTML page with references to Shiny components</a></li>
+<li><a href="#you-need-a-ui-that-reads-the-html-template">You need a UI that reads the HTML template</a></li>
 </ul></li>
 <li><a href="#brush-click-and-hover-on-plots-and-an-example-of-using-global-variables">Brush, click and hover on plots (and an example of using global variables)</a></li>
 <li><a href="#including-custom-javascript-in-your-app">Including custom JavaScript in your app</a></li>
+<li><a href="#shiny-dashboards">Shiny dashboards</a></li>
 <li><a href="#more-on-reactive-programming">More on reactive programming</a></li>
 </ul></li>
 <li><a href="#details-on-the-package-versions-and-operating-system-used-to-create-this-post">Details on the package versions and operating system used to create this post</a></li>
@@ -190,6 +192,12 @@ height:600px;
 
 }
 
+.apptab.tallest{
+
+height:750px;
+
+}
+
 .iframeapp{
 width: 100%;
 height:100%;
@@ -200,6 +208,7 @@ height:100%;
 
 padding-top: 10px;
 padding-bottom: 10px;
+text-align:right;
 }
 
 .warning{
@@ -331,14 +340,14 @@ $('a').attr('target', '_blank');
 <p>Not much here, but this is a real Shiny app.</p>
 <ul class="nav nav-tabs">
 <li class="active licode">
-<a data-toggle="tab" href="#code0">Code 0</a>
+<a data-toggle="tab" href="#code1">Code 1</a>
 </li>
 <li>
-<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app0">App 0</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app1">App 1</a>
 </li>
 </ul>
 <div class="tab-content">
-<div id="code0" class="tab-pane fade in active codetab">
+<div id="code1" class="tab-pane fade in active codetab">
 <pre class="r"><code>library(shiny)
 
 server &lt;- function(input, output, session) { } #the server
@@ -347,7 +356,7 @@ ui &lt;- basicPage(&quot;This is a real Shiny app&quot;) # the user interface
 
 shinyApp(ui = ui, server = server) # this launches your app</code></pre>
 </div>
-<div id="app0" class="tab-pane fade apptab">
+<div id="app1" class="tab-pane fade apptab">
 
 </div>
 </div>
@@ -366,14 +375,14 @@ shinyApp(ui = ui, server = server) # this launches your app</code></pre>
 <h4><span class="exampleapp">Example app:</span> Basic user interface</h4>
 <ul class="nav nav-tabs">
 <li class="active licode">
-<a data-toggle="tab" href="#code1">Code 1</a>
+<a data-toggle="tab" href="#code2">Code 2</a>
 </li>
 <li>
-<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app1">App 1</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app2">App 2</a>
 </li>
 </ul>
 <div class="tab-content">
-<div id="code1" class="tab-pane fade in active codetab">
+<div id="code2" class="tab-pane fade in active codetab">
 <pre class="r"><code>#### server
 server &lt;- function(input, output, session) {
   
@@ -398,7 +407,7 @@ ui &lt;- fluidPage(
 
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
-<div id="app1" class="tab-pane fade apptab">
+<div id="app2" class="tab-pane fade apptab">
 
 </div>
 </div>
@@ -411,14 +420,14 @@ shinyApp(ui = ui, server = server)</code></pre>
 <h4><span class="exampleapp">Example app:</span> using HTML tags to layout your app</h4>
 <ul class="nav nav-tabs">
 <li class="active licode">
-<a data-toggle="tab" href="#code2">Code 2</a>
+<a data-toggle="tab" href="#code3">Code 3</a>
 </li>
 <li>
-<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app2">App 2</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app3">App 3</a>
 </li>
 </ul>
 <div class="tab-content">
-<div id="code2" class="tab-pane fade in active codetab">
+<div id="code3" class="tab-pane fade in active codetab">
 <pre class="r"><code>server &lt;- function(input, output, session) {
   
 }
@@ -432,7 +441,7 @@ ui &lt;- basicPage(
 
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
-<div id="app2" class="tab-pane fade apptab">
+<div id="app3" class="tab-pane fade apptab">
 
 </div>
 </div>
@@ -446,14 +455,14 @@ shinyApp(ui = ui, server = server)</code></pre>
 <h4><span class="exampleapp">Example app:</span> Manual layout using Bootstrap’s grid system</h4>
 <ul class="nav nav-tabs">
 <li class="active licode">
-<a data-toggle="tab" href="#code3">Code 3</a>
+<a data-toggle="tab" href="#code4">Code 4</a>
 </li>
 <li>
-<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app3">App 3</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app4">App 4</a>
 </li>
 </ul>
 <div class="tab-content">
-<div id="code3" class="tab-pane fade in active codetab">
+<div id="code4" class="tab-pane fade in active codetab">
 <pre class="r"><code>server &lt;- function(input, output, session) {
   
 }
@@ -480,7 +489,7 @@ ui &lt;- fluidPage(
 
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
-<div id="app3" class="tab-pane fade apptab">
+<div id="app4" class="tab-pane fade apptab">
 
 </div>
 </div>
@@ -499,14 +508,14 @@ shinyApp(ui = ui, server = server)</code></pre>
 <p><strong>Note that because this blog post is not very wide and we’re using a fluid page, the main panel has collapsed below the sidebar.</strong></p>
 <ul class="nav nav-tabs">
 <li class="active licode">
-<a data-toggle="tab" href="#code4">Code 4</a>
+<a data-toggle="tab" href="#code5">Code 5</a>
 </li>
 <li>
-<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app4">App 4</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app5">App 5</a>
 </li>
 </ul>
 <div class="tab-content">
-<div id="code4" class="tab-pane fade in active codetab">
+<div id="code5" class="tab-pane fade in active codetab">
 <pre class="r"><code>library(shinythemes)
 
 server &lt;- function(input, output, session) {
@@ -536,7 +545,7 @@ ui &lt;- fluidPage(theme=shinytheme(&quot;cosmo&quot;),
 
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
-<div id="app4" class="tab-pane fade apptab">
+<div id="app5" class="tab-pane fade apptab">
 
 </div>
 </div>
@@ -559,14 +568,14 @@ shinyApp(ui = ui, server = server)</code></pre>
 <p>Note that the actual style code is within an <code>HTML</code> function – this prevents Shiny from treating the text as “regular” text and escaping the strings.</p>
 <ul class="nav nav-tabs">
 <li class="active licode">
-<a data-toggle="tab" href="#code5">Code 5</a>
+<a data-toggle="tab" href="#code6">Code 6</a>
 </li>
 <li>
-<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app5">App 5</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app6">App 6</a>
 </li>
 </ul>
 <div class="tab-content">
-<div id="code5" class="tab-pane fade in active codetab">
+<div id="code6" class="tab-pane fade in active codetab">
 <pre class="r"><code>server &lt;- function(input, output, session) {
   
 }
@@ -592,7 +601,7 @@ ui &lt;- basicPage(
 
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
-<div id="app5" class="tab-pane fade apptab">
+<div id="app6" class="tab-pane fade apptab">
 
 </div>
 </div>
@@ -600,40 +609,6 @@ shinyApp(ui = ui, server = server)</code></pre>
 <div id="example-app-using-includecss-assumes-you-have-an-external-file-called-style.css" class="section level4">
 <h4><span class="exampleapp">Example app:</span> using <code>includeCSS</code> (assumes you have an external file called <code>style.css</code>)</h4>
 <p>In this case my <code>style.css</code> file only has one bit of CSS <code>body{background-color: Maroon;}</code>.</p>
-<ul class="nav nav-tabs">
-<li class="active licode">
-<a data-toggle="tab" href="#code6">Code 6</a>
-</li>
-<li>
-<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app6">App 6</a>
-</li>
-</ul>
-<div class="tab-content">
-<div id="code6" class="tab-pane fade in active codetab">
-<pre class="r"><code>server &lt;- function(input, output, session) {
-
-}
-
-ui &lt;- basicPage(
-
-includeCSS(&quot;style.css&quot;),
-  
-  h2(&quot;CSS using by referring to an external page&quot;),
-  p(&quot;Some important text&quot;)
-
-)
-
-
-shinyApp(ui = ui, server = server)</code></pre>
-</div>
-<div id="app6" class="tab-pane fade apptab">
-
-</div>
-</div>
-</div>
-<div id="example-app-including-a-style-in-an-individual-html-tag" class="section level4">
-<h4><span class="exampleapp">Example app:</span> including a style in an individual HTML tag</h4>
-<p>Usually, this is not a great idea because it’s hard to find your styles and it’s even harder to be consistent with style. But for small apps it’s fine.</p>
 <ul class="nav nav-tabs">
 <li class="active licode">
 <a data-toggle="tab" href="#code7">Code 7</a>
@@ -650,9 +625,9 @@ shinyApp(ui = ui, server = server)</code></pre>
 
 ui &lt;- basicPage(
 
-  # here we style inline
-  h2(style = &quot;color:green; font-family:'Comic Sans MS'&quot;, 
-     &quot;Styles within an HTML tag (not recommended for big apps)&quot;),
+includeCSS(&quot;style.css&quot;),
+  
+  h2(&quot;CSS using by referring to an external page&quot;),
   p(&quot;Some important text&quot;)
 
 )
@@ -665,9 +640,9 @@ shinyApp(ui = ui, server = server)</code></pre>
 </div>
 </div>
 </div>
-<div id="example-app-an-example-of-using-the-shinyjs-inlinecss-function" class="section level4">
-<h4><span class="exampleapp">Example app:</span> An example of using the <code>shinyjs</code> <code>inlineCSS</code> function</h4>
-<p>The <code>shinyjs</code> package has a lot of nice add-on functionality and includes the <code>inlineCSS</code> function to make it a little easier to include CSS using a syntax that is more R-like. Note that instead of <code>body{color:DarkBlue}</code>, which is CSS, we have <code>list(body = &quot;color:DarkBlue&quot;)</code> which is R code. This will make all the text blue.</p>
+<div id="example-app-including-a-style-in-an-individual-html-tag" class="section level4">
+<h4><span class="exampleapp">Example app:</span> including a style in an individual HTML tag</h4>
+<p>Usually, this is not a great idea because it’s hard to find your styles and it’s even harder to be consistent with style. But for small apps it’s fine.</p>
 <ul class="nav nav-tabs">
 <li class="active licode">
 <a data-toggle="tab" href="#code8">Code 8</a>
@@ -678,6 +653,40 @@ shinyApp(ui = ui, server = server)</code></pre>
 </ul>
 <div class="tab-content">
 <div id="code8" class="tab-pane fade in active codetab">
+<pre class="r"><code>server &lt;- function(input, output, session) {
+
+}
+
+ui &lt;- basicPage(
+
+  # here we style inline
+  h2(style = &quot;color:green; font-family:'Comic Sans MS'&quot;, 
+     &quot;Styles within an HTML tag (not recommended for big apps)&quot;),
+  p(&quot;Some important text&quot;)
+
+)
+
+
+shinyApp(ui = ui, server = server)</code></pre>
+</div>
+<div id="app8" class="tab-pane fade apptab">
+
+</div>
+</div>
+</div>
+<div id="example-app-an-example-of-using-the-shinyjs-inlinecss-function" class="section level4">
+<h4><span class="exampleapp">Example app:</span> An example of using the <code>shinyjs</code> <code>inlineCSS</code> function</h4>
+<p>The <code>shinyjs</code> package has a lot of nice add-on functionality and includes the <code>inlineCSS</code> function to make it a little easier to include CSS using a syntax that is more R-like. Note that instead of <code>body{color:DarkBlue}</code>, which is CSS, we have <code>list(body = &quot;color:DarkBlue&quot;)</code> which is R code. This will make all the text blue.</p>
+<ul class="nav nav-tabs">
+<li class="active licode">
+<a data-toggle="tab" href="#code9">Code 9</a>
+</li>
+<li>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app9">App 9</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="code9" class="tab-pane fade in active codetab">
 <pre class="r"><code>library(shinyjs)
 
 server &lt;- function(input, output, session) {
@@ -704,7 +713,7 @@ ui &lt;- fluidPage(
 
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
-<div id="app8" class="tab-pane fade apptab">
+<div id="app9" class="tab-pane fade apptab">
 
 </div>
 </div>
@@ -721,14 +730,14 @@ shinyApp(ui = ui, server = server)</code></pre>
 <p>Simple app with widgets, though the widgets are not connected to the server yet. You can enter text and play with the slider but nothing will happen.</p>
 <ul class="nav nav-tabs">
 <li class="active licode">
-<a data-toggle="tab" href="#code9">Code 9</a>
+<a data-toggle="tab" href="#code10">Code 10</a>
 </li>
 <li>
-<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app9">App 9</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app10">App 10</a>
 </li>
 </ul>
 <div class="tab-content">
-<div id="code9" class="tab-pane fade in active codetab">
+<div id="code10" class="tab-pane fade in active codetab">
 <pre class="r"><code>server &lt;- function(input, output, session) {
   
 }
@@ -747,7 +756,7 @@ ui &lt;- basicPage(
 
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
-<div id="app9" class="tab-pane fade apptab">
+<div id="app10" class="tab-pane fade apptab">
 
 </div>
 </div>
@@ -770,14 +779,14 @@ shinyApp(ui = ui, server = server)</code></pre>
 <p>This will throw an error because the reactive value is not being read by a function designed to handle it! Instead we need to wrap the values in an <code>observe</code>, <code>reactive</code> or <code>render*</code> function that is designed to handle reactive content. In a console, you will see the error. Here the app will fail to load.</p>
 <ul class="nav nav-tabs">
 <li class="active licode">
-<a data-toggle="tab" href="#code10">Code 10</a>
+<a data-toggle="tab" href="#code11">Code 11</a>
 </li>
 <li>
-<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app10">App 10 (this will fail to load properly)</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app11">App 11 (this will fail to load properly)</a>
 </li>
 </ul>
 <div class="tab-content">
-<div id="code10" class="tab-pane fade in active codetab">
+<div id="code11" class="tab-pane fade in active codetab">
 <pre class="r"><code>server &lt;- function(input, output, session) {
   # this will NOT work!!
   print(input$mytext)
@@ -795,7 +804,7 @@ ui &lt;- basicPage(
 
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
-<div id="app10" class="tab-pane fade apptab">
+<div id="app11" class="tab-pane fade apptab">
 
 </div>
 </div>
@@ -809,14 +818,14 @@ shinyApp(ui = ui, server = server)</code></pre>
 <p>In the app below you can see that I’m “printing” the text typed into <code>mytext</code> to <code>myresults</code> with the function <code>updateTextInput</code>.</p>
 <ul class="nav nav-tabs">
 <li class="active licode">
-<a data-toggle="tab" href="#code11">Code 11</a>
+<a data-toggle="tab" href="#code12">Code 12</a>
 </li>
 <li>
-<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app11">App 11</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app12">App 12</a>
 </li>
 </ul>
 <div class="tab-content">
-<div id="code11" class="tab-pane fade in active codetab">
+<div id="code12" class="tab-pane fade in active codetab">
 <pre class="r"><code>server &lt;- function(input, output, session) {
   
   observe({
@@ -837,7 +846,7 @@ ui &lt;-   basicPage(
 
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
-<div id="app11" class="tab-pane fade apptab">
+<div id="app12" class="tab-pane fade apptab">
 
 </div>
 </div>
@@ -853,14 +862,14 @@ shinyApp(ui = ui, server = server)</code></pre>
 <p>We use the <code>observe</code> function to listen for changes to the reactive value associated with the input text box (<code>input$mytext</code>). When <code>input$mytext</code> changes the observer code runs and updates <code>myresults</code>.</p>
 <ul class="nav nav-tabs">
 <li class="active licode">
-<a data-toggle="tab" href="#code12">Code 12</a>
+<a data-toggle="tab" href="#code13">Code 13</a>
 </li>
 <li>
-<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app12">App 12</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app13">App 132</a>
 </li>
 </ul>
 <div class="tab-content">
-<div id="code12" class="tab-pane fade in active codetab">
+<div id="code13" class="tab-pane fade in active codetab">
 <pre class="r"><code>server &lt;- function(input, output, session) {
   # this will work, the reactive element is wrapped in an observer
   # it prints the value to the to the results text box
@@ -879,7 +888,7 @@ ui &lt;-   basicPage(
 
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
-<div id="app12" class="tab-pane fade apptab">
+<div id="app13" class="tab-pane fade apptab">
 
 </div>
 </div>
@@ -894,14 +903,14 @@ shinyApp(ui = ui, server = server)</code></pre>
 <p><strong>Note that in the next couple of apps I paste a random number to the text to make it easier to see updates.</strong></p>
 <ul class="nav nav-tabs">
 <li class="active licode">
-<a data-toggle="tab" href="#code13">Code 13</a>
+<a data-toggle="tab" href="#code14">Code 14</a>
 </li>
 <li>
-<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app13">App 13</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app14">App 14</a>
 </li>
 </ul>
 <div class="tab-content">
-<div id="code13" class="tab-pane fade in active codetab">
+<div id="code14" class="tab-pane fade in active codetab">
 <pre class="r"><code>server &lt;- function(input, output, session) {
   
   observe({
@@ -925,7 +934,7 @@ ui &lt;- basicPage(
 
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
-<div id="app13" class="tab-pane fade apptab">
+<div id="app14" class="tab-pane fade apptab">
 
 </div>
 </div>
@@ -936,14 +945,14 @@ shinyApp(ui = ui, server = server)</code></pre>
 <p>Using <code>observeEvent</code> instead of <code>observe</code> allows you to specify the reactive values to listen for and react to. In this case, we’re only listening for one reactive (<code>input$mytext</code>) but you can include more than one.</p>
 <ul class="nav nav-tabs">
 <li class="active licode">
-<a data-toggle="tab" href="#code14">Code 14</a>
+<a data-toggle="tab" href="#code15">Code 15</a>
 </li>
 <li>
-<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app14">App 14</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app15">App 15</a>
 </li>
 </ul>
 <div class="tab-content">
-<div id="code14" class="tab-pane fade in active codetab">
+<div id="code15" class="tab-pane fade in active codetab">
 <pre class="r"><code>server &lt;- function(input, output, session) {
   
   # Using observeEvent we're tell Shiny only to run this code
@@ -971,7 +980,7 @@ ui &lt;- basicPage(
 
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
-<div id="app14" class="tab-pane fade apptab">
+<div id="app15" class="tab-pane fade apptab">
 
 </div>
 </div>
@@ -985,14 +994,14 @@ shinyApp(ui = ui, server = server)</code></pre>
 <p>The order of execution is not always predictable in Shiny apps. In this example we have two observers and they <strong>both write to the same output text box</strong>. This app uses default priorities and the second observer will run second and will, therefore, write over the updates from the first observer.</p>
 <ul class="nav nav-tabs">
 <li class="active licode">
-<a data-toggle="tab" href="#code15">Code 15</a>
+<a data-toggle="tab" href="#code16">Code 16</a>
 </li>
 <li>
-<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app15">App 15</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app16">App 16</a>
 </li>
 </ul>
 <div class="tab-content">
-<div id="code15" class="tab-pane fade in active codetab">
+<div id="code16" class="tab-pane fade in active codetab">
 <pre class="r"><code>server &lt;- function(input, output, session) {
   
   # With no priority specified the second observer will
@@ -1018,7 +1027,7 @@ ui &lt;- basicPage(
 
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
-<div id="app15" class="tab-pane fade apptab">
+<div id="app16" class="tab-pane fade apptab">
 
 </div>
 </div>
@@ -1028,14 +1037,14 @@ shinyApp(ui = ui, server = server)</code></pre>
 <p>Instead of default priorities we will force the first observer to run second so that it writes over the updates from the second observer. In order to do this we have a higher priority for the second observer so that it runs first.</p>
 <ul class="nav nav-tabs">
 <li class="active licode">
-<a data-toggle="tab" href="#code16">Code 16</a>
+<a data-toggle="tab" href="#code17">Code 17</a>
 </li>
 <li>
-<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app16">App 16</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app17">App 17</a>
 </li>
 </ul>
 <div class="tab-content">
-<div id="code16" class="tab-pane fade in active codetab">
+<div id="code17" class="tab-pane fade in active codetab">
 <pre class="r"><code>server &lt;- function(input, output, session) {
   
   # first observer has lower priority so it runs second and will
@@ -1063,7 +1072,7 @@ ui &lt;- basicPage(
 
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
-<div id="app16" class="tab-pane fade apptab">
+<div id="app17" class="tab-pane fade apptab">
 
 </div>
 </div>
@@ -1078,14 +1087,14 @@ shinyApp(ui = ui, server = server)</code></pre>
 <p>In this app we use <code>reactive</code> to create a function that listens for the <code>input$mytext</code> reactive value. When it hears a change it generates a string as output.</p>
 <ul class="nav nav-tabs">
 <li class="active licode">
-<a data-toggle="tab" href="#code17">Code 17</a>
+<a data-toggle="tab" href="#code18">Code 18</a>
 </li>
 <li>
-<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app17">App 17</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app18">App 18</a>
 </li>
 </ul>
 <div class="tab-content">
-<div id="code17" class="tab-pane fade in active codetab">
+<div id="code18" class="tab-pane fade in active codetab">
 <pre class="r"><code>server &lt;- function(input, output, session) {
   
   # this is my reactive function -- I'm using it to
@@ -1113,7 +1122,7 @@ ui &lt;- basicPage(
 
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
-<div id="app17" class="tab-pane fade apptab">
+<div id="app18" class="tab-pane fade apptab">
 
 </div>
 </div>
@@ -1127,14 +1136,14 @@ shinyApp(ui = ui, server = server)</code></pre>
 <p>Sometimes you only want your reactive function to listen for specific reactive values and this is when you use <code>eventReactive</code> or <code>observeEvent</code>. In this app we have a <code>reactive</code> function that responds to both reactive values and an <code>eventReactive</code> that only reacts to changes in <code>input$mytext</code>.</p>
 <ul class="nav nav-tabs">
 <li class="active licode">
-<a data-toggle="tab" href="#code18">Code 18</a>
+<a data-toggle="tab" href="#code19">Code 19</a>
 </li>
 <li>
-<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app18">App 18</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app19">App 19</a>
 </li>
 </ul>
 <div class="tab-content">
-<div id="code18" class="tab-pane fade in active codetab">
+<div id="code19" class="tab-pane fade in active codetab">
 <pre class="r"><code>server &lt;- function(input, output, session) {
   
   # since both mytext and myslider are in the reactive
@@ -1167,7 +1176,7 @@ ui &lt;- basicPage(
 
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
-<div id="app18" class="tab-pane fade apptab">
+<div id="app19" class="tab-pane fade apptab">
 
 </div>
 </div>
@@ -1211,14 +1220,14 @@ shinyApp(ui = ui, server = server)</code></pre>
 <p>Both reactive values (<code>input$mytext</code> and <code>input$myslider</code>) are in the same observer meaning that all the code in that observer runs when either changes.</p>
 <ul class="nav nav-tabs">
 <li class="active licode">
-<a data-toggle="tab" href="#code19">Code 19</a>
+<a data-toggle="tab" href="#code20">Code 20</a>
 </li>
 <li>
-<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app19">App 19</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app20">App 20</a>
 </li>
 </ul>
 <div class="tab-content">
-<div id="code19" class="tab-pane fade in active codetab">
+<div id="code20" class="tab-pane fade in active codetab">
 <pre class="r"><code>#### server
 server &lt;- function(input, output, session) {
   
@@ -1246,7 +1255,7 @@ ui &lt;- basicPage(
 
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
-<div id="app19" class="tab-pane fade apptab">
+<div id="app20" class="tab-pane fade apptab">
 
 </div>
 </div>
@@ -1256,14 +1265,14 @@ shinyApp(ui = ui, server = server)</code></pre>
 <p>I refactored the code above so that the slider and text reactive values are in separate reactive functions. This way if the text reactive changes only the relevant code gets run. Likewise for the slider.</p>
 <ul class="nav nav-tabs">
 <li class="active licode">
-<a data-toggle="tab" href="#code20">Code 20</a>
+<a data-toggle="tab" href="#code21">Code 21</a>
 </li>
 <li>
-<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app20">App 20</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app21">App 21</a>
 </li>
 </ul>
 <div class="tab-content">
-<div id="code20" class="tab-pane fade in active codetab">
+<div id="code21" class="tab-pane fade in active codetab">
 <pre class="r"><code>server &lt;- function(input, output, session) {
   
   # Now if you change the slider only the slider result changes
@@ -1293,7 +1302,7 @@ ui &lt;- basicPage(
 
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
-<div id="app20" class="tab-pane fade apptab">
+<div id="app21" class="tab-pane fade apptab">
 
 </div>
 </div>
@@ -1307,14 +1316,14 @@ shinyApp(ui = ui, server = server)</code></pre>
 <p>In this example we have two text boxes that update with the input text. One updates constantly and in the other we’ve used <code>isolate</code> to ensure it only gets triggered with a button click.</p>
 <ul class="nav nav-tabs">
 <li class="active licode">
-<a data-toggle="tab" href="#code21">Code 21</a>
+<a data-toggle="tab" href="#code22">Code 22</a>
 </li>
 <li>
-<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app21">App 21</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app22">App 22</a>
 </li>
 </ul>
 <div class="tab-content">
-<div id="code21" class="tab-pane fade in active codetab">
+<div id="code22" class="tab-pane fade in active codetab">
 <pre class="r"><code>server &lt;- function(input, output, session) {
   
   observe({
@@ -1344,7 +1353,7 @@ ui &lt;- basicPage(
 
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
-<div id="app21" class="tab-pane fade apptab">
+<div id="app22" class="tab-pane fade apptab">
 
 </div>
 </div>
@@ -1377,14 +1386,14 @@ shinyApp(ui = ui, server = server)</code></pre>
 <h4><span class="exampleapp">Example app:</span> Using <code>renderText</code> and <code>textOutput</code> to add to your UI</h4>
 <ul class="nav nav-tabs">
 <li class="active licode">
-<a data-toggle="tab" href="#code22">Code 22</a>
+<a data-toggle="tab" href="#code23">Code 23</a>
 </li>
 <li>
-<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app22">App 22</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app23">App 23</a>
 </li>
 </ul>
 <div class="tab-content">
-<div id="code22" class="tab-pane fade in active codetab">
+<div id="code23" class="tab-pane fade in active codetab">
 <pre class="r"><code>server &lt;- function(input, output, session) {
   
   # input$mytext comes from the UI. my_output_text gets
@@ -1405,27 +1414,27 @@ ui &lt;- basicPage(
 
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
-<div id="app22" class="tab-pane fade apptab">
+<div id="app23" class="tab-pane fade apptab">
 
 </div>
 </div>
 </div>
-<div id="spice-things-up-with-renderplot-and-plotoutput" class="section level4">
-<h4>Spice things up with <code>renderPlot</code> and <code>plotOutput</code></h4>
-<p>Similar to the <code>renderText</code> and <code>textOutput</code>, the <code>renderPlot</code> and <code>plotOutput</code> functions will create an object, in this case a plot, and then add that object to the user interface. Also similar to the text example, the objects move from the UI to the server and back to the UI.</p>
 </div>
-<div id="example-app-add-a-plot" class="section level4">
-<h4><span class="exampleapp">Example app:</span> Add a plot</h4>
+<div id="adding-a-plot-with-renderplot-and-plotoutput" class="section level2">
+<h2>Adding a plot with <code>renderPlot</code> and <code>plotOutput</code></h2>
+<p>Similar to the <code>renderText</code> and <code>textOutput</code>, the <code>renderPlot</code> and <code>plotOutput</code> functions will create an object, in this case a plot, and then add that object to the user interface. Also similar to the text example, the objects move from the UI to the server and back to the UI.</p>
+<div id="example-app-add-a-plot-to-your-ui" class="section level4">
+<h4><span class="exampleapp">Example app:</span> Add a plot to your UI</h4>
 <ul class="nav nav-tabs">
 <li class="active licode">
-<a data-toggle="tab" href="#code23">Code 23</a>
+<a data-toggle="tab" href="#code24">Code 24</a>
 </li>
 <li>
-<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app23">App 23</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app24">App 24</a>
 </li>
 </ul>
 <div class="tab-content">
-<div id="code23" class="tab-pane fade in active codetab">
+<div id="code24" class="tab-pane fade in active codetab">
 <pre class="r"><code>server &lt;- function(input, output, session) {
   
   output$my_output_text &lt;- renderText({
@@ -1455,7 +1464,7 @@ ui &lt;- basicPage(
 
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
-<div id="app23" class="tab-pane fade apptab taller">
+<div id="app24" class="tab-pane fade apptab taller">
 
 </div>
 </div>
@@ -1463,20 +1472,20 @@ shinyApp(ui = ui, server = server)</code></pre>
 </div>
 <div id="dynamic-ui-with-renderui-and-outputui" class="section level2">
 <h2>Dynamic UI with <code>renderUI</code> and <code>outputUI</code></h2>
-<p>More often than plain text or even a nice plot, you’re likely to want to output new and altered HTML elements. In this case, instead of using <code>renderText</code> and <code>textOutput</code> you would use the <code>renderUI</code> and <code>uiOutput</code> pair of functions. In this example, the user input in the textbox gets appended to a pulldown menu. (This example does not remember previous input, this is discussed in another section below).</p>
-<p>In <code>renderUI</code> you will often be returning more than one element for the UI, perhaps a title and a select box. With multiple elements, rather than returning a single element you return a <code>list</code> or <code>tagList</code> of elements as in <code>list(selectInput...., radioButtons...)</code>.</p>
+<p>If you want to return a block of UI elements – say a paragraph, then a text box and a selector – you would use <code>renderUI</code> and <code>outputUI</code> and instead of returning one object, you return a <code>list</code> or <code>tagList</code> of objects (these functions can be used interchangeably).</p>
 <div id="example-app-dynamic-user-interface" class="section level4">
 <h4><span class="exampleapp">Example app:</span> Dynamic user interface</h4>
+<p>Instead of returning a single object, we are returning a list of objects. Specifically, our <code>my_output_UI</code> output is a list of an <code>h4</code> header and a <code>selector</code>. The selector gets updated when the user clicks on the button (note <code>observeEvent</code>). Each time the user clicks the button the <code>selections</code> gets updated.</p>
 <ul class="nav nav-tabs">
 <li class="active licode">
-<a data-toggle="tab" href="#code24">Code 24</a>
+<a data-toggle="tab" href="#code25">Code 25</a>
 </li>
 <li>
-<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app24">App 24</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app25">App 25</a>
 </li>
 </ul>
 <div class="tab-content">
-<div id="code24" class="tab-pane fade in active codetab">
+<div id="code25" class="tab-pane fade in active codetab">
 <pre class="r"><code>server &lt;- function(input, output, session) {
   
   # return a list of UI elements
@@ -1511,27 +1520,27 @@ ui &lt;- basicPage(
 
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
-<div id="app24" class="tab-pane fade apptab">
+<div id="app25" class="tab-pane fade apptab">
 
 </div>
 </div>
 </div>
 </div>
-<div id="putting-all-three-listeners-together-in-one-app" class="section level2">
-<h2>Putting all three listeners together in one app</h2>
+<div id="putting-the-three-listeners-reactive-observer-and-render-together-in-your-server" class="section level2">
+<h2>Putting the three listeners, <code>reactive</code>, <code>observer</code> and <code>render</code> together in your server</h2>
 <p>In the example below I’m including one typical use case for each of the three listeners. In a later example, I will link them together in a more meaningful way but there is one more topic I want to cover before I do that.</p>
 <div id="example-app-observe-reactive-and-render-in-one-app" class="section level4">
 <h4><span class="exampleapp">Example app:</span> <code>observe</code>, <code>reactive</code> and <code>render*</code> in one app</h4>
 <ul class="nav nav-tabs">
 <li class="active licode">
-<a data-toggle="tab" href="#code25">Code 25</a>
+<a data-toggle="tab" href="#code26">Code 26</a>
 </li>
 <li>
-<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app25">App 25</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app26">App 26</a>
 </li>
 </ul>
 <div class="tab-content">
-<div id="code25" class="tab-pane fade in active codetab">
+<div id="code26" class="tab-pane fade in active codetab">
 <pre class="r"><code>server &lt;- function(input, output, session) {
   
   # when the slider change change the text box
@@ -1575,7 +1584,7 @@ ui &lt;- fluidPage(
 
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
-<div id="app25" class="tab-pane fade apptab">
+<div id="app26" class="tab-pane fade apptab">
 
 </div>
 </div>
@@ -1587,11 +1596,11 @@ shinyApp(ui = ui, server = server)</code></pre>
 <p>Although Shiny apps end up as HTML files you can’t simply copy them to your server. They require a Shiny server, a server that can run your R commands.</p>
 <div id="running-locally" class="section level4">
 <h4>Running locally</h4>
-<ol style="list-style-type: decimal">
+<ul>
 <li><p>If you’re developing in RStudio, and have multi-page app you can open either ui.R or server.R and click on Run App in the top right.</p></li>
 <li><p>For a single or multi-page app you an use the function <code>runApp</code> where you specify the directory your app.R or ui.R/server.R files are housed in.</p></li>
 <li><p>For a single page app you can use the function <code>shinyApp</code> where you specify the ui and the server as I’ve in the examples above.</p></li>
-</ol>
+</ul>
 </div>
 <div id="running-on-shinyapps.io" class="section level4">
 <h4>Running on shinyapps.io</h4>
@@ -1599,7 +1608,7 @@ shinyApp(ui = ui, server = server)</code></pre>
 </div>
 <div id="running-your-own-shiny-server" class="section level4">
 <h4>Running your own Shiny server</h4>
-<p>There is a free, open source version of the Shiny server that you can run on, for example, Amazon Web Services or your own server.</p>
+<p>There is a free, open source version of the Shiny server that you can run on, for example, Amazon Web Services or your own server. This is designed for apps with a relatively low number of visitors.</p>
 </div>
 <div id="running-shiny-server-pro" class="section level4">
 <h4>Running Shiny Server Pro</h4>
@@ -1610,20 +1619,21 @@ shinyApp(ui = ui, server = server)</code></pre>
 <h1>Add-on packages</h1>
 <div id="shinyjs" class="section level3">
 <h3>shinyjs</h3>
-<p>The <code>shinyjs</code> package, created by <a href>Dean Attali</a>, allows you to use common JavaScript operations in your Shiny applications such as hiding an element, delaying code etc. The package provides more than a dozen useful functions that are descibed in a <a href="https://github.com/daattali/shinyjs">useful page on GitHub</a>. His talk on the package at the 2016 Shiny Developers Conference is also worth watching.</p>
+<p>The <code>shinyjs</code> package, created by <a href="http://deanattali.com/">Dean Attali</a>, allows you to use common JavaScript operations in your Shiny applications such as hiding an element, delaying code etc. The package provides more than a dozen useful functions that are descibed in a <a href="https://github.com/daattali/shinyjs">page on GitHub</a>. His talk on the package at the 2016 Shiny Developers Conference is also worth watching and will be posted by RStudio in the near future.</p>
 <p>In order to use the functionality you need to load the package and then to activate it in the UI with the <code>useShinyjs</code> function.</p>
-<div id="shinyjs-in-action-try-the-toggle" class="section level4">
-<h4><code>shinyjs</code> in action, try the toggle</h4>
+<div id="example-app-shinyjs-in-action-try-the-toggle" class="section level4">
+<h4><span class="exampleapp">Example app:</span> <code>shinyjs</code> in action, try the toggle</h4>
+<p>This is just a tiny example of using the package to run JavaScript code.</p>
 <ul class="nav nav-tabs">
 <li class="active licode">
-<a data-toggle="tab" href="#code26">Code 26</a>
+<a data-toggle="tab" href="#code27">Code 27</a>
 </li>
 <li>
-<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app26">App 26</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app27">App 27</a>
 </li>
 </ul>
 <div class="tab-content">
-<div id="code26" class="tab-pane fade in active codetab">
+<div id="code27" class="tab-pane fade in active codetab">
 <pre class="r"><code>library(shinyjs)
 
 server &lt;- function(input, output, session) {
@@ -1646,7 +1656,7 @@ ui &lt;- fluidPage(
 
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
-<div id="app26" class="tab-pane fade apptab">
+<div id="app27" class="tab-pane fade apptab">
 
 </div>
 </div>
@@ -1654,11 +1664,11 @@ shinyApp(ui = ui, server = server)</code></pre>
 </div>
 <div id="shinyurl" class="section level3">
 <h3>shinyURL</h3>
-<p>The <code>shinyURL</code> package, created by XXXX, allows you to save and restore the state of your shiny apps if you want to share not just the app, but a particular page in the app. See the <a href="https://github.com/aoles/shinyURL">GitHub page</a> for more details. His talk on the package at the 2016 Shiny Developers Conference is also worth watching.</p>
+<p>The <code>shinyURL</code> package, created by <a href="https://github.com/aoles">Andrzej Oleś</a>, allows you to save and restore the state of your shiny apps if you want to share not just the app, but a particular page in the app. See the <a href="https://github.com/aoles/shinyURL">GitHub page</a> for more details. His talk on the package at the 2016 Shiny Developers Conference is also worth watching.</p>
 </div>
 <div id="shinybs" class="section level3">
 <h3>shinyBS</h3>
-<p>The shinyBS package, created by XX, offers some nice additional Bootstrap-related components like modals, collapses and related. Unfortunately, it’s not clear that it’s being maintained (last commit in April 2015) and many of the components do not work with the most recent versions of Shiny. The functions can still be useful to help guide the creation of updated versions of the components. See, for example, <a href="https://github.com/ebailey78/shinyBS/issues/62">this discussion</a> where the modal function is altered to work with current Shiny. For now you might hold off on using this one.</p>
+<p>The <a href="https://ebailey78.github.io/shinyBS/">shinyBS package</a>, created by Eric Bailey, offers some nice additional Bootstrap-related components like modals, collapses and related. Unfortunately, it’s not clear that it’s being maintained (last commit in April 2015) and many of the components do not work with the most recent versions of Shiny. The functions can still be useful to help guide the creation of updated versions of the components. See, for example, <a href="https://github.com/ebailey78/shinyBS/issues/62">this discussion</a> where the modal function is altered to work with current Shiny. For now you might hold off on using this one.</p>
 </div>
 </div>
 <div id="advanced-topics" class="section level1">
@@ -1671,20 +1681,21 @@ shinyApp(ui = ui, server = server)</code></pre>
 <li>Shiny requires that your elements all have unique IDs so you’d need to come up with a naming scheme. Perhaps select1, select2 etc…</li>
 <li>Copy paste is a pain and prone to error!</li>
 </ol>
-<p>As an alternative, you can create a function that outputs the UI elements you need and then, instead of repeating the code that creates those elements you can simply call the function. So in the example below, I create a function to generate a title, select box, radio buttons and a checkbox. Then I call that function three times – one each for the tabs.</p>
+<p>As an alternative, you can create a function that outputs the UI elements you need and then, instead of repeating the code that creates those elements you can simply call the function. So in the example below, I create a function to generate a title, select box, radio buttons and a check box. Then I call that function three times – one each for the tabs.</p>
 <p>(Note that in the newest versions of Shiny there is an alternative approach, modules, discussed below).</p>
-<div id="the-example-app-create-re-useable-ui-elements" class="section level4">
-<h4>The example app: Create re-useable UI elements</h4>
+<div id="example-app-create-re-useable-ui-elements" class="section level4">
+<h4><span class="exampleapp">Example app:</span> Create re-useable UI elements</h4>
+<p>The <code>createSelectRadio</code> function takes an id as input and then creates and outputs a list of components. The new ID for each component is the component name and then, as a suffix, the id provided when running the function.</p>
 <ul class="nav nav-tabs">
 <li class="active licode">
-<a data-toggle="tab" href="#code27">Code 27</a>
+<a data-toggle="tab" href="#code28">Code 28</a>
 </li>
 <li>
-<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app27">App 27</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app28">App 28</a>
 </li>
 </ul>
 <div class="tab-content">
-<div id="code27" class="tab-pane fade in active codetab">
+<div id="code28" class="tab-pane fade in active codetab">
 <pre class="r"><code>server &lt;- function(input, output, session) {
   
   # A function to create a block of UI elements this 
@@ -1728,60 +1739,19 @@ ui &lt;- basicPage(
 
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
-<div id="app27" class="tab-pane fade apptab">
+<div id="app28" class="tab-pane fade apptab taller">
 
 </div>
 </div>
 </div>
 </div>
-<div id="interactive-data-tables" class="section level2">
-<h2>Interactive data tables</h2>
-<p>Adding interactive tables to your Shiny app is easier than you think. The original version of the shiny package included a renderDataTable function but this is slowly being deprecated in favor of a new renderDataTable function from the package <code>DT</code>. For the purposes of simply showing a table, the two options are very similar but DT extends the styling and interaction capabilities. The <code>DT</code> package, created by Yihui Xie, has some pretty amazing functionality – take a look at the <a href="https://rstudio.github.io/DT/shiny.html">documentation</a>.</p>
+<div id="interactive-data-tables-careful-there-are-two-flavors" class="section level2">
+<h2>Interactive data tables (careful, there are two flavors)</h2>
+<p>Adding interactive tables to your Shiny app is easier than you think. The original version of the shiny package included a <code>renderDataTable</code> function but this is slowly being deprecated in favor of a new <code>renderDataTable</code> function from the package <code>DT</code>. For the purposes of simply showing a table, the two options are very similar but DT extends the styling and interaction capabilities. The <code>DT</code> package, created by Yihui Xie, has some pretty amazing functionality – take a look at the <a href="https://rstudio.github.io/DT/shiny.html">documentation</a>.</p>
 <p>Keep in mind that the original <code>renderDataTable</code> function and the version in the package <code>DT</code> have slightly different syntax which can be confusing when you’re looking for example code. I recommend you only use code where <code>DT</code> is explicitly loaded (after the <code>shiny</code> package) or you see the syntax <code>DT::renderDataTable</code> which specifies which version of the function to use.</p>
 <div id="example-app-using-the-shiny-package-for-an-interactive-table" class="section level4">
 <h4><span class="exampleapp">Example app:</span> Using the shiny package for an interactive table</h4>
-<ul class="nav nav-tabs">
-<li class="active licode">
-<a data-toggle="tab" href="#code28">Code 28</a>
-</li>
-<li>
-<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app28">App 28</a>
-</li>
-</ul>
-<div class="tab-content">
-<div id="code28" class="tab-pane fade in active codetab">
-<pre class="r"><code>server &lt;- function(input, output, session) {
-  
-  observe({
-    updateTextInput(session, &quot;mytext&quot;, value=input$myslider)
-  })
-  
-  dat &lt;- reactive({
-    input$myslider
-    mtcars[1:input$myslider,]
-    
-  })
-  
-  output$mytable &lt;- shiny::renderDataTable(dat())
-}
-
-ui &lt;- basicPage(
-  h3(&quot;Interactive table using the now deprecated Shiny data table renderer&quot;),
-  sliderInput(&quot;myslider&quot;, &quot;Number of rows to display&quot;, min=1, max = 32, value = 5),
-  shiny::dataTableOutput(&quot;mytable&quot;)
-  
-)
-
-
-shinyApp(ui = ui, server = server)</code></pre>
-</div>
-<div id="app28" class="tab-pane fade apptab">
-
-</div>
-</div>
-</div>
-<div id="example-app-using-the-dt-package-for-an-interactive-table" class="section level4">
-<h4><span class="exampleapp">Example app:</span> Using the DT package for an interactive table</h4>
+<p>This app uses the <code>renderDataTable</code> function from Shiny.</p>
 <ul class="nav nav-tabs">
 <li class="active licode">
 <a data-toggle="tab" href="#code29">Code 29</a>
@@ -1800,7 +1770,50 @@ shinyApp(ui = ui, server = server)</code></pre>
   
   dat &lt;- reactive({
     input$myslider
-    mtcars[1:input$myslider,]
+    mtcars[1:input$myslider, c(&quot;mpg&quot;, &quot;cyl&quot;, &quot;disp&quot;)]
+    
+  })
+  
+  output$mytable &lt;- shiny::renderDataTable(dat())
+}
+
+ui &lt;- basicPage(
+  h3(&quot;Interactive table using the now deprecated Shiny data table renderer&quot;),
+  sliderInput(&quot;myslider&quot;, &quot;Number of rows to display&quot;, min=1, max = 32, value = 5),
+  shiny::dataTableOutput(&quot;mytable&quot;)
+  
+)
+
+
+shinyApp(ui = ui, server = server)</code></pre>
+</div>
+<div id="app29" class="tab-pane fade apptab taller">
+
+</div>
+</div>
+</div>
+<div id="example-app-using-the-dt-package-for-an-interactive-table" class="section level4">
+<h4><span class="exampleapp">Example app:</span> Using the DT package for an interactive table</h4>
+<p>This app uses the <code>renderDataTable</code> function from DT.</p>
+<ul class="nav nav-tabs">
+<li class="active licode">
+<a data-toggle="tab" href="#code30">Code 30</a>
+</li>
+<li>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app30">App 30</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="code30" class="tab-pane fade in active codetab">
+<pre class="r"><code>server &lt;- function(input, output, session) {
+  
+  observe({
+    updateTextInput(session, &quot;mytext&quot;, value=input$myslider)
+  })
+  
+  dat &lt;- reactive({
+    input$myslider
+    mtcars[1:input$myslider,c(&quot;mpg&quot;, &quot;cyl&quot;, &quot;disp&quot;)]
     
   })
   
@@ -1822,7 +1835,7 @@ ui &lt;- basicPage(
 
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
-<div id="app29" class="tab-pane fade apptab">
+<div id="app30" class="tab-pane fade apptab">
 
 </div>
 </div>
@@ -1830,20 +1843,20 @@ shinyApp(ui = ui, server = server)</code></pre>
 </div>
 <div id="interactive-plots-and-maps" class="section level2">
 <h2>Interactive plots and maps</h2>
-<p>HTML widgets allow you to use JavaScript visualization libraries to create interactive graphics in R, including Shiny web applications. For details on HTML widgets generally you can visit <a href="http://www.htmlwidgets.org/">the htmlwidgets site</a>. Below I show three examples, two examples of interactive plots (<code>plot.ly</code> and <code>highcharts</code>) and an interactive map with <code>leaflet</code> but there are many other widgets available.</p>
+<p>HTML widgets allow you to use JavaScript visualization libraries to create interactive graphics in R, including Shiny web applications. For details on HTML widgets generally you can visit the <a href="http://www.htmlwidgets.org/">htmlwidgets site</a>. Below I show three examples, two examples of interactive plots (<code>plot.ly</code> and <code>highcharts</code>) and an interactive map with <code>leaflet</code> but there are many other widgets available.</p>
 <div id="example-app-use-plot.ly-to-make-a-ggplot-interactive" class="section level4">
 <h4><span class="exampleapp">Example app:</span> Use plot.ly to make a ggplot interactive</h4>
-<p>Details on using plot.ly can be found at <a href="https://plot.ly/r/shiny-tutorial/">this site</a>.</p>
+<p>Details on using plot.ly can be found at <a href="https://plot.ly/r/shiny-tutorial/">this site</a>. In this example, I’m using plot.ly to make a ggplot interactive.</p>
 <ul class="nav nav-tabs">
 <li class="active licode">
-<a data-toggle="tab" href="#code30">Code 30</a>
+<a data-toggle="tab" href="#code31">Code 31</a>
 </li>
 <li>
-<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app30">App 30</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app31">App 31</a>
 </li>
 </ul>
 <div class="tab-content">
-<div id="code30" class="tab-pane fade in active codetab">
+<div id="code31" class="tab-pane fade in active codetab">
 <pre class="r"><code>library(plotly)
 
 server &lt;- function(input, output, session) {
@@ -1867,24 +1880,24 @@ ui &lt;- basicPage(
 
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
-<div id="app30" class="tab-pane fade apptab">
+<div id="app31" class="tab-pane fade apptab taller">
 
 </div>
 </div>
 </div>
 <div id="example-app-use-highcharts-to-make-an-interactive-plot" class="section level4">
 <h4><span class="exampleapp">Example app:</span> Use highcharts to make an interactive plot</h4>
-<p>Details on using highcharts can be found at <a href="http://jkunst.com/highcharter/">this site</a>.</p>
+<p>Details on using highcharts can be found at <a href="http://jkunst.com/highcharter/">this site</a>. In this example, we create a scatter plot from scratch.</p>
 <ul class="nav nav-tabs">
 <li class="active licode">
-<a data-toggle="tab" href="#code31">Code 31</a>
+<a data-toggle="tab" href="#code32">Code 32</a>
 </li>
 <li>
-<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app31">App 31</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app32">App 32</a>
 </li>
 </ul>
 <div class="tab-content">
-<div id="code31" class="tab-pane fade in active codetab">
+<div id="code32" class="tab-pane fade in active codetab">
 <pre class="r"><code>library(highcharter)
 library(magrittr) # for the pipe %&gt;%
 
@@ -1905,31 +1918,31 @@ server &lt;- function(input, output, session) {
 
 ui &lt;-  basicPage(
   
-  h3(&quot;Example of plot.ly, the plot is interactive&quot;),
+  h3(&quot;Example of highcharter, the plot is interactive&quot;),
   sliderInput(&quot;myslider&quot;, &quot;A slider:&quot;, min=1, max=50, value=10),
   highchartOutput(&quot;myplot&quot;)
 )
 
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
-<div id="app31" class="tab-pane fade apptab">
+<div id="app32" class="tab-pane fade apptab">
 
 </div>
 </div>
 </div>
 <div id="example-app-use-leaflet-for-an-interactive-map" class="section level4">
 <h4><span class="exampleapp">Example app:</span> Use leaflet for an interactive map</h4>
-<p>Details on using leaflet in R can be found at <a href="http://rstudio.github.io/leaflet/shiny.html">this site</a>. If you want to interact between your map and app see <a href="http://urbanstudies.tcu.edu/research/open-data/tx-demographics/">this example</a> by Kyle Walker and the <a href="https://gist.github.com/walkerke/4988b5164258917687cb">code used to create it</a>. We use</p>
+<p>Details on using leaflet in R can be found at <a href="http://rstudio.github.io/leaflet/shiny.html">this site</a>. If you want to interact between your map and app see</p>
 <ul class="nav nav-tabs">
 <li class="active licode">
-<a data-toggle="tab" href="#code32">Code 32</a>
+<a data-toggle="tab" href="#code33">Code 33</a>
 </li>
 <li>
-<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app32">App 32</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app33">App 33</a>
 </li>
 </ul>
 <div class="tab-content">
-<div id="code32" class="tab-pane fade in active codetab">
+<div id="code33" class="tab-pane fade in active codetab">
 <pre class="r"><code>library(leaflet)
 #### server
 server &lt;- function(input, output, session) {
@@ -1974,7 +1987,7 @@ ui &lt;- fluidPage(
 
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
-<div id="app32" class="tab-pane fade apptab">
+<div id="app33" class="tab-pane fade apptab tallest">
 
 </div>
 </div>
@@ -1982,7 +1995,7 @@ shinyApp(ui = ui, server = server)</code></pre>
 </div>
 <div id="shiny-modules" class="section level2">
 <h2>Shiny modules</h2>
-<p>At the Shiny Developers Conference Joe Cheng from RStudio gave a great presentation on Shiny modules. They are designed, in part, to help solve the issue of re-useability discussed above. You may have, as an example, a block of UI widgets you want to repeat on multiple pages. Rather than copy and paste code, you can use modules to help manage the pieces. For more detail on Shiny modules check out <a href="http://shiny.rstudio.com/articles/modules.html">this write-up</a> by Joe Cheng.</p>
+<p>At the Shiny Developers Conference Joe Cheng, from RStudio, gave a great presentation on Shiny modules. They are designed, in part, to help solve the issue of re-useability discussed above in the section on <a href="#create-re-useable-ui-elements">creating re-useable UI elements</a>. You may have, as an example, a block of UI widgets you want to repeat on multiple pages. Rather than copy and paste code, you can use modules to help manage the pieces. For more detail on Shiny modules check out <a href="http://shiny.rstudio.com/articles/modules.html">this write-up</a> by Joe Cheng.</p>
 <p>To use a module, in addition to creating the UI and server as we’ve done above, you would also create a module UI and module server. Here are the four pieces you would need for an application that uses one module</p>
 <div id="module-ui" class="section level3">
 <h3>Module UI</h3>
@@ -2008,7 +2021,7 @@ shinyApp(ui = ui, server = server)</code></pre>
 </div>
 <div id="app-ui" class="section level3">
 <h3>App UI</h3>
-<p>In your app UI you can include any UI elements that are not included in the module **and* you would include your module. Since your module UI is a function you would call this function and feed it a prefix, anything you want.</p>
+<p>In your app UI you can include any UI elements that are not included in the module <strong>and</strong> you would include your module. Since your module UI is a function you would call this function and feed it a prefix, anything you want.</p>
 <pre class="r"><code>ui &lt;- fluidPage(
   
   h3(&quot;This is not part of the module but the pieces below were created with a module&quot;),
@@ -2021,20 +2034,21 @@ shinyApp(ui = ui, server = server)</code></pre>
 <pre class="r"><code>server &lt;- function(input, output,session){
 
   callModule(scatter, &quot;prefix&quot;, &quot;purple&quot;)
+  
 }</code></pre>
 <div id="example-app-simple-module-example" class="section level4">
 <h4><span class="exampleapp">Example app:</span> simple module example</h4>
 <p>This example demonstrates the code needed to use a module, but is not a very practical example because the purpose of using modules would be to re-use code. See the next example for a more realistic example.</p>
 <ul class="nav nav-tabs">
 <li class="active licode">
-<a data-toggle="tab" href="#code33">Code 33</a>
+<a data-toggle="tab" href="#code34">Code 34</a>
 </li>
 <li>
-<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app33">App 33</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app34">App 34</a>
 </li>
 </ul>
 <div class="tab-content">
-<div id="code33" class="tab-pane fade in active codetab">
+<div id="code34" class="tab-pane fade in active codetab">
 <pre class="r"><code>library(ggplot2)
 # module UI
 scatterUI &lt;- function(id) {
@@ -2069,7 +2083,7 @@ server &lt;- function(input, output,session){
 
 shinyApp(ui, server)</code></pre>
 </div>
-<div id="app33" class="tab-pane fade apptab">
+<div id="app34" class="tab-pane fade apptab taller">
 
 </div>
 </div>
@@ -2079,30 +2093,28 @@ shinyApp(ui, server)</code></pre>
 <p>This app is a little harder to follow but a better example of how modules can be useful. In this app the module creates a slider and two plots. As input, the module function takes the name of the data.frame as well as several plot-related variables. This way you can create side-by-side plots with a slider using multiple datasets with slight alteraations to the app server.</p>
 <ul class="nav nav-tabs">
 <li class="active licode">
-<a data-toggle="tab" href="#code34">Code 34</a>
+<a data-toggle="tab" href="#code35">Code 35</a>
 </li>
 <li>
-<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app34">App 34</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app35">App 35</a>
 </li>
 </ul>
 <div class="tab-content">
-<div id="code34" class="tab-pane fade in active codetab">
+<div id="code35" class="tab-pane fade in active codetab">
 <pre class="r"><code>library(ggplot2)
-library(shiny)
 
 # MODULE UI
 scatterUI &lt;- function(id) {
   ns &lt;- NS(id)
   
   list(
-    div(class=&quot;blah&quot;, sliderInput(ns(&quot;slider1&quot;), label = &quot;Limit points&quot;, min = 0, max = 32, value = 15)),
-    
+    div(sliderInput(ns(&quot;slider1&quot;), label = &quot;Limit points&quot;, min = 0, max = 32, value = 15)),
     div(style=&quot;display: inline-block; height:220px;&quot;, plotOutput(ns(&quot;plot1&quot;))),
     div(style=&quot;display: inline-block; height:220px;&quot;, plotOutput(ns(&quot;plot2&quot;)))
   )
 }
 
-# Module server piece
+# MODULE Server
 scatter &lt;- function(input, output, session, datname, var1, var2, ptshape, col1, col2) {
   
   dat &lt;- eval(as.name(datname))
@@ -2126,13 +2138,14 @@ scatter &lt;- function(input, output, session, datname, var1, var2, ptshape, col
 }
 
 
+# App ui
 ui &lt;- fluidPage(
   h3(&quot;The module creates two plots and a slider and is called twice below&quot;),
   scatterUI(&quot;prefix&quot;),
   scatterUI(&quot;prefix2&quot;)
 )
 
-
+# App server
 server &lt;- function(input, output,session){
   
   callModule(scatter, &quot;prefix&quot;, &quot;cars&quot;, &quot;speed&quot;, &quot;dist&quot;,  1, &quot;red&quot;, &quot;blue&quot;)
@@ -2141,7 +2154,7 @@ server &lt;- function(input, output,session){
 
 shinyApp(ui, server)</code></pre>
 </div>
-<div id="app34" class="tab-pane fade apptab">
+<div id="app35" class="tab-pane fade apptab tallest">
 
 </div>
 </div>
@@ -2153,8 +2166,8 @@ shinyApp(ui, server)</code></pre>
 <p>Some developers feel more comfortable writing HTML code directly rather than writing in R and having Shiny compile code to HTML. To meet this need, RStudio introduced the concept of HTML templates that allow you to write the HTML and include placeholders for Shiny input using curly braces. If you’re comfortable with web development, the concept will be familiar (e.g. mustache, handlebars).</p>
 <p>RStudio’s Winston Chang has written a <a href="http://shiny.rstudio.com/articles/templates.html">nice article</a> with significant details so I’ll cover it only briefly here.</p>
 <p>You need the following items in a Shiny app using HTML templates:</p>
-<div id="an-html-page-with-references-to-shiny-components" class="section level3">
-<h3>An HTML page with references to Shiny components</h3>
+<div id="you-need-an-html-page-with-references-to-shiny-components" class="section level3">
+<h3>You need an HTML page with references to Shiny components</h3>
 <p>In addition to your ui.R and server.R (or app.R) you would create an HTML page with the structure you want. Shiny-related components are then included in curly braces. A few key points to keep in mind:</p>
 <ol style="list-style-type: decimal">
 <li><p>You must include Shiny-related refences in the header: Shiny apps reference Shiny-related JavaScript libraries and include other required information in the head of a Shiny app’s HTML page so you need to include these references in your template. You could manually copy and paste them from another Shiny app, but it’s much easier to use the <code>headContent()</code> function within curly braces.</p></li>
@@ -2197,8 +2210,8 @@ shinyApp(ui, server)</code></pre>
 &lt;/body&gt;
 &lt;/html&gt;</code></pre>
 </div>
-<div id="a-ui-that-reads-the-html-template" class="section level3">
-<h3>A UI that reads the HTML template</h3>
+<div id="you-need-a-ui-that-reads-the-html-template" class="section level3">
+<h3>You need a UI that reads the HTML template</h3>
 <p>Your server and UI will be very similar to an all-R app except that your UI needs to read the HTML template, and feed the template whatever Shiny components you’ll want on the page. This is done with the <code>htmlTemplate</code> function.</p>
 <p>So in the current example, I am reading the <code>template.html</code> file in the same directory as app.R and I am also using the <code>htmlTemplate</code> function to feed two objects, <code>shinycontrols</code> which is a block of Shiny controls, and <code>justslider</code> which is a simple slider to the <code>template.html</code>.</p>
 <pre class="r"><code># here are some elements I want to include as a block
@@ -2217,17 +2230,17 @@ htmlTemplate(&quot;X:/administrative/social_media/blogposts/r_shiny/htmlTemplate
 )</code></pre>
 <div id="example-app-an-app-using-html-templates" class="section level4">
 <h4><span class="exampleapp">Example app:</span> An app using HTML templates</h4>
-<p>This app is a little harder to follow than the simple code above but a better example of how modules can be useful. In this app the module creates a slider and two plots. As input, the module function takes the name of the data.frame as well as several plot-related variables. This way you can create side-by-side plots with a slider using multiple datasets with slight alteraations to the app server.</p>
+<p>This app reads my file, <code>template.html</code> and then feeds it a block of controls called <code>shinycontrols</code> and a slider called <code>justslider</code>.</p>
 <ul class="nav nav-tabs">
 <li class="active licode">
-<a data-toggle="tab" href="#code35">Code 35</a>
+<a data-toggle="tab" href="#code36">Code 36</a>
 </li>
 <li>
-<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app35">App 35</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app36">App 36</a>
 </li>
 </ul>
 <div class="tab-content">
-<div id="code35" class="tab-pane fade in active codetab">
+<div id="code36" class="tab-pane fade in active codetab">
 <pre class="r"><code>server &lt;- function(input, output, session) {
  
 }
@@ -2249,7 +2262,7 @@ htmlTemplate(&quot;template.html&quot;,
 
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
-<div id="app35" class="tab-pane fade apptab">
+<div id="app36" class="tab-pane fade apptab tallest">
 
 </div>
 </div>
@@ -2258,21 +2271,21 @@ shinyApp(ui = ui, server = server)</code></pre>
 </div>
 <div id="brush-click-and-hover-on-plots-and-an-example-of-using-global-variables" class="section level2">
 <h2>Brush, click and hover on plots (and an example of using global variables)</h2>
-<p>In mid-2015 RStudio added plot interactivity to Shiny’s arsenal – this is a little different, though, than the HTML widgets mentioned above. This interactivity allows users to interact with “regular” base plots and ggplot2. Specifically, these functions allow your users to click, hover or brush a base or ggplot to get more information on the elements clicked etc. Adding this type of functionality can be done simply by adding an argument to the <code>plotOutput</code> function and using that output in your server.</p>
+<p>In mid-2015 RStudio added plot interactivity to Shiny’s arsenal – this is a little different, though, than the HTML widgets mentioned above. This interactivity allows users to interact with “regular” base plots and ggplot2 plots. Specifically, these functions allow your users to click, hover or brush a base or ggplot to get more information on the elements clicked etc. Adding this type of functionality can be done simply by adding an argument to the <code>plotOutput</code> function and using that output in your server.</p>
 <div id="example-app-brush-and-click-on-a-ggplot" class="section level4">
 <h4><span class="exampleapp">Example app:</span> Brush and click on a ggplot</h4>
 <p>As an example of interactive plots, consider this reasonably simple app. You’ll notice that in the <code>plotOutput</code> function I added two arguments, one for click and one for brush. And then in the reactive I use both of these. The actual resulting input variables (<code>input$user_brush</code> and <code>input$user_click</code>) provide details like the x and y coordinates clicked. To use this information to filter your table you can use the corresponding <code>brushedPoints</code> and <code>nearPoints</code> functions.</p>
 <p>A note about this particular example: remember that any reactives in your reactive function will trigger the code to run. As a result, if the user either brushes or clicks the <code>dat</code> reactive will run. But… it won’t know which reactive variable triggered the code to run. To get around this, I’ve created a global variable called <code>interaction_type</code> that stores the current type of interaction (i.e., brush or click). There are two <code>observeEvent</code> functions that will listen and update as needed. Pay special attention to the double assignment operator (<code>&lt;&lt;-</code>), this is needed to change the global variable.</p>
 <ul class="nav nav-tabs">
 <li class="active licode">
-<a data-toggle="tab" href="#code36">Code 36</a>
+<a data-toggle="tab" href="#code37">Code 37</a>
 </li>
 <li>
-<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app36">App 36</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app37">App 37</a>
 </li>
 </ul>
 <div class="tab-content">
-<div id="code36" class="tab-pane fade in active codetab">
+<div id="code37" class="tab-pane fade in active codetab">
 <pre class="r"><code>library(ggplot2)
 
 
@@ -2303,7 +2316,7 @@ server &lt;- function(input, output, session) {
     
   })
   
-  output$table &lt;- DT::renderDataTable(DT::datatable(dat()))
+  output$table &lt;- DT::renderDataTable(DT::datatable(dat()[,c(&quot;mpg&quot;, &quot;cyl&quot;, &quot;disp&quot;)]))
   
 }
 
@@ -2318,24 +2331,25 @@ ui &lt;- fluidPage(
 
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
-<div id="app36" class="tab-pane fade apptab">
+<div id="app37" class="tab-pane fade apptab tallest">
 
 </div>
 </div>
 </div>
 <div id="example-app-brush-with-map-and-plot" class="section level4">
 <h4><span class="exampleapp">Example app:</span> Brush with map and plot</h4>
-<p>As mentioned above, Kyle Walker inspired us to link plots and maps using the brushing functionality. This app is a slightly more complex version of the brush functionality. In this example, the user selections update in both a plot and on a leaflet map. The approach is very similar, though, to the previous app. We include a <code>brush</code> argument in the <code>plotOutput</code> and we use a brush to select point with the <code>brushedPoints</code> function.</p>
+<p>This app is a slightly more complex version of the brush functionality. In this example, the user selections update in both a plot and on a leaflet map. The approach is very similar, though, to the previous app. We include a <code>brush</code> argument in the <code>plotOutput</code> and we use a brush to select point with the <code>brushedPoints</code> function.</p>
+<p>This app example was inspired by an <a href="http://urbanstudies.tcu.edu/research/open-data/tx-demographics/">app from Kyle Walker</a> that dsiplayes the demographics of Texas Counties. He generously posted the <a href="https://gist.github.com/walkerke/4988b5164258917687cb">code used to create it</a>.</p>
 <ul class="nav nav-tabs">
 <li class="active licode">
-<a data-toggle="tab" href="#code37">Code 37</a>
+<a data-toggle="tab" href="#code38">Code 38</a>
 </li>
 <li>
-<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app37">App 37</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app38">App 38</a>
 </li>
 </ul>
 <div class="tab-content">
-<div id="code37" class="tab-pane fade in active codetab">
+<div id="code38" class="tab-pane fade in active codetab">
 <pre class="r"><code>library(leaflet)
 library(ggplot2)
 
@@ -2411,7 +2425,7 @@ ui &lt;- fluidPage(
 
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
-<div id="app37" class="tab-pane fade apptab">
+<div id="app38" class="tab-pane fade apptab">
 
 </div>
 </div>
@@ -2419,26 +2433,24 @@ shinyApp(ui = ui, server = server)</code></pre>
 </div>
 <div id="including-custom-javascript-in-your-app" class="section level2">
 <h2>Including custom JavaScript in your app</h2>
-<p>Occasionally you may want to include some JavaScript that you’ve written in your Shiny app.</p>
+<p>Occasionally you may want to include some JavaScript that you’ve written in your Shiny app. Similar to the discussion of CSS above you can include the JS by referencing an external file or you can include JS inline in the header.</p>
 <ol style="list-style-type: decimal">
-<li>tags$head(includeScript(“google-analytics.js”))</li>
-<li>tags$head(HTML(“
-<script type="text/javascript"></script>
-“))</li>
+<li><code>tags$head(includeScript(&quot;google-analytics.js&quot;))</code></li>
+<li><code>tags$head(HTML(&quot;&lt;script type='text/javascript'&gt;&lt;/script&gt;&quot;))</code></li>
 </ol>
 <div id="example-app-inline-javascript-code" class="section level4">
 <h4><span class="exampleapp">Example app:</span> inline JavaScript code</h4>
 <p>Here we add inline JavaScript (jQuery) to fade out, then in the title and finally make it green.</p>
 <ul class="nav nav-tabs">
 <li class="active licode">
-<a data-toggle="tab" href="#code38">Code 38</a>
+<a data-toggle="tab" href="#code39">Code 39</a>
 </li>
 <li>
-<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app38">App 38</a>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app39">App 39</a>
 </li>
 </ul>
 <div class="tab-content">
-<div id="code38" class="tab-pane fade in active codetab">
+<div id="code39" class="tab-pane fade in active codetab">
 <pre class="r"><code>server &lt;- function(input, output, session) {
   
 }
@@ -2457,7 +2469,7 @@ ui &lt;- basicPage(
                       $thetitle.fadeOut(2000);
                       $thetitle.fadeIn(2000);
                       $thetitle.css('color', 'green');
-})
+                      })
 
                       });
                       &lt;/script&gt;&quot;))
@@ -2466,7 +2478,77 @@ ui &lt;- basicPage(
 
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
-<div id="app38" class="tab-pane fade apptab">
+<div id="app39" class="tab-pane fade apptab">
+
+</div>
+</div>
+</div>
+</div>
+<div id="shiny-dashboards" class="section level2">
+<h2>Shiny dashboards</h2>
+<p>With an R backend for processing and strong plotting capabilities Shiny is well-suited to creating dashboards. Dashboards can be created manually using the techniques discussed above, but creating them is simpler with the Rstudio package <code>shinydashboard</code>. In order to create a dashboard you need a header, sidebar and body. Within the body you create a series <code>tabItem</code>s and fill them with the controls you want see included. For more detail you should refer directly to the <a href="https://rstudio.github.io/shinydashboard">shiny dashboard page on GitHub</a>.</p>
+<div id="example-app-a-simple-dashboard" class="section level4">
+<h4><span class="exampleapp">Example app:</span> A simple dashboard</h4>
+<p>This code was stolen, in a large part, from the shiny dashboard <a href="https://rstudio.github.io/shinydashboard/get_started.html">get started page</a>.</p>
+<ul class="nav nav-tabs">
+<li class="active licode">
+<a data-toggle="tab" href="#code40">Code 40</a>
+</li>
+<li>
+<a onclick="clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app40">App 40</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="code40" class="tab-pane fade in active codetab">
+<pre class="r"><code>library(shinydashboard)
+
+ui &lt;- dashboardPage(
+  dashboardHeader(title = &quot;Basic dashboard&quot;),
+  dashboardSidebar(
+     sidebarMenu(
+      menuItem(&quot;Dashboard&quot;, tabName = &quot;dashboard&quot;, icon = icon(&quot;dashboard&quot;)),
+      menuItem(&quot;Widgets&quot;, tabName = &quot;widgets&quot;, icon = icon(&quot;th&quot;))
+    )
+  ),
+  dashboardBody(
+    tabItems(
+      # First tab content
+      tabItem(tabName = &quot;dashboard&quot;,
+        fluidRow(
+          box(plotOutput(&quot;plot1&quot;, height = 250)),
+          box(plotOutput(&quot;plot2&quot;, height = 250)),
+
+          box(
+            title = &quot;Controls&quot;,
+            sliderInput(&quot;myslider&quot;, &quot;Number of observations:&quot;, 1, 50, 15)
+          )
+        )
+      ),
+
+      # Second tab content
+      tabItem(tabName = &quot;widgets&quot;,
+        h2(&quot;Widgets tab content&quot;)
+      )
+    )
+  )
+)
+
+server &lt;- function(input, output) {
+  histdata &lt;- rnorm(500)
+
+  output$plot1 &lt;- renderPlot({
+    dat &lt;- mtcars[1:input$myslider,]
+    ggplot(dat, aes(mpg)) + geom_histogram(fill=&quot;cadetblue&quot;)
+  })
+   output$plot2 &lt;- renderPlot({
+    dat &lt;- mtcars[1:input$myslider,]
+    ggplot(dat, aes(mpg, wt)) + geom_point() + stat_smooth()
+  })
+}
+
+shinyApp(ui, server)</code></pre>
+</div>
+<div id="app40" class="tab-pane fade apptab tallest">
 
 </div>
 </div>
@@ -2474,7 +2556,7 @@ shinyApp(ui = ui, server = server)</code></pre>
 </div>
 <div id="more-on-reactive-programming" class="section level2">
 <h2>More on reactive programming</h2>
-<p>Joe Cheng, the primary creator of Shiny, gave a great talk on reactive programming at the Shiny Developers Conference in January 2016. The videos are now online and I highly recommend you watch both part 1 and part 2.</p>
+<p>Joe Cheng, the primary creator of Shiny, gave a great talk on reactive programming at the Shiny Developers Conference in January 2016. The videos are <a href="https://www.rstudio.com/resources/webinars/shiny-developer-conference/">now online</a> and I highly recommend you watch both part 1 and part 2.</p>
 </div>
 </div>
 <div id="details-on-the-package-versions-and-operating-system-used-to-create-this-post" class="section level1">

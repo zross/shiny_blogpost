@@ -1,26 +1,31 @@
-#### server
 server <- function(input, output, session) {
   
-  # Notice that even if you only change the text box that the 
-  # slider code also runs and gets changed. The reverse is also
-  # true. You might want to isolate these pieces.
-  observe({
-    txt <- paste(input$mytext, sample(1:100, 1))
-    val <- paste(input$myslider,  sample(1:100, 1), sep="-")
-    
-    res <- paste0(txt, " | Slider ", val)
-    updateTextInput(session, "myresults", value = res)
+  # since both mytext and myslider are in the reactive
+  # they both trigger the code to run
+  myresults <- reactive({
+    paste(input$mytext, input$myslider)
   })
-}
+  
+  # eventReactive here tells Shiny only to trigger this code
+  # when mytext changes
+  myresults_lim <- eventReactive(input$mytext, {
+    paste(input$mytext, input$myslider)
+  })
+  
+  observe(updateTextInput(session, "myresults", value = myresults()))
+  observe(updateTextInput(session, "myresults_lim", value = myresults_lim()))
 
+  
+}
 
 ui <- basicPage(
   
-  h3("Change to text OR slider changes both parts of results text box"),
-  sliderInput("myslider", "A slider:", min=0, max=1000, value=500),
-  textInput("mytext", "Input goes here", "Text"),
-  textInput("myresults", "Results will be printed here", "Initial value")
-  
+    h3("Using eventReactive to limit reactions."),
+    sliderInput("myslider", "", min=0, max=1000, value=500),
+    textInput("mytext", "Input goes here"),
+    textInput("myresults", "Text box + slider (updates when either changes)", "Initial value"),
+    textInput("myresults_lim", "Text box + slider (updates when text box changes)", "Initial value")
+    
 )
 
 shinyApp(ui = ui, server = server)

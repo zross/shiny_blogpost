@@ -1,47 +1,26 @@
-library(shinydashboard)
-
-ui <- dashboardPage(
-  dashboardHeader(title = "Basic dashboard"),
-  dashboardSidebar(
-     sidebarMenu(
-      menuItem("Dashboard", tabName = "dashboard", icon = icon("dashboard")),
-      menuItem("Widgets", tabName = "widgets", icon = icon("th"))
-    )
-  ),
-  dashboardBody(
-    tabItems(
-      # First tab content
-      tabItem(tabName = "dashboard",
-        fluidRow(
-          box(plotOutput("plot1", height = 250)),
-          box(plotOutput("plot2", height = 250)),
-
-          box(
-            title = "Controls",
-            sliderInput("myslider", "Number of observations:", 1, 50, 15)
-          )
-        )
-      ),
-
-      # Second tab content
-      tabItem(tabName = "widgets",
-        h2("Widgets tab content")
-      )
-    )
-  )
-)
-
-server <- function(input, output) {
-  histdata <- rnorm(500)
-
-  output$plot1 <- renderPlot({
-    dat <- mtcars[1:input$myslider,]
-    ggplot(dat, aes(mpg)) + geom_histogram(fill="cadetblue")
-  })
-   output$plot2 <- renderPlot({
-    dat <- mtcars[1:input$myslider,]
-    ggplot(dat, aes(mpg, wt)) + geom_point() + stat_smooth()
-  })
+server <- function(input, output, session) {
+  
 }
 
-shinyApp(ui, server)
+ui <- basicPage(
+  
+    h1(id = "thetitle", "Inline JavaScript to change the title style"),
+    actionButton("thebutton", "Click to change title color and transparency"),
+    
+    # here we're including inline JavaScript code (jQuery)
+    tags$footer(HTML("<script type='text/javascript'>
+                      $( document ).ready(function() {
+                      var $thetitle = $('#thetitle');
+                      var $thebutton  = $('#thebutton');
+                      $thebutton.click(function(){
+                      $thetitle.fadeOut(2000);
+                      $thetitle.fadeIn(2000);
+                      $thetitle.css('color', 'green');
+                      })
+
+                      });
+                      </script>"))
+)
+
+
+shinyApp(ui = ui, server = server)

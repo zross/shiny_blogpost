@@ -4,9 +4,9 @@ server <- function(input, output, session) {
 
 ui <- basicPage(
 
-  # here we style inline
-  h2(style = "color:green; font-family:'Comic Sans MS'", 
-     "Styles within an HTML tag (not recommended for big apps)"),
+includeCSS("style.css"),
+  
+  h2("CSS using by referring to an external page"),
   p("Some important text")
 
 )

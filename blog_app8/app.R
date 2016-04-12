@@ -1,25 +1,15 @@
-library(shinyjs)
-
 server <- function(input, output, session) {
-  
+
 }
 
-ui <- fluidPage(
-  
-  # This adds the CSS to the file
-  shinyjs::inlineCSS(list(body = "color:DarkBlue")),
-  titlePanel("Use the shinyjs package to add styles"),
-  
-  sidebarLayout(
-    
-    sidebarPanel(
-      h3("Sidebar title")
-    ), 
-    
-    mainPanel(
-        "Body text"
-    )
-  )
+ui <- basicPage(
+
+  # here we style inline
+  h2(style = "color:green; font-family:'Comic Sans MS'", 
+     "Styles within an HTML tag (not recommended for big apps)"),
+  p("Some important text")
+
 )
+
 
 shinyApp(ui = ui, server = server)

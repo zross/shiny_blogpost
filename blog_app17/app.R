@@ -1,26 +1,26 @@
 server <- function(input, output, session) {
   
-  # this is my reactive function -- I'm using it to
-  # isolate reactions related to the text box
-  mystring <- reactive({
-    paste(input$mytext, " is what the user types")
-  })
-  
+  # first observer has lower priority so it runs second and will
+  # overwrite the other observer
   observe({
-    # The reactive will run each time the textbox changes and
-    # print results to the console.
-    txt <- mystring()
-    updateTextInput(session, inputId = "myresults", value = txt) 
-  })
+    txtA <- paste("First observer", input$mytext)
+    updateTextInput(session, inputId = "myresults", value = txtA)
+  }, priority = 1)
+  
+  # second observer has higher priority so it will run first and
+  # then be overwritten
+  observe({
+    txtB <- paste("Second observer", input$mytext)
+    updateTextInput(session, inputId = "myresults", value = txtB)
+  }, priority = 2)
   
 }
 
 ui <- basicPage(
   
-    h3("Using a simple reactive."),
-    textInput("mytext", "Input goes here"),
-    textInput("myresults", "Results will be printed here", "Initial value")
-
+  h3("The value in the text box gets printed to the results text box."),
+  textInput("mytext", "Input goes here"),
+  textInput("myresults", "Results will be printed here", "Initial value")
 )
 
 shinyApp(ui = ui, server = server)

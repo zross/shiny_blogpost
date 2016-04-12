@@ -1,19 +1,16 @@
 server <- function(input, output, session) {
-  
-  observe({
-    txt <- paste("Value above is:", input$mytext)
-    
-    # here I'm essentially writing a result to the text box
-    # called myresults
-    updateTextInput(session, "myresults", value=txt)
-  })
-  
+  # this will NOT work!!
+  print(input$mytext)
 }
 
-ui <-   basicPage(
-  h3("An example of an update* function"),
-  textInput("mytext", "Input goes here"),
-  textInput("myresults", "Results will be printed here", "Initial value")
+ui <- basicPage(
+  
+  h3("A couple of simple widgets that don't do anything yet"),
+  # a slider
+  sliderInput(inputId = "myslider", label = "Limit the ", min = 0, 
+              max = 100, value = c(40, 60)),
+  # a text input box
+  textInput(inputId = "mytext", label = "Text input", value = "Enter text...")
 )
 
 shinyApp(ui = ui, server = server)

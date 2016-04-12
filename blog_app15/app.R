@@ -1,24 +1,26 @@
 server <- function(input, output, session) {
   
-  # With no priority specified the second observer will
-  # run second and overwrite the first observer
-  observe({
-    txtA <- paste("First observer", input$mytext)
-    updateTextInput(session, inputId = "myresults", value = txtA)
+  # Using observeEvent we're tell Shiny only to run this code
+  # if mytext gets updated.
+  observeEvent(input$mytext, {
+    
+    # myslider is a reactive but it does not trigger the code to 
+    # run here because we're using observeEvent and only specified
+    # input$mytext
+    input$myslider
+    txt <- paste(input$mytext, sample(1:10000, 1))
+    updateTextInput(session, inputId = "myresults", value = txt)  
+    
   })
-  
-  observe({
-    txtB <- paste("Second observer", input$mytext)
-    updateTextInput(session, inputId = "myresults", value = txtB)
-  })
-  
-  
 }
 
 ui <- basicPage(
-  h3("The value in the text box gets printed to the results text box."),
-  textInput("mytext", "Input goes here"),
-  textInput("myresults", "Results will be printed here", "Initial value")
+  
+  h3("The results text box only updates when you change the top text box (slider interactions do not trigger an update)."),
+  sliderInput("myslider", "A slider:", min=0, max=1000, value=500),
+  textInput("mytext", "Input goes here", value = "Initial value"),
+  textInput("myresults", "Results will be printed here")
+  
 )
 
 shinyApp(ui = ui, server = server)

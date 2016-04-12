@@ -1,33 +1,43 @@
-library(ggplot2)
-# module UI
-scatterUI <- function(id) {
-  ns <- NS(id)
+library(leaflet)
+#### server
+server <- function(input, output, session) {
   
-  list(
-    plotOutput(ns("plot1"))
-  )
-}
-
-# module server
-scatter <- function(input, output, session, my_color) {
   
-  output$plot1 <- renderPlot({
-    ggplot(mtcars, aes(wt, mpg)) + geom_point(color=my_color, size=2)
+  # create random points in the US
+  dat <- reactive({
+    long <- runif(input$myslider,-121, -77 )
+    lat <- runif(input$myslider,33, 48)
+    vals <- rpois(input$myslider, 5)
+    data.frame(latitude = lat, longitude = long, vals)
+  })
+  
+  output$mymap <- renderLeaflet({
+    leaflet() %>% addProviderTiles("Stamen.TonerLite") %>%  
+      addCircleMarkers(data = dat(), radius = ~vals ) %>% 
+      setView(-98, 38.6, zoom=3)
   })
 }
 
-# app ui
+#### user interface
 ui <- fluidPage(
   
-  h3("This is not part of the module but the plot below was created with a module"),
-  scatterUI("prefix")
+  titlePanel("Example of leaflet interactive map"),
+  
+  sidebarLayout(
+    
+    sidebarPanel(
+      h3("Slider changes number of map points"),
+      sliderInput(inputId = "myslider", label = "Limit the ", min = 0, 
+                  max = 50, value = c(10))
+    ), #endsidebarpanel
+    
+    mainPanel(
+      tabsetPanel(
+        tabPanel("Map", leafletOutput("mymap"))
+        
+      )
+    )#end mainpanel
+  )# end sidebarlayout
 )
 
-# app server
-server <- function(input, output,session){
-  
-  callModule(scatter, "prefix", "purple")
-  
-}
-
-shinyApp(ui, server)
+shinyApp(ui = ui, server = server)

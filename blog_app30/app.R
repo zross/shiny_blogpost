@@ -1,22 +1,29 @@
-library(plotly)
-
 server <- function(input, output, session) {
   
-  dat <- reactive(cars[1:input$myslider,])
-  
-  output$myplot <- renderPlotly({
-    p <- ggplot(dat(), aes(speed, dist)) + geom_point(color="purple")
-    p <- ggplotly(p)
-    p
+  observe({
+    updateTextInput(session, "mytext", value=input$myslider)
   })
+  
+  dat <- reactive({
+    input$myslider
+    mtcars[1:input$myslider,c("mpg", "cyl", "disp")]
+    
+  })
+  
+  # I'm setting paging = FALSE so all rows are shown all the time
+  # scrollX adds a scrollbar, filter allows column filtering
+  output$mytable <- DT::renderDataTable(dat(), 
+                                        options = list(paging=FALSE, scrollX = TRUE), 
+                                        rownames=TRUE, 
+                                        filter = "top")
 }
 
 ui <- basicPage(
   
-  h3("Example of plot.ly, the plot is interactive"),
-  sliderInput("myslider", "A slider:", min=1, max=50, value=10),
-  plotlyOutput("myplot")
-  
-)
+    h3("Interactive table using the DT data table renderer"),
+    sliderInput("myslider", "Number of rows to display", min=1, max = 32, value = 5),
+    DT::dataTableOutput("mytable")
+
+) 
 
 shinyApp(ui = ui, server = server)

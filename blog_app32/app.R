@@ -1,43 +1,28 @@
-library(leaflet)
-#### server
+library(highcharter)
+library(magrittr) # for the pipe %>%
+
 server <- function(input, output, session) {
   
+  dat <- reactive(cars[1:input$myslider,])
   
-  # create random points in the US
-  dat <- reactive({
-    long <- runif(input$myslider,-121, -77 )
-    lat <- runif(input$myslider,33, 48)
-    vals <- rpois(input$myslider, 5)
-    data.frame(latitude = lat, longitude = long, vals)
-  })
-  
-  output$mymap <- renderLeaflet({
-    leaflet() %>% addProviderTiles("Stamen.TonerLite") %>%  
-      addCircleMarkers(data = dat(), radius = ~vals ) %>% 
-      setView(-98, 38.6, zoom=3)
+  output$myplot <- renderHighchart({
+    highchart() %>% 
+      hc_title(text = "Scatter chart") %>% 
+      hc_add_serie_scatter(dat()$speed, dat()$dist)
+    
+    # here is the code if you don't want to use the %>% pipe
+    # hc_add_serie_scatter(hc_title(highchart(), 
+    # text = "Scatter chart"), dat()$speed, dat()$dist)
   })
 }
 
-#### user interface
-ui <- fluidPage(
+ui <-  basicPage(
   
-  titlePanel("Example of leaflet interactive map"),
-  
-  sidebarLayout(
-    
-    sidebarPanel(
-      h3("Slider changes number of map points"),
-      sliderInput(inputId = "myslider", label = "Limit the ", min = 0, 
-                  max = 50, value = c(10))
-    ), #endsidebarpanel
-    
-    mainPanel(
-      tabsetPanel(
-        tabPanel("Map", leafletOutput("mymap"))
-        
-      )
-    )#end mainpanel
-  )# end sidebarlayout
+  h3("Example of highcharter, the plot is interactive"),
+  sliderInput("myslider", "A slider:", min=1, max=50, value=10),
+  highchartOutput("myplot")
 )
 
 shinyApp(ui = ui, server = server)
+
+

@@ -1,74 +1,44 @@
-library(leaflet)
 library(ggplot2)
 
 
-#### server
 server <- function(input, output, session) {
   
-  dat<-reactive({
-    long <- runif(input$myslider, -121, -77 )
-    lat <- runif(input$myslider, 33, 48)
-    val1 <- runif(input$myslider, 1, 50)
-    val2 <- rnorm(input$myslider, 1, 50)
-    data.frame(latitude = lat, longitude = long, val1, val2)
-  })
+  # global variable, what type of plot interaction
+  interaction_type <- "click"
   
-  br <- reactive({
-    brushedPoints(dat(), input$plot_brush)
-  })
+  # observe for user interaction and change the global interaction_type
+  # variable
+  observeEvent(input$user_click, interaction_type <<- "click")
+  observeEvent(input$user_brush, interaction_type <<- "brush")
   
   output$plot <- renderPlot({
-    ggplot(dat(), aes(val1, val2, color=val2)) + geom_point() +
-      ggtitle("Select points by brushing graph")
-  })
-
-  output$mymap <- renderLeaflet({
-
-   # if nothing has been selected use the data itself, otherwise
-   # use a brushed version
-   ifelse(is.null(input$plot_brush), dat <- dat(), dat <- br() )
-
-    leaflet(data = dat) %>%
-      addProviderTiles("CartoDB.Positron",
-                       options = providerTileOptions(noWrap = TRUE)) %>%
-      addMarkers(~longitude, ~latitude) %>%
-      setView(-98, 38.6, zoom=3)
+    ggplot(mtcars, aes(wt, mpg)) + geom_point()
   })
   
-
-  
-  output$table_brushedpoints <- renderTable({
-    br()[,c("val1", "val2")]
+  # generate the data to put in the table
+  dat <- reactive({
+    
+    user_brush <- input$user_brush
+    user_click <- input$user_click
+    
+    if(interaction_type == "brush") res <- brushedPoints(mtcars, user_brush)
+    if(interaction_type == "click") res <- nearPoints(mtcars, user_click, threshold = 10, maxpoints = 1)
+    
+    return(res)
+    
   })
+  
+  output$table <- DT::renderDataTable(DT::datatable(dat()[,c("mpg", "cyl", "disp")]))
+  
 }
 
 
-#### user interface
 ui <- fluidPage(
   
-  titlePanel("Example of leaflet interactive map using brushing"),
+  h3("Click or brush the plot and it will filter the table"),
+  plotOutput("plot", click = "user_click", brush = "user_brush"),
+  DT::dataTableOutput("table")
   
-  sidebarLayout(
-    
-    sidebarPanel(
-      h3("Slider changes number of points"),
-      sliderInput(inputId = "myslider", "Number of points:",
-                  min = 5, max = 20, value = 10, step = 1),
-      plotOutput("plot", height = 250,
-                 brush = brushOpts(id = "plot_brush", resetOnNew = TRUE,
-                                   fill = "red", stroke = "#036", opacity = 0.3)),
-      h4("Brushed points appear here"),
-      tableOutput("table_brushedpoints")
-    ), #endsidebarpanel
-    
-    mainPanel(
-      tabsetPanel(
-        tabPanel("Map", leafletOutput("mymap"))
-        
-      )
-    )#end mainpanel
-  )# end sidebarlayout
 )
-
 
 shinyApp(ui = ui, server = server)

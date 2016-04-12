@@ -1,6 +1,5 @@
 server <- function(input, output, session) {
-  # this will NOT work!!
-  print(input$mytext)
+  
 }
 
 ui <- basicPage(
@@ -12,5 +11,7 @@ ui <- basicPage(
   # a text input box
   textInput(inputId = "mytext", label = "Text input", value = "Enter text...")
 )
+
+
 
 shinyApp(ui = ui, server = server)

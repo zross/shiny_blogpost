@@ -1,27 +1,24 @@
-library(shinythemes)
-
 server <- function(input, output, session) {
   
 }
 
-ui <- fluidPage(theme=shinytheme("cosmo"),
+ui <- fluidPage(
   
-  titlePanel("Use an existing theme"),
-  
-  sidebarLayout(
-    
-    sidebarPanel(
-      h3("Note the button is black. This is different from the previous app."),
-      actionButton("button", "A button")
-    ), 
-    
-    mainPanel(
-      tabsetPanel(
-        tabPanel("Plot"), 
-        tabPanel("Summary"), 
-        tabPanel("Table")
-      )
+  fluidRow(
+    column(6, offset=1,
+           h1("Title in one row")
     )
+    
+  ),
+  fluidRow(
+    column(1, 
+           actionButton("button", "Click")
+           
+    ),
+    column(6, 
+           p("Row 2, Column 2 (button is col 1)")
+    )
+
   )
 )
 

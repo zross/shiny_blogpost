@@ -1,24 +1,28 @@
+library(shinythemes)
+
 server <- function(input, output, session) {
   
 }
 
-ui <- basicPage(
-  # this is your web page header information
-  tags$head(
-    # here you include your inline styles
-    tags$style(HTML("
-
-      body {
-        background-color: cornflowerblue;
-        color: #6B1413;
-      }
-
-    "))
-  ),
+ui <- fluidPage(theme=shinytheme("cosmo"),
   
-  h3("CSS using the HTML tag"),
-  p("Some important text")
-
+  titlePanel("Use an existing theme"),
+  
+  sidebarLayout(
+    
+    sidebarPanel(
+      h3("Note the button is black. This is different from the previous app."),
+      actionButton("button", "A button")
+    ), 
+    
+    mainPanel(
+      tabsetPanel(
+        tabPanel("Plot"), 
+        tabPanel("Summary"), 
+        tabPanel("Table")
+      )
+    )
+  )
 )
 
 shinyApp(ui = ui, server = server)
