@@ -12,6 +12,20 @@ width: 600px;
 height:450px;
 border: 1px solid #D5D8D5;
 }
+
+
+.apptab.taller{
+
+height:600px;
+
+}
+
+.apptab.tallest{
+
+height:750px;
+
+}
+
 .iframeapp{
 width: 100%;
 height:100%;
@@ -22,6 +36,7 @@ height:100%;
 
 padding-top: 10px;
 padding-bottom: 10px;
+text-align:right;
 }
 
 .warning{
@@ -29,7 +44,33 @@ color:red;
 }
 
 .tab-content{
-padding-bottom: 20px;
+padding-bottom: 10px;
+}
+
+.exampleapp{
+font-weight:bold;
+}
+
+.exampleapp:before{
+
+color: #6b1616;
+padding-right: 0.3em;
+margin-left: 0;
+content: "#";
+}
+
+
+::-moz-selection {
+    background:rgba(255, 255, 125, 0.99);
+    color:#032764;
+}
+::-webkit-selection {
+    background:rgba(255, 255, 125, 0.99);
+    color:#032764;
+}
+::selection {
+    background:rgba(255, 255, 125, 0.99);
+    color:#032764;
 }
 
 </style>
@@ -144,7 +185,7 @@ Depending on what you want to do with your app, the `session` argument is not re
 
 
 
-#### Example app: The simplest possible app 
+#### <span class="exampleapp">Example app:</span> The simplest possible app 
 
 Not much here, but this is a real Shiny app.
 
@@ -184,7 +225,7 @@ As mentioned above, you will choose a layout function depending on the type of a
 
 
 
-#### Example app: Basic user interface
+#### <span class="exampleapp">Example app:</span> Basic user interface
 
 <ul class="nav nav-tabs">
 <li class="active licode"><a data-toggle="tab" href="#code1">Code 1</a></li>
@@ -214,7 +255,7 @@ As mentioned above, you will choose a layout function depending on the type of a
 It's easy to add HTML elements to your Shiny app using [HTML tags](http://shiny.rstudio.com/articles/tag-glossary.html). There are more than 100 HTML elements you can add to your page using the syntax `tags$OBJECT()` as in `tags$p()` for a paragraph or `tags$blockquote()`. For a limited number of these tags, the most common ones, there are helper functions that allow you to skip the `tags$` so, for example, a first tier header can be created with `h1()` -- but be careful, not all tags permit this.
 
 
-#### Example app: using HTML tags to layout your app 
+#### <span class="exampleapp">Example app:</span> using HTML tags to layout your app 
 
 <ul class="nav nav-tabs">
 <li class="active licode"><a data-toggle="tab" href="#code2">Code 2</a></li>
@@ -243,7 +284,7 @@ In the example below, we have an layout with 2 rows. One is offset by one column
 
 
 
-#### Example app: Manual layout using Bootstrap's grid system 
+#### <span class="exampleapp">Example app:</span> Manual layout using Bootstrap's grid system 
 
 <ul class="nav nav-tabs">
 <li class="active licode"><a data-toggle="tab" href="#code3">Code 3</a></li>
@@ -276,7 +317,7 @@ Bootstrap offers a number of pre-created themes that allow for a complete change
 In this particular example, you won't see much difference because the app is so simple, but with bigger apps the changes are significant and you can see examples in the [Rstudio documentation for shinythemes](http://rstudio.github.io/shinythemes/) or in the [free themes page](http://bootswatch.com/).
 
 
-#### Example app: Use a pre-existing Bootstrap theme 
+#### <span class="exampleapp">Example app:</span> Use a pre-existing Bootstrap theme 
 
 **Note that because this blog post is not very wide and we're using a fluid page, the main panel has collapsed below the sidebar.** 
 
@@ -316,7 +357,7 @@ For more detail, see [RStudio's page on CSS](http://shiny.rstudio.com/articles/c
 
 
 
-#### Example app: using inline CSS in the HTML head 
+#### <span class="exampleapp">Example app:</span> using inline CSS in the HTML head 
 
 Note that the actual style code is within an `HTML` function -- this prevents Shiny from treating the text as "regular" text and escaping the strings.
 
@@ -339,7 +380,7 @@ Note that the actual style code is within an `HTML` function -- this prevents Sh
 </div>
 
 
-#### Example app: using `includeCSS` (assumes you have an external file called `style.css`) 
+#### <span class="exampleapp">Example app:</span> using `includeCSS` (assumes you have an external file called `style.css`) 
 
 In this case my `style.css` file only has one bit of CSS `body{background-color: Maroon;}`.
 
@@ -362,7 +403,7 @@ In this case my `style.css` file only has one bit of CSS `body{background-color:
 </div>
 
 
-#### Example app: including a style in an individual HTML tag 
+#### <span class="exampleapp">Example app:</span> including a style in an individual HTML tag 
 
 Usually, this is not a great idea because it's hard to find your styles and it's even harder to be consistent with style. But for small apps it's fine.
 
@@ -386,7 +427,7 @@ Usually, this is not a great idea because it's hard to find your styles and it's
 
 
 
-#### Example app: An example of using the `shinyjs` `inlineCSS` function 
+#### <span class="exampleapp">Example app:</span> An example of using the `shinyjs` `inlineCSS` function 
 
 The `shinyjs` package has a lot of nice add-on functionality and includes the `inlineCSS` function to make it a little easier to include CSS using a syntax that is more R-like. Note that instead of `body{color:DarkBlue}`, which is CSS, we have `list(body = "color:DarkBlue")` which is R code. This will make all the text blue.
 
@@ -422,7 +463,7 @@ For this particular example, I'll want a slider range and text input. Note that 
 We're still only focusing here on the UI so these widgets "work" but don't actually do anything because we have not included any code in the Shiny server. In this particular example, we are including both a slider and a text input.
 
 
-#### Example app: Allow user input 
+#### <span class="exampleapp">Example app:</span> Allow user input 
 
 Simple app with widgets, though the widgets are not connected to the server yet. You can enter text and play with the slider but nothing will happen.
 
@@ -463,7 +504,7 @@ The values associated with your UI inputs (like the text box, `input$mytext`) ar
 
 
 
-#### Example app: Careful, you can't include bare reactive values in the server 
+#### <span class="exampleapp">Example app:</span> Careful, you can't include bare reactive values in the server 
 
 This will throw an error because the reactive value is not being read by a function designed to handle it! Instead we need to wrap the values in an `observe`, `reactive` or `render*` function that is designed to handle reactive content. In a console, you will see the error. Here the app will fail to load.
 
@@ -497,7 +538,7 @@ In the example code above (which doesn't work) you'll notice that I used a `prin
 In particular, I want to introduce you to the suite of `update*` functions that are designed to allow you to update existing Shiny widgets -- for example, update a text box or the list of items in a pulldown menu. In the next few apps I will be using a function called `updateTextInput` instead of `print` -- essentially I will use a text box as a console and will print results to the text box with `updateTextInput`. Here is an example:
 
 
-#### Example app: Using `updateTextInput` as a "console" for this blog post 
+#### <span class="exampleapp">Example app:</span> Using `updateTextInput` as a "console" for this blog post 
 
 In the app below you can see that I'm "printing" the text typed into `mytext` to `myresults` with the function `updateTextInput`.
 
@@ -531,7 +572,7 @@ So, back to the example from above. Instead of including `input$mytext` alone in
 
 
 
-#### Example app: Use `observe` for side effects 
+#### <span class="exampleapp">Example app:</span> Use `observe` to react and cause side effects 
 
 We use the `observe` function to listen for changes to the reactive value associated with the input text box (`input$mytext`). When `input$mytext` changes the observer code runs and updates `myresults`.
 
@@ -560,7 +601,7 @@ We use the `observe` function to listen for changes to the reactive value associ
 As mentioned above, the code in an `observe` will run if *any* of the reactives inside change. So in the following code the results text box will update if the user interacts with the input text box **or** with the slider. Even though the slider reactive `input$myslider` is not actually being used in any way. Any reactive value in the `observe` function will trigger all the code in the observe function to run.
 
 
-#### Example app: All the reactive values in `observe` will trigger the code to run (even if that's not what you want)
+#### <span class="exampleapp">Example app:</span> All the reactive values in `observe` will trigger the code to run (even if that's not what you want)
 
 Since `input$myslider` and `input$mytext` are in the observer if the user makes a change to *either* the observer code will run.
 
@@ -588,9 +629,9 @@ Since `input$myslider` and `input$mytext` are in the observer if the user makes 
 The `observeEvent` function is designed to address this issue. With `observeEvent` the code inside will only run if the specified reactive value(s) change. So in the following code the print statements will only execute if the user makes changes to the text box.
 
 
-#### Example app: Only specified reactive(s) trigger the code to run using `observeEvent`. 
+#### <span class="exampleapp">Example app:</span> Only specified reactive(s) trigger the code to run using `observeEvent`. 
 
-This app only includes a single reactive to respond to (`input$mytext`) but you can include more than one.
+Using `observeEvent` instead of `observe` allows you to specify the reactive values to listen for and react to. In this case, we're only listening for one reactive (`input$mytext`) but you can include more than one.
 
 <ul class="nav nav-tabs">
 <li class="active licode"><a data-toggle="tab" href="#code14">Code 14</a></li>
@@ -615,7 +656,7 @@ This app only includes a single reactive to respond to (`input$mytext`) but you 
 With bigger apps, you may have situations where you want one observer to run before others. You can use an `observe`s priority argument to do this. The default priority is 0 and higher numbers mean higher priority (and you can use negative numbers).
 
 
-#### Example app: No priority specified 
+#### <span class="exampleapp">Example app:</span> No priority specified 
 
 The order of execution is not always predictable in Shiny apps. In this example we have two observers and they **both write to the same output text box**. This app uses default priorities and the second observer will run second and will, therefore, write over the updates from the first observer.
 
@@ -638,7 +679,7 @@ The order of execution is not always predictable in Shiny apps. In this example 
 </div>
 
 
-#### Example app: Prioritize to control order of execution 
+#### <span class="exampleapp">Example app:</span> Prioritize to control order of execution 
 
 Instead of default priorities we will force the first observer to run second so that it writes over the updates from the second observer. In order to do this we have a higher priority for the second observer so that it runs first.
 
@@ -670,7 +711,9 @@ A `reactive` function is used in the same way you would use an R function except
 So in the example, below I use `reactive` to create a self-contained function called `myresults`. Since I want to print the results to the console (a side effect), I run the reactive function from within an observer. Note that since it's a function I'm using `myresults()` rather than just `myresults`.
 
 
-#### Example app: Using `reactive`. 
+#### <span class="exampleapp">Example app:</span> Using `reactive` to generate output
+
+In this app we use `reactive` to create a function that listens for the `input$mytext` reactive value. When it hears a change it generates a string as output.
 
 
 <ul class="nav nav-tabs">
@@ -698,8 +741,10 @@ Similar to the function `observeEvent` which allows you to specify which reactiv
 
 
 
-#### Example app: Using `eventReactive` to prevent unwanted reactions 
+#### <span class="exampleapp">Example app:</span> Using `eventReactive` to prevent unwanted reactions 
 
+
+Sometimes you only want your reactive function to listen for specific reactive values and this is when you use `eventReactive` or `observeEvent`. In this app we have a `reactive` function that responds to both reactive values and an `eventReactive` that only reacts to changes in `input$mytext`.
 
 <ul class="nav nav-tabs">
 <li class="active licode"><a data-toggle="tab" href="#code18">Code 18</a></li>
@@ -723,11 +768,13 @@ Similar to the function `observeEvent` which allows you to specify which reactiv
 ## Understanding and controlling when reactive functions get triggered
 
 
-In our examples above, we included a reactive value (`input$mytext`) in `observe` or `reactive`. Each time the user changes the text value the server updates the text box. No problem.
+In our examples above, we included a reactive value (`input$mytext`) in `observe` or `reactive`. Each time the user changes the text value the server updates the text box. No problem. These rules also apply to the family of `render*` functions which we discuss below.
 
-But what if (A) you have no reactive value in an `observe` function or (B) your reactive value IS in the `observe` function but does **absolutely nothing**?
+But, and here is a mini test,:
 
-(By the way, these rules also apply to the `render*` functions we discuss below).
+* What happens if you have no reactive value in an `observe` function?
+* What happens if your reactive value *is* in the `observe` function but is not involved in any calculations?
+
 
 ### If there is no reactive value the code will run once and never again
 
@@ -746,7 +793,7 @@ server <- function(input, output, session) {
 
 ### If there is a reactive value the code will run on app load and then on each change
 
-Conversely, if you include a reactive value in an `observe` (or `reactive` or `render`) function the code inside will be triggered on app load and then every time the reactive value changes **even if that reactive values is not used in any calculations**. So in the code below you can see that `input$mytext` is not actually part of the print statement -- it's not used. Nevertheless, any time your user changes the text box this server will print 1 to 10 to the console. This is a very important concept -- a reactive value in your `observe` or `reactive` functions will trigger that function to run if the user interacts with it even if the reactive element is not part of the calculations.
+Conversely, if you include a reactive value in an `observe` (or `reactive` or `render`) function the code inside will be triggered on app load and then every time the reactive value changes even if that reactive values is not used in any calculations. So in the code below you can see that `input$mytext` is not actually part of the print statement -- it's not used in any calculations. Nevertheless, any time your user changes the text box this server will print 1 to 10 to the console. This is a very important concept -- **a reactive value in your `observe` or `reactive` functions will trigger that function to run if the user interacts with it even if the reactive element is not part of the calculations.**
 
 
 ```{r, eval=FALSE}
@@ -761,13 +808,14 @@ server <- function(input, output, session) {
 
 ```
 
-### Don't stick all your reactive values into one function
+### Since reactive values trigger reactive functions you should keep reactive values separated whenever possible
 
-As we discussed above, because any reactive value in a reactive function will trigger code to run you want to be careful to modularize your code as much as possible -- as much as possible keep calculations separated. Reactive functions are a good way to do this. You can use reactive functions to isolate code and only run that code when necessary. Take, for example, the following app. I have included the reactive associated with both the slider and the text input in the same observer. As a result, even if the user only changes the slider, **all the code in the observer will get run**, even the pieces associated with the text box.
+As we discussed above, because any reactive value in a reactive function will trigger code to run you want to be careful to modularize your code as much as possible. In other words, keep calculations separated as much as possible. Reactive functions are a good way to do this. You can use reactive functions to isolate code and only run that code when necessary. Take, for example, the following app. I have included the reactive associated with both the slider and the text input in the same observer. As a result, even if the user only changes the slider, **all the code in the observer will get run**, even the pieces associated with the text box.
 
 
-#### The example app: All the observer code runs with change to text or slider 
+#### <span class="exampleapp">Example app:</span> Reactive values are **not** kept separate (less good)
 
+Both reactive values (`input$mytext` and `input$myslider`) are in the same observer meaning that all the code in that observer runs when either changes. 
 
 <ul class="nav nav-tabs">
 <li class="active licode"><a data-toggle="tab" href="#code19">Code 19</a></li>
@@ -789,7 +837,7 @@ As we discussed above, because any reactive value in a reactive function will tr
 
 
 
-#### Isolate code chunks so that only relevant pieces run when changes are made 
+####  <span class="exampleapp">Example app:</span> Reactive values are kept separate (better)
 
 I refactored the code above so that the slider and text reactive values are in separate reactive functions. This way if the text reactive changes only the relevant code gets run. Likewise for the slider.
 
@@ -813,9 +861,9 @@ I refactored the code above so that the slider and text reactive values are in s
 </div>
 
 
-### `isolate`: If you need to use a reactive but don't want it triggering reactions use 
+### `isolate`: An alternative to `observeEvent` or `eventReactive` 
 
-Above you saw that `observeEvent` can limit reactions to specified reactive values. An alternative to using `observeEvent` is to use `isolate`. Given that `observeEvent` exists `isolate` is less useful in obervers but can be quite useful in the `render*` functions discussed above. Nevertheless, I will show one example here with `observe`.
+Above you saw that `observeEvent` and `eventReactive` can limit reactions to specified reactive values. An alternative to using those functions is to use `isolate` in `observe`, `reactive` or `render*`. Generally, I'd argue in favor of using `observeEvent` and `eventReactive` because `isolate` will be harder to find in your code, but there are times when `isolate` can be useful.
 
 
 #### The example app: Use isolate to avoid triggering reactions 
@@ -844,7 +892,7 @@ In this example we have two text boxes that update with the input text. One upda
 # Link your user interface with the server to display text, tables and plots (`render*` and `*Output`)
 
 
-The third type of listener (after `observe` and `reactive`) is designed to create items to add to your user interface. In the previous mini-apps we listened and reacted to reactive values with `observe` or `reactive` but simply updated a text box. Not that exciting. The functions like `renderText` or `renderPlot` and their UI counterparts, `textOutput` and `plotOutput`, enable you to create meaninful output.
+The third type of listener (after `observe` and `reactive`) is designed to create data-related items to add to your user interface. In the previous mini-apps we listened and reacted to reactive values with `observe` or `reactive` but simply updated a text box. Not that exciting. The functions like `renderText` or `renderPlot` and their UI counterparts, `textOutput` and `plotOutput`, enable you to create meaningful output.
 
 ## An initial example with `renderText` and `textOutput`
 
@@ -858,16 +906,16 @@ In order to return values to the user we need a strategy to (1) grab needed valu
 
 **The User-to-Server-back-to-User process our example in detail**:
 
-Using our own app as an example. Let's say that we want to print the value in a text box to the UI. In order to do this we need to "complete the loop" with our UI which amounts to this:
+Using our own app as an example. Let's say that we want to print the value from a text box to the UI. In order to do this we need to "complete the loop" with our UI which amounts to this:
 
-1. Our UI has a text input called `mytext`. 
+1. Our UI has a text input box called `mytext`. 
 2. Anytime the text box changes it triggers the `renderText` function in the server (this is because `input$mytext`, a reactive, is in the `renderText` function)
 3. All the code in `renderText` runs each time the text box changes
 4. The results from `renderText` are attached to an output list, in this case we've named it the output `my_output_text`.
 5. Since the `my_output_text` object was generated by the server's `renderText` function we need to use the UI's counterpart function `textOutput` to handle it and send it to the user.Note that unlike reactives in the server that are identified as `input$mytext` the output is named in quotes (so we use `"my_output_text"` rather than `output$my_output_text`).
 
 
-#### Example app: Using `renderText` and `textOutput` to add to your UI
+#### <span class="exampleapp">Example app:</span> Using `renderText` and `textOutput` to add to your UI
 
 
 <ul class="nav nav-tabs">
@@ -888,15 +936,13 @@ Using our own app as an example. Let's say that we want to print the value in a 
 </div>
 </div>
 
+## Adding a plot with `renderPlot` and `plotOutput`
 
-#### Spice things up with `renderPlot` and `plotOutput`
 
 Similar to the `renderText` and `textOutput`, the `renderPlot` and `plotOutput` functions will create an object, in this case a plot, and then add that object to the user interface. Also similar to the text example, the objects move from the UI to the server and back to the UI.
 
 
-
-
-#### Example app: Add a plot 
+#### <span class="exampleapp">Example app:</span> Add a plot to your UI
 
 
 <ul class="nav nav-tabs">
@@ -912,7 +958,7 @@ Similar to the `renderText` and `textOutput`, the `renderPlot` and `plotOutput` 
 ```
 
 </div>
-<div id="app23" class="tab-pane fade apptab">
+<div id="app23" class="tab-pane fade apptab taller">
 
 </div>
 </div>
@@ -921,14 +967,12 @@ Similar to the `renderText` and `textOutput`, the `renderPlot` and `plotOutput` 
 ## Dynamic UI with `renderUI` and `outputUI`
 
 
-More often than plain text or even a nice plot, you're likely to want to output new and altered HTML elements. In this case, instead of using `renderText` and `textOutput` you would use the `renderUI` and `uiOutput` pair of functions. In this example, the user input in the textbox gets appended to a pulldown menu. (This example does not remember previous input, this is discussed in another section below).
-
-In `renderUI` you will often be returning more than one element for the UI, perhaps a title and a select box. With multiple elements, rather than returning a single element you return a `list` or `tagList` of elements as in `list(selectInput...., radioButtons...)`.
+If you want to return a block of UI elements -- say a paragraph, then a text box and a selector -- you would use `renderUI` and `outputUI` and instead of returning one object, you return a `list` or `tagList` of objects (these functions can be used interchangeably). 
 
 
+#### <span class="exampleapp">Example app:</span> Dynamic user interface 
 
-
-#### Example app: Dynamic user interface 
+Instead of returning a single object, we are returning a list of objects. Specifically, our `my_output_UI` output is a list of an `h4` header and a `selector`. The selector gets updated when the user clicks on the button (note `observeEvent`). Each time the user clicks the button the `selections` gets updated.
 
 
 <ul class="nav nav-tabs">
@@ -952,12 +996,12 @@ In `renderUI` you will often be returning more than one element for the UI, perh
 
 
 
-## Putting all three listeners together in one app
+## Putting the three listeners, `reactive`, `observer` and `render` together in your server
 
 In the example below I'm including one typical use case for each of the three listeners. In a later example, I will link them together in a more meaningful way but there is one more topic I want to cover before I do that.
 
 
-#### Example app: `observe`, `reactive` and `render*` in one app
+#### <span class="exampleapp">Example app:</span> `observe`, `reactive` and `render*` in one app
 
 
 <ul class="nav nav-tabs">
@@ -985,11 +1029,11 @@ Although Shiny apps end up as HTML files you can't simply copy them to your serv
 
 #### Running locally
 
-1. If you're developing in RStudio, and have multi-page app you can open either ui.R or server.R and click on Run App in the top right.
+* If you're developing in RStudio, and have multi-page app you can open either ui.R or server.R and click on Run App in the top right.
 
-2. For a single or multi-page app you an use the function `runApp` where you specify the directory your app.R or ui.R/server.R files are housed in.
+* For a single or multi-page app you an use the function `runApp` where you specify the directory your app.R or ui.R/server.R files are housed in.
 
-3. For a single page app you can use the function `shinyApp` where you specify the ui and the server as I've in the examples above.
+* For a single page app you can use the function `shinyApp` where you specify the ui and the server as I've in the examples above.
 
 
 #### Running on shinyapps.io
@@ -998,7 +1042,7 @@ This site is managed by RStudio and is free for small apps with limited visits a
 
 #### Running your own Shiny server
 
-There is a free, open source version of the Shiny server that you can run on, for example, Amazon Web Services or your own server.
+There is a free, open source version of the Shiny server that you can run on, for example, Amazon Web Services or your own server. This is designed for apps with a relatively low number of visitors.
 
 #### Running Shiny Server Pro
 
@@ -1012,12 +1056,13 @@ RStudio also sells a yearly subscription to Shiny Server Pro that provides secur
 
 ### shinyjs
 
-The `shinyjs` package, created by [Dean Attali](), allows you to use common JavaScript operations in your Shiny applications such as hiding an element, delaying code etc. The package provides more than a dozen useful functions that are descibed in a [useful page on GitHub](https://github.com/daattali/shinyjs). His talk on the package at the 2016 Shiny Developers Conference is also worth watching.
+The `shinyjs` package, created by [Dean Attali](http://deanattali.com/), allows you to use common JavaScript operations in your Shiny applications such as hiding an element, delaying code etc. The package provides more than a dozen useful functions that are descibed in a [page on GitHub](https://github.com/daattali/shinyjs). His talk on the package at the 2016 Shiny Developers Conference is also worth watching and will be posted by RStudio in the near future.
 
 In order to use the functionality you need to load the package and then to activate it in the UI with the `useShinyjs` function.
 
-#### `shinyjs` in action, try the toggle 
+####  <span class="exampleapp">Example app:</span> `shinyjs` in action, try the toggle 
 
+This is just a tiny example of using the package to run JavaScript code.
 
 <ul class="nav nav-tabs">
 <li class="active licode"><a data-toggle="tab" href="#code26">Code 26</a></li>
@@ -1039,12 +1084,12 @@ In order to use the functionality you need to load the package and then to activ
 
 
 ### shinyURL
-The `shinyURL` package, created by XXXX, allows you to save and restore the state of your shiny apps if you want to share not just the app, but a particular page in the app. See the [GitHub page](https://github.com/aoles/shinyURL) for more details. His talk on the package at the 2016 Shiny Developers Conference is also worth watching.
+The `shinyURL` package, created by [Andrzej Oleś](https://github.com/aoles), allows you to save and restore the state of your shiny apps if you want to share not just the app, but a particular page in the app. See the [GitHub page](https://github.com/aoles/shinyURL) for more details. His talk on the package at the 2016 Shiny Developers Conference is also worth watching.
 
 
 ### shinyBS
 
-The shinyBS package, created by XX, offers some nice additional Bootstrap-related components like modals, collapses and related. Unfortunately, it's not clear that it's being maintained (last commit in April 2015) and many of the components do not work with the most recent versions of Shiny. The functions can still be useful to help guide the creation of updated versions of the components. See, for example, [this discussion](https://github.com/ebailey78/shinyBS/issues/62) where the modal function is altered to work with current Shiny. For now you might hold off on using this one.
+The [shinyBS package](https://ebailey78.github.io/shinyBS/), created by Eric Bailey, offers some nice additional Bootstrap-related components like modals, collapses and related. Unfortunately, it's not clear that it's being maintained (last commit in April 2015) and many of the components do not work with the most recent versions of Shiny. The functions can still be useful to help guide the creation of updated versions of the components. See, for example, [this discussion](https://github.com/ebailey78/shinyBS/issues/62) where the modal function is altered to work with current Shiny. For now you might hold off on using this one.
 
 # Advanced topics
 
@@ -1058,13 +1103,14 @@ What if you have an app that puts the same element in multiple tabs. Perhaps you
 2. Shiny requires that your elements all have unique IDs so you'd need to come up with a naming scheme. Perhaps select1, select2 etc...
 3. Copy paste is a pain and prone to error!
 
-As an alternative, you can create a function that outputs the UI elements you need and then, instead of repeating the code that creates those elements you can simply call the function. So in the example below, I create a function to generate a title, select box, radio buttons and a checkbox. Then I call that function three times -- one each for the tabs.
+As an alternative, you can create a function that outputs the UI elements you need and then, instead of repeating the code that creates those elements you can simply call the function. So in the example below, I create a function to generate a title, select box, radio buttons and a check box. Then I call that function three times -- one each for the tabs.
 
 (Note that in the newest versions of Shiny there is an alternative approach, modules, discussed below).
 
 
-#### The example app: Create re-useable UI elements 
+####<span class="exampleapp">Example app:</span> Create re-useable UI elements 
 
+The `createSelectRadio` function takes an id as input and then creates and outputs a list of components. The new ID for each component is the component name and then, as a suffix, the id provided when running the function. 
 
 <ul class="nav nav-tabs">
 <li class="active licode"><a data-toggle="tab" href="#code27">Code 27</a></li>
@@ -1079,21 +1125,22 @@ As an alternative, you can create a function that outputs the UI elements you ne
 ```
 
 </div>
-<div id="app27" class="tab-pane fade apptab">
+<div id="app27" class="tab-pane fade apptab taller">
 
 </div>
 </div>
 
 
 
-## Interactive data tables
+## Interactive data tables (careful, there are two flavors)
 
-Adding interactive tables to your Shiny app is easier than you think. The original version of the shiny package included a renderDataTable function but this is slowly being deprecated in favor of a new renderDataTable function from the package `DT`. For the purposes of simply showing a table, the two options are very similar but DT extends the styling and interaction capabilities. The `DT` package, created by Yihui Xie, has some pretty amazing functionality  -- take a look at the [documentation](https://rstudio.github.io/DT/shiny.html). 
+Adding interactive tables to your Shiny app is easier than you think. The original version of the shiny package included a `renderDataTable` function but this is slowly being deprecated in favor of a new `renderDataTable` function from the package `DT`. For the purposes of simply showing a table, the two options are very similar but DT extends the styling and interaction capabilities. The `DT` package, created by Yihui Xie, has some pretty amazing functionality  -- take a look at the [documentation](https://rstudio.github.io/DT/shiny.html). 
 
 Keep in mind that the original `renderDataTable` function and the version in the package `DT` have slightly different syntax which can be confusing when you're looking for example code. I recommend you only use code where `DT` is explicitly loaded (after the `shiny` package) or you see the syntax `DT::renderDataTable` which specifies which version of the function to use.
 
-#### Example app: Using the shiny package for an interactive table 
+#### <span class="exampleapp">Example app:</span> Using the shiny package for an interactive table 
 
+This app uses the `renderDataTable` function from Shiny.
 
 <ul class="nav nav-tabs">
 <li class="active licode"><a data-toggle="tab" href="#code28">Code 28</a></li>
@@ -1108,13 +1155,15 @@ Keep in mind that the original `renderDataTable` function and the version in the
 ```
 
 </div>
-<div id="app28" class="tab-pane fade apptab">
+<div id="app28" class="tab-pane fade apptab taller">
 
 </div>
 </div>
 
 
-#### Example app: Using the DT package for an interactive table 
+#### <span class="exampleapp">Example app:</span> Using the DT package for an interactive table 
+
+This app uses the `renderDataTable` function from DT.
 
 
 <ul class="nav nav-tabs">
@@ -1139,13 +1188,13 @@ Keep in mind that the original `renderDataTable` function and the version in the
 ## Interactive plots and maps
 
 
-HTML widgets allow you to use JavaScript visualization libraries to create interactive graphics in R, including Shiny web applications. For details on HTML widgets generally you can visit [the htmlwidgets site](http://www.htmlwidgets.org/). Below I show three examples, two examples of interactive plots (`plot.ly` and `highcharts`) and an interactive map with `leaflet` but there are many other widgets available.
+HTML widgets allow you to use JavaScript visualization libraries to create interactive graphics in R, including Shiny web applications. For details on HTML widgets generally you can visit the [htmlwidgets site](http://www.htmlwidgets.org/). Below I show three examples, two examples of interactive plots (`plot.ly` and `highcharts`) and an interactive map with `leaflet` but there are many other widgets available.
 
 
 
-#### Example app: Use plot.ly to make a ggplot interactive 
+#### <span class="exampleapp">Example app:</span> Use plot.ly to make a ggplot interactive 
 
-Details on using plot.ly can be found at [this site](https://plot.ly/r/shiny-tutorial/).
+Details on using plot.ly can be found at [this site](https://plot.ly/r/shiny-tutorial/). In this example, I'm using plot.ly to make a ggplot interactive.
 
 <ul class="nav nav-tabs">
 <li class="active licode"><a data-toggle="tab" href="#code30">Code 30</a></li>
@@ -1160,14 +1209,14 @@ Details on using plot.ly can be found at [this site](https://plot.ly/r/shiny-tut
 ```
 
 </div>
-<div id="app30" class="tab-pane fade apptab">
+<div id="app30" class="tab-pane fade apptab taller">
 
 </div>
 </div>
 
-#### Example app: Use highcharts to make an interactive plot 
+#### <span class="exampleapp">Example app:</span> Use highcharts to make an interactive plot 
 
-Details on using highcharts can be found at [this site](http://jkunst.com/highcharter/).
+Details on using highcharts can be found at [this site](http://jkunst.com/highcharter/). In this example, we create a scatter plot from scratch.
 
 <ul class="nav nav-tabs">
 <li class="active licode"><a data-toggle="tab" href="#code31">Code 31</a></li>
@@ -1189,9 +1238,9 @@ Details on using highcharts can be found at [this site](http://jkunst.com/highch
 
 
 
-#### Example app: Use leaflet for an interactive map 
+#### <span class="exampleapp">Example app:</span> Use leaflet for an interactive map 
 
-Details on using leaflet in R can be found at [this site](http://rstudio.github.io/leaflet/shiny.html). If you want to interact between your map and app see [this example](http://urbanstudies.tcu.edu/research/open-data/tx-demographics/) by Kyle Walker and the [code used to create it](https://gist.github.com/walkerke/4988b5164258917687cb). We use
+Details on using leaflet in R can be found at [this site](http://rstudio.github.io/leaflet/shiny.html). If you want to interact between your map and app see 
 
 <ul class="nav nav-tabs">
 <li class="active licode"><a data-toggle="tab" href="#code32">Code 32</a></li>
@@ -1206,7 +1255,7 @@ Details on using leaflet in R can be found at [this site](http://rstudio.github.
 ```
 
 </div>
-<div id="app32" class="tab-pane fade apptab">
+<div id="app32" class="tab-pane fade apptab tallest">
 
 </div>
 </div>
@@ -1216,7 +1265,7 @@ Details on using leaflet in R can be found at [this site](http://rstudio.github.
 
 ## Shiny modules
 
-At the Shiny Developers Conference Joe Cheng from RStudio gave a great presentation on Shiny modules. They are designed, in part, to help solve the issue of re-useability discussed above. You may have, as an example, a block of UI widgets you want to repeat on multiple pages. Rather than copy and paste code, you can use modules to help manage the pieces. For more detail on Shiny modules check out [this write-up](http://shiny.rstudio.com/articles/modules.html) by Joe Cheng.
+At the Shiny Developers Conference Joe Cheng, from RStudio, gave a great presentation on Shiny modules. They are designed, in part, to help solve the issue of re-useability discussed above in the section on [creating re-useable UI elements](#create-re-useable-ui-elements). You may have, as an example, a block of UI widgets you want to repeat on multiple pages. Rather than copy and paste code, you can use modules to help manage the pieces. For more detail on Shiny modules check out [this write-up](http://shiny.rstudio.com/articles/modules.html) by Joe Cheng.
 
 To use a module, in addition to creating the UI and server as we've done above, you would also create a module UI and module server. Here are the four pieces you would need for an application that uses one module
 
@@ -1254,7 +1303,7 @@ scatter <- function(input, output, session, my_color) {
 
 ### App UI
 
-In your app UI you can include any UI elements that are not included in the module **and* you would include your module. Since your module UI is a function you would call this function and feed it a prefix, anything you want.
+In your app UI you can include any UI elements that are not included in the module **and** you would include your module. Since your module UI is a function you would call this function and feed it a prefix, anything you want.
 
 ```{r, eval=FALSE}
 ui <- fluidPage(
@@ -1274,12 +1323,13 @@ Similar to the app UI you would include any non-module related processing in you
 server <- function(input, output,session){
 
   callModule(scatter, "prefix", "purple")
+  
 }
 
 ```
 
 
-#### Example app: simple module example 
+#### <span class="exampleapp">Example app:</span> simple module example 
 
 This example demonstrates the code needed to use a module, but is not a very practical example because the purpose of using modules would be to re-use code. See the next example for a more realistic example.
 
@@ -1296,13 +1346,13 @@ This example demonstrates the code needed to use a module, but is not a very pra
 ```
 
 </div>
-<div id="app33" class="tab-pane fade apptab">
+<div id="app33" class="tab-pane fade apptab taller">
 
 </div>
 </div>
 
 
-#### Example app: more practical module example 
+#### <span class="exampleapp">Example app:</span> more practical module example 
 
 This app is a little harder to follow but a better example of how modules can be useful. In this app the module creates a slider and two plots. As input, the module function takes the name of the data.frame as well as several plot-related variables. This way you can create side-by-side plots with a slider using multiple datasets with slight alteraations to the app server.
 
@@ -1319,7 +1369,7 @@ This app is a little harder to follow but a better example of how modules can be
 ```
 
 </div>
-<div id="app34" class="tab-pane fade apptab">
+<div id="app34" class="tab-pane fade apptab tallest">
 
 </div>
 </div>
@@ -1333,7 +1383,7 @@ RStudio's Winston Chang has written a [nice article](http://shiny.rstudio.com/ar
 
 You need the following items in a Shiny app using HTML templates:
 
-### An HTML page with references to Shiny components
+### You need an HTML page with references to Shiny components
 
 In addition to your ui.R and server.R (or app.R) you would create an HTML page with the structure you want. Shiny-related components are then included in curly braces. A few key points to keep in mind:
 
@@ -1385,7 +1435,7 @@ Here is what our sample app HTML file looks like:
 
 
 
-### A UI that reads the HTML template
+### You need a UI that reads the HTML template
 
 Your server and UI will be very similar to an all-R app except that your UI needs to read the HTML template, and feed the template whatever Shiny components you'll want on the page. This is done with the `htmlTemplate` function. 
 
@@ -1410,9 +1460,9 @@ htmlTemplate("X:/administrative/social_media/blogposts/r_shiny/htmlTemplates/tem
 ```
 
 
-#### Example app: An app using HTML templates 
+#### <span class="exampleapp">Example app:</span> An app using HTML templates 
 
-This app is a little harder to follow than the simple code above but a better example of how modules can be useful. In this app the module creates a slider and two plots. As input, the module function takes the name of the data.frame as well as several plot-related variables. This way you can create side-by-side plots with a slider using multiple datasets with slight alteraations to the app server.
+This app reads my file, `template.html` and then feeds it a block of controls called `shinycontrols` and a slider called `justslider`.
 
 <ul class="nav nav-tabs">
 <li class="active licode"><a data-toggle="tab" href="#code35">Code 35</a></li>
@@ -1427,7 +1477,7 @@ This app is a little harder to follow than the simple code above but a better ex
 ```
 
 </div>
-<div id="app35" class="tab-pane fade apptab">
+<div id="app35" class="tab-pane fade apptab tallest">
 
 </div>
 </div>
@@ -1437,10 +1487,10 @@ This app is a little harder to follow than the simple code above but a better ex
 ## Brush, click and hover on plots (and an example of using global variables)
 
 
-In mid-2015 RStudio added plot interactivity to Shiny's arsenal -- this is a little different, though, than the HTML widgets mentioned above. This interactivity allows users to interact with "regular" base plots and ggplot2. Specifically, these functions allow your users to click, hover or brush a base or ggplot to get more information on the elements clicked etc. Adding this type of functionality can be done simply by adding an argument to the `plotOutput` function and using that output in your server. 
+In mid-2015 RStudio added plot interactivity to Shiny's arsenal -- this is a little different, though, than the HTML widgets mentioned above. This interactivity allows users to interact with "regular" base plots and ggplot2 plots. Specifically, these functions allow your users to click, hover or brush a base or ggplot to get more information on the elements clicked etc. Adding this type of functionality can be done simply by adding an argument to the `plotOutput` function and using that output in your server. 
 
 
-#### Example app: Brush and click on a ggplot 
+#### <span class="exampleapp">Example app:</span> Brush and click on a ggplot 
 
 As an example of interactive plots, consider this reasonably simple app. You'll notice that in the `plotOutput` function I added two arguments, one for click and one for brush. And then in the reactive I use both of these. The actual resulting input variables (`input$user_brush` and `input$user_click`) provide details like the x and y coordinates clicked. To use this information to filter your table you can use the corresponding `brushedPoints` and `nearPoints` functions.
 
@@ -1459,16 +1509,18 @@ A note about this particular example: remember that any reactives in your reacti
 ```
 
 </div>
-<div id="app36" class="tab-pane fade apptab">
+<div id="app36" class="tab-pane fade apptab tallest">
 
 </div>
 </div>
 
 
 
-#### Example app: Brush with map and plot 
+#### <span class="exampleapp">Example app:</span> Brush with map and plot 
 
-As mentioned above, Kyle Walker inspired us to link plots and maps using the brushing functionality. This app is a slightly more complex version of the brush functionality. In this example, the user selections update in both a plot and on a leaflet map. The approach is very similar, though, to the previous app. We include a `brush` argument in the `plotOutput` and we use a brush to select point with the `brushedPoints` function.
+This app is a slightly more complex version of the brush functionality. In this example, the user selections update in both a plot and on a leaflet map. The approach is very similar, though, to the previous app. We include a `brush` argument in the `plotOutput` and we use a brush to select point with the `brushedPoints` function.
+
+This app example was inspired by an [app from Kyle Walker](http://urbanstudies.tcu.edu/research/open-data/tx-demographics/) that dsiplayes the demographics of Texas Counties. He generously posted the [code used to create it](https://gist.github.com/walkerke/4988b5164258917687cb). 
 
 
 <ul class="nav nav-tabs">
@@ -1491,13 +1543,13 @@ As mentioned above, Kyle Walker inspired us to link plots and maps using the bru
 
 ## Including custom JavaScript in your app
 
-Occasionally you may want to include some JavaScript that you've written in your Shiny app. 
+Occasionally you may want to include some JavaScript that you've written in your Shiny app. Similar to the discussion of CSS above you can include the JS by referencing an external file or you can include JS inline in the header.
 
-1. tags$head(includeScript("google-analytics.js"))
-2. tags$head(HTML("<script type='text/javascript'></script>"))
+1. `tags$head(includeScript("google-analytics.js"))`
+2. `tags$head(HTML("<script type='text/javascript'></script>"))`
 
 
-#### Example app: inline JavaScript code 
+#### <span class="exampleapp">Example app:</span> inline JavaScript code 
 
 Here we add inline JavaScript (jQuery) to fade out, then in the title and finally make it green.
 
@@ -1521,9 +1573,44 @@ Here we add inline JavaScript (jQuery) to fade out, then in the title and finall
 </div>
 
 
+
+## Shiny dashboards
+
+With an R backend for processing and strong plotting capabilities Shiny is well-suited to creating dashboards. Dashboards can be created manually using the techniques discussed above, but creating them is simpler with the Rstudio package `shinydashboard`. In order to create a dashboard you need a header, sidebar and body. Within the body you create a series `tabItem`s and fill them with the controls you want see included. For more detail you should refer directly to the [shiny dashboard page on GitHub](https://rstudio.github.io/shinydashboard).
+
+
+#### <span class="exampleapp">Example app:</span> A simple dashboard
+
+This code was stolen, in a large part, from the shiny dashboard [get started page](https://rstudio.github.io/shinydashboard/get_started.html).
+
+
+
+<ul class="nav nav-tabs">
+<li class="active licode"><a data-toggle="tab" href="#code39">Code 39</a></li>
+<li><a  onclick = "clickfunction(this.hash.substr(1))" data-toggle="tab" href="#app39">App 39</a></li>
+</ul>
+
+<div class="tab-content">
+<div id="code39" class="tab-pane fade in active codetab">
+    
+```{r, eval=FALSE, code=readLines("blog_app39/app.R")}
+
+```
+
+</div>
+<div id="app39" class="tab-pane fade apptab tallest">
+
+</div>
+</div>
+
+
+
+
+
+
 ## More on reactive programming
 
-Joe Cheng, the primary creator of Shiny, gave a great talk on reactive programming at the Shiny Developers Conference in January 2016. The videos are now online and I highly recommend you watch both part 1 and part 2.
+Joe Cheng, the primary creator of Shiny, gave a great talk on reactive programming at the Shiny Developers Conference in January 2016. The videos are [now online](https://www.rstudio.com/resources/webinars/shiny-developer-conference/) and I highly recommend you watch both part 1 and part 2.
 
 # Details on the package versions and operating system used to create this post
 

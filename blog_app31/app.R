@@ -18,7 +18,7 @@ server <- function(input, output, session) {
 
 ui <-  basicPage(
   
-  h3("Example of plot.ly, the plot is interactive"),
+  h3("Example of highcharter, the plot is interactive"),
   sliderInput("myslider", "A slider:", min=1, max=50, value=10),
   highchartOutput("myplot")
 )

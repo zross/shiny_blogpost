@@ -6,7 +6,7 @@ server <- function(input, output, session) {
   
   dat <- reactive({
     input$myslider
-    mtcars[1:input$myslider,]
+    mtcars[1:input$myslider, c("mpg", "cyl", "disp")]
     
   })
   

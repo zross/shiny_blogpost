@@ -1,19 +1,17 @@
 library(ggplot2)
-library(shiny)
 
 # MODULE UI
 scatterUI <- function(id) {
   ns <- NS(id)
   
   list(
-    div(class="blah", sliderInput(ns("slider1"), label = "Limit points", min = 0, max = 32, value = 15)),
-    
+    div(sliderInput(ns("slider1"), label = "Limit points", min = 0, max = 32, value = 15)),
     div(style="display: inline-block; height:220px;", plotOutput(ns("plot1"))),
     div(style="display: inline-block; height:220px;", plotOutput(ns("plot2")))
   )
 }
 
-# Module server piece
+# MODULE Server
 scatter <- function(input, output, session, datname, var1, var2, ptshape, col1, col2) {
   
   dat <- eval(as.name(datname))
@@ -37,13 +35,14 @@ scatter <- function(input, output, session, datname, var1, var2, ptshape, col1, 
 }
 
 
+# App ui
 ui <- fluidPage(
   h3("The module creates two plots and a slider and is called twice below"),
   scatterUI("prefix"),
   scatterUI("prefix2")
 )
 
-
+# App server
 server <- function(input, output,session){
   
   callModule(scatter, "prefix", "cars", "speed", "dist",  1, "red", "blue")

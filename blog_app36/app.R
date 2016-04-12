@@ -28,7 +28,7 @@ server <- function(input, output, session) {
     
   })
   
-  output$table <- DT::renderDataTable(DT::datatable(dat()))
+  output$table <- DT::renderDataTable(DT::datatable(dat()[,c("mpg", "cyl", "disp")]))
   
 }
 

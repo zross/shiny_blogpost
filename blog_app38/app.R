@@ -16,7 +16,7 @@ ui <- basicPage(
                       $thetitle.fadeOut(2000);
                       $thetitle.fadeIn(2000);
                       $thetitle.css('color', 'green');
-})
+                      })
 
                       });
                       </script>"))
