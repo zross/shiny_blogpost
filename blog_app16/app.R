@@ -16,7 +16,7 @@ server <- function(input, output, session) {
 }
 
 ui <- basicPage(
-  h3("The value in the text box gets printed to the results text box."),
+  h3("Second observer runs second so it overwrites the first observer"),
   textInput("mytext", "Input goes here"),
   textInput("myresults", "Results will be printed here", "Initial value")
 )

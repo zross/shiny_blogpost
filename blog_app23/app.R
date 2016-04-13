@@ -8,7 +8,7 @@ server <- function(input, output, session) {
 }
 
 ui <- basicPage(
-    h3("The value in the text box gets printed here with the textOutput function."),
+    h3("The value in the text box gets printed below with the textOutput function."),
     textInput("mytext", "Input goes here"),
     
     # my_output_text comes from the server

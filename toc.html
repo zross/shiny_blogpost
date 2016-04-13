@@ -1,0 +1,66 @@
+<div id="TOC">
+<ul>
+<li><a onclick="clickfunction('app1')" href="#shiny-at-its-simplest">Shiny at it’s simplest</a></li>
+<li><a onclick="clickfunction('app2')" href="#set-up-your-user-interface-ui">Set up your user interface (UI)</a><ul>
+<li><a onclick="clickfunction('app2')" href="#layout-your-user-interface">Layout your user interface</a><ul>
+<li><a onclick="clickfunction('app2')" href="#using-predefined-layout-functions">Using predefined layout functions</a></li>
+<li><a onclick="clickfunction('app3')" href="#adding-elements-with-tagsxxx">Adding elements with tags$xxx</a></li>
+<li><a onclick="clickfunction('app4')" href="#layout-your-app-using-bootstraps-grid-system-manually">Layout your app using Bootstrap’s grid system manually</a></li>
+</ul></li>
+<li><a onclick="clickfunction('app5')" href="#style-your-user-interface">Style your user interface</a><ul>
+<li><a onclick="clickfunction('app5')" href="#use-an-existing-theme">Use an existing “theme”</a></li>
+<li><a onclick="clickfunction('app6')" href="#style-yourself-with-css">Style yourself with CSS</a></li>
+</ul></li>
+<li><a onclick="clickfunction('app10')" href="#add-widgets-to-your-user-interface-text-boxes-sliders-etc">Add widgets to your user interface (text boxes, sliders etc)</a></li>
+</ul></li>
+<li><a onclick="clickfunction('app11')" href="#set-up-your-server">Set up your server</a><ul>
+<li><a onclick="clickfunction('app11')" href="#input-from-your-user-interface">Input from your user interface</a></li>
+<li><a onclick="clickfunction('app11')" href="#listen-for-changes-with-observe-or-reactive-the-shiny-hearing-aids">Listen for changes with <code>observe</code> or <code>reactive</code>, the Shiny hearing aids</a><ul>
+<li><a onclick="clickfunction('app12')" href="#before-going-any-further-let-me-introduce-the-update-functions">Before going any further let me introduce the <code>update*</code> functions</a></li>
+<li><a onclick="clickfunction('app13')" href="#back-to-functions-to-read-reactive-values-featuring-observe-to-generate-side-effects-and-no-output">Back to functions to read reactive values: featuring <code>observe</code> to generate side effects and no output</a></li>
+<li><a onclick="clickfunction('app14')" href="#observeevent-use-observeevent-to-prevent-unwanted-reactions"><code>observeEvent</code>: use <code>observeEvent</code> to prevent unwanted reactions</a></li>
+<li><a onclick="clickfunction('app16')" href="#observer-priority-which-observers-run-first">Observer priority: which observers run first</a></li>
+<li><a onclick="clickfunction('app18')" href="#reactive-use-a-reactive-function-to-isolate-code-and-generate-output-with-no-side-effects"><code>reactive</code>: use a <code>reactive</code> function to isolate code and generate output with no side effects</a></li>
+<li><a onclick="clickfunction('app19')" href="#eventreactive-used-to-prevent-unwanted-reactions-in-a-reactive-function"><code>eventReactive</code>: used to prevent unwanted reactions in a <code>reactive</code> function</a></li>
+</ul></li>
+<li><a onclick="clickfunction('app20')" href="#understanding-and-controlling-when-reactive-functions-get-triggered">Understanding and controlling when reactive functions get triggered</a><ul>
+<li><a onclick="clickfunction('app20')" href="#if-there-is-no-reactive-value-the-code-will-run-once-and-never-again">If there is no reactive value the code will run once and never again</a></li>
+<li><a onclick="clickfunction('app20')" href="#if-there-is-a-reactive-value-the-code-will-run-on-app-load-and-then-on-each-change">If there is a reactive value the code will run on app load and then on each change</a></li>
+<li><a onclick="clickfunction('app21')" href="#since-reactive-values-trigger-reactive-functions-you-should-keep-reactive-values-separated-whenever-possible">Since reactive values trigger reactive functions you should keep reactive values separated whenever possible</a></li>
+<li><a onclick="clickfunction('app22')" href="#isolate-an-alternative-to-observeevent-or-eventreactive"><code>isolate</code>: An alternative to <code>observeEvent</code> or <code>eventReactive</code></a></li>
+</ul></li>
+</ul></li>
+<li><a onclick="clickfunction('app23')" href="#link-your-user-interface-with-the-server-to-display-text-tables-and-plots-render-and-output">Link your user interface with the server to display text, tables and plots (<code>render*</code> and <code>*Output</code>)</a><ul>
+<li><a onclick="clickfunction('app23')" href="#an-initial-example-with-rendertext-and-textoutput">An initial example with <code>renderText</code> and <code>textOutput</code></a></li>
+<li><a onclick="clickfunction('app24')" href="#adding-a-plot-with-renderplot-and-plotoutput">Adding a plot with <code>renderPlot</code> and <code>plotOutput</code></a></li>
+<li><a onclick="clickfunction('app25')" href="#dynamic-ui-with-renderui-and-outputui">Dynamic UI with <code>renderUI</code> and <code>outputUI</code></a></li>
+<li><a onclick="clickfunction('app26')" href="#putting-the-three-listeners-reactive-observer-and-render-together-in-your-server">Putting the three listeners, <code>reactive</code>, <code>observer</code> and <code>render</code> together in your server</a></li>
+</ul></li>
+<li><a onclick="clickfunction('app27')" href="#deploy-your-app">Deploy your app</a></li>
+<li><a onclick="clickfunction('app27')" href="#add-on-packages">Add-on packages</a><ul>
+<li><a onclick="clickfunction('app27')" href="#shinyjs">shinyjs</a></li>
+<li><a onclick="clickfunction('app27')" href="#shinyurl">shinyURL</a></li>
+<li><a onclick="clickfunction('app27')" href="#shinybs">shinyBS</a></li>
+</ul></li>
+<li><a onclick="clickfunction('app28')" href="#advanced-topics">Advanced topics</a><ul>
+<li><a onclick="clickfunction('app28')" href="#create-re-useable-ui-elements">Create re-useable UI elements</a></li>
+<li><a onclick="clickfunction('app29')" href="#interactive-data-tables-careful-there-are-two-flavors">Interactive data tables (careful, there are two flavors)</a></li>
+<li><a onclick="clickfunction('app31')" href="#interactive-plots-and-maps">Interactive plots and maps</a></li>
+<li><a onclick="clickfunction('app34')" href="#shiny-modules">Shiny modules</a><ul>
+<li><a onclick="clickfunction('app34')" href="#module-ui">Module UI</a></li>
+<li><a onclick="clickfunction('app34')" href="#module-server">Module Server</a></li>
+<li><a onclick="clickfunction('app34')" href="#app-ui">App UI</a></li>
+<li><a onclick="clickfunction('app34')" href="#app-server">App Server</a></li>
+</ul></li>
+<li><a onclick="clickfunction('app36')" href="#html-templates">HTML templates</a><ul>
+<li><a onclick="clickfunction('app36')" href="#you-need-an-html-page-with-references-to-shiny-components">You need an HTML page with references to Shiny components</a></li>
+<li><a onclick="clickfunction('app36')" href="#you-need-a-ui-that-reads-the-html-template">You need a UI that reads the HTML template</a></li>
+</ul></li>
+<li><a onclick="clickfunction('app37')" href="#brush-click-and-hover-on-plots-and-an-example-of-using-global-variables">Brush, click and hover on plots (and an example of using global variables)</a></li>
+<li><a onclick="clickfunction('app39')" href="#including-custom-javascript-in-your-app">Including custom JavaScript in your app</a></li>
+<li><a onclick="clickfunction('app40')" href="#shiny-dashboards">Shiny dashboards</a></li>
+<li><a href="#more-on-reactive-programming">More on reactive programming</a></li>
+</ul></li>
+<li><a href="#details-on-the-package-versions-and-operating-system-used-to-create-this-post">Details on the package versions and operating system used to create this post</a></li>
+</ul>
+</div>

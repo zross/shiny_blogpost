@@ -6,7 +6,7 @@ ui <- basicPage(
 
 includeCSS("style.css"),
   
-  h2("CSS using by referring to an external page"),
+  h2("CSS by reading an external page"),
   p("Some important text")
 
 )

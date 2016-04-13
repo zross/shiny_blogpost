@@ -17,9 +17,9 @@ server <- function(input, output, session) {
 
 ui <- basicPage(
   
-    h3("Using a simple reactive."),
+    h3("The reactive generates a string output which is added to the results text box"),
     textInput("mytext", "Input goes here"),
-    textInput("myresults", "Results will be printed here", "Initial value")
+    textInput("myresults", "Results will be printed here", "")
 
 )
 

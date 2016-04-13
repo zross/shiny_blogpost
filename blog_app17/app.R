@@ -18,9 +18,9 @@ server <- function(input, output, session) {
 
 ui <- basicPage(
   
-  h3("The value in the text box gets printed to the results text box."),
+  h3("Priority is higher for second observer so it runs first and then gets written over by the first observer"),
   textInput("mytext", "Input goes here"),
-  textInput("myresults", "Results will be printed here", "Initial value")
+  textInput("myresults", "Results will be printed here", "")
 )
 
 shinyApp(ui = ui, server = server)
