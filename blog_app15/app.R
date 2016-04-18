@@ -1,6 +1,6 @@
 server <- function(input, output, session) {
   
-  # Using observeEvent we're tell Shiny only to run this code
+  # Using observeEvent we're telling Shiny only to run this code
   # if mytext gets updated.
   observeEvent(input$mytext, {
     

@@ -26,6 +26,12 @@ height:750px;
 
 }
 
+.apptab.mosttall{
+
+height:850px;
+
+}
+
 .iframeapp{
 width: 100%;
 height:100%;
@@ -153,7 +159,7 @@ $('#app0').append('<iFrame class="iframeapp" id = "iframe0" src="https://spatial
 $('#app1').append('<iFrame class="iframeapp" id = "iframe1" src="https://spatial.shinyapps.io/blog_app1/"></iFrame>');
 
 $('h4:contains("Example app")').parent().prev().append('<div class="backtotop text-right"><a href src="#TOC" >Back to top</a></div>')
-$('a').attr('target', '_blank');
+$('a:not([href*="#"])').attr('target', '_blank');
 });
 </script>
 
@@ -175,7 +181,7 @@ In order to run Shiny and follow the code on this post you should make sure you 
 
 
 
-## Shiny at it's simplest
+## Shiny at its simplest
 
 In its simplest form, a Shiny application requires a server function to do the calculations and a user interface. Below we have the simplest possible shiny app. We create an empty server, a UI with a basic message and then launch the app with the `shinyApp` function. Voila -- a functioning web application created entirely in R!
 
@@ -216,7 +222,7 @@ Not much here, but this is a real Shiny app.
 ## Layout your user interface
 
 
-Under the hood, Shiny uses Twitter Bootstrap, a commonly used framework for designing webpages, to scaffold and provide some miminal styling. When you run the function `shinyApp()` your R code is essentially compiled to web-friendly languages HTML, JavaScript and CSS. You can take advantage of Shiny page template functions to layout your app or you can essentially design your app from scratch. There is also a brand new option [discussed below](#html-templates) to use what are called HTML templates but here we will focus the most common (and simpler) approach.
+Under the hood, Shiny uses Twitter Bootstrap, a commonly used framework for designing webpages, to scaffold and provide some minimal styling. When you run the function `shinyApp()` your R code is essentially compiled to web-friendly languages HTML, JavaScript and CSS. You can take advantage of Shiny page template functions to layout your app or you can essentially design your app from scratch. There is also a brand new option [discussed below](#html-templates) to use what are called HTML templates but here we will focus on the most common (and simpler) approach.
 
 ### Using predefined layout functions
 
@@ -237,7 +243,7 @@ As mentioned above, you will choose a layout function depending on the type of a
 <div class="tab-content">
 <div id="code2" class="tab-pane fade in active codetab">
     
-```{r, eval=FALSE, code=readLines("blog_app2/app.R")}
+```{r, eval=FALSE, code=readLines("blog_app2/app_show.R")}
 
 ```
 
@@ -255,6 +261,8 @@ As mentioned above, you will choose a layout function depending on the type of a
 ### Adding elements with tags$xxx
 
 It's easy to add HTML elements to your Shiny app using [HTML tags](http://shiny.rstudio.com/articles/tag-glossary.html). There are more than 100 HTML elements you can add to your page using the syntax `tags$OBJECT()` as in `tags$p()` for a paragraph or `tags$blockquote()`. For a limited number of these tags, the most common ones, there are helper functions that allow you to skip the `tags$` so, for example, a first tier header can be created with `h1()` -- but be careful, not all tags permit this.
+
+For more detail on generating HTML I recommend you watch [this video](https://www.youtube.com/watch?v=XfEvsu4_zaE) by Joe Cheng or review the [HTML tags page](http://shiny.rstudio.com/articles/html-tags.html) on the RStudio website.
 
 
 #### <span class="exampleapp">Example app:</span> using HTML tags to layout your app 
@@ -284,7 +292,7 @@ In this app we add HTML tags using, for example, `tags$blockquote` or, for commo
 
 If you're new to CSS creating your layout can be challenging and you would need to read [the Bootstrap basics](https://getbootstrap.com/examples/grid/) before getting started. When you're comfortable, though, you can use Bootstrap's grid system directly by specifying, rows and columns and column spans. As a general rule, all Bootstrap layouts are 12 columns across and these columns can be grouped to make wider columns.
 
-In the example below, we have an layout with 2 rows. One is offset by one column and the other has a button (one column width) and text (6 column width).
+In the example below, we have a layout with 2 rows. One is offset by one column and the other has a button (one column width) and text (6 column width).
 
 
 
@@ -300,7 +308,7 @@ In this app we use Bootstrap elements like rows and columns to manually layout t
 <div class="tab-content">
 <div id="code4" class="tab-pane fade in active codetab">
     
-```{r, eval=FALSE, code=readLines("blog_app4/app.R")}
+```{r, eval=FALSE, code=readLines("blog_app4/app_show.R")}
 
 ```
 
@@ -314,7 +322,7 @@ In this app we use Bootstrap elements like rows and columns to manually layout t
 
 ## Style your user interface
 
-Now that you have created your app layout following some of the approaches discussed above you are ready to style your app. There are several appraoches to doing this from choosing existing themes (like adding a new, pre-defined skin) or styling yourself with CSS.
+Now that you have created your app layout following some of the approaches discussed above you are ready to style your app. There are several approaches to doing this from choosing existing themes (like adding a new, pre-defined skin) or styling yourself with CSS.
 
 ### Use an existing "theme"
 
@@ -347,7 +355,7 @@ In this particular example, you won't see much difference because the app is so 
 
 ### Style yourself with CSS
 
-If you want to use your own CSS have several options. For the sake of completeness, I will cover them all but the best practice would be to include all of your CSS in an external stylesheet (let's say it's called `style.css`). If you're using a two page app ( with a ui.R and server.R rile) you can add a www folder at the same level as the UI and server files with your style sheet and this will be read automatically. Otherwise you can read your stylesheet with `includeCSS`. Here is your full list of options.
+If you want to use your own CSS you have several options. For the sake of completeness, I will cover them all but the best practice would be to include all of your CSS in an external stylesheet (let's say it's called `style.css`). If you're using a two page app (with a ui.R and server.R file) you can add a www folder at the same level as the UI and server files with your style sheet and this will be read automatically. Otherwise you can read your stylesheet with `includeCSS`. Here is your full list of options.
 
 1. Include your raw CSS directly inline in the head of your app
 2. Include CSS within specific HTML tags
@@ -799,7 +807,7 @@ server <- function(input, output, session) {
 
 ### If there is a reactive value the code will run on app load and then on each change
 
-Conversely, if you include a reactive value in an `observe` (or `reactive` or `render`) function the code inside will be triggered on app load and then every time the reactive value changes even if that reactive values is not used in any calculations. So in the code below you can see that `input$mytext` is not actually part of the print statement -- it's not used in any calculations. Nevertheless, any time your user changes the text box this server will print 1 to 10 to the console. This is a very important concept -- **a reactive value in your `observe` or `reactive` functions will trigger that function to run if the user interacts with it even if the reactive element is not part of the calculations.**
+Conversely, if you include a reactive value in an `observe` (or `reactive` or `render`) function the code inside will be triggered on app load and then every time the reactive value changes even if that reactive value is not used in any calculations. So in the code below you can see that `input$mytext` is not actually part of the print statement -- it's not used in any calculations. Nevertheless, any time your user changes the text box this server will print 1 to 10 to the console. This is a very important concept -- **a reactive value in your `observe` or `reactive` functions will trigger that function to run if the user interacts with it even if the reactive element is not part of the calculations.**
 
 
 ```{r, eval=FALSE}
@@ -910,7 +918,7 @@ In order to return values to the user we need a strategy to (1) grab needed valu
 2. Then the `renderText` function would send the result back to the Shiny UI by attaching the results to the `output` object.
 3. Shiny's UI would read the output from the server and deliver to the user using the `textOutput` function.
 
-**The User-to-Server-back-to-User process our example in detail**:
+**The User-to-Server-back-to-User process in detail**:
 
 Using our own app as an example. Let's say that we want to print the value from a text box to the UI. In order to do this we need to "complete the loop" with our UI which amounts to this:
 
@@ -918,7 +926,7 @@ Using our own app as an example. Let's say that we want to print the value from 
 2. Anytime the text box changes it triggers the `renderText` function in the server (this is because `input$mytext`, a reactive, is in the `renderText` function)
 3. All the code in `renderText` runs each time the text box changes
 4. The results from `renderText` are attached to an output list, in this case we've named it the output `my_output_text`.
-5. Since the `my_output_text` object was generated by the server's `renderText` function we need to use the UI's counterpart function `textOutput` to handle it and send it to the user.Note that unlike reactives in the server that are identified as `input$mytext` the output is named in quotes (so we use `"my_output_text"` rather than `output$my_output_text`).
+5. Since the `my_output_text` object was generated by the server's `renderText` function we need to use the UI's counterpart function `textOutput` to handle it and send it to the user. Note that unlike reactives in the server that are identified as `input$mytext` the output is named in quotes (so we use `"my_output_text"` rather than `output$my_output_text`).
 
 
 #### <span class="exampleapp">Example app:</span> Using `renderText` and `textOutput` to add to your UI
@@ -1039,11 +1047,11 @@ Although Shiny apps end up as HTML files you can't simply copy them to your serv
 
 #### Running locally
 
-* If you're developing in RStudio, and have multi-page app you can open either ui.R or server.R and click on Run App in the top right.
+* If you're developing in RStudio, and have a multi-page app you can open either ui.R or server.R and click on Run App in the top right.
 
-* For a single or multi-page app you an use the function `runApp` where you specify the directory your app.R or ui.R/server.R files are housed in.
+* For a single or multi-page app you can use the function `runApp` where you specify the directory your app.R or ui.R/server.R files are housed in.
 
-* For a single page app you can use the function `shinyApp` where you specify the ui and the server as I've in the examples above.
+* For a single page app you can use the function `shinyApp` where you specify the ui and the server as I've done in the examples above.
 
 
 #### Running on shinyapps.io
@@ -1066,9 +1074,9 @@ RStudio also sells a yearly subscription to Shiny Server Pro that provides secur
 
 ### shinyjs
 
-The `shinyjs` package, created by [Dean Attali](http://deanattali.com/), allows you to use common JavaScript operations in your Shiny applications such as hiding an element, delaying code etc. The package provides more than a dozen useful functions that are descibed in a [page on GitHub](https://github.com/daattali/shinyjs). His talk on the package at the 2016 Shiny Developers Conference is also worth watching and will be posted by RStudio in the near future.
+The `shinyjs` package, created by [Dean Attali](http://deanattali.com/), allows you to use common JavaScript operations in your Shiny applications such as hiding an element, delaying code etc. The package provides more than a dozen useful functions that are described in a [page on GitHub](https://github.com/daattali/shinyjs). His talk on the package at the 2016 Shiny Developers Conference is also worth watching and will be posted by RStudio in the near future.
 
-In order to use the functionality you need to load the package and then to activate it in the UI with the `useShinyjs` function.
+In order to use the functionality you need to load the package and then activate it in the UI with the `useShinyjs` function.
 
 ####  <span class="exampleapp">Example app:</span> `shinyjs` in action, try the toggle 
 
@@ -1275,13 +1283,13 @@ In this app the slider is linked to a map. Details on using leaflet in R can be 
 
 ## Shiny modules
 
-At the Shiny Developers Conference Joe Cheng, from RStudio, gave a great presentation on Shiny modules. They are designed, in part, to help solve the issue of re-useability discussed above in the section on [creating re-useable UI elements](#create-re-useable-ui-elements). You may have, as an example, a block of UI widgets you want to repeat on multiple pages. Rather than copy and paste code, you can use modules to help manage the pieces. For more detail on Shiny modules check out [this write-up](http://shiny.rstudio.com/articles/modules.html) by Joe Cheng.
+At the Shiny Developers Conference Garrett Grolemund, from RStudio, gave a great presentation on Shiny modules. They are designed, in part, to help solve the issue of re-useability discussed above in the section on [creating re-useable UI elements](#create-re-useable-ui-elements). You may have, as an example, a block of UI widgets you want to repeat on multiple pages. Rather than copy and paste code, you can use modules to help manage the pieces. For more detail on Shiny modules check out [this write-up](http://shiny.rstudio.com/articles/modules.html) by Joe Cheng.
 
 To use a module, in addition to creating the UI and server as we've done above, you would also create a module UI and module server. Here are the four pieces you would need for an application that uses one module
 
 ### Module UI
 
-This is a function that takes, as input, an id that will end up getting pre-pended to all your HTML element ids. You can actuallly manually paste together your prefix and the IDs but there is a helper function to make it a little easier called `NS`. Essentially `NS` just creates a new function you can use to do the pasting a little more simply.
+This is a function that takes, as input, an id that will end up getting pre-pended to all your HTML element ids. You can actually manually paste together your prefix and the IDs but there is a helper function to make it a little easier called `NS`. Essentially `NS` just creates a new function you can use to do the pasting a little more simply.
 
 ```{r, eval=FALSE}
 scatterUI <- function(id) {
@@ -1364,7 +1372,7 @@ This example demonstrates the code needed to use a module, but is not a very pra
 
 #### <span class="exampleapp">Example app:</span> more practical module example 
 
-This app is a little harder to follow but a better example of how modules can be useful. In this app the module creates a slider and two plots. As input, the module function takes the name of the data.frame as well as several plot-related variables. This way you can create side-by-side plots with a slider using multiple datasets with slight alteraations to the app server.
+This app is a little harder to follow but a better example of how modules can be useful. In this app the module creates a slider and two plots. As input, the module function takes the name of the data.frame as well as several plot-related variables. This way you can create side-by-side plots with a slider using multiple datasets with slight alterations to the app server.
 
 <ul class="nav nav-tabs">
 <li class="active licode"><a data-toggle="tab" href="#code35">Code 35</a></li>
@@ -1397,7 +1405,7 @@ You need the following items in a Shiny app using HTML templates:
 
 In addition to your ui.R and server.R (or app.R) you would create an HTML page with the structure you want. Shiny-related components are then included in curly braces. A few key points to keep in mind:
 
-1. You must include Shiny-related refences in the header: Shiny apps reference Shiny-related JavaScript libraries and include other required information in the head of a Shiny app's HTML page so you need to include these references in your template. You could manually copy and paste them from another Shiny app, but it's much easier to use the `headContent()` function within curly braces.
+1. You must include Shiny-related references in the header: Shiny apps reference Shiny-related JavaScript libraries and include other required information in the head of a Shiny app's HTML page so you need to include these references in your template. You could manually copy and paste them from another Shiny app, but it's much easier to use the `headContent()` function within curly braces.
 
 2. You can also reference bootstrap in the header with a Shiny function: Including Bootstrap for styling is so common that Shiny includes a function to do it for you called `bootstrapLib`. Again you would use this in curly braces in your header.
 
@@ -1417,29 +1425,31 @@ Here is what our sample app HTML file looks like:
 </head>
 
 <body>
-    <!-- I'm using HTML directly -->
-    <div class='jumbotron' style='text-align: center;'>
-        <h2 class='display-3'>HTML templates with Shiny</h2>
-        <p class='lead'>Details on creating Shiny apps with HTML templates. And a random photo</p>
-        <img src='http://lorempixel.com/200/100' />
+    <div class="container">
+        <!-- I'm using HTML directly -->
+        <div class="jumbotron" style="text-align: center;">
+            <h2 class="display-3">HTML templates with Shiny</h2>
+            <p class="lead">Details on creating Shiny apps with HTML templates. And a random photo</p>
+            <img src="http://lorempixel.com/200/100" />
+        </div>
+
+        <h2>Block of controls from the Shiny UI</h2> 
+        <!-- shinycontrols is an object from the ui -->
+        {{shinycontrols}}
+
+        <h2>Slider and radio buttons</h2>
+        <!-- justslider is an object from the ui -->
+    	{{justslider}}
+        {{radioButtons("my_radio", "Radio buttons from the HTML template", c("A", "B", "C"), "C")}}
+
+
+        <h2>You can do calculations with R directly</h2>
+        
+        The average of a sequence of numbers from 1 to 10 is {{mean(1:10)}}!
     </div>
-
-    <h2>Block of controls from the Shiny UI</h2> 
-    <!-- shinycontrols is an object from the ui -->
-    {{shinycontrols}}
-
-    <h2>Slider and radio buttons</h2>
-    <!-- justslider is an object from the ui -->
-	{{justslider}}
-    {{radioButtons('my_radio', 'Radio buttons from the HTML template', c('A', 'B', 'C'), 'C')}}
-
-
-    <h2>You can do calculations with R directly</h2>
-    
-    The average of a sequence of numbers from 1 to 10 is {{mean(1:10)}}!
-
 </body>
 </html>
+
 ```
 
 
@@ -1454,17 +1464,17 @@ So in the current example, I am reading the `template.html` file in the same dir
 ```{r, eval=FALSE}
 # here are some elements I want to include as a block
 block_of_stuff <- list(
-    selectInput("my_select", "Select something please", c("A", "B", "C"), selected="B"),
-    textInput("my_text", "A text box", value = "initial value")
+  selectInput("my_select", "Select something please", c("A", "B", "C"), selected="B"),
+  textInput("my_text", "A text box", value = "initial value")
 )
 
 # user interface
 ui <- fluidPage(
- 
-htmlTemplate("X:/administrative/social_media/blogposts/r_shiny/htmlTemplates/template.html",
-             shinycontrols =  block_of_stuff,
-             justslider = sliderInput("my_slider", "A slider from the Shiny UI", 0, 10, 5)
-             )
+  
+  htmlTemplate("template.html",
+               shinycontrols =  block_of_stuff,
+               justslider = sliderInput("my_slider", "A slider from the Shiny UI", 0, 10, 5)
+  )
 )
 
 ```
@@ -1528,7 +1538,7 @@ A note about this particular example: remember that any reactives in your reacti
 
 #### <span class="exampleapp">Example app:</span> Brush with map and plot 
 
-This app is a slightly more complex version of the brush functionality. In this example, the user selections update in both a plot and on a leaflet map. The approach is very similar, though, to the previous app. We include a `brush` argument in the `plotOutput` and we use a brush to select point with the `brushedPoints` function.
+This app is a slightly more complex version of the brush functionality. In this example, the user selections update in both a plot and on a leaflet map. The approach is very similar, though, to the previous app. We include a `brush` argument in the `plotOutput` and we use a brush to select points with the `brushedPoints` function.
 
 This app example was inspired by an [app from Kyle Walker](http://urbanstudies.tcu.edu/research/open-data/tx-demographics/) that displays the demographics of Texas Counties. He generously posted the [code used to create it](https://gist.github.com/walkerke/4988b5164258917687cb). 
 
@@ -1546,7 +1556,7 @@ This app example was inspired by an [app from Kyle Walker](http://urbanstudies.t
 ```
 
 </div>
-<div id="app38" class="tab-pane fade apptab tallest">
+<div id="app38" class="tab-pane fade apptab mosttall">
 
 </div>
 </div>
@@ -1586,7 +1596,7 @@ Here we add inline JavaScript (jQuery) to fade out, then in the title and finall
 
 ## Shiny dashboards
 
-With an R backend for processing and strong plotting capabilities Shiny is well-suited to creating dashboards. Dashboards can be created manually using the techniques discussed above, but creating them is simpler with the Rstudio package `shinydashboard`. In order to create a dashboard you need a header, sidebar and body. Within the body you create a series `tabItem`s and fill them with the controls you want see included. For more detail you should refer directly to the [shiny dashboard page on GitHub](https://rstudio.github.io/shinydashboard).
+With an R backend for processing and strong plotting capabilities Shiny is well-suited to creating dashboards. Dashboards can be created manually using the techniques discussed above, but creating them is simpler with the Rstudio package `shinydashboard`. In order to create a dashboard you need a header, sidebar and body. Within the body you create a series `tabItem`s and fill them with the controls you want to see included. For more detail you should refer directly to the [shiny dashboard page on GitHub](https://rstudio.github.io/shinydashboard).
 
 
 #### <span class="exampleapp">Example app:</span> A simple dashboard

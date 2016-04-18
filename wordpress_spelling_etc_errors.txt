@@ -1,0 +1,78 @@
+# ---------------------------------------------------------------
+# Spelling errors (section first, then misspelled word in caps)
+# ---------------------------------------------------------------
+
+Set up your user interface
+	to scaffold and provide some MINIMAL styling
+	
+Style your user interface
+	There are several APPROACHES to
+	
+Running Shiny Server Pro
+	The package provides more than a dozen useful functions that are DESCRIBED
+	
+Shiny modules
+	all your HTML element ids. You can ACTUALLY manually
+	
+Example app: more practical module example
+	multiple datasets with slight ALTERATIONS
+	
+HTML templates
+	You must include Shiny-related REFERENCES
+	
+
+	
+# ---------------------------------------------------------------
+# Dropped or missing words (section first, then drop/missing word in caps)
+# ---------------------------------------------------------------
+	
+Layout your user interface
+	templates but here we will focus ON the most common
+	
+Layout your app using Bootstrap's grid system manually
+	In the example below, we have A layout with 2 rows
+	
+Style yourself with CSS
+	If you want to use your own CSS YOU have several options
+	If you’re using a two page app ( with a ui.R and server.R FILE)
+	
+# Example app: Only specified reactive(s) trigger the code to run using observeEvent
+	# Using observeEvent we're TELLING Shiny only to run this code
+	
+If there is a reactive value the code will run on app load and then on each change
+	every time the reactive value changes even if that reactive VALUE is not used
+	
+An initial example with renderText and textOutput
+	The User-to-Server-back-to-User process IN DETAIL:
+	to handle it and send it to the USER.NOTE that unlike
+	
+# Example app: observe, reactive and render* in one app
+	# when the slider changeS UPDATE the text box
+	
+Deploy your app
+	If you’re developing in RStudio, and have A multi-page app you can
+	For a single or multi-page app you CAN use the function runApp where you specify the directory your app.R or ui.R/server.R files are housed in.
+	For a single page app you can use the function shinyApp where you specify the ui and the server as I’ve DONE in the examples above.
+	
+Add-on packages
+	In order to use the functionality you need to load the package and then TO activate it in the UI with the useShinyjs function.
+	
+Shiny modules
+	re-useability discussed above in the SECTION on creating re-useable UI elements.
+
+Brush with map and plot
+	We include a brush argument in the plotOutput and we use a brush to select POINTS
+	
+Shiny dashboards
+	Within the body you create a series tabItems and fill them with the controls you want TO see included
+
+	
+	
+	
+Other notes
+App 27, shinyjs in action, try the toggle was very, very slow
+	
+	
+	
+	
+	

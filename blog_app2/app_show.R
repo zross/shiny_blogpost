@@ -10,11 +10,11 @@ ui <- fluidPage(
   
   sidebarLayout(
     
-    sidebarPanel(width = 2, class = "col-xs-2",
+    sidebarPanel(
       "Sidebar"
     ), #endsidebarpanel
     
-    mainPanel(width = 4, class = "col-xs-4",
+    mainPanel(
       "This is the main panel"
     )#end mainpanel
   )# end sidebarlayout

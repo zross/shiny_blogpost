@@ -1,6 +1,6 @@
 server <- function(input, output, session) {
   
-  # when the slider change change the text box
+  # when the slider changes update the text box
   observe({
     updateTextInput(session, "mytext", value=input$myslider)
   })
